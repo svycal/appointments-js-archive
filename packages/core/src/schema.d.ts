@@ -1254,7 +1254,34 @@ export interface components {
                  */
                 object: "block";
                 /** @description The recurrence rule for the block (or null if there is no recurrence). */
-                recurrence_rule: components["schemas"]["RecurrenceRule"] | null;
+                recurrence_rule: {
+                    /**
+                     * @description The days of the week on which the recurrence occurs.
+                     * @example [
+                     *       "mo",
+                     *       "we",
+                     *       "fr"
+                     *     ]
+                     */
+                    byday?: string[];
+                    /** @description Number of occurrences at which to end the recurrence. */
+                    count?: number | null;
+                    /**
+                     * @description The frequency of the recurrence.
+                     * @enum {string}
+                     */
+                    freq: "daily" | "weekly";
+                    /**
+                     * @description How often the recurrence rule repeats.
+                     * @example 2
+                     */
+                    interval?: number;
+                    /**
+                     * @description Date at which to end the recurrence (in ISO-8601 format).
+                     * @example 2024-01-02
+                     */
+                    until?: Record<string, never> | null;
+                } | null;
                 /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
                 service_id: string | null;
                 /**
@@ -2924,7 +2951,34 @@ export interface components {
             /** @description The exception dates for the block. */
             exception_dates?: string[];
             /** @description The recurrence rule for the block (or null if there is no recurrence). */
-            recurrence_rule?: components["schemas"]["RecurrenceRule"] | null;
+            recurrence_rule?: {
+                /**
+                 * @description The days of the week on which the recurrence occurs.
+                 * @example [
+                 *       "mo",
+                 *       "we",
+                 *       "fr"
+                 *     ]
+                 */
+                byday?: string[];
+                /** @description Number of occurrences at which to end the recurrence. */
+                count?: number | null;
+                /**
+                 * @description The frequency of the recurrence.
+                 * @enum {string}
+                 */
+                freq: "daily" | "weekly";
+                /**
+                 * @description How often the recurrence rule repeats.
+                 * @example 2
+                 */
+                interval?: number;
+                /**
+                 * @description Date at which to end the recurrence (in ISO-8601 format).
+                 * @example 2024-01-02
+                 */
+                until?: Record<string, never> | null;
+            } | null;
             /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
             service_id?: string | null;
             /**
@@ -3626,6 +3680,161 @@ export interface components {
             object: "public_cancellation_reason";
             /** @description The sort order of the cancellation reason. */
             sort_order: number;
+        };
+        /**
+         * BlockUpdatedEventData
+         * @description This is an object representing data for the block updated event.
+         * @example {
+         *       "object": {
+         *         "all_day": false,
+         *         "attachment_type": "provider",
+         *         "attachments": [
+         *           "prov_d025a96ac0c6"
+         *         ],
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "end_date": "2025-10-27",
+         *         "end_time": "17:00",
+         *         "exception_dates": [
+         *           "2025-10-27T09:00:00"
+         *         ],
+         *         "id": "blk_d025a96ac0c6",
+         *         "object": "block",
+         *         "recurrence_rule": {
+         *           "byday": [
+         *             "mo",
+         *             "we",
+         *             "fr"
+         *           ],
+         *           "freq": "weekly"
+         *         },
+         *         "service_id": null,
+         *         "start_date": "2025-10-27",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Team Meeting",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "block.updated"
+         *     }
+         */
+        BlockUpdatedEventData: {
+            /**
+             * Block
+             * @description This is an object representing a range of blocked time for a provider, service, service provider, or location.
+             * @example {
+             *       "all_day": false,
+             *       "attachment_type": "provider",
+             *       "attachments": [
+             *         "prov_d025a96ac0c6"
+             *       ],
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "end_date": "2025-10-27",
+             *       "end_time": "17:00",
+             *       "exception_dates": [
+             *         "2025-10-27T09:00:00"
+             *       ],
+             *       "id": "blk_d025a96ac0c6",
+             *       "object": "block",
+             *       "recurrence_rule": {
+             *         "byday": [
+             *           "mo",
+             *           "we",
+             *           "fr"
+             *         ],
+             *         "freq": "weekly"
+             *       },
+             *       "service_id": null,
+             *       "start_date": "2025-10-27",
+             *       "start_time": "09:00",
+             *       "time_zone": "America/New_York",
+             *       "title": "Team Meeting",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /** @description Whether the block is all day. */
+                all_day: boolean;
+                /**
+                 * @description The type of attachment for the block.
+                 * @enum {string}
+                 */
+                attachment_type: "location" | "service" | "provider" | "service_provider";
+                /** @description The resources to which this block is attached. These can be service IDs (to block availabilty for all providers on a service), provider IDs (to block availability for a specific provider), or location IDs (to block availability for a specific location). */
+                attachments: string[];
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: date
+                 * @description The end date of the block.
+                 */
+                end_date: string;
+                /** @description The end time of the block. */
+                end_time: string | null;
+                /** @description The exception dates for the block. */
+                exception_dates: string[];
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "block";
+                /** @description The recurrence rule for the block (or null if there is no recurrence). */
+                recurrence_rule: {
+                    /**
+                     * @description The days of the week on which the recurrence occurs.
+                     * @example [
+                     *       "mo",
+                     *       "we",
+                     *       "fr"
+                     *     ]
+                     */
+                    byday?: string[];
+                    /** @description Number of occurrences at which to end the recurrence. */
+                    count?: number | null;
+                    /**
+                     * @description The frequency of the recurrence.
+                     * @enum {string}
+                     */
+                    freq: "daily" | "weekly";
+                    /**
+                     * @description How often the recurrence rule repeats.
+                     * @example 2
+                     */
+                    interval?: number;
+                    /**
+                     * @description Date at which to end the recurrence (in ISO-8601 format).
+                     * @example 2024-01-02
+                     */
+                    until?: Record<string, never> | null;
+                } | null;
+                /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
+                service_id: string | null;
+                /**
+                 * Format: date
+                 * @description The start date of the block.
+                 */
+                start_date: string;
+                /** @description The start time of the block. */
+                start_time: string | null;
+                /** @description The time zone of the block. */
+                time_zone: string | null;
+                /** @description The title of the block. */
+                title: string | null;
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "block.updated";
         };
         /**
          * ReschedulePublicAppointmentRequest
@@ -10951,6 +11160,360 @@ export interface components {
                  * @enum {string}
                  */
                 type: "appointment.deleted";
+            } | {
+                /**
+                 * Block
+                 * @description This is an object representing a range of blocked time for a provider, service, service provider, or location.
+                 * @example {
+                 *       "all_day": false,
+                 *       "attachment_type": "provider",
+                 *       "attachments": [
+                 *         "prov_d025a96ac0c6"
+                 *       ],
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "end_date": "2025-10-27",
+                 *       "end_time": "17:00",
+                 *       "exception_dates": [
+                 *         "2025-10-27T09:00:00"
+                 *       ],
+                 *       "id": "blk_d025a96ac0c6",
+                 *       "object": "block",
+                 *       "recurrence_rule": {
+                 *         "byday": [
+                 *           "mo",
+                 *           "we",
+                 *           "fr"
+                 *         ],
+                 *         "freq": "weekly"
+                 *       },
+                 *       "service_id": null,
+                 *       "start_date": "2025-10-27",
+                 *       "start_time": "09:00",
+                 *       "time_zone": "America/New_York",
+                 *       "title": "Team Meeting",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /** @description Whether the block is all day. */
+                    all_day: boolean;
+                    /**
+                     * @description The type of attachment for the block.
+                     * @enum {string}
+                     */
+                    attachment_type: "location" | "service" | "provider" | "service_provider";
+                    /** @description The resources to which this block is attached. These can be service IDs (to block availabilty for all providers on a service), provider IDs (to block availability for a specific provider), or location IDs (to block availability for a specific location). */
+                    attachments: string[];
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: date
+                     * @description The end date of the block.
+                     */
+                    end_date: string;
+                    /** @description The end time of the block. */
+                    end_time: string | null;
+                    /** @description The exception dates for the block. */
+                    exception_dates: string[];
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "block";
+                    /** @description The recurrence rule for the block (or null if there is no recurrence). */
+                    recurrence_rule: {
+                        /**
+                         * @description The days of the week on which the recurrence occurs.
+                         * @example [
+                         *       "mo",
+                         *       "we",
+                         *       "fr"
+                         *     ]
+                         */
+                        byday?: string[];
+                        /** @description Number of occurrences at which to end the recurrence. */
+                        count?: number | null;
+                        /**
+                         * @description The frequency of the recurrence.
+                         * @enum {string}
+                         */
+                        freq: "daily" | "weekly";
+                        /**
+                         * @description How often the recurrence rule repeats.
+                         * @example 2
+                         */
+                        interval?: number;
+                        /**
+                         * @description Date at which to end the recurrence (in ISO-8601 format).
+                         * @example 2024-01-02
+                         */
+                        until?: Record<string, never> | null;
+                    } | null;
+                    /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
+                    service_id: string | null;
+                    /**
+                     * Format: date
+                     * @description The start date of the block.
+                     */
+                    start_date: string;
+                    /** @description The start time of the block. */
+                    start_time: string | null;
+                    /** @description The time zone of the block. */
+                    time_zone: string | null;
+                    /** @description The title of the block. */
+                    title: string | null;
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "block.created";
+            } | {
+                /**
+                 * Block
+                 * @description This is an object representing a range of blocked time for a provider, service, service provider, or location.
+                 * @example {
+                 *       "all_day": false,
+                 *       "attachment_type": "provider",
+                 *       "attachments": [
+                 *         "prov_d025a96ac0c6"
+                 *       ],
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "end_date": "2025-10-27",
+                 *       "end_time": "17:00",
+                 *       "exception_dates": [
+                 *         "2025-10-27T09:00:00"
+                 *       ],
+                 *       "id": "blk_d025a96ac0c6",
+                 *       "object": "block",
+                 *       "recurrence_rule": {
+                 *         "byday": [
+                 *           "mo",
+                 *           "we",
+                 *           "fr"
+                 *         ],
+                 *         "freq": "weekly"
+                 *       },
+                 *       "service_id": null,
+                 *       "start_date": "2025-10-27",
+                 *       "start_time": "09:00",
+                 *       "time_zone": "America/New_York",
+                 *       "title": "Team Meeting",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /** @description Whether the block is all day. */
+                    all_day: boolean;
+                    /**
+                     * @description The type of attachment for the block.
+                     * @enum {string}
+                     */
+                    attachment_type: "location" | "service" | "provider" | "service_provider";
+                    /** @description The resources to which this block is attached. These can be service IDs (to block availabilty for all providers on a service), provider IDs (to block availability for a specific provider), or location IDs (to block availability for a specific location). */
+                    attachments: string[];
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: date
+                     * @description The end date of the block.
+                     */
+                    end_date: string;
+                    /** @description The end time of the block. */
+                    end_time: string | null;
+                    /** @description The exception dates for the block. */
+                    exception_dates: string[];
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "block";
+                    /** @description The recurrence rule for the block (or null if there is no recurrence). */
+                    recurrence_rule: {
+                        /**
+                         * @description The days of the week on which the recurrence occurs.
+                         * @example [
+                         *       "mo",
+                         *       "we",
+                         *       "fr"
+                         *     ]
+                         */
+                        byday?: string[];
+                        /** @description Number of occurrences at which to end the recurrence. */
+                        count?: number | null;
+                        /**
+                         * @description The frequency of the recurrence.
+                         * @enum {string}
+                         */
+                        freq: "daily" | "weekly";
+                        /**
+                         * @description How often the recurrence rule repeats.
+                         * @example 2
+                         */
+                        interval?: number;
+                        /**
+                         * @description Date at which to end the recurrence (in ISO-8601 format).
+                         * @example 2024-01-02
+                         */
+                        until?: Record<string, never> | null;
+                    } | null;
+                    /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
+                    service_id: string | null;
+                    /**
+                     * Format: date
+                     * @description The start date of the block.
+                     */
+                    start_date: string;
+                    /** @description The start time of the block. */
+                    start_time: string | null;
+                    /** @description The time zone of the block. */
+                    time_zone: string | null;
+                    /** @description The title of the block. */
+                    title: string | null;
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "block.updated";
+            } | {
+                /**
+                 * Block
+                 * @description This is an object representing a range of blocked time for a provider, service, service provider, or location.
+                 * @example {
+                 *       "all_day": false,
+                 *       "attachment_type": "provider",
+                 *       "attachments": [
+                 *         "prov_d025a96ac0c6"
+                 *       ],
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "end_date": "2025-10-27",
+                 *       "end_time": "17:00",
+                 *       "exception_dates": [
+                 *         "2025-10-27T09:00:00"
+                 *       ],
+                 *       "id": "blk_d025a96ac0c6",
+                 *       "object": "block",
+                 *       "recurrence_rule": {
+                 *         "byday": [
+                 *           "mo",
+                 *           "we",
+                 *           "fr"
+                 *         ],
+                 *         "freq": "weekly"
+                 *       },
+                 *       "service_id": null,
+                 *       "start_date": "2025-10-27",
+                 *       "start_time": "09:00",
+                 *       "time_zone": "America/New_York",
+                 *       "title": "Team Meeting",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /** @description Whether the block is all day. */
+                    all_day: boolean;
+                    /**
+                     * @description The type of attachment for the block.
+                     * @enum {string}
+                     */
+                    attachment_type: "location" | "service" | "provider" | "service_provider";
+                    /** @description The resources to which this block is attached. These can be service IDs (to block availabilty for all providers on a service), provider IDs (to block availability for a specific provider), or location IDs (to block availability for a specific location). */
+                    attachments: string[];
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: date
+                     * @description The end date of the block.
+                     */
+                    end_date: string;
+                    /** @description The end time of the block. */
+                    end_time: string | null;
+                    /** @description The exception dates for the block. */
+                    exception_dates: string[];
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "block";
+                    /** @description The recurrence rule for the block (or null if there is no recurrence). */
+                    recurrence_rule: {
+                        /**
+                         * @description The days of the week on which the recurrence occurs.
+                         * @example [
+                         *       "mo",
+                         *       "we",
+                         *       "fr"
+                         *     ]
+                         */
+                        byday?: string[];
+                        /** @description Number of occurrences at which to end the recurrence. */
+                        count?: number | null;
+                        /**
+                         * @description The frequency of the recurrence.
+                         * @enum {string}
+                         */
+                        freq: "daily" | "weekly";
+                        /**
+                         * @description How often the recurrence rule repeats.
+                         * @example 2
+                         */
+                        interval?: number;
+                        /**
+                         * @description Date at which to end the recurrence (in ISO-8601 format).
+                         * @example 2024-01-02
+                         */
+                        until?: Record<string, never> | null;
+                    } | null;
+                    /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
+                    service_id: string | null;
+                    /**
+                     * Format: date
+                     * @description The start date of the block.
+                     */
+                    start_date: string;
+                    /** @description The start time of the block. */
+                    start_time: string | null;
+                    /** @description The time zone of the block. */
+                    time_zone: string | null;
+                    /** @description The title of the block. */
+                    title: string | null;
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "block.deleted";
             };
             /** @description Unique identifier for the object. */
             id: string;
@@ -11534,7 +12097,34 @@ export interface components {
             /** @description Exceptions for recurring block instances (in naive date time format). */
             exception_dates?: string[];
             /** @description The recurrence rule for the block (or null if there is no recurrence). */
-            recurrence_rule?: components["schemas"]["RecurrenceRule"] | null;
+            recurrence_rule?: {
+                /**
+                 * @description The days of the week on which the recurrence occurs.
+                 * @example [
+                 *       "mo",
+                 *       "we",
+                 *       "fr"
+                 *     ]
+                 */
+                byday?: string[];
+                /** @description Number of occurrences at which to end the recurrence. */
+                count?: number | null;
+                /**
+                 * @description The frequency of the recurrence.
+                 * @enum {string}
+                 */
+                freq: "daily" | "weekly";
+                /**
+                 * @description How often the recurrence rule repeats.
+                 * @example 2
+                 */
+                interval?: number;
+                /**
+                 * @description Date at which to end the recurrence (in ISO-8601 format).
+                 * @example 2024-01-02
+                 */
+                until?: Record<string, never> | null;
+            } | null;
             /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
             service_id?: string | null;
             /**
@@ -11858,6 +12448,161 @@ export interface components {
             /** @description The providers details */
             data: components["schemas"]["Provider"][];
             meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
+         * BlockDeletedEventData
+         * @description This is an object representing data for the block deleted event.
+         * @example {
+         *       "object": {
+         *         "all_day": false,
+         *         "attachment_type": "provider",
+         *         "attachments": [
+         *           "prov_d025a96ac0c6"
+         *         ],
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "end_date": "2025-10-27",
+         *         "end_time": "17:00",
+         *         "exception_dates": [
+         *           "2025-10-27T09:00:00"
+         *         ],
+         *         "id": "blk_d025a96ac0c6",
+         *         "object": "block",
+         *         "recurrence_rule": {
+         *           "byday": [
+         *             "mo",
+         *             "we",
+         *             "fr"
+         *           ],
+         *           "freq": "weekly"
+         *         },
+         *         "service_id": null,
+         *         "start_date": "2025-10-27",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Team Meeting",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "block.deleted"
+         *     }
+         */
+        BlockDeletedEventData: {
+            /**
+             * Block
+             * @description This is an object representing a range of blocked time for a provider, service, service provider, or location.
+             * @example {
+             *       "all_day": false,
+             *       "attachment_type": "provider",
+             *       "attachments": [
+             *         "prov_d025a96ac0c6"
+             *       ],
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "end_date": "2025-10-27",
+             *       "end_time": "17:00",
+             *       "exception_dates": [
+             *         "2025-10-27T09:00:00"
+             *       ],
+             *       "id": "blk_d025a96ac0c6",
+             *       "object": "block",
+             *       "recurrence_rule": {
+             *         "byday": [
+             *           "mo",
+             *           "we",
+             *           "fr"
+             *         ],
+             *         "freq": "weekly"
+             *       },
+             *       "service_id": null,
+             *       "start_date": "2025-10-27",
+             *       "start_time": "09:00",
+             *       "time_zone": "America/New_York",
+             *       "title": "Team Meeting",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /** @description Whether the block is all day. */
+                all_day: boolean;
+                /**
+                 * @description The type of attachment for the block.
+                 * @enum {string}
+                 */
+                attachment_type: "location" | "service" | "provider" | "service_provider";
+                /** @description The resources to which this block is attached. These can be service IDs (to block availabilty for all providers on a service), provider IDs (to block availability for a specific provider), or location IDs (to block availability for a specific location). */
+                attachments: string[];
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: date
+                 * @description The end date of the block.
+                 */
+                end_date: string;
+                /** @description The end time of the block. */
+                end_time: string | null;
+                /** @description The exception dates for the block. */
+                exception_dates: string[];
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "block";
+                /** @description The recurrence rule for the block (or null if there is no recurrence). */
+                recurrence_rule: {
+                    /**
+                     * @description The days of the week on which the recurrence occurs.
+                     * @example [
+                     *       "mo",
+                     *       "we",
+                     *       "fr"
+                     *     ]
+                     */
+                    byday?: string[];
+                    /** @description Number of occurrences at which to end the recurrence. */
+                    count?: number | null;
+                    /**
+                     * @description The frequency of the recurrence.
+                     * @enum {string}
+                     */
+                    freq: "daily" | "weekly";
+                    /**
+                     * @description How often the recurrence rule repeats.
+                     * @example 2
+                     */
+                    interval?: number;
+                    /**
+                     * @description Date at which to end the recurrence (in ISO-8601 format).
+                     * @example 2024-01-02
+                     */
+                    until?: Record<string, never> | null;
+                } | null;
+                /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
+                service_id: string | null;
+                /**
+                 * Format: date
+                 * @description The start date of the block.
+                 */
+                start_date: string;
+                /** @description The start time of the block. */
+                start_time: string | null;
+                /** @description The time zone of the block. */
+                time_zone: string | null;
+                /** @description The title of the block. */
+                title: string | null;
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "block.deleted";
         };
         /**
          * BookingPolicy
@@ -12433,6 +13178,161 @@ export interface components {
         CancellationReasonsResponse: {
             /** @description The cancellation reasons details */
             data: components["schemas"]["CancellationReason"][];
+        };
+        /**
+         * BlockCreatedEventData
+         * @description This is an object representing data for the block created event.
+         * @example {
+         *       "object": {
+         *         "all_day": false,
+         *         "attachment_type": "provider",
+         *         "attachments": [
+         *           "prov_d025a96ac0c6"
+         *         ],
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "end_date": "2025-10-27",
+         *         "end_time": "17:00",
+         *         "exception_dates": [
+         *           "2025-10-27T09:00:00"
+         *         ],
+         *         "id": "blk_d025a96ac0c6",
+         *         "object": "block",
+         *         "recurrence_rule": {
+         *           "byday": [
+         *             "mo",
+         *             "we",
+         *             "fr"
+         *           ],
+         *           "freq": "weekly"
+         *         },
+         *         "service_id": null,
+         *         "start_date": "2025-10-27",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Team Meeting",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "block.created"
+         *     }
+         */
+        BlockCreatedEventData: {
+            /**
+             * Block
+             * @description This is an object representing a range of blocked time for a provider, service, service provider, or location.
+             * @example {
+             *       "all_day": false,
+             *       "attachment_type": "provider",
+             *       "attachments": [
+             *         "prov_d025a96ac0c6"
+             *       ],
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "end_date": "2025-10-27",
+             *       "end_time": "17:00",
+             *       "exception_dates": [
+             *         "2025-10-27T09:00:00"
+             *       ],
+             *       "id": "blk_d025a96ac0c6",
+             *       "object": "block",
+             *       "recurrence_rule": {
+             *         "byday": [
+             *           "mo",
+             *           "we",
+             *           "fr"
+             *         ],
+             *         "freq": "weekly"
+             *       },
+             *       "service_id": null,
+             *       "start_date": "2025-10-27",
+             *       "start_time": "09:00",
+             *       "time_zone": "America/New_York",
+             *       "title": "Team Meeting",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /** @description Whether the block is all day. */
+                all_day: boolean;
+                /**
+                 * @description The type of attachment for the block.
+                 * @enum {string}
+                 */
+                attachment_type: "location" | "service" | "provider" | "service_provider";
+                /** @description The resources to which this block is attached. These can be service IDs (to block availabilty for all providers on a service), provider IDs (to block availability for a specific provider), or location IDs (to block availability for a specific location). */
+                attachments: string[];
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: date
+                 * @description The end date of the block.
+                 */
+                end_date: string;
+                /** @description The end time of the block. */
+                end_time: string | null;
+                /** @description The exception dates for the block. */
+                exception_dates: string[];
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "block";
+                /** @description The recurrence rule for the block (or null if there is no recurrence). */
+                recurrence_rule: {
+                    /**
+                     * @description The days of the week on which the recurrence occurs.
+                     * @example [
+                     *       "mo",
+                     *       "we",
+                     *       "fr"
+                     *     ]
+                     */
+                    byday?: string[];
+                    /** @description Number of occurrences at which to end the recurrence. */
+                    count?: number | null;
+                    /**
+                     * @description The frequency of the recurrence.
+                     * @enum {string}
+                     */
+                    freq: "daily" | "weekly";
+                    /**
+                     * @description How often the recurrence rule repeats.
+                     * @example 2
+                     */
+                    interval?: number;
+                    /**
+                     * @description Date at which to end the recurrence (in ISO-8601 format).
+                     * @example 2024-01-02
+                     */
+                    until?: Record<string, never> | null;
+                } | null;
+                /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
+                service_id: string | null;
+                /**
+                 * Format: date
+                 * @description The start date of the block.
+                 */
+                start_date: string;
+                /** @description The start time of the block. */
+                start_time: string | null;
+                /** @description The time zone of the block. */
+                time_zone: string | null;
+                /** @description The title of the block. */
+                title: string | null;
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "block.created";
         };
         /**
          * ServicesResponse
@@ -14103,7 +15003,34 @@ export interface components {
              */
             object: "block";
             /** @description The recurrence rule for the block (or null if there is no recurrence). */
-            recurrence_rule: components["schemas"]["RecurrenceRule"] | null;
+            recurrence_rule: {
+                /**
+                 * @description The days of the week on which the recurrence occurs.
+                 * @example [
+                 *       "mo",
+                 *       "we",
+                 *       "fr"
+                 *     ]
+                 */
+                byday?: string[];
+                /** @description Number of occurrences at which to end the recurrence. */
+                count?: number | null;
+                /**
+                 * @description The frequency of the recurrence.
+                 * @enum {string}
+                 */
+                freq: "daily" | "weekly";
+                /**
+                 * @description How often the recurrence rule repeats.
+                 * @example 2
+                 */
+                interval?: number;
+                /**
+                 * @description Date at which to end the recurrence (in ISO-8601 format).
+                 * @example 2024-01-02
+                 */
+                until?: Record<string, never> | null;
+            } | null;
             /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
             service_id: string | null;
             /**

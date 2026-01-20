@@ -43,3 +43,6 @@ The following event types are available. The Schema definitions referenced in th
 | `appointment.canceled` | Emitted when an existing appointment is canceled. ([Schema](/api/schemas/appointmentcanceledeventdata)) |
 | `appointment.confirmed` | Emitted when an existing appointment is confirmed. ([Schema](/api/schemas/appointmentconfirmedeventdata)) |
 | `appointment.deleted`   | Emitted when an existing appointment is deleted. ([Schema](/api/schemas/appointmentdeletedeventdata)) |
+| `block.created` | Emitted when a new block is created. ([Schema](/api/schemas/blockcreatedeventdata)) |
+| `block.updated` | Emitted when an existing block is updated. ([Schema](/api/schemas/blockupdatedeventdata)) |
+| `block.deleted` | Emitted when an existing block is deleted. ([Schema](/api/schemas/blockdeletedeventdata)) |

@@ -722,6 +722,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/blockupdatedeventdata",
+          label: "BlockUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/reschedulepublicappointmentrequest",
           label: "ReschedulePublicAppointmentRequest",
           className: "schema",
@@ -848,6 +854,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/blockdeletedeventdata",
+          label: "BlockDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/bookingpolicy",
           label: "BookingPolicy",
           className: "schema",
@@ -898,6 +910,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/cancellationreasonsresponse",
           label: "CancellationReasonsResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/blockcreatedeventdata",
+          label: "BlockCreatedEventData",
           className: "schema",
         },
         {
