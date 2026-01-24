@@ -1415,6 +1415,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -1647,6 +1650,9 @@ export interface components {
              *         "first_name": "John",
              *         "id": "prov_d025a96ac0c6",
              *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
              *         "object": "provider",
              *         "updated_at": "2017-09-13T10:11:12Z"
              *       },
@@ -2104,6 +2110,9 @@ export interface components {
                  *       "first_name": "John",
                  *       "id": "prov_d025a96ac0c6",
                  *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
                  *       "object": "provider",
                  *       "updated_at": "2017-09-13T10:11:12Z"
                  *     }
@@ -2122,6 +2131,8 @@ export interface components {
                     id: string;
                     /** @description The provider's last name. */
                     last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -2760,6 +2771,9 @@ export interface components {
          *                 "first_name": "John",
          *                 "id": "prov_d025a96ac0c6",
          *                 "last_name": "Smith",
+         *                 "metadata": {
+         *                   "external_id": "123"
+         *                 },
          *                 "object": "provider",
          *                 "updated_at": "2017-09-13T10:11:12Z"
          *               },
@@ -2822,6 +2836,9 @@ export interface components {
                      *         "first_name": "John",
                      *         "id": "prov_d025a96ac0c6",
                      *         "last_name": "Smith",
+                     *         "metadata": {
+                     *           "external_id": "123"
+                     *         },
                      *         "object": "provider",
                      *         "updated_at": "2017-09-13T10:11:12Z"
                      *       },
@@ -3078,6 +3095,9 @@ export interface components {
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "object": "provider",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
@@ -3099,6 +3119,9 @@ export interface components {
          *       "email": "john.smith@tendermedical.com",
          *       "first_name": "John",
          *       "last_name": "Smith",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "notify": false,
          *       "role_ids": [
          *         "role_123456789012"
@@ -3119,6 +3142,8 @@ export interface components {
             first_name: string;
             /** @description The provider's last name. */
             last_name: string;
+            /** @description Set of key-value pairs to attach to this provider. Maximum size is 16 KB. */
+            metadata?: Record<string, never>;
             /**
              * @description Whether to send an email notification to the user (if `add_user` is true). If they don't already have an account, they will receive an email with instructions to set their password when this property is true.
              * @default false
@@ -3140,6 +3165,9 @@ export interface components {
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "provider",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
@@ -3647,7 +3675,10 @@ export interface components {
          * @example {
          *       "display_name": "John Smith",
          *       "first_name": "John",
-         *       "last_name": "Smith"
+         *       "last_name": "Smith",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       }
          *     }
          */
         UpdateProviderRequest: {
@@ -3657,6 +3688,8 @@ export interface components {
             first_name?: string;
             /** @description Provider's last name */
             last_name?: string;
+            /** @description Set of key-value pairs to attach to this provider. Maximum size is 16 KB. */
+            metadata?: Record<string, never>;
         };
         /**
          * PublicCancellationReason
@@ -4230,6 +4263,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -4446,6 +4482,9 @@ export interface components {
              *         "first_name": "John",
              *         "id": "prov_d025a96ac0c6",
              *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
              *         "object": "provider",
              *         "updated_at": "2017-09-13T10:11:12Z"
              *       },
@@ -4903,6 +4942,9 @@ export interface components {
                  *       "first_name": "John",
                  *       "id": "prov_d025a96ac0c6",
                  *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
                  *       "object": "provider",
                  *       "updated_at": "2017-09-13T10:11:12Z"
                  *     }
@@ -4921,6 +4963,8 @@ export interface components {
                     id: string;
                     /** @description The provider's last name. */
                     last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -5596,6 +5640,9 @@ export interface components {
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "object": "provider",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
@@ -5823,6 +5870,9 @@ export interface components {
                  *         "first_name": "John",
                  *         "id": "prov_d025a96ac0c6",
                  *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
                  *         "object": "provider",
                  *         "updated_at": "2017-09-13T10:11:12Z"
                  *       },
@@ -6280,6 +6330,9 @@ export interface components {
                      *       "first_name": "John",
                      *       "id": "prov_d025a96ac0c6",
                      *       "last_name": "Smith",
+                     *       "metadata": {
+                     *         "external_id": "123"
+                     *       },
                      *       "object": "provider",
                      *       "updated_at": "2017-09-13T10:11:12Z"
                      *     }
@@ -6298,6 +6351,8 @@ export interface components {
                         id: string;
                         /** @description The provider's last name. */
                         last_name: string;
+                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                        metadata?: Record<string, never>;
                         /**
                          * @description String representing the object's type.
                          * @enum {string}
@@ -6893,6 +6948,9 @@ export interface components {
                  *         "first_name": "John",
                  *         "id": "prov_d025a96ac0c6",
                  *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
                  *         "object": "provider",
                  *         "updated_at": "2017-09-13T10:11:12Z"
                  *       },
@@ -7350,6 +7408,9 @@ export interface components {
                      *       "first_name": "John",
                      *       "id": "prov_d025a96ac0c6",
                      *       "last_name": "Smith",
+                     *       "metadata": {
+                     *         "external_id": "123"
+                     *       },
                      *       "object": "provider",
                      *       "updated_at": "2017-09-13T10:11:12Z"
                      *     }
@@ -7368,6 +7429,8 @@ export interface components {
                         id: string;
                         /** @description The provider's last name. */
                         last_name: string;
+                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                        metadata?: Record<string, never>;
                         /**
                          * @description String representing the object's type.
                          * @enum {string}
@@ -8043,6 +8106,9 @@ export interface components {
                  *         "first_name": "John",
                  *         "id": "prov_d025a96ac0c6",
                  *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
                  *         "object": "provider",
                  *         "updated_at": "2017-09-13T10:11:12Z"
                  *       },
@@ -8500,6 +8566,9 @@ export interface components {
                      *       "first_name": "John",
                      *       "id": "prov_d025a96ac0c6",
                      *       "last_name": "Smith",
+                     *       "metadata": {
+                     *         "external_id": "123"
+                     *       },
                      *       "object": "provider",
                      *       "updated_at": "2017-09-13T10:11:12Z"
                      *     }
@@ -8518,6 +8587,8 @@ export interface components {
                         id: string;
                         /** @description The provider's last name. */
                         last_name: string;
+                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                        metadata?: Record<string, never>;
                         /**
                          * @description String representing the object's type.
                          * @enum {string}
@@ -9113,6 +9184,9 @@ export interface components {
                  *         "first_name": "John",
                  *         "id": "prov_d025a96ac0c6",
                  *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
                  *         "object": "provider",
                  *         "updated_at": "2017-09-13T10:11:12Z"
                  *       },
@@ -9570,6 +9644,9 @@ export interface components {
                      *       "first_name": "John",
                      *       "id": "prov_d025a96ac0c6",
                      *       "last_name": "Smith",
+                     *       "metadata": {
+                     *         "external_id": "123"
+                     *       },
                      *       "object": "provider",
                      *       "updated_at": "2017-09-13T10:11:12Z"
                      *     }
@@ -9588,6 +9665,8 @@ export interface components {
                         id: string;
                         /** @description The provider's last name. */
                         last_name: string;
+                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                        metadata?: Record<string, never>;
                         /**
                          * @description String representing the object's type.
                          * @enum {string}
@@ -10183,6 +10262,9 @@ export interface components {
                  *         "first_name": "John",
                  *         "id": "prov_d025a96ac0c6",
                  *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
                  *         "object": "provider",
                  *         "updated_at": "2017-09-13T10:11:12Z"
                  *       },
@@ -10640,6 +10722,9 @@ export interface components {
                      *       "first_name": "John",
                      *       "id": "prov_d025a96ac0c6",
                      *       "last_name": "Smith",
+                     *       "metadata": {
+                     *         "external_id": "123"
+                     *       },
                      *       "object": "provider",
                      *       "updated_at": "2017-09-13T10:11:12Z"
                      *     }
@@ -10658,6 +10743,8 @@ export interface components {
                         id: string;
                         /** @description The provider's last name. */
                         last_name: string;
+                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                        metadata?: Record<string, never>;
                         /**
                          * @description String representing the object's type.
                          * @enum {string}
@@ -11619,6 +11706,9 @@ export interface components {
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "object": "provider",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
@@ -12232,6 +12322,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -12393,6 +12486,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -12432,6 +12528,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         }
@@ -12911,6 +13010,9 @@ export interface components {
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "provider",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       }
@@ -13591,6 +13693,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -13807,6 +13912,9 @@ export interface components {
              *         "first_name": "John",
              *         "id": "prov_d025a96ac0c6",
              *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
              *         "object": "provider",
              *         "updated_at": "2017-09-13T10:11:12Z"
              *       },
@@ -14264,6 +14372,9 @@ export interface components {
                  *       "first_name": "John",
                  *       "id": "prov_d025a96ac0c6",
                  *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
                  *       "object": "provider",
                  *       "updated_at": "2017-09-13T10:11:12Z"
                  *     }
@@ -14282,6 +14393,8 @@ export interface components {
                     id: string;
                     /** @description The provider's last name. */
                     last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -14812,6 +14925,9 @@ export interface components {
          *       "first_name": "John",
          *       "id": "prov_d025a96ac0c6",
          *       "last_name": "Smith",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "object": "provider",
          *       "updated_at": "2017-09-13T10:11:12Z"
          *     }
@@ -14830,6 +14946,8 @@ export interface components {
             id: string;
             /** @description The provider's last name. */
             last_name: string;
+            /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+            metadata?: Record<string, never>;
             /**
              * @description String representing the object's type.
              * @enum {string}
@@ -15436,6 +15554,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -15652,6 +15773,9 @@ export interface components {
              *         "first_name": "John",
              *         "id": "prov_d025a96ac0c6",
              *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
              *         "object": "provider",
              *         "updated_at": "2017-09-13T10:11:12Z"
              *       },
@@ -16109,6 +16233,9 @@ export interface components {
                  *       "first_name": "John",
                  *       "id": "prov_d025a96ac0c6",
                  *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
                  *       "object": "provider",
                  *       "updated_at": "2017-09-13T10:11:12Z"
                  *     }
@@ -16127,6 +16254,8 @@ export interface components {
                     id: string;
                     /** @description The provider's last name. */
                     last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -16884,6 +17013,9 @@ export interface components {
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "provider",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
@@ -17341,6 +17473,9 @@ export interface components {
              *       "first_name": "John",
              *       "id": "prov_d025a96ac0c6",
              *       "last_name": "Smith",
+             *       "metadata": {
+             *         "external_id": "123"
+             *       },
              *       "object": "provider",
              *       "updated_at": "2017-09-13T10:11:12Z"
              *     }
@@ -17359,6 +17494,8 @@ export interface components {
                 id: string;
                 /** @description The provider's last name. */
                 last_name: string;
+                /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                metadata?: Record<string, never>;
                 /**
                  * @description String representing the object's type.
                  * @enum {string}
@@ -18278,6 +18415,9 @@ export interface components {
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
@@ -18494,6 +18634,9 @@ export interface components {
              *         "first_name": "John",
              *         "id": "prov_d025a96ac0c6",
              *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
              *         "object": "provider",
              *         "updated_at": "2017-09-13T10:11:12Z"
              *       },
@@ -18951,6 +19094,9 @@ export interface components {
                  *       "first_name": "John",
                  *       "id": "prov_d025a96ac0c6",
                  *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
                  *       "object": "provider",
                  *       "updated_at": "2017-09-13T10:11:12Z"
                  *     }
@@ -18969,6 +19115,8 @@ export interface components {
                     id: string;
                     /** @description The provider's last name. */
                     last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -20752,10 +20900,16 @@ export interface operations {
                  */
                 time_zone?: string;
                 /**
-                 * @description Filter slot by specific provider ID
+                 * @deprecated
+                 * @description Filter slot by specific provider ID (deprecated, use provider_ids)
                  * @example prv_123456789012
                  */
                 provider_id?: string;
+                /**
+                 * @description Filter slots by provider IDs (comma-separated)
+                 * @example prv_123456789012,prv_234567890123
+                 */
+                provider_ids?: string;
             };
             header?: {
                 /**
@@ -21370,6 +21524,29 @@ export interface operations {
                 page_size?: number;
                 /** @description Only return providers that match the search query (name or email). */
                 search?: string;
+                /**
+                 * @description Filter providers by metadata using bracket notation.
+                 *
+                 *     **Query formats:**
+                 *     - `metadata[key]=value` - equality match (implicit eq)
+                 *     - `metadata[key][operator]=value` - explicit operator
+                 *
+                 *     **Supported operators:**
+                 *     - `eq` - exact match
+                 *     - `not_eq` - not equal (excludes matching providers)
+                 *     - `in` - value is one of comma-delimited values (e.g., `metadata[status][in]=active,pending`)
+                 *     - `contains` - array metadata value contains the given value
+                 *     - `gte` - greater than or equal (numeric comparison)
+                 *     - `lte` - less than or equal (numeric comparison)
+                 *
+                 *     **Examples:**
+                 *     - `?metadata[location]=NYC` - providers where metadata.location equals "NYC"
+                 *     - `?metadata[age][gte]=30` - providers where metadata.age >= 30
+                 *     - `?metadata[department][in]=sales,marketing` - providers in sales or marketing
+                 */
+                metadata?: {
+                    [key: string]: unknown;
+                };
             };
             header?: {
                 /**
@@ -21480,10 +21657,16 @@ export interface operations {
                  */
                 time_zone?: string;
                 /**
-                 * @description Filter slots by specific provider ID
+                 * @deprecated
+                 * @description Filter slots by specific provider ID (deprecated, use provider_ids)
                  * @example prv_123456789012
                  */
                 provider_id?: string;
+                /**
+                 * @description Filter slots by provider IDs (comma-separated)
+                 * @example prv_123456789012,prv_234567890123
+                 */
+                provider_ids?: string;
             };
             header?: {
                 /**
@@ -22232,6 +22415,11 @@ export interface operations {
                  * @example "America/New_York"
                  */
                 time_zone?: string;
+                /**
+                 * @description Filter slots by provider IDs (comma-separated)
+                 * @example prv_123456789012,prv_234567890123
+                 */
+                provider_ids?: string;
             };
             header?: {
                 /**
