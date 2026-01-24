@@ -7,6 +7,8 @@
 
 Visit the [Webhooks](https://savvycal.app/webhooks) page in the SavvyCal Dashboard and follow the prompts to register a new webhook.
 
+For platforms, register webhooks on the platform settings page under the "Platform webhooks" section.
+
 ## Listening for events
 
 When an event occurs that triggers a webhook, we will send an HTTP POST to the URL you specified, with a JSON-encoded body of this shape:
@@ -22,6 +24,7 @@ content-type: application/json
 
 {
   "id": "evt_d025a96ac0c6",
+  "account_id": "acct_d025a96ac0c6",
   "version": "1.0",
   "created_at": "2025-03-12T12:34:55Z",
   "data": {
@@ -31,18 +34,17 @@ content-type: application/json
 }
 ```
 
-
 ## Event types
 
 The following event types are available. The Schema definitions referenced in the table below represent the shape of the `data` field in the webhook payload.
 
-| Event Type | Description |
-| --- | --- |
-| `appointment.created` | Emitted when a new appointment is created. ([Schema](/api/schemas/appointmentcreatedeventdata)) |
+| Event Type                | Description                                                                                                   |
+| ------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| `appointment.created`     | Emitted when a new appointment is created. ([Schema](/api/schemas/appointmentcreatedeventdata))               |
 | `appointment.rescheduled` | Emitted when an existing appointment is rescheduled. ([Schema](/api/schemas/appointmentrescheduledeventdata)) |
-| `appointment.canceled` | Emitted when an existing appointment is canceled. ([Schema](/api/schemas/appointmentcanceledeventdata)) |
-| `appointment.confirmed` | Emitted when an existing appointment is confirmed. ([Schema](/api/schemas/appointmentconfirmedeventdata)) |
-| `appointment.deleted`   | Emitted when an existing appointment is deleted. ([Schema](/api/schemas/appointmentdeletedeventdata)) |
-| `block.created` | Emitted when a new block is created. ([Schema](/api/schemas/blockcreatedeventdata)) |
-| `block.updated` | Emitted when an existing block is updated. ([Schema](/api/schemas/blockupdatedeventdata)) |
-| `block.deleted` | Emitted when an existing block is deleted. ([Schema](/api/schemas/blockdeletedeventdata)) |
+| `appointment.canceled`    | Emitted when an existing appointment is canceled. ([Schema](/api/schemas/appointmentcanceledeventdata))       |
+| `appointment.confirmed`   | Emitted when an existing appointment is confirmed. ([Schema](/api/schemas/appointmentconfirmedeventdata))     |
+| `appointment.deleted`     | Emitted when an existing appointment is deleted. ([Schema](/api/schemas/appointmentdeletedeventdata))         |
+| `block.created`           | Emitted when a new block is created. ([Schema](/api/schemas/blockcreatedeventdata))                           |
+| `block.updated`           | Emitted when an existing block is updated. ([Schema](/api/schemas/blockupdatedeventdata))                     |
+| `block.deleted`           | Emitted when an existing block is deleted. ([Schema](/api/schemas/blockdeletedeventdata))                     |
