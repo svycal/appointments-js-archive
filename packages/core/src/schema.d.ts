@@ -21524,26 +21524,7 @@ export interface operations {
                 page_size?: number;
                 /** @description Only return providers that match the search query (name or email). */
                 search?: string;
-                /**
-                 * @description Filter providers by metadata using bracket notation.
-                 *
-                 *     **Query formats:**
-                 *     - `metadata[key]=value` - equality match (implicit eq)
-                 *     - `metadata[key][operator]=value` - explicit operator
-                 *
-                 *     **Supported operators:**
-                 *     - `eq` - exact match
-                 *     - `not_eq` - not equal (excludes matching providers)
-                 *     - `in` - value is one of comma-delimited values (e.g., `metadata[status][in]=active,pending`)
-                 *     - `contains` - array metadata value contains the given value
-                 *     - `gte` - greater than or equal (numeric comparison)
-                 *     - `lte` - less than or equal (numeric comparison)
-                 *
-                 *     **Examples:**
-                 *     - `?metadata[location]=NYC` - providers where metadata.location equals "NYC"
-                 *     - `?metadata[age][gte]=30` - providers where metadata.age >= 30
-                 *     - `?metadata[department][in]=sales,marketing` - providers in sales or marketing
-                 */
+                /** @description Filter providers by metadata using bracket notation. See [Metadata Filtering](https://developers.savvycal.app/metadata-filtering) for more details. */
                 metadata?: {
                     [key: string]: unknown;
                 };
