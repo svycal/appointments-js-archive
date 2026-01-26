@@ -21712,10 +21712,10 @@ export interface operations {
                 page?: number;
                 /** @description Number of items per page */
                 page_size?: number;
-                /** @description Only return provider schedules for the provider specified by this provider ID. */
-                provider?: string;
-                /** @description Only return provider schedules for the location specified by this location ID. */
-                location?: string;
+                /** @description Filter by provider ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                provider_ids?: string;
+                /** @description Filter by location ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                location_ids?: string;
             };
             header?: {
                 /**
@@ -22004,11 +22004,28 @@ export interface operations {
                 page_size?: number;
                 /** @description Whether to include sensitive fields (such as client name, email, and phone) */
                 include_sensitive?: boolean;
-                /**
-                 * @description A JSON-encoded list of filters
-                 * @example [{"field":"period","op":"==","value":"upcoming"}]
-                 */
-                filters?: string[];
+                /** @description Filter by time period. */
+                period?: "upcoming" | "past";
+                /** @description Filter by status. */
+                status?: "scheduled" | "canceled";
+                /** @description Filter by appointment type. */
+                appointment_type?: "virtual" | "in_person";
+                /** @description Filter by provider ID(s). Accepts a single ID or comma-delimited list. */
+                provider_ids?: string;
+                /** @description Filter by service ID(s). Accepts a single ID or comma-delimited list. */
+                service_ids?: string;
+                /** @description Filter by client ID(s). Accepts a single ID or comma-delimited list. */
+                client_ids?: string;
+                /** @description Filter by location ID(s). Accepts a single ID or comma-delimited list. */
+                location_ids?: string;
+                /** @description Filter for appointments starting on or after this time (ISO 8601 format). */
+                start_at_min?: string;
+                /** @description Filter for appointments starting on or before this time (ISO 8601 format). */
+                start_at_max?: string;
+                /** @description Filter for appointments ending on or after this time (ISO 8601 format). */
+                end_at_min?: string;
+                /** @description Filter for appointments ending on or before this time (ISO 8601 format). */
+                end_at_max?: string;
                 /**
                  * @description A field to order by
                  * @example ?order_by[]=start_at_utc
@@ -22571,14 +22588,14 @@ export interface operations {
                 page_size?: number;
                 /** @description Only return blocks with the specified attachment type. */
                 attachment_type?: "provider" | "service" | "location" | "service_provider";
-                /** @description Only return blocks for the provider specified by this provider ID. */
-                provider?: string;
-                /** @description Only return blocks for the service specified by this service ID. */
-                service?: string;
-                /** @description Only return blocks for the service provider specified by this service provider ID. */
-                service_provider?: string;
-                /** @description Only return blocks for the location specified by this location ID. */
-                location?: string;
+                /** @description Filter by provider ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                provider_ids?: string;
+                /** @description Filter by service ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                service_ids?: string;
+                /** @description Filter by service provider ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                service_provider_ids?: string;
+                /** @description Filter by location ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                location_ids?: string;
                 /** @description Only return blocks that start on the specified date. */
                 start_date?: string;
                 /** @description Only return blocks that end on the specified date. */
