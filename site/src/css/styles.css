@@ -41,7 +41,7 @@
   --ifm-h2-font-size: var(--text-2xl);
   --ifm-h3-font-size: var(--text-xl);
 
-  --ifm-code-font-size: 85%;
+  --ifm-code-font-size: 100%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 
   --ifm-link-color: var(--color-green-600);
@@ -105,3 +105,4 @@ html[data-theme="dark"] {
 .openapi-params__list-item::before {
   top: 10px !important;
 }
+
