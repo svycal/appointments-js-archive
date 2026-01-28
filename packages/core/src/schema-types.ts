@@ -49,6 +49,15 @@ export type ClientResponse = Schemas["ClientResponse"];
 export type ClientsResponse = Schemas["ClientsResponse"];
 export type ConfirmAppointmentRequest = Schemas["ConfirmAppointmentRequest"];
 export type ConfirmationEvent = Schemas["ConfirmationEvent"];
+export type ConnectedAccount = Schemas["ConnectedAccount"];
+export type ConnectedAccountCreatedEventData =
+  Schemas["ConnectedAccountCreatedEventData"];
+export type ConnectedAccountDeletedEventData =
+  Schemas["ConnectedAccountDeletedEventData"];
+export type ConnectedAccountReconnectedEventData =
+  Schemas["ConnectedAccountReconnectedEventData"];
+export type ConnectedAccountRefreshFailedEventData =
+  Schemas["ConnectedAccountRefreshFailedEventData"];
 export type CreateAccountRequest = Schemas["CreateAccountRequest"];
 export type CreateAccountUserRequest = Schemas["CreateAccountUserRequest"];
 export type CreateAppointmentRequest = Schemas["CreateAppointmentRequest"];
@@ -109,6 +118,7 @@ export type Slot = Schemas["Slot"];
 export type SlotRule = Schemas["SlotRule"];
 export type UnauthorizedResponse = Schemas["UnauthorizedResponse"];
 export type UpdateAccountRequest = Schemas["UpdateAccountRequest"];
+export type UpdateAccountUserRequest = Schemas["UpdateAccountUserRequest"];
 export type UpdateBlockRequest = Schemas["UpdateBlockRequest"];
 export type UpdateCancellationReasonRequest =
   Schemas["UpdateCancellationReasonRequest"];
