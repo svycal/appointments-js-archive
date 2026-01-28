@@ -38,13 +38,17 @@ content-type: application/json
 
 The following event types are available. The Schema definitions referenced in the table below represent the shape of the `data` field in the webhook payload.
 
-| Event Type                | Description                                                                                                   |
-| ------------------------- | ------------------------------------------------------------------------------------------------------------- |
-| `appointment.created`     | Emitted when a new appointment is created. ([Schema](/api/schemas/appointmentcreatedeventdata))               |
-| `appointment.rescheduled` | Emitted when an existing appointment is rescheduled. ([Schema](/api/schemas/appointmentrescheduledeventdata)) |
-| `appointment.canceled`    | Emitted when an existing appointment is canceled. ([Schema](/api/schemas/appointmentcanceledeventdata))       |
-| `appointment.confirmed`   | Emitted when an existing appointment is confirmed. ([Schema](/api/schemas/appointmentconfirmedeventdata))     |
-| `appointment.deleted`     | Emitted when an existing appointment is deleted. ([Schema](/api/schemas/appointmentdeletedeventdata))         |
-| `block.created`           | Emitted when a new block is created. ([Schema](/api/schemas/blockcreatedeventdata))                           |
-| `block.updated`           | Emitted when an existing block is updated. ([Schema](/api/schemas/blockupdatedeventdata))                     |
-| `block.deleted`           | Emitted when an existing block is deleted. ([Schema](/api/schemas/blockdeletedeventdata))                     |
+| Event Type                         | Description                                                                                                                |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `appointment.created`              | Emitted when a new appointment is created. ([Schema](/api/schemas/appointmentcreatedeventdata))                            |
+| `appointment.rescheduled`          | Emitted when an existing appointment is rescheduled. ([Schema](/api/schemas/appointmentrescheduledeventdata))              |
+| `appointment.canceled`             | Emitted when an existing appointment is canceled. ([Schema](/api/schemas/appointmentcanceledeventdata))                    |
+| `appointment.confirmed`            | Emitted when an existing appointment is confirmed. ([Schema](/api/schemas/appointmentconfirmedeventdata))                  |
+| `appointment.deleted`              | Emitted when an existing appointment is deleted. ([Schema](/api/schemas/appointmentdeletedeventdata))                      |
+| `block.created`                    | Emitted when a new block is created. ([Schema](/api/schemas/blockcreatedeventdata))                                        |
+| `block.updated`                    | Emitted when an existing block is updated. ([Schema](/api/schemas/blockupdatedeventdata))                                  |
+| `block.deleted`                    | Emitted when an existing block is deleted. ([Schema](/api/schemas/blockdeletedeventdata))                                  |
+| `connected_account.created`        | Emitted when a new calendar integration is connected. ([Schema](/api/schemas/connectedaccountcreatedeventdata))            |
+| `connected_account.deleted`        | Emitted when a calendar integration is disconnected. ([Schema](/api/schemas/connectedaccountdeletedeventdata))             |
+| `connected_account.refresh_failed` | Emitted when an OAuth token refresh permanently fails. ([Schema](/api/schemas/connectedaccountrefreshfailedeventdata))     |
+| `connected_account.reconnected`    | Emitted when a previously failed integration is reconnected. ([Schema](/api/schemas/connectedaccountreconnectedeventdata)) |
