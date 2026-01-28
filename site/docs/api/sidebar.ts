@@ -226,6 +226,46 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Account Users",
+      link: {
+        type: "doc",
+        id: "api/account-users",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/accountuser",
+          label: "AccountUser",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/update-account-user",
+          label: "Update account user",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/get-current-account-user",
+          label: "Get current account user",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/list-account-users",
+          label: "List account users",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-account-user",
+          label: "Create account user",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Clients",
       link: {
         type: "doc",
@@ -450,40 +490,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Account Users",
-      link: {
-        type: "doc",
-        id: "api/account-users",
-      },
-      items: [
-        {
-          type: "doc",
-          id: "api/schemas/accountuser",
-          label: "AccountUser",
-          className: "schema",
-        },
-        {
-          type: "doc",
-          id: "api/get-current-account-user",
-          label: "Get current account user",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/list-account-users",
-          label: "List account users",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/create-account-user",
-          label: "Create account user",
-          className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Platforms",
       link: {
         type: "doc",
@@ -563,6 +569,18 @@ const sidebar: SidebarsConfig = {
           id: "api/list-service-slots",
           label: "List available time slots",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Connected Accounts",
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/connectedaccount",
+          label: "ConnectedAccount",
+          className: "schema",
         },
       ],
     },
@@ -686,6 +704,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/connectedaccountdeletedeventdata",
+          label: "ConnectedAccountDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/rolesresponse",
           label: "RolesResponse",
           className: "schema",
@@ -740,6 +764,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/connectedaccountreconnectedeventdata",
+          label: "ConnectedAccountReconnectedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/publicserviceslotsresponse",
           label: "PublicServiceSlotsResponse",
           className: "schema",
@@ -778,6 +808,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/slot",
           label: "Slot",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/connectedaccountrefreshfailedeventdata",
+          label: "ConnectedAccountRefreshFailedEventData",
           className: "schema",
         },
         {
@@ -908,6 +944,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/connectedaccountcreatedeventdata",
+          label: "ConnectedAccountCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/cancellationreasonsresponse",
           label: "CancellationReasonsResponse",
           className: "schema",
@@ -934,6 +976,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providerscheduleresponse",
           label: "ProviderScheduleResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/updateaccountuserrequest",
+          label: "UpdateAccountUserRequest",
           className: "schema",
         },
         {

@@ -138,6 +138,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/users/{user_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update account user
+         * @description Update a user's settings in the specified account.
+         */
+        patch: operations["updateAccountUser"];
+        trace?: never;
+    };
     "/v1/clients/{client_id}": {
         parameters: {
             query?: never;
@@ -2891,6 +2911,7 @@ export interface components {
          * @description This is an object representing a user in an account.
          * @example {
          *       "object": "account_user",
+         *       "passive": false,
          *       "roles": [
          *         {
          *           "id": "role_123456789012",
@@ -2916,6 +2937,8 @@ export interface components {
              * @enum {string}
              */
             object: "account_user";
+            /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+            passive: boolean;
             /** @description The roles assigned to the user in this account. */
             roles: components["schemas"]["Role"][];
             user: components["schemas"]["User"];
@@ -3509,6 +3532,7 @@ export interface components {
          *       "first_name": "John",
          *       "last_name": "Doe",
          *       "notify": false,
+         *       "passive": false,
          *       "role_ids": [
          *         "role_123456789012"
          *       ],
@@ -3537,10 +3561,101 @@ export interface components {
              * @default false
              */
             notify: boolean;
+            /**
+             * @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). Use this for platform/headless scenarios where the platform handles user communication.
+             * @default false
+             */
+            passive: boolean;
             /** @description List of role IDs to assign to the user. */
             role_ids?: string[];
             /** @description The user's time zone. */
             time_zone?: string;
+        };
+        /**
+         * ConnectedAccountDeletedEventData
+         * @description This is an object representing data for the connected account deleted event.
+         * @example {
+         *       "object": {
+         *         "connection_scope": "user",
+         *         "created_at": "2025-03-12T12:34:55Z",
+         *         "display_name": "John Doe",
+         *         "email": "user@example.com",
+         *         "external_subject": "123456789",
+         *         "id": "cact_d025a96ac0c6",
+         *         "object": "connected_account",
+         *         "provider": "google",
+         *         "status": "active",
+         *         "updated_at": "2025-03-13T10:11:12Z",
+         *         "user_id": "user_d025a96ac0c6"
+         *       },
+         *       "type": "connected_account.deleted"
+         *     }
+         */
+        ConnectedAccountDeletedEventData: {
+            /**
+             * ConnectedAccount
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @example {
+             *       "connection_scope": "user",
+             *       "created_at": "2025-03-12T12:34:55Z",
+             *       "display_name": "John Doe",
+             *       "email": "user@example.com",
+             *       "external_subject": "123456789",
+             *       "id": "cact_d025a96ac0c6",
+             *       "object": "connected_account",
+             *       "provider": "google",
+             *       "status": "active",
+             *       "updated_at": "2025-03-13T10:11:12Z",
+             *       "user_id": "user_d025a96ac0c6"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                 * @enum {string}
+                 */
+                connection_scope: "user" | "account";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The display name from the provider. */
+                display_name: string | null;
+                /** @description The email address associated with this connected account. */
+                email: string;
+                /** @description The unique identifier for this account at the provider. */
+                external_subject: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "connected_account";
+                /**
+                 * @description The calendar provider for this connected account.
+                 * @enum {string}
+                 */
+                provider: "google";
+                /**
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @enum {string}
+                 */
+                status: "active" | "reconnect_required";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+                /** @description The ID of the user who owns this connected account. */
+                user_id: string | null;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "connected_account.deleted";
         };
         /**
          * RolesResponse
@@ -3987,6 +4102,92 @@ export interface components {
             start_times: string[];
         };
         /**
+         * ConnectedAccountReconnectedEventData
+         * @description This is an object representing data for the connected account reconnected event. This event is triggered when a previously failed connection is successfully reauthenticated.
+         * @example {
+         *       "object": {
+         *         "connection_scope": "user",
+         *         "created_at": "2025-03-12T12:34:55Z",
+         *         "display_name": "John Doe",
+         *         "email": "user@example.com",
+         *         "external_subject": "123456789",
+         *         "id": "cact_d025a96ac0c6",
+         *         "object": "connected_account",
+         *         "provider": "google",
+         *         "status": "active",
+         *         "updated_at": "2025-03-13T10:11:12Z",
+         *         "user_id": "user_d025a96ac0c6"
+         *       },
+         *       "type": "connected_account.reconnected"
+         *     }
+         */
+        ConnectedAccountReconnectedEventData: {
+            /**
+             * ConnectedAccount
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @example {
+             *       "connection_scope": "user",
+             *       "created_at": "2025-03-12T12:34:55Z",
+             *       "display_name": "John Doe",
+             *       "email": "user@example.com",
+             *       "external_subject": "123456789",
+             *       "id": "cact_d025a96ac0c6",
+             *       "object": "connected_account",
+             *       "provider": "google",
+             *       "status": "active",
+             *       "updated_at": "2025-03-13T10:11:12Z",
+             *       "user_id": "user_d025a96ac0c6"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                 * @enum {string}
+                 */
+                connection_scope: "user" | "account";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The display name from the provider. */
+                display_name: string | null;
+                /** @description The email address associated with this connected account. */
+                email: string;
+                /** @description The unique identifier for this account at the provider. */
+                external_subject: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "connected_account";
+                /**
+                 * @description The calendar provider for this connected account.
+                 * @enum {string}
+                 */
+                provider: "google";
+                /**
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @enum {string}
+                 */
+                status: "active" | "reconnect_required";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+                /** @description The ID of the user who owns this connected account. */
+                user_id: string | null;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "connected_account.reconnected";
+        };
+        /**
          * Client
          * @description This is an object representing a client.
          * @example {
@@ -4141,6 +4342,7 @@ export interface components {
          * @description Response schema for a single account user
          * @example {
          *       "object": "account_user",
+         *       "passive": false,
          *       "roles": [
          *         {
          *           "id": "role_123456789012",
@@ -4166,6 +4368,8 @@ export interface components {
              * @enum {string}
              */
             object: "account_user";
+            /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+            passive: boolean;
             /** @description The roles assigned to the user in this account. */
             roles: components["schemas"]["Role"][];
             user: components["schemas"]["User"];
@@ -5544,6 +5748,92 @@ export interface components {
             start_at_ts: number;
             /** @description IANA time zone name */
             time_zone: string;
+        };
+        /**
+         * ConnectedAccountRefreshFailedEventData
+         * @description This is an object representing data for the connected account refresh failed event. This event is triggered when an OAuth token refresh permanently fails, indicating the integration needs to be reauthorized.
+         * @example {
+         *       "object": {
+         *         "connection_scope": "user",
+         *         "created_at": "2025-03-12T12:34:55Z",
+         *         "display_name": "John Doe",
+         *         "email": "user@example.com",
+         *         "external_subject": "123456789",
+         *         "id": "cact_d025a96ac0c6",
+         *         "object": "connected_account",
+         *         "provider": "google",
+         *         "status": "active",
+         *         "updated_at": "2025-03-13T10:11:12Z",
+         *         "user_id": "user_d025a96ac0c6"
+         *       },
+         *       "type": "connected_account.refresh_failed"
+         *     }
+         */
+        ConnectedAccountRefreshFailedEventData: {
+            /**
+             * ConnectedAccount
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @example {
+             *       "connection_scope": "user",
+             *       "created_at": "2025-03-12T12:34:55Z",
+             *       "display_name": "John Doe",
+             *       "email": "user@example.com",
+             *       "external_subject": "123456789",
+             *       "id": "cact_d025a96ac0c6",
+             *       "object": "connected_account",
+             *       "provider": "google",
+             *       "status": "active",
+             *       "updated_at": "2025-03-13T10:11:12Z",
+             *       "user_id": "user_d025a96ac0c6"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                 * @enum {string}
+                 */
+                connection_scope: "user" | "account";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The display name from the provider. */
+                display_name: string | null;
+                /** @description The email address associated with this connected account. */
+                email: string;
+                /** @description The unique identifier for this account at the provider. */
+                external_subject: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "connected_account";
+                /**
+                 * @description The calendar provider for this connected account.
+                 * @enum {string}
+                 */
+                provider: "google";
+                /**
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @enum {string}
+                 */
+                status: "active" | "reconnect_required";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+                /** @description The ID of the user who owns this connected account. */
+                user_id: string | null;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "connected_account.refresh_failed";
         };
         /**
          * AccountEvent
@@ -11601,6 +11891,266 @@ export interface components {
                  * @enum {string}
                  */
                 type: "block.deleted";
+            } | {
+                /**
+                 * ConnectedAccount
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @example {
+                 *       "connection_scope": "user",
+                 *       "created_at": "2025-03-12T12:34:55Z",
+                 *       "display_name": "John Doe",
+                 *       "email": "user@example.com",
+                 *       "external_subject": "123456789",
+                 *       "id": "cact_d025a96ac0c6",
+                 *       "object": "connected_account",
+                 *       "provider": "google",
+                 *       "status": "active",
+                 *       "updated_at": "2025-03-13T10:11:12Z",
+                 *       "user_id": "user_d025a96ac0c6"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                     * @enum {string}
+                     */
+                    connection_scope: "user" | "account";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The display name from the provider. */
+                    display_name: string | null;
+                    /** @description The email address associated with this connected account. */
+                    email: string;
+                    /** @description The unique identifier for this account at the provider. */
+                    external_subject: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "connected_account";
+                    /**
+                     * @description The calendar provider for this connected account.
+                     * @enum {string}
+                     */
+                    provider: "google";
+                    /**
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @enum {string}
+                     */
+                    status: "active" | "reconnect_required";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                    /** @description The ID of the user who owns this connected account. */
+                    user_id: string | null;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "connected_account.created";
+            } | {
+                /**
+                 * ConnectedAccount
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @example {
+                 *       "connection_scope": "user",
+                 *       "created_at": "2025-03-12T12:34:55Z",
+                 *       "display_name": "John Doe",
+                 *       "email": "user@example.com",
+                 *       "external_subject": "123456789",
+                 *       "id": "cact_d025a96ac0c6",
+                 *       "object": "connected_account",
+                 *       "provider": "google",
+                 *       "status": "active",
+                 *       "updated_at": "2025-03-13T10:11:12Z",
+                 *       "user_id": "user_d025a96ac0c6"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                     * @enum {string}
+                     */
+                    connection_scope: "user" | "account";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The display name from the provider. */
+                    display_name: string | null;
+                    /** @description The email address associated with this connected account. */
+                    email: string;
+                    /** @description The unique identifier for this account at the provider. */
+                    external_subject: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "connected_account";
+                    /**
+                     * @description The calendar provider for this connected account.
+                     * @enum {string}
+                     */
+                    provider: "google";
+                    /**
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @enum {string}
+                     */
+                    status: "active" | "reconnect_required";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                    /** @description The ID of the user who owns this connected account. */
+                    user_id: string | null;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "connected_account.deleted";
+            } | {
+                /**
+                 * ConnectedAccount
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @example {
+                 *       "connection_scope": "user",
+                 *       "created_at": "2025-03-12T12:34:55Z",
+                 *       "display_name": "John Doe",
+                 *       "email": "user@example.com",
+                 *       "external_subject": "123456789",
+                 *       "id": "cact_d025a96ac0c6",
+                 *       "object": "connected_account",
+                 *       "provider": "google",
+                 *       "status": "active",
+                 *       "updated_at": "2025-03-13T10:11:12Z",
+                 *       "user_id": "user_d025a96ac0c6"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                     * @enum {string}
+                     */
+                    connection_scope: "user" | "account";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The display name from the provider. */
+                    display_name: string | null;
+                    /** @description The email address associated with this connected account. */
+                    email: string;
+                    /** @description The unique identifier for this account at the provider. */
+                    external_subject: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "connected_account";
+                    /**
+                     * @description The calendar provider for this connected account.
+                     * @enum {string}
+                     */
+                    provider: "google";
+                    /**
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @enum {string}
+                     */
+                    status: "active" | "reconnect_required";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                    /** @description The ID of the user who owns this connected account. */
+                    user_id: string | null;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "connected_account.refresh_failed";
+            } | {
+                /**
+                 * ConnectedAccount
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @example {
+                 *       "connection_scope": "user",
+                 *       "created_at": "2025-03-12T12:34:55Z",
+                 *       "display_name": "John Doe",
+                 *       "email": "user@example.com",
+                 *       "external_subject": "123456789",
+                 *       "id": "cact_d025a96ac0c6",
+                 *       "object": "connected_account",
+                 *       "provider": "google",
+                 *       "status": "active",
+                 *       "updated_at": "2025-03-13T10:11:12Z",
+                 *       "user_id": "user_d025a96ac0c6"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                     * @enum {string}
+                     */
+                    connection_scope: "user" | "account";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The display name from the provider. */
+                    display_name: string | null;
+                    /** @description The email address associated with this connected account. */
+                    email: string;
+                    /** @description The unique identifier for this account at the provider. */
+                    external_subject: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "connected_account";
+                    /**
+                     * @description The calendar provider for this connected account.
+                     * @enum {string}
+                     */
+                    provider: "google";
+                    /**
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @enum {string}
+                     */
+                    status: "active" | "reconnect_required";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                    /** @description The ID of the user who owns this connected account. */
+                    user_id: string | null;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "connected_account.reconnected";
             };
             /** @description Unique identifier for the object. */
             id: string;
@@ -13264,6 +13814,92 @@ export interface components {
             updated_at: string;
         };
         /**
+         * ConnectedAccountCreatedEventData
+         * @description This is an object representing data for the connected account created event.
+         * @example {
+         *       "object": {
+         *         "connection_scope": "user",
+         *         "created_at": "2025-03-12T12:34:55Z",
+         *         "display_name": "John Doe",
+         *         "email": "user@example.com",
+         *         "external_subject": "123456789",
+         *         "id": "cact_d025a96ac0c6",
+         *         "object": "connected_account",
+         *         "provider": "google",
+         *         "status": "active",
+         *         "updated_at": "2025-03-13T10:11:12Z",
+         *         "user_id": "user_d025a96ac0c6"
+         *       },
+         *       "type": "connected_account.created"
+         *     }
+         */
+        ConnectedAccountCreatedEventData: {
+            /**
+             * ConnectedAccount
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @example {
+             *       "connection_scope": "user",
+             *       "created_at": "2025-03-12T12:34:55Z",
+             *       "display_name": "John Doe",
+             *       "email": "user@example.com",
+             *       "external_subject": "123456789",
+             *       "id": "cact_d025a96ac0c6",
+             *       "object": "connected_account",
+             *       "provider": "google",
+             *       "status": "active",
+             *       "updated_at": "2025-03-13T10:11:12Z",
+             *       "user_id": "user_d025a96ac0c6"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+                 * @enum {string}
+                 */
+                connection_scope: "user" | "account";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The display name from the provider. */
+                display_name: string | null;
+                /** @description The email address associated with this connected account. */
+                email: string;
+                /** @description The unique identifier for this account at the provider. */
+                external_subject: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "connected_account";
+                /**
+                 * @description The calendar provider for this connected account.
+                 * @enum {string}
+                 */
+                provider: "google";
+                /**
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @enum {string}
+                 */
+                status: "active" | "reconnect_required";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+                /** @description The ID of the user who owns this connected account. */
+                user_id: string | null;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "connected_account.created";
+        };
+        /**
          * CancellationReasonsResponse
          * @description Response schema for multiple cancellation reasons
          * @example {
@@ -13585,6 +14221,17 @@ export interface components {
          */
         ProviderScheduleResponse: {
             data: components["schemas"]["ProviderSchedule"];
+        };
+        /**
+         * UpdateAccountUserRequest
+         * @description Request schema for updating a user in an account
+         * @example {
+         *       "passive": true
+         *     }
+         */
+        UpdateAccountUserRequest: {
+            /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). Use this for platform/headless scenarios where the platform handles user communication. */
+            passive?: boolean;
         };
         /**
          * AdvanceNoticePolicy
@@ -18068,6 +18715,7 @@ export interface components {
          *       "data": [
          *         {
          *           "object": "account_user",
+         *           "passive": false,
          *           "roles": [
          *             {
          *               "id": "role_123456789012",
@@ -18092,6 +18740,65 @@ export interface components {
         AccountUsersResponse: {
             /** @description The account users details */
             data?: components["schemas"]["AccountUser"][];
+        };
+        /**
+         * ConnectedAccount
+         * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+         * @example {
+         *       "connection_scope": "user",
+         *       "created_at": "2025-03-12T12:34:55Z",
+         *       "display_name": "John Doe",
+         *       "email": "user@example.com",
+         *       "external_subject": "123456789",
+         *       "id": "cact_d025a96ac0c6",
+         *       "object": "connected_account",
+         *       "provider": "google",
+         *       "status": "active",
+         *       "updated_at": "2025-03-13T10:11:12Z",
+         *       "user_id": "user_d025a96ac0c6"
+         *     }
+         */
+        ConnectedAccount: {
+            /**
+             * @description The scope of this connection. 'user' means owned by a specific user, 'account' means shared across the account.
+             * @enum {string}
+             */
+            connection_scope: "user" | "account";
+            /**
+             * Format: date-time
+             * @description Time at which the object was created.
+             */
+            created_at: string;
+            /** @description The display name from the provider. */
+            display_name: string | null;
+            /** @description The email address associated with this connected account. */
+            email: string;
+            /** @description The unique identifier for this account at the provider. */
+            external_subject: string;
+            /** @description Unique identifier for the object. */
+            id: string;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "connected_account";
+            /**
+             * @description The calendar provider for this connected account.
+             * @enum {string}
+             */
+            provider: "google";
+            /**
+             * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+             * @enum {string}
+             */
+            status: "active" | "reconnect_required";
+            /**
+             * Format: date-time
+             * @description Time at which the object was last updated.
+             */
+            updated_at: string;
+            /** @description The ID of the user who owns this connected account. */
+            user_id: string | null;
         };
         /**
          * CreateServiceRequest
@@ -20100,6 +20807,70 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PublicAppointmentResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    updateAccountUser: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /**
+                 * @description The user's unique identifier
+                 * @example user_abcdef123456
+                 */
+                user_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description User update details */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateAccountUserRequest"];
+            };
+        };
+        responses: {
+            /** @description User updated */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["AccountUserResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description GenericError */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenericErrorResponse"];
                 };
             };
             /** @description Unprocessable Entity */

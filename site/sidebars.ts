@@ -45,7 +45,7 @@ const sidebars: SidebarsConfig = {
   ],
   openApiSidebar: [
     {
-      items: sortSchemas(
+      items: sortSidebarItems(
         apisidebar.filter(
           (item: { id: string } & SidebarItem) =>
             item.id !== "api/savvycal-appointments-api",
@@ -65,21 +65,28 @@ const sidebars: SidebarsConfig = {
 };
 
 /**
- * Sorts the schemas in the sidebar alphabetically.
+ * Sorts the sidebar items alphabetically:
+ * - Top-level categories are sorted by label
+ * - Items within the "Schemas" category are sorted by label
  */
-function sortSchemas(items: SidebarItem[]) {
-  return items.map((item) => {
-    if (item.type === "category" && item.label === "Schemas") {
-      return {
-        ...item,
-        items: (item.items as SidebarItemLink[]).sort((a, b) =>
-          a.label.localeCompare(b.label),
-        ),
-      };
-    }
-
-    return item;
-  });
+function sortSidebarItems(items: SidebarItem[]) {
+  return items
+    .map((item) => {
+      if (item.type === "category" && item.label === "Schemas") {
+        return {
+          ...item,
+          items: (item.items as SidebarItemLink[]).sort((a, b) =>
+            a.label.localeCompare(b.label),
+          ),
+        };
+      }
+      return item;
+    })
+    .sort((a, b) => {
+      const labelA = a.type === "category" ? a.label : "";
+      const labelB = b.type === "category" ? b.label : "";
+      return labelA.localeCompare(labelB);
+    });
 }
 
 export default sidebars;

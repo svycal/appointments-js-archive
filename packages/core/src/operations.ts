@@ -483,6 +483,17 @@ export function updateAccount(
   });
 }
 
+export function updateAccountUser(
+  client: FetchClient,
+  path: PathParams<"/v1/users/{user_id}", "patch">,
+  body: RequestBody<"/v1/users/{user_id}", "patch">,
+) {
+  return client.PATCH("/v1/users/{user_id}", {
+    body,
+    params: { path },
+  });
+}
+
 export function updateBlock(
   client: FetchClient,
   path: PathParams<"/v1/blocks/{block_id}", "patch">,
