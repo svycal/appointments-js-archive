@@ -574,7 +574,7 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "ConnectedAccounts",
+      label: "Connected Accounts",
       items: [
         {
           type: "doc",
