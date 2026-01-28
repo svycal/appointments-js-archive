@@ -173,7 +173,23 @@ const config: Config = {
     },
   } satisfies Preset.ThemeConfig,
 
-  themes: ["docusaurus-theme-openapi-docs", "@signalwire/docusaurus-theme-llms-txt"],
+  themes: [
+    "docusaurus-theme-openapi-docs",
+    "@signalwire/docusaurus-theme-llms-txt",
+    [
+      "@easyops-cn/docusaurus-search-local",
+      {
+        indexDocs: true,
+        indexBlog: false,
+        indexPages: false,
+        hashed: true,
+        language: ["en"],
+        highlightSearchTermsOnTargetPage: true,
+        docsRouteBasePath: "/",
+        searchBarShortcutHint: true,
+      },
+    ],
+  ],
 
   title: "SavvyCal Appointments",
   trailingSlash: false,
