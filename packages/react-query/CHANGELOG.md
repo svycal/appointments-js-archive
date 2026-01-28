@@ -1,5 +1,12 @@
 # @savvycal/appointments-react-query
 
+## 0.1.2
+
+### Patch Changes
+
+- Updated dependencies [[`088fcfa`](https://github.com/svycal/appointments/commit/088fcfa9c258fcc3c23b372f389c798830125555)]:
+  - @savvycal/appointments-core@0.3.0
+
 ## 0.1.1
 
 ### Patch Changes
