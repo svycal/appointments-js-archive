@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 0.4.0
+
+### Minor Changes
+
+- [`492c6a6`](https://github.com/svycal/appointments/commit/492c6a6186812528b0c281b2a05bd37e6432d6e5) Thanks [@derrickreimer](https://github.com/derrickreimer)! - Support for Connected Accounts API
+
 ## 0.3.0
 
 ### Minor Changes
