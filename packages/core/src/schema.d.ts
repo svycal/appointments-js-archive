@@ -480,6 +480,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/connected_accounts/{connected_account_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get connected account
+         * @description Get a single connected account by ID.
+         */
+        get: operations["getConnectedAccount"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete connected account
+         * @description Deletes (disconnects) an existing connected account.
+         */
+        delete: operations["deleteConnectedAccount"];
+        options?: never;
+        head?: never;
+        /**
+         * Update connected account
+         * @description Update an existing connected account.
+         */
+        patch: operations["updateConnectedAccount"];
+        trace?: never;
+    };
     "/v1/roles": {
         parameters: {
             query?: never;
@@ -865,6 +893,30 @@ export interface paths {
          * @description Create a new block.
          */
         post: operations["createBlock"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/connected_accounts": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List connected accounts
+         * @description List all connected accounts accessible to the current actor.
+         *
+         *     If the current actor is a user (for example, authenticated via JWT), then
+         *     this returns all connected accounts the user has permission to view. Otherwise,
+         *     this returns all connected accounts belonging to the current account.
+         */
+        get: operations["listConnectedAccounts"];
+        put?: never;
+        post?: never;
         delete?: never;
         options?: never;
         head?: never;
@@ -3050,6 +3102,17 @@ export interface components {
             data?: components["schemas"]["Account"];
         };
         /**
+         * UpdateConnectedAccountRequest
+         * @description Request schema for updating a connected account
+         * @example {
+         *       "display_name": "Work Calendar"
+         *     }
+         */
+        UpdateConnectedAccountRequest: {
+            /** @description The display name for the connected account. */
+            display_name?: string | null;
+        };
+        /**
          * GenericErrorResponse
          * @description Response schema for generic error messages
          * @example {
@@ -3639,10 +3702,10 @@ export interface components {
                  */
                 provider: "google";
                 /**
-                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
                  */
-                status: "active" | "reconnect_required";
+                status: "active" | "reconnect_required" | "insufficient_permissions";
                 /**
                  * Format: date-time
                  * @description Time at which the object was last updated.
@@ -4169,10 +4232,10 @@ export interface components {
                  */
                 provider: "google";
                 /**
-                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
                  */
-                status: "active" | "reconnect_required";
+                status: "active" | "reconnect_required" | "insufficient_permissions";
                 /**
                  * Format: date-time
                  * @description Time at which the object was last updated.
@@ -4277,6 +4340,28 @@ export interface components {
              * @description Time at which the object was last updated.
              */
             updated_at: string;
+        };
+        /**
+         * ConnectedAccountResponse
+         * @description Response schema for a single connected account
+         * @example {
+         *       "data": {
+         *         "connection_scope": "user",
+         *         "created_at": "2025-03-12T12:34:55Z",
+         *         "display_name": "John Doe",
+         *         "email": "user@example.com",
+         *         "external_subject": "123456789",
+         *         "id": "cact_d025a96ac0c6",
+         *         "object": "connected_account",
+         *         "provider": "google",
+         *         "status": "active",
+         *         "updated_at": "2025-03-13T10:11:12Z",
+         *         "user_id": "user_d025a96ac0c6"
+         *       }
+         *     }
+         */
+        ConnectedAccountResponse: {
+            data: components["schemas"]["ConnectedAccount"];
         };
         /**
          * PublicServiceSlotsResponse
@@ -5817,10 +5902,10 @@ export interface components {
                  */
                 provider: "google";
                 /**
-                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
                  */
-                status: "active" | "reconnect_required";
+                status: "active" | "reconnect_required" | "insufficient_permissions";
                 /**
                  * Format: date-time
                  * @description Time at which the object was last updated.
@@ -11939,10 +12024,10 @@ export interface components {
                      */
                     provider: "google";
                     /**
-                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
                      */
-                    status: "active" | "reconnect_required";
+                    status: "active" | "reconnect_required" | "insufficient_permissions";
                     /**
                      * Format: date-time
                      * @description Time at which the object was last updated.
@@ -12004,10 +12089,10 @@ export interface components {
                      */
                     provider: "google";
                     /**
-                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
                      */
-                    status: "active" | "reconnect_required";
+                    status: "active" | "reconnect_required" | "insufficient_permissions";
                     /**
                      * Format: date-time
                      * @description Time at which the object was last updated.
@@ -12069,10 +12154,10 @@ export interface components {
                      */
                     provider: "google";
                     /**
-                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
                      */
-                    status: "active" | "reconnect_required";
+                    status: "active" | "reconnect_required" | "insufficient_permissions";
                     /**
                      * Format: date-time
                      * @description Time at which the object was last updated.
@@ -12134,10 +12219,10 @@ export interface components {
                      */
                     provider: "google";
                     /**
-                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                     * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
                      */
-                    status: "active" | "reconnect_required";
+                    status: "active" | "reconnect_required" | "insufficient_permissions";
                     /**
                      * Format: date-time
                      * @description Time at which the object was last updated.
@@ -13881,10 +13966,10 @@ export interface components {
                  */
                 provider: "google";
                 /**
-                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+                 * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
                  */
-                status: "active" | "reconnect_required";
+                status: "active" | "reconnect_required" | "insufficient_permissions";
                 /**
                  * Format: date-time
                  * @description Time at which the object was last updated.
@@ -15814,6 +15899,38 @@ export interface components {
              * @description Time at which the object was last updated.
              */
             updated_at: string;
+        };
+        /**
+         * ConnectedAccountsResponse
+         * @description Response schema for multiple connected accounts
+         * @example {
+         *       "data": [
+         *         {
+         *           "connection_scope": "user",
+         *           "created_at": "2025-03-12T12:34:55Z",
+         *           "display_name": "John Doe",
+         *           "email": "user@example.com",
+         *           "external_subject": "123456789",
+         *           "id": "cact_d025a96ac0c6",
+         *           "object": "connected_account",
+         *           "provider": "google",
+         *           "status": "active",
+         *           "updated_at": "2025-03-13T10:11:12Z",
+         *           "user_id": "user_d025a96ac0c6"
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        ConnectedAccountsResponse: {
+            /** @description A list of connected accounts */
+            data: components["schemas"]["ConnectedAccount"][];
+            meta: components["schemas"]["PaginationMeta"];
         };
         /**
          * AccountsResponse
@@ -18788,10 +18905,10 @@ export interface components {
              */
             provider: "google";
             /**
-             * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization.
+             * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
              * @enum {string}
              */
-            status: "active" | "reconnect_required";
+            status: "active" | "reconnect_required" | "insufficient_permissions";
             /**
              * Format: date-time
              * @description Time at which the object was last updated.
@@ -22087,6 +22204,161 @@ export interface operations {
             };
         };
     };
+    getConnectedAccount: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Connected Account ID */
+                connected_account_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConnectedAccountResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    deleteConnectedAccount: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Connected Account ID */
+                connected_account_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateConnectedAccount: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Connected Account ID */
+                connected_account_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Connected account params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateConnectedAccountRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConnectedAccountResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     listRoles: {
         parameters: {
             query?: never;
@@ -23452,6 +23724,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["BlockResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    listConnectedAccounts: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+                /** @description Only return connected accounts that belong to the specified user. */
+                user_id?: string;
+                /** @description Only return connected accounts for the specified provider. */
+                provider?: "google";
+            };
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ConnectedAccountsResponse"];
                 };
             };
             /** @description Unauthorized */

@@ -194,6 +194,15 @@ export function deleteClient(
   });
 }
 
+export function deleteConnectedAccount(
+  client: FetchClient,
+  path: PathParams<"/v1/connected_accounts/{connected_account_id}", "delete">,
+) {
+  return client.DELETE("/v1/connected_accounts/{connected_account_id}", {
+    params: { path },
+  });
+}
+
 export function deleteProviderSchedule(
   client: FetchClient,
   path: PathParams<"/v1/provider_schedules/{provider_schedule_id}", "delete">,
@@ -263,6 +272,15 @@ export function getClient(
   path: PathParams<"/v1/clients/{client_id}", "get">,
 ) {
   return client.GET("/v1/clients/{client_id}", {
+    params: { path },
+  });
+}
+
+export function getConnectedAccount(
+  client: FetchClient,
+  path: PathParams<"/v1/connected_accounts/{connected_account_id}", "get">,
+) {
+  return client.GET("/v1/connected_accounts/{connected_account_id}", {
     params: { path },
   });
 }
@@ -365,6 +383,15 @@ export function listClients(
   query?: QueryParams<"/v1/clients", "get">,
 ) {
   return client.GET("/v1/clients", {
+    params: { query },
+  });
+}
+
+export function listConnectedAccounts(
+  client: FetchClient,
+  query?: QueryParams<"/v1/connected_accounts", "get">,
+) {
+  return client.GET("/v1/connected_accounts", {
     params: { query },
   });
 }
@@ -528,6 +555,17 @@ export function updateClient(
   body: RequestBody<"/v1/clients/{client_id}", "patch">,
 ) {
   return client.PATCH("/v1/clients/{client_id}", {
+    body,
+    params: { path },
+  });
+}
+
+export function updateConnectedAccount(
+  client: FetchClient,
+  path: PathParams<"/v1/connected_accounts/{connected_account_id}", "patch">,
+  body: RequestBody<"/v1/connected_accounts/{connected_account_id}", "patch">,
+) {
+  return client.PATCH("/v1/connected_accounts/{connected_account_id}", {
     body,
     params: { path },
   });

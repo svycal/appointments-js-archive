@@ -28,6 +28,7 @@ export { useDeleteServiceProvider } from "./mutation-hooks/use-delete-service-pr
 export { useRescheduleAppointment } from "./mutation-hooks/use-reschedule-appointment";
 export { useReschedulePublicAppointment } from "./mutation-hooks/use-reschedule-public-appointment";
 export { useUpdateAccount } from "./mutation-hooks/use-update-account";
+export { useUpdateAccountUser } from "./mutation-hooks/use-update-account-user";
 export { useUpdateBlock } from "./mutation-hooks/use-update-block";
 export { useUpdateCancellationReason } from "./mutation-hooks/use-update-cancellation-reason";
 export { useUpdateClient } from "./mutation-hooks/use-update-client";

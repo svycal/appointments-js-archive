@@ -422,6 +422,46 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Connected Accounts",
+      link: {
+        type: "doc",
+        id: "api/connected-accounts",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/connectedaccount",
+          label: "ConnectedAccount",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/delete-connected-account",
+          label: "Delete connected account",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-connected-account",
+          label: "Get connected account",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-connected-account",
+          label: "Update connected account",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/list-connected-accounts",
+          label: "List connected accounts",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Roles",
       link: {
         type: "doc",
@@ -574,18 +614,6 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Connected Accounts",
-      items: [
-        {
-          type: "doc",
-          id: "api/schemas/connectedaccount",
-          label: "ConnectedAccount",
-          className: "schema",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Schemas",
       items: [
         {
@@ -634,6 +662,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/accountresponse",
           label: "AccountResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/updateconnectedaccountrequest",
+          label: "UpdateConnectedAccountRequest",
           className: "schema",
         },
         {
@@ -766,6 +800,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/connectedaccountreconnectedeventdata",
           label: "ConnectedAccountReconnectedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/connectedaccountresponse",
+          label: "ConnectedAccountResponse",
           className: "schema",
         },
         {
@@ -1012,6 +1052,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/recurrencerule",
           label: "RecurrenceRule",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/connectedaccountsresponse",
+          label: "ConnectedAccountsResponse",
           className: "schema",
         },
         {

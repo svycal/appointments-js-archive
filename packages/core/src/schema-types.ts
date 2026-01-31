@@ -58,6 +58,8 @@ export type ConnectedAccountReconnectedEventData =
   Schemas["ConnectedAccountReconnectedEventData"];
 export type ConnectedAccountRefreshFailedEventData =
   Schemas["ConnectedAccountRefreshFailedEventData"];
+export type ConnectedAccountResponse = Schemas["ConnectedAccountResponse"];
+export type ConnectedAccountsResponse = Schemas["ConnectedAccountsResponse"];
 export type CreateAccountRequest = Schemas["CreateAccountRequest"];
 export type CreateAccountUserRequest = Schemas["CreateAccountUserRequest"];
 export type CreateAppointmentRequest = Schemas["CreateAppointmentRequest"];
@@ -123,6 +125,8 @@ export type UpdateBlockRequest = Schemas["UpdateBlockRequest"];
 export type UpdateCancellationReasonRequest =
   Schemas["UpdateCancellationReasonRequest"];
 export type UpdateClientRequest = Schemas["UpdateClientRequest"];
+export type UpdateConnectedAccountRequest =
+  Schemas["UpdateConnectedAccountRequest"];
 export type UpdateProviderRequest = Schemas["UpdateProviderRequest"];
 export type UpdateProviderScheduleRequest =
   Schemas["UpdateProviderScheduleRequest"];
