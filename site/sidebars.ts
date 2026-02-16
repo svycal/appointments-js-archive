@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
     "data-model",
     "authentication",
     "metadata-filtering",
+    "dates",
     {
       collapsed: false,
       items: ["components/public-booking-form"],
