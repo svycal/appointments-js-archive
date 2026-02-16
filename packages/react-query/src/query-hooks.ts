@@ -14,6 +14,8 @@ export { useCancellationReason } from "./query-hooks/use-cancellation-reason";
 export { useCancellationReasons } from "./query-hooks/use-cancellation-reasons";
 export { useClient } from "./query-hooks/use-client";
 export { useClients } from "./query-hooks/use-clients";
+export { useConnectedAccount } from "./query-hooks/use-connected-account";
+export { useConnectedAccounts } from "./query-hooks/use-connected-accounts";
 export { useCurrentAccount } from "./query-hooks/use-current-account";
 export { useCurrentAccountUser } from "./query-hooks/use-current-account-user";
 export { useCurrentPlatform } from "./query-hooks/use-current-platform";

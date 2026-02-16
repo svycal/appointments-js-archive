@@ -1605,6 +1605,9 @@ export interface components {
          *           "ics": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
          *           "reschedule": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
@@ -1839,6 +1842,9 @@ export interface components {
              *         ],
              *         "ics": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+             *         ],
+             *         "join": [
+             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
              *         ],
              *         "reschedule": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -2698,6 +2704,8 @@ export interface components {
                     confirm: string[];
                     /** @description URLs for the client to use to download an iCal file for this appointment. */
                     ics: string[];
+                    /** @description URLs for the client to use to join this appointment. */
+                    join: string[];
                     /** @description URLs for the client to use to reschedule this appointment. */
                     reschedule: string[];
                 };
@@ -3643,6 +3651,7 @@ export interface components {
          *         "created_at": "2025-03-12T12:34:55Z",
          *         "display_name": "John Doe",
          *         "email": "user@example.com",
+         *         "external_account_id": null,
          *         "external_subject": "123456789",
          *         "id": "cact_d025a96ac0c6",
          *         "object": "connected_account",
@@ -3663,6 +3672,7 @@ export interface components {
              *       "created_at": "2025-03-12T12:34:55Z",
              *       "display_name": "John Doe",
              *       "email": "user@example.com",
+             *       "external_account_id": null,
              *       "external_subject": "123456789",
              *       "id": "cact_d025a96ac0c6",
              *       "object": "connected_account",
@@ -3687,6 +3697,8 @@ export interface components {
                 display_name: string | null;
                 /** @description The email address associated with this connected account. */
                 email: string;
+                /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                external_account_id: string | null;
                 /** @description The unique identifier for this account at the provider. */
                 external_subject: string;
                 /** @description Unique identifier for the object. */
@@ -4173,6 +4185,7 @@ export interface components {
          *         "created_at": "2025-03-12T12:34:55Z",
          *         "display_name": "John Doe",
          *         "email": "user@example.com",
+         *         "external_account_id": null,
          *         "external_subject": "123456789",
          *         "id": "cact_d025a96ac0c6",
          *         "object": "connected_account",
@@ -4193,6 +4206,7 @@ export interface components {
              *       "created_at": "2025-03-12T12:34:55Z",
              *       "display_name": "John Doe",
              *       "email": "user@example.com",
+             *       "external_account_id": null,
              *       "external_subject": "123456789",
              *       "id": "cact_d025a96ac0c6",
              *       "object": "connected_account",
@@ -4217,6 +4231,8 @@ export interface components {
                 display_name: string | null;
                 /** @description The email address associated with this connected account. */
                 email: string;
+                /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                external_account_id: string | null;
                 /** @description The unique identifier for this account at the provider. */
                 external_subject: string;
                 /** @description Unique identifier for the object. */
@@ -4350,6 +4366,7 @@ export interface components {
          *         "created_at": "2025-03-12T12:34:55Z",
          *         "display_name": "John Doe",
          *         "email": "user@example.com",
+         *         "external_account_id": null,
          *         "external_subject": "123456789",
          *         "id": "cact_d025a96ac0c6",
          *         "object": "connected_account",
@@ -4670,6 +4687,9 @@ export interface components {
          *           "ics": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
          *           "reschedule": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
@@ -4888,6 +4908,9 @@ export interface components {
              *         ],
              *         "ics": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+             *         ],
+             *         "join": [
+             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
              *         ],
              *         "reschedule": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -5747,6 +5770,8 @@ export interface components {
                     confirm: string[];
                     /** @description URLs for the client to use to download an iCal file for this appointment. */
                     ics: string[];
+                    /** @description URLs for the client to use to join this appointment. */
+                    join: string[];
                     /** @description URLs for the client to use to reschedule this appointment. */
                     reschedule: string[];
                 };
@@ -5843,6 +5868,7 @@ export interface components {
          *         "created_at": "2025-03-12T12:34:55Z",
          *         "display_name": "John Doe",
          *         "email": "user@example.com",
+         *         "external_account_id": null,
          *         "external_subject": "123456789",
          *         "id": "cact_d025a96ac0c6",
          *         "object": "connected_account",
@@ -5863,6 +5889,7 @@ export interface components {
              *       "created_at": "2025-03-12T12:34:55Z",
              *       "display_name": "John Doe",
              *       "email": "user@example.com",
+             *       "external_account_id": null,
              *       "external_subject": "123456789",
              *       "id": "cact_d025a96ac0c6",
              *       "object": "connected_account",
@@ -5887,6 +5914,8 @@ export interface components {
                 display_name: string | null;
                 /** @description The email address associated with this connected account. */
                 email: string;
+                /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                external_account_id: string | null;
                 /** @description The unique identifier for this account at the provider. */
                 external_subject: string;
                 /** @description Unique identifier for the object. */
@@ -6133,6 +6162,9 @@ export interface components {
          *             "ics": [
          *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
          *             ],
+         *             "join": [
+         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             ],
          *             "reschedule": [
          *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *             ]
@@ -6363,6 +6395,9 @@ export interface components {
                  *         "ics": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
                  *         ],
+                 *         "join": [
+                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+                 *         ],
                  *         "reschedule": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
                  *         ]
@@ -7221,6 +7256,8 @@ export interface components {
                         confirm: string[];
                         /** @description URLs for the client to use to download an iCal file for this appointment. */
                         ics: string[];
+                        /** @description URLs for the client to use to join this appointment. */
+                        join: string[];
                         /** @description URLs for the client to use to reschedule this appointment. */
                         reschedule: string[];
                     };
@@ -7441,6 +7478,9 @@ export interface components {
                  *         "ics": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
                  *         ],
+                 *         "join": [
+                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+                 *         ],
                  *         "reschedule": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
                  *         ]
@@ -8299,6 +8339,8 @@ export interface components {
                         confirm: string[];
                         /** @description URLs for the client to use to download an iCal file for this appointment. */
                         ics: string[];
+                        /** @description URLs for the client to use to join this appointment. */
+                        join: string[];
                         /** @description URLs for the client to use to reschedule this appointment. */
                         reschedule: string[];
                     };
@@ -8599,6 +8641,9 @@ export interface components {
                  *         "ics": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
                  *         ],
+                 *         "join": [
+                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+                 *         ],
                  *         "reschedule": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
                  *         ]
@@ -9457,6 +9502,8 @@ export interface components {
                         confirm: string[];
                         /** @description URLs for the client to use to download an iCal file for this appointment. */
                         ics: string[];
+                        /** @description URLs for the client to use to join this appointment. */
+                        join: string[];
                         /** @description URLs for the client to use to reschedule this appointment. */
                         reschedule: string[];
                     };
@@ -9677,6 +9724,9 @@ export interface components {
                  *         "ics": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
                  *         ],
+                 *         "join": [
+                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+                 *         ],
                  *         "reschedule": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
                  *         ]
@@ -10535,6 +10585,8 @@ export interface components {
                         confirm: string[];
                         /** @description URLs for the client to use to download an iCal file for this appointment. */
                         ics: string[];
+                        /** @description URLs for the client to use to join this appointment. */
+                        join: string[];
                         /** @description URLs for the client to use to reschedule this appointment. */
                         reschedule: string[];
                     };
@@ -10755,6 +10807,9 @@ export interface components {
                  *         "ics": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
                  *         ],
+                 *         "join": [
+                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+                 *         ],
                  *         "reschedule": [
                  *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
                  *         ]
@@ -11613,6 +11668,8 @@ export interface components {
                         confirm: string[];
                         /** @description URLs for the client to use to download an iCal file for this appointment. */
                         ics: string[];
+                        /** @description URLs for the client to use to join this appointment. */
+                        join: string[];
                         /** @description URLs for the client to use to reschedule this appointment. */
                         reschedule: string[];
                     };
@@ -11985,6 +12042,7 @@ export interface components {
                  *       "created_at": "2025-03-12T12:34:55Z",
                  *       "display_name": "John Doe",
                  *       "email": "user@example.com",
+                 *       "external_account_id": null,
                  *       "external_subject": "123456789",
                  *       "id": "cact_d025a96ac0c6",
                  *       "object": "connected_account",
@@ -12009,6 +12067,8 @@ export interface components {
                     display_name: string | null;
                     /** @description The email address associated with this connected account. */
                     email: string;
+                    /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                    external_account_id: string | null;
                     /** @description The unique identifier for this account at the provider. */
                     external_subject: string;
                     /** @description Unique identifier for the object. */
@@ -12050,6 +12110,7 @@ export interface components {
                  *       "created_at": "2025-03-12T12:34:55Z",
                  *       "display_name": "John Doe",
                  *       "email": "user@example.com",
+                 *       "external_account_id": null,
                  *       "external_subject": "123456789",
                  *       "id": "cact_d025a96ac0c6",
                  *       "object": "connected_account",
@@ -12074,6 +12135,8 @@ export interface components {
                     display_name: string | null;
                     /** @description The email address associated with this connected account. */
                     email: string;
+                    /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                    external_account_id: string | null;
                     /** @description The unique identifier for this account at the provider. */
                     external_subject: string;
                     /** @description Unique identifier for the object. */
@@ -12115,6 +12178,7 @@ export interface components {
                  *       "created_at": "2025-03-12T12:34:55Z",
                  *       "display_name": "John Doe",
                  *       "email": "user@example.com",
+                 *       "external_account_id": null,
                  *       "external_subject": "123456789",
                  *       "id": "cact_d025a96ac0c6",
                  *       "object": "connected_account",
@@ -12139,6 +12203,8 @@ export interface components {
                     display_name: string | null;
                     /** @description The email address associated with this connected account. */
                     email: string;
+                    /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                    external_account_id: string | null;
                     /** @description The unique identifier for this account at the provider. */
                     external_subject: string;
                     /** @description Unique identifier for the object. */
@@ -12180,6 +12246,7 @@ export interface components {
                  *       "created_at": "2025-03-12T12:34:55Z",
                  *       "display_name": "John Doe",
                  *       "email": "user@example.com",
+                 *       "external_account_id": null,
                  *       "external_subject": "123456789",
                  *       "id": "cact_d025a96ac0c6",
                  *       "object": "connected_account",
@@ -12204,6 +12271,8 @@ export interface components {
                     display_name: string | null;
                     /** @description The email address associated with this connected account. */
                     email: string;
+                    /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                    external_account_id: string | null;
                     /** @description The unique identifier for this account at the provider. */
                     external_subject: string;
                     /** @description Unique identifier for the object. */
@@ -12458,6 +12527,9 @@ export interface components {
          *             ],
          *             "ics": [
          *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             ],
+         *             "join": [
+         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
          *             ],
          *             "reschedule": [
          *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -13074,6 +13146,9 @@ export interface components {
          *           ],
          *           "ics": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -13907,6 +13982,7 @@ export interface components {
          *         "created_at": "2025-03-12T12:34:55Z",
          *         "display_name": "John Doe",
          *         "email": "user@example.com",
+         *         "external_account_id": null,
          *         "external_subject": "123456789",
          *         "id": "cact_d025a96ac0c6",
          *         "object": "connected_account",
@@ -13927,6 +14003,7 @@ export interface components {
              *       "created_at": "2025-03-12T12:34:55Z",
              *       "display_name": "John Doe",
              *       "email": "user@example.com",
+             *       "external_account_id": null,
              *       "external_subject": "123456789",
              *       "id": "cact_d025a96ac0c6",
              *       "object": "connected_account",
@@ -13951,6 +14028,8 @@ export interface components {
                 display_name: string | null;
                 /** @description The email address associated with this connected account. */
                 email: string;
+                /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+                external_account_id: string | null;
                 /** @description The unique identifier for this account at the provider. */
                 external_subject: string;
                 /** @description Unique identifier for the object. */
@@ -14543,6 +14622,9 @@ export interface components {
          *           "ics": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
          *           "reschedule": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
@@ -14761,6 +14843,9 @@ export interface components {
              *         ],
              *         "ics": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+             *         ],
+             *         "join": [
+             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
              *         ],
              *         "reschedule": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -15620,6 +15705,8 @@ export interface components {
                     confirm: string[];
                     /** @description URLs for the client to use to download an iCal file for this appointment. */
                     ics: string[];
+                    /** @description URLs for the client to use to join this appointment. */
+                    join: string[];
                     /** @description URLs for the client to use to reschedule this appointment. */
                     reschedule: string[];
                 };
@@ -15910,6 +15997,7 @@ export interface components {
          *           "created_at": "2025-03-12T12:34:55Z",
          *           "display_name": "John Doe",
          *           "email": "user@example.com",
+         *           "external_account_id": null,
          *           "external_subject": "123456789",
          *           "id": "cact_d025a96ac0c6",
          *           "object": "connected_account",
@@ -16436,6 +16524,9 @@ export interface components {
          *           "ics": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
          *           "reschedule": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
@@ -16654,6 +16745,9 @@ export interface components {
              *         ],
              *         "ics": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+             *         ],
+             *         "join": [
+             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
              *         ],
              *         "reschedule": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -17513,6 +17607,8 @@ export interface components {
                     confirm: string[];
                     /** @description URLs for the client to use to download an iCal file for this appointment. */
                     ics: string[];
+                    /** @description URLs for the client to use to join this appointment. */
+                    join: string[];
                     /** @description URLs for the client to use to reschedule this appointment. */
                     reschedule: string[];
                 };
@@ -17894,6 +17990,9 @@ export interface components {
          *         ],
          *         "ics": [
          *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *         ],
+         *         "join": [
+         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
          *         ],
          *         "reschedule": [
          *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -18753,6 +18852,8 @@ export interface components {
                 confirm: string[];
                 /** @description URLs for the client to use to download an iCal file for this appointment. */
                 ics: string[];
+                /** @description URLs for the client to use to join this appointment. */
+                join: string[];
                 /** @description URLs for the client to use to reschedule this appointment. */
                 reschedule: string[];
             };
@@ -18866,6 +18967,7 @@ export interface components {
          *       "created_at": "2025-03-12T12:34:55Z",
          *       "display_name": "John Doe",
          *       "email": "user@example.com",
+         *       "external_account_id": null,
          *       "external_subject": "123456789",
          *       "id": "cact_d025a96ac0c6",
          *       "object": "connected_account",
@@ -18890,6 +18992,8 @@ export interface components {
             display_name: string | null;
             /** @description The email address associated with this connected account. */
             email: string;
+            /** @description The unique identifier for the organization at the provider (e.g., Zoom account number). */
+            external_account_id: string | null;
             /** @description The unique identifier for this account at the provider. */
             external_subject: string;
             /** @description Unique identifier for the object. */
@@ -19357,6 +19461,9 @@ export interface components {
          *           "ics": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
          *           "reschedule": [
          *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
@@ -19575,6 +19682,9 @@ export interface components {
              *         ],
              *         "ics": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+             *         ],
+             *         "join": [
+             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
              *         ],
              *         "reschedule": [
              *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
@@ -20434,6 +20544,8 @@ export interface components {
                     confirm: string[];
                     /** @description URLs for the client to use to download an iCal file for this appointment. */
                     ics: string[];
+                    /** @description URLs for the client to use to join this appointment. */
+                    join: string[];
                     /** @description URLs for the client to use to reschedule this appointment. */
                     reschedule: string[];
                 };

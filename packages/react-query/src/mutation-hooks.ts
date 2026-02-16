@@ -22,6 +22,7 @@ export { useDeactivateProvider } from "./mutation-hooks/use-deactivate-provider"
 export { useDeleteBlock } from "./mutation-hooks/use-delete-block";
 export { useDeleteCancellationReason } from "./mutation-hooks/use-delete-cancellation-reason";
 export { useDeleteClient } from "./mutation-hooks/use-delete-client";
+export { useDeleteConnectedAccount } from "./mutation-hooks/use-delete-connected-account";
 export { useDeleteProviderSchedule } from "./mutation-hooks/use-delete-provider-schedule";
 export { useDeleteService } from "./mutation-hooks/use-delete-service";
 export { useDeleteServiceProvider } from "./mutation-hooks/use-delete-service-provider";
@@ -32,6 +33,7 @@ export { useUpdateAccountUser } from "./mutation-hooks/use-update-account-user";
 export { useUpdateBlock } from "./mutation-hooks/use-update-block";
 export { useUpdateCancellationReason } from "./mutation-hooks/use-update-cancellation-reason";
 export { useUpdateClient } from "./mutation-hooks/use-update-client";
+export { useUpdateConnectedAccount } from "./mutation-hooks/use-update-connected-account";
 export { useUpdateProvider } from "./mutation-hooks/use-update-provider";
 export { useUpdateProviderSchedule } from "./mutation-hooks/use-update-provider-schedule";
 export { useUpdateService } from "./mutation-hooks/use-update-service";
