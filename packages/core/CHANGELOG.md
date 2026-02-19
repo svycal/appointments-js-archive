@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 0.5.0
+
+### Minor Changes
+
+- [`5d3a2f7`](https://github.com/svycal/appointments/commit/5d3a2f72a67c0d410df6203afedc4c852f65d1c3) Thanks [@derrickreimer](https://github.com/derrickreimer)! - API updates
+
 ## 0.4.0
 
 ### Minor Changes
