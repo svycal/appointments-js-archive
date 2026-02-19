@@ -87,11 +87,17 @@ export type PaginationMeta = Schemas["PaginationMeta"];
 export type Platform = Schemas["Platform"];
 export type PlatformResponse = Schemas["PlatformResponse"];
 export type Provider = Schemas["Provider"];
+export type ProviderCreatedEventData = Schemas["ProviderCreatedEventData"];
+export type ProviderDeactivatedEventData =
+  Schemas["ProviderDeactivatedEventData"];
+export type ProviderReactivatedEventData =
+  Schemas["ProviderReactivatedEventData"];
 export type ProviderResponse = Schemas["ProviderResponse"];
 export type ProviderSchedule = Schemas["ProviderSchedule"];
 export type ProviderScheduleResponse = Schemas["ProviderScheduleResponse"];
 export type ProviderSchedulesResponse = Schemas["ProviderSchedulesResponse"];
 export type ProvidersResponse = Schemas["ProvidersResponse"];
+export type ProviderUpdatedEventData = Schemas["ProviderUpdatedEventData"];
 export type PublicAppointment = Schemas["PublicAppointment"];
 export type PublicAppointmentResponse = Schemas["PublicAppointmentResponse"];
 export type PublicCancellationReason = Schemas["PublicCancellationReason"];

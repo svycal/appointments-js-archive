@@ -52,3 +52,7 @@ The following event types are available. The Schema definitions referenced in th
 | `connected_account.deleted`        | Emitted when a calendar integration is disconnected. ([Schema](/api/schemas/connectedaccountdeletedeventdata))             |
 | `connected_account.refresh_failed` | Emitted when an OAuth token refresh permanently fails. ([Schema](/api/schemas/connectedaccountrefreshfailedeventdata))     |
 | `connected_account.reconnected`    | Emitted when a previously failed integration is reconnected. ([Schema](/api/schemas/connectedaccountreconnectedeventdata)) |
+| `provider.created`                 | Emitted when a new provider is created. ([Schema](/api/schemas/providercreatedeventdata))                                  |
+| `provider.deactivated`             | Emitted when a provider is deactivated. ([Schema](/api/schemas/providerdeactivatedeventdata))                              |
+| `provider.reactivated`             | Emitted when a previously deactivated provider is reactivated. ([Schema](/api/schemas/providerreactivatedeventdata))       |
+| `provider.updated`                 | Emitted when an existing provider is updated. ([Schema](/api/schemas/providerupdatedeventdata))                            |

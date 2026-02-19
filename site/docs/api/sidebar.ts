@@ -636,6 +636,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/providerupdatedeventdata",
+          label: "ProviderUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/appointmentrescheduledeventdata",
           label: "AppointmentRescheduledEventData",
           className: "schema",
@@ -864,6 +870,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/providercreatedeventdata",
+          label: "ProviderCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/appointmentsresponse",
           label: "AppointmentsResponse",
           className: "schema",
@@ -938,6 +950,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/bookingpolicy",
           label: "BookingPolicy",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/providerreactivatedeventdata",
+          label: "ProviderReactivatedEventData",
           className: "schema",
         },
         {
@@ -1124,6 +1142,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/jsonerrorresponse",
           label: "JsonErrorResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/providerdeactivatedeventdata",
+          label: "ProviderDeactivatedEventData",
           className: "schema",
         },
         {

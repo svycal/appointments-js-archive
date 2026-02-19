@@ -1395,6 +1395,76 @@ export interface components {
             };
         };
         /**
+         * ProviderUpdatedEventData
+         * @description This is an object representing data for the provider updated event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "provider.updated"
+         *     }
+         */
+        ProviderUpdatedEventData: {
+            /**
+             * Provider
+             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @example {
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "display_name": "John Smith",
+             *       "first_name": "John",
+             *       "id": "prov_d025a96ac0c6",
+             *       "last_name": "Smith",
+             *       "metadata": {
+             *         "external_id": "123"
+             *       },
+             *       "object": "provider",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The provider's display name. */
+                display_name: string;
+                /** @description The provider's first name. */
+                first_name: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The provider's last name. */
+                last_name: string;
+                /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                metadata?: Record<string, never>;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider.updated";
+        };
+        /**
          * AppointmentRescheduledEventData
          * @description This is an object representing data for the appointment rescheduled event.
          * @example {
@@ -12305,6 +12375,206 @@ export interface components {
                  * @enum {string}
                  */
                 type: "connected_account.reconnected";
+            } | {
+                /**
+                 * Provider
+                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @example {
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "display_name": "John Smith",
+                 *       "first_name": "John",
+                 *       "id": "prov_d025a96ac0c6",
+                 *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
+                 *       "object": "provider",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The provider's display name. */
+                    display_name: string;
+                    /** @description The provider's first name. */
+                    first_name: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The provider's last name. */
+                    last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider.created";
+            } | {
+                /**
+                 * Provider
+                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @example {
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "display_name": "John Smith",
+                 *       "first_name": "John",
+                 *       "id": "prov_d025a96ac0c6",
+                 *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
+                 *       "object": "provider",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The provider's display name. */
+                    display_name: string;
+                    /** @description The provider's first name. */
+                    first_name: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The provider's last name. */
+                    last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider.updated";
+            } | {
+                /**
+                 * Provider
+                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @example {
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "display_name": "John Smith",
+                 *       "first_name": "John",
+                 *       "id": "prov_d025a96ac0c6",
+                 *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
+                 *       "object": "provider",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The provider's display name. */
+                    display_name: string;
+                    /** @description The provider's first name. */
+                    first_name: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The provider's last name. */
+                    last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider.deactivated";
+            } | {
+                /**
+                 * Provider
+                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @example {
+                 *       "created_at": "2017-09-12T12:34:55Z",
+                 *       "display_name": "John Smith",
+                 *       "first_name": "John",
+                 *       "id": "prov_d025a96ac0c6",
+                 *       "last_name": "Smith",
+                 *       "metadata": {
+                 *         "external_id": "123"
+                 *       },
+                 *       "object": "provider",
+                 *       "updated_at": "2017-09-13T10:11:12Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /** @description The provider's display name. */
+                    display_name: string;
+                    /** @description The provider's first name. */
+                    first_name: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The provider's last name. */
+                    last_name: string;
+                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                    metadata?: Record<string, never>;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider";
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider.reactivated";
             };
             /** @description Unique identifier for the object. */
             id: string;
@@ -12315,6 +12585,76 @@ export interface components {
             object?: "account_event";
             /** @description The event version. */
             version: string;
+        };
+        /**
+         * ProviderCreatedEventData
+         * @description This is an object representing data for the provider created event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "provider.created"
+         *     }
+         */
+        ProviderCreatedEventData: {
+            /**
+             * Provider
+             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @example {
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "display_name": "John Smith",
+             *       "first_name": "John",
+             *       "id": "prov_d025a96ac0c6",
+             *       "last_name": "Smith",
+             *       "metadata": {
+             *         "external_id": "123"
+             *       },
+             *       "object": "provider",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The provider's display name. */
+                display_name: string;
+                /** @description The provider's first name. */
+                first_name: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The provider's last name. */
+                last_name: string;
+                /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                metadata?: Record<string, never>;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider.created";
         };
         /**
          * AppointmentsResponse
@@ -13709,6 +14049,76 @@ export interface components {
              * @description When the service was last updated.
              */
             updated_at: string;
+        };
+        /**
+         * ProviderReactivatedEventData
+         * @description This is an object representing data for the provider reactivated event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "provider.reactivated"
+         *     }
+         */
+        ProviderReactivatedEventData: {
+            /**
+             * Provider
+             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @example {
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "display_name": "John Smith",
+             *       "first_name": "John",
+             *       "id": "prov_d025a96ac0c6",
+             *       "last_name": "Smith",
+             *       "metadata": {
+             *         "external_id": "123"
+             *       },
+             *       "object": "provider",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The provider's display name. */
+                display_name: string;
+                /** @description The provider's first name. */
+                first_name: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The provider's last name. */
+                last_name: string;
+                /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                metadata?: Record<string, never>;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider.reactivated";
         };
         /**
          * ProviderResponse
@@ -18877,6 +19287,76 @@ export interface components {
                 /** @description URLs for the client to use to reschedule this appointment. */
                 reschedule: string[];
             };
+        };
+        /**
+         * ProviderDeactivatedEventData
+         * @description This is an object representing data for the provider deactivated event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "type": "provider.deactivated"
+         *     }
+         */
+        ProviderDeactivatedEventData: {
+            /**
+             * Provider
+             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
+             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @example {
+             *       "created_at": "2017-09-12T12:34:55Z",
+             *       "display_name": "John Smith",
+             *       "first_name": "John",
+             *       "id": "prov_d025a96ac0c6",
+             *       "last_name": "Smith",
+             *       "metadata": {
+             *         "external_id": "123"
+             *       },
+             *       "object": "provider",
+             *       "updated_at": "2017-09-13T10:11:12Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /** @description The provider's display name. */
+                display_name: string;
+                /** @description The provider's first name. */
+                first_name: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The provider's last name. */
+                last_name: string;
+                /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
+                metadata?: Record<string, never>;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider";
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider.deactivated";
         };
         /**
          * PublicAppointmentResponse
