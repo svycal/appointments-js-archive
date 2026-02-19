@@ -3638,9 +3638,9 @@ export interface components {
              */
             passive: boolean;
             /** @description List of role IDs to assign to the user. */
-            role_ids?: string[];
+            role_ids: string[];
             /** @description The user's time zone. */
-            time_zone?: string;
+            time_zone: string;
         };
         /**
          * ConnectedAccountDeletedEventData
@@ -3666,7 +3666,7 @@ export interface components {
         ConnectedAccountDeletedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -3709,10 +3709,10 @@ export interface components {
                  */
                 object: "connected_account";
                 /**
-                 * @description The calendar provider for this connected account.
+                 * @description The provider for this connected account.
                  * @enum {string}
                  */
-                provider: "google";
+                provider: "google" | "microsoft" | "zoom_admin";
                 /**
                  * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
@@ -4200,7 +4200,7 @@ export interface components {
         ConnectedAccountReconnectedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -4243,10 +4243,10 @@ export interface components {
                  */
                 object: "connected_account";
                 /**
-                 * @description The calendar provider for this connected account.
+                 * @description The provider for this connected account.
                  * @enum {string}
                  */
-                provider: "google";
+                provider: "google" | "microsoft" | "zoom_admin";
                 /**
                  * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
@@ -5883,7 +5883,7 @@ export interface components {
         ConnectedAccountRefreshFailedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -5926,10 +5926,10 @@ export interface components {
                  */
                 object: "connected_account";
                 /**
-                 * @description The calendar provider for this connected account.
+                 * @description The provider for this connected account.
                  * @enum {string}
                  */
-                provider: "google";
+                provider: "google" | "microsoft" | "zoom_admin";
                 /**
                  * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
@@ -12036,7 +12036,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12079,10 +12079,10 @@ export interface components {
                      */
                     object: "connected_account";
                     /**
-                     * @description The calendar provider for this connected account.
+                     * @description The provider for this connected account.
                      * @enum {string}
                      */
-                    provider: "google";
+                    provider: "google" | "microsoft" | "zoom_admin";
                     /**
                      * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
@@ -12104,7 +12104,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12147,10 +12147,10 @@ export interface components {
                      */
                     object: "connected_account";
                     /**
-                     * @description The calendar provider for this connected account.
+                     * @description The provider for this connected account.
                      * @enum {string}
                      */
-                    provider: "google";
+                    provider: "google" | "microsoft" | "zoom_admin";
                     /**
                      * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
@@ -12172,7 +12172,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12215,10 +12215,10 @@ export interface components {
                      */
                     object: "connected_account";
                     /**
-                     * @description The calendar provider for this connected account.
+                     * @description The provider for this connected account.
                      * @enum {string}
                      */
-                    provider: "google";
+                    provider: "google" | "microsoft" | "zoom_admin";
                     /**
                      * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
@@ -12240,7 +12240,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12283,10 +12283,10 @@ export interface components {
                      */
                     object: "connected_account";
                     /**
-                     * @description The calendar provider for this connected account.
+                     * @description The provider for this connected account.
                      * @enum {string}
                      */
-                    provider: "google";
+                    provider: "google" | "microsoft" | "zoom_admin";
                     /**
                      * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                      * @enum {string}
@@ -13997,7 +13997,7 @@ export interface components {
         ConnectedAccountCreatedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -14040,10 +14040,10 @@ export interface components {
                  */
                 object: "connected_account";
                 /**
-                 * @description The calendar provider for this connected account.
+                 * @description The provider for this connected account.
                  * @enum {string}
                  */
-                provider: "google";
+                provider: "google" | "microsoft" | "zoom_admin";
                 /**
                  * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
                  * @enum {string}
@@ -14390,12 +14390,32 @@ export interface components {
          * UpdateAccountUserRequest
          * @description Request schema for updating a user in an account
          * @example {
-         *       "passive": true
+         *       "email": "john.doe@example.com",
+         *       "first_name": "John",
+         *       "last_name": "Doe",
+         *       "passive": true,
+         *       "role_ids": [
+         *         "role_abc123def456"
+         *       ],
+         *       "time_zone": "America/Chicago"
          *     }
          */
         UpdateAccountUserRequest: {
+            /**
+             * Format: email
+             * @description The user's email address.
+             */
+            email?: string;
+            /** @description The user's first name. */
+            first_name?: string;
+            /** @description The user's last name. */
+            last_name?: string;
             /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). Use this for platform/headless scenarios where the platform handles user communication. */
             passive?: boolean;
+            /** @description List of role IDs to assign to the user. Replaces all existing role assignments. */
+            role_ids?: string[];
+            /** @description The user's time zone. */
+            time_zone?: string;
         };
         /**
          * AdvanceNoticePolicy
@@ -18961,7 +18981,7 @@ export interface components {
         };
         /**
          * ConnectedAccount
-         * @description This is an object representing a connected calendar account (e.g., a Google Calendar integration).
+         * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
          * @example {
          *       "connection_scope": "user",
          *       "created_at": "2025-03-12T12:34:55Z",
@@ -19004,10 +19024,10 @@ export interface components {
              */
             object: "connected_account";
             /**
-             * @description The calendar provider for this connected account.
+             * @description The provider for this connected account.
              * @enum {string}
              */
-            provider: "google";
+            provider: "google" | "microsoft" | "zoom_admin";
             /**
              * @description The current status of the connection. 'active' means the connection is working, 'reconnect_required' means the OAuth token has failed and needs reauthorization, 'insufficient_permissions' means the user did not grant all required OAuth scopes.
              * @enum {string}
@@ -23868,7 +23888,7 @@ export interface operations {
                 /** @description Only return connected accounts that belong to the specified user. */
                 user_id?: string;
                 /** @description Only return connected accounts for the specified provider. */
-                provider?: "google";
+                provider?: "google" | "microsoft" | "zoom_admin";
             };
             header?: {
                 /**
