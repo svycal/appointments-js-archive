@@ -309,13 +309,13 @@ export interface paths {
         };
         /**
          * List service providers
-         * @description List all providers associated with a service
+         * @description List all providers associated with a service.
          */
         get: operations["listServiceProviders"];
         put?: never;
         /**
          * Add provider to service
-         * @description Associate a provider with a service
+         * @description Add a provider to the rotation for a specific service.
          */
         post: operations["createServiceProvider"];
         delete?: never;
@@ -360,7 +360,7 @@ export interface paths {
         post?: never;
         /**
          * Remove service provider
-         * @description Remove a provider from a service
+         * @description Remove a provider from the rotation for a service.
          */
         delete: operations["deleteServiceProvider"];
         options?: never;
@@ -731,7 +731,9 @@ export interface paths {
         put?: never;
         /**
          * Create appointment
-         * @description Create a new appointment. The time slot for the appointment must be available unless you explicitly disable validation (by setting `validate_slot` to `false` in the request body).
+         * @description Create a new appointment.
+         *
+         *     The time slot for the appointment must be available unless you explicitly disable validation (by setting `validate_slot` to `false` in the request body).
          *     You can find available time slots using the [List slots for a service](/api/list-service-slots) endpoint.
          */
         post: operations["createAppointment"];
@@ -822,7 +824,7 @@ export interface paths {
         };
         /**
          * List available time slots
-         * @description List all available time slots for a service in a specific time range
+         * @description List all available time slots for a service in a specific time range.
          */
         get: operations["listServiceSlots"];
         put?: never;
@@ -844,9 +846,9 @@ export interface paths {
         put?: never;
         /**
          * Reschedule appointment
-         * @description Reschedule an existing appointment. The new time slot for the appointment must be available.
+         * @description Reschedule an existing appointment.
          *
-         *     You can find available time slots using the [List slots for a service](/api/list-service-slots) endpoint.
+         *     The new time slot for the appointment must be available. You can find available time slots using the [List slots for a service](/api/list-service-slots) endpoint.
          */
         post: operations["rescheduleAppointment"];
         delete?: never;
@@ -884,7 +886,9 @@ export interface paths {
         };
         /**
          * List blocks
-         * @description List all blocks account-wide or attached to a specific resource type. Blocks are sorted by `start_date` in ascending order (oldest first).
+         * @description List all blocks account-wide or attached to a specific resource type.
+         *
+         *     Blocks are sorted by `start_date` in ascending order (oldest first).
          */
         get: operations["listBlocks"];
         put?: never;
@@ -1416,8 +1420,7 @@ export interface components {
         ProviderUpdatedEventData: {
             /**
              * Provider
-             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @description A provider represents a staff member who can provide services to clients.
              * @example {
              *       "created_at": "2017-09-12T12:34:55Z",
              *       "display_name": "John Smith",
@@ -1999,14 +2002,14 @@ export interface components {
                     created_at: string;
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
                     /** @description Unique identifier for the object. */
                     id: string;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client.
@@ -2018,7 +2021,7 @@ export interface components {
                      * @enum {string}
                      */
                     object: "client";
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description External reference identifier for the client. */
                     reference_id: string | null;
@@ -2033,23 +2036,23 @@ export interface components {
                      */
                     updated_at: string;
                 };
-                /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                 client_data: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client booking the appointment.
                      * @example en-US
                      */
                     locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description The client's external reference identifier. */
                     reference_id: string | null;
@@ -2231,14 +2234,14 @@ export interface components {
                 fields: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                 };
                 /** @description Unique identifier for the object. */
@@ -2250,8 +2253,7 @@ export interface components {
                 object: "appointment";
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -2464,8 +2466,7 @@ export interface components {
                 }[];
                 /**
                  * Service
-                 * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                 *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                 * @description A service represents a type of appointment.
                  * @example {
                  *       "appointment_type": "in_person",
                  *       "booking_policy": {
@@ -3736,7 +3737,7 @@ export interface components {
         ConnectedAccountDeletedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+             * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -3862,6 +3863,269 @@ export interface components {
             allow_cancellation: boolean;
             /** @description The message to display when public cancellation is disabled. */
             disabled_message: string | null;
+        };
+        /**
+         * AccountUserUpdatedEventData
+         * @description This is an object representing data for the account user updated event.
+         * @example {
+         *       "object": {
+         *         "object": "account_user",
+         *         "passive": false,
+         *         "roles": [
+         *           {
+         *             "id": "role_123456789012",
+         *             "name": "Admin",
+         *             "object": "role",
+         *             "type": "admin"
+         *           }
+         *         ],
+         *         "user": {
+         *           "created_at": "2025-03-15T13:01:08Z",
+         *           "email": "avery@tendermedical.com",
+         *           "first_name": "Avery",
+         *           "id": "user_d025a96ac0c6",
+         *           "last_name": "Evans",
+         *           "object": "user",
+         *           "updated_at": "2025-03-15T13:01:08Z"
+         *         }
+         *       },
+         *       "type": "account_user.updated"
+         *     }
+         */
+        AccountUserUpdatedEventData: {
+            /**
+             * AccountUser
+             * @description This is an object representing a user in an account.
+             * @example {
+             *       "object": "account_user",
+             *       "passive": false,
+             *       "roles": [
+             *         {
+             *           "id": "role_123456789012",
+             *           "name": "Admin",
+             *           "object": "role",
+             *           "type": "admin"
+             *         }
+             *       ],
+             *       "user": {
+             *         "created_at": "2025-03-15T13:01:08Z",
+             *         "email": "avery@tendermedical.com",
+             *         "first_name": "Avery",
+             *         "id": "user_d025a96ac0c6",
+             *         "last_name": "Evans",
+             *         "object": "user",
+             *         "updated_at": "2025-03-15T13:01:08Z"
+             *       }
+             *     }
+             */
+            object: {
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "account_user";
+                /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+                passive: boolean;
+                /** @description The roles assigned to the user in this account. */
+                roles: components["schemas"]["Role"][];
+                user: components["schemas"]["User"];
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "account_user.updated";
+        };
+        /**
+         * ClientDeletedEventData
+         * @description This is an object representing data for the client deleted event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-01-15T14:30:00Z",
+         *         "email": "jane.smith@example.com",
+         *         "first_name": "Jane",
+         *         "id": "clnt_a1b2c3d4e5f6",
+         *         "last_name": "Smith",
+         *         "locale": "en-US",
+         *         "object": "client",
+         *         "phone": "+15551234567",
+         *         "reference_id": "ext_12345",
+         *         "time_zone": "America/Chicago",
+         *         "updated_at": "2025-03-10T09:45:00Z"
+         *       },
+         *       "type": "client.deleted"
+         *     }
+         */
+        ClientDeletedEventData: {
+            /**
+             * Client
+             * @description This is an object representing a client.
+             * @example {
+             *       "created_at": "2025-01-15T14:30:00Z",
+             *       "email": "jane.smith@example.com",
+             *       "first_name": "Jane",
+             *       "id": "clnt_a1b2c3d4e5f6",
+             *       "last_name": "Smith",
+             *       "locale": "en-US",
+             *       "object": "client",
+             *       "phone": "+15551234567",
+             *       "reference_id": "ext_12345",
+             *       "time_zone": "America/Chicago",
+             *       "updated_at": "2025-03-10T09:45:00Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: email
+                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
+                 */
+                email?: string | null;
+                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
+                first_name?: string | null;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
+                last_name?: string | null;
+                /**
+                 * @description The locale of the client.
+                 * @example en-US
+                 */
+                locale: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "client";
+                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
+                phone?: string | null;
+                /** @description External reference identifier for the client. */
+                reference_id: string | null;
+                /**
+                 * @description The client's time zone (IANA format).
+                 * @example America/Chicago
+                 */
+                time_zone: string;
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "client.deleted";
+        };
+        /**
+         * ProviderScheduleDeletedEventData
+         * @description This is an object representing data for the provider schedule deleted event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "effective_from": "2025-01-01",
+         *         "effective_to": "2025-12-31",
+         *         "id": "psch_d025a96ac0c6",
+         *         "object": "provider_schedule",
+         *         "public_bookings": {
+         *           "enabled": true
+         *         },
+         *         "updated_at": "2025-02-17T17:49:19Z",
+         *         "weekly_rules": [
+         *           {
+         *             "day": "mo",
+         *             "end_time": "17:00",
+         *             "start_time": "09:00"
+         *           }
+         *         ]
+         *       },
+         *       "type": "provider_schedule.deleted"
+         *     }
+         */
+        ProviderScheduleDeletedEventData: {
+            /**
+             * ProviderSchedule
+             * @description A provider schedule represents a schedule for a provider at a location.
+             * @example {
+             *       "created_at": "2025-02-17T17:49:19Z",
+             *       "effective_from": "2025-01-01",
+             *       "effective_to": "2025-12-31",
+             *       "id": "psch_d025a96ac0c6",
+             *       "object": "provider_schedule",
+             *       "public_bookings": {
+             *         "enabled": true
+             *       },
+             *       "updated_at": "2025-02-17T17:49:19Z",
+             *       "weekly_rules": [
+             *         {
+             *           "day": "mo",
+             *           "end_time": "17:00",
+             *           "start_time": "09:00"
+             *         }
+             *       ]
+             *     }
+             */
+            object: {
+                /**
+                 * Format: datetime
+                 * @description When the service was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: date
+                 * @description The start date of the schedule.
+                 */
+                effective_from: string;
+                /**
+                 * Format: date
+                 * @description The end date of the schedule.
+                 */
+                effective_to: string | null;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider_schedule";
+                /**
+                 * @description Public booking settings for the schedule.
+                 * @example {
+                 *       "enabled": true
+                 *     }
+                 */
+                public_bookings: {
+                    /** @description Whether public bookings are enabled for the schedule. */
+                    enabled: boolean;
+                };
+                /**
+                 * Format: datetime
+                 * @description When the schedule was last updated.
+                 */
+                updated_at: string;
+                /** @description Weekly rules for the schedule. */
+                weekly_rules: {
+                    /**
+                     * @description The day of the week.
+                     * @enum {string}
+                     */
+                    day: "mo" | "tu" | "we" | "th" | "fr" | "sa" | "su";
+                    /** @description The end time of the rule. */
+                    end_time: string;
+                    /** @description The start time of the rule. */
+                    start_time: string;
+                }[];
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider_schedule.deleted";
         };
         /**
          * Account
@@ -4270,7 +4534,7 @@ export interface components {
         ConnectedAccountReconnectedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+             * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -4361,14 +4625,14 @@ export interface components {
             created_at: string;
             /**
              * Format: email
-             * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+             * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
              */
             email?: string | null;
-            /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+            /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
             first_name?: string | null;
             /** @description Unique identifier for the object. */
             id: string;
-            /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+            /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
             last_name?: string | null;
             /**
              * @description The locale of the client.
@@ -4380,7 +4644,7 @@ export interface components {
              * @enum {string}
              */
             object: "client";
-            /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+            /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
             phone?: string | null;
             /** @description External reference identifier for the client. */
             reference_id: string | null;
@@ -4449,6 +4713,323 @@ export interface components {
          */
         ConnectedAccountResponse: {
             data: components["schemas"]["ConnectedAccount"];
+        };
+        /**
+         * ServiceDeletedEventData
+         * @description This is an object representing data for the service deleted event.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "booking_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_booking": true,
+         *           "disabled_message": "Booking is disabled for this service.",
+         *           "maximize_utilization": {
+         *             "enabled": true
+         *           }
+         *         },
+         *         "cancellation_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_cancellation": true,
+         *           "disabled_message": "Cancellation is disabled for this service."
+         *         },
+         *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "duration": "PT1H30M",
+         *         "id": "srv_d025a96ac0c6",
+         *         "name": "Initial Consult",
+         *         "object": "service",
+         *         "rescheduling_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_rescheduling": true,
+         *           "disabled_message": "Rescheduling is disabled for this service."
+         *         },
+         *         "slot_rules": [
+         *           {
+         *             "recurrence_rule": {
+         *               "byday": [
+         *                 "mo",
+         *                 "we",
+         *                 "fr"
+         *               ],
+         *               "freq": "weekly"
+         *             },
+         *             "start_times": [
+         *               "09:00",
+         *               "10:00"
+         *             ]
+         *           }
+         *         ],
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "type": "service.deleted"
+         *     }
+         */
+        ServiceDeletedEventData: {
+            /**
+             * Service
+             * @description A service represents a type of appointment.
+             * @example {
+             *       "appointment_type": "in_person",
+             *       "booking_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_booking": true,
+             *         "disabled_message": "Booking is disabled for this service.",
+             *         "maximize_utilization": {
+             *           "enabled": true
+             *         }
+             *       },
+             *       "cancellation_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_cancellation": true,
+             *         "disabled_message": "Cancellation is disabled for this service."
+             *       },
+             *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+             *       "created_at": "2025-02-17T17:49:19Z",
+             *       "duration": "PT1H30M",
+             *       "id": "srv_d025a96ac0c6",
+             *       "name": "Initial Consult",
+             *       "object": "service",
+             *       "rescheduling_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_rescheduling": true,
+             *         "disabled_message": "Rescheduling is disabled for this service."
+             *       },
+             *       "slot_rules": [
+             *         {
+             *           "recurrence_rule": {
+             *             "byday": [
+             *               "mo",
+             *               "we",
+             *               "fr"
+             *             ],
+             *             "freq": "weekly"
+             *           },
+             *           "start_times": [
+             *             "09:00",
+             *             "10:00"
+             *           ]
+             *         }
+             *       ],
+             *       "updated_at": "2025-02-17T17:49:19Z"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The type of appointment.
+                 * @enum {string}
+                 */
+                appointment_type: "in_person" | "virtual";
+                /**
+                 * BookingPolicy
+                 * @description A booking policy defines the rules for booking a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_booking": true,
+                 *       "disabled_message": "Booking is disabled for this service.",
+                 *       "maximize_utilization": {
+                 *         "enabled": true
+                 *       }
+                 *     }
+                 */
+                booking_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public booking is allowed for the service. */
+                    allow_booking: boolean;
+                    /** @description The message to display when public booking is disabled. */
+                    disabled_message: string | null;
+                    /**
+                     * MaximizeUtilizationPolicy
+                     * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
+                     * @example {
+                     *       "enabled": true
+                     *     }
+                     */
+                    maximize_utilization: {
+                        /** @description Whether maximize utilization is enabled for the service. */
+                        enabled: boolean;
+                    };
+                };
+                /**
+                 * CancellationPolicy
+                 * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_cancellation": true,
+                 *       "disabled_message": "Cancellation is disabled for this service."
+                 *     }
+                 */
+                cancellation_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public cancellation is allowed for the service. */
+                    allow_cancellation: boolean;
+                    /** @description The message to display when public cancellation is disabled. */
+                    disabled_message: string | null;
+                };
+                /**
+                 * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
+                 * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
+                 */
+                change_policy_text: string;
+                /**
+                 * Format: datetime
+                 * @description When the service was created.
+                 */
+                created_at: string;
+                /**
+                 * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+                 * @example `PT30M`
+                 */
+                duration: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The name of the service. */
+                name: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "service";
+                /**
+                 * ReschedulingPolicy
+                 * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_rescheduling": true,
+                 *       "disabled_message": "Rescheduling is disabled for this service."
+                 *     }
+                 */
+                rescheduling_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public rescheduling is allowed for the service. */
+                    allow_rescheduling: boolean;
+                    /** @description The message to display when public rescheduling is disabled. */
+                    disabled_message: string | null;
+                };
+                /** @description Array of slot rules for the service. */
+                slot_rules: {
+                    /**
+                     * RecurrenceRule
+                     * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
+                     *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
+                     *     but are a subset of the full specification.
+                     * @example {
+                     *       "byday": [
+                     *         "mo",
+                     *         "we",
+                     *         "fr"
+                     *       ],
+                     *       "freq": "weekly"
+                     *     }
+                     */
+                    recurrence_rule: {
+                        /**
+                         * @description The days of the week on which the recurrence occurs.
+                         * @example [
+                         *       "mo",
+                         *       "we",
+                         *       "fr"
+                         *     ]
+                         */
+                        byday?: string[];
+                        /** @description Number of occurrences at which to end the recurrence. */
+                        count?: number | null;
+                        /**
+                         * @description The frequency of the recurrence.
+                         * @enum {string}
+                         */
+                        freq: "daily" | "weekly";
+                        /**
+                         * @description How often the recurrence rule repeats.
+                         * @example 2
+                         */
+                        interval?: number;
+                        /**
+                         * @description Date at which to end the recurrence (in ISO-8601 format).
+                         * @example 2024-01-02
+                         */
+                        until?: Record<string, never> | null;
+                    };
+                    /** @description Array of start times for slots. */
+                    start_times: string[];
+                }[];
+                /**
+                 * Format: datetime
+                 * @description When the service was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "service.deleted";
         };
         /**
          * PublicServiceSlotsResponse
@@ -5065,14 +5646,14 @@ export interface components {
                     created_at: string;
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
                     /** @description Unique identifier for the object. */
                     id: string;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client.
@@ -5084,7 +5665,7 @@ export interface components {
                      * @enum {string}
                      */
                     object: "client";
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description External reference identifier for the client. */
                     reference_id: string | null;
@@ -5099,23 +5680,23 @@ export interface components {
                      */
                     updated_at: string;
                 };
-                /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                 client_data: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client booking the appointment.
                      * @example en-US
                      */
                     locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description The client's external reference identifier. */
                     reference_id: string | null;
@@ -5297,14 +5878,14 @@ export interface components {
                 fields: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                 };
                 /** @description Unique identifier for the object. */
@@ -5316,8 +5897,7 @@ export interface components {
                 object: "appointment";
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -5530,8 +6110,7 @@ export interface components {
                 }[];
                 /**
                  * Service
-                 * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                 *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                 * @description A service represents a type of appointment.
                  * @example {
                  *       "appointment_type": "in_person",
                  *       "booking_policy": {
@@ -5953,7 +6532,7 @@ export interface components {
         ConnectedAccountRefreshFailedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+             * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -6256,6 +6835,135 @@ export interface components {
             /** @description The event data. */
             data: {
                 /**
+                 * AccountUser
+                 * @description This is an object representing a user in an account.
+                 * @example {
+                 *       "object": "account_user",
+                 *       "passive": false,
+                 *       "roles": [
+                 *         {
+                 *           "id": "role_123456789012",
+                 *           "name": "Admin",
+                 *           "object": "role",
+                 *           "type": "admin"
+                 *         }
+                 *       ],
+                 *       "user": {
+                 *         "created_at": "2025-03-15T13:01:08Z",
+                 *         "email": "avery@tendermedical.com",
+                 *         "first_name": "Avery",
+                 *         "id": "user_d025a96ac0c6",
+                 *         "last_name": "Evans",
+                 *         "object": "user",
+                 *         "updated_at": "2025-03-15T13:01:08Z"
+                 *       }
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "account_user";
+                    /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+                    passive: boolean;
+                    /** @description The roles assigned to the user in this account. */
+                    roles: components["schemas"]["Role"][];
+                    user: components["schemas"]["User"];
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "account_user.created";
+            } | {
+                /**
+                 * AccountUser
+                 * @description This is an object representing a user in an account.
+                 * @example {
+                 *       "object": "account_user",
+                 *       "passive": false,
+                 *       "roles": [
+                 *         {
+                 *           "id": "role_123456789012",
+                 *           "name": "Admin",
+                 *           "object": "role",
+                 *           "type": "admin"
+                 *         }
+                 *       ],
+                 *       "user": {
+                 *         "created_at": "2025-03-15T13:01:08Z",
+                 *         "email": "avery@tendermedical.com",
+                 *         "first_name": "Avery",
+                 *         "id": "user_d025a96ac0c6",
+                 *         "last_name": "Evans",
+                 *         "object": "user",
+                 *         "updated_at": "2025-03-15T13:01:08Z"
+                 *       }
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "account_user";
+                    /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+                    passive: boolean;
+                    /** @description The roles assigned to the user in this account. */
+                    roles: components["schemas"]["Role"][];
+                    user: components["schemas"]["User"];
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "account_user.deleted";
+            } | {
+                /**
+                 * AccountUser
+                 * @description This is an object representing a user in an account.
+                 * @example {
+                 *       "object": "account_user",
+                 *       "passive": false,
+                 *       "roles": [
+                 *         {
+                 *           "id": "role_123456789012",
+                 *           "name": "Admin",
+                 *           "object": "role",
+                 *           "type": "admin"
+                 *         }
+                 *       ],
+                 *       "user": {
+                 *         "created_at": "2025-03-15T13:01:08Z",
+                 *         "email": "avery@tendermedical.com",
+                 *         "first_name": "Avery",
+                 *         "id": "user_d025a96ac0c6",
+                 *         "last_name": "Evans",
+                 *         "object": "user",
+                 *         "updated_at": "2025-03-15T13:01:08Z"
+                 *       }
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "account_user";
+                    /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+                    passive: boolean;
+                    /** @description The roles assigned to the user in this account. */
+                    roles: components["schemas"]["Role"][];
+                    user: components["schemas"]["User"];
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "account_user.updated";
+            } | {
+                /**
                  * Appointment
                  * @description An appointment represents a booking that a client has made with a provider for a service.
                  * @example {
@@ -6551,14 +7259,14 @@ export interface components {
                         created_at: string;
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
                         /** @description Unique identifier for the object. */
                         id: string;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client.
@@ -6570,7 +7278,7 @@ export interface components {
                          * @enum {string}
                          */
                         object: "client";
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description External reference identifier for the client. */
                         reference_id: string | null;
@@ -6585,23 +7293,23 @@ export interface components {
                          */
                         updated_at: string;
                     };
-                    /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                     client_data: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client booking the appointment.
                          * @example en-US
                          */
                         locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description The client's external reference identifier. */
                         reference_id: string | null;
@@ -6783,14 +7491,14 @@ export interface components {
                     fields: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                     };
                     /** @description Unique identifier for the object. */
@@ -6802,8 +7510,7 @@ export interface components {
                     object: "appointment";
                     /**
                      * Provider
-                     * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                     *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                     * @description A provider represents a staff member who can provide services to clients.
                      * @example {
                      *       "created_at": "2017-09-12T12:34:55Z",
                      *       "display_name": "John Smith",
@@ -7016,8 +7723,7 @@ export interface components {
                     }[];
                     /**
                      * Service
-                     * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                     *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                     * @description A service represents a type of appointment.
                      * @example {
                      *       "appointment_type": "in_person",
                      *       "booking_policy": {
@@ -7634,14 +8340,14 @@ export interface components {
                         created_at: string;
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
                         /** @description Unique identifier for the object. */
                         id: string;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client.
@@ -7653,7 +8359,7 @@ export interface components {
                          * @enum {string}
                          */
                         object: "client";
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description External reference identifier for the client. */
                         reference_id: string | null;
@@ -7668,23 +8374,23 @@ export interface components {
                          */
                         updated_at: string;
                     };
-                    /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                     client_data: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client booking the appointment.
                          * @example en-US
                          */
                         locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description The client's external reference identifier. */
                         reference_id: string | null;
@@ -7866,14 +8572,14 @@ export interface components {
                     fields: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                     };
                     /** @description Unique identifier for the object. */
@@ -7885,8 +8591,7 @@ export interface components {
                     object: "appointment";
                     /**
                      * Provider
-                     * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                     *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                     * @description A provider represents a staff member who can provide services to clients.
                      * @example {
                      *       "created_at": "2017-09-12T12:34:55Z",
                      *       "display_name": "John Smith",
@@ -8099,8 +8804,7 @@ export interface components {
                     }[];
                     /**
                      * Service
-                     * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                     *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                     * @description A service represents a type of appointment.
                      * @example {
                      *       "appointment_type": "in_person",
                      *       "booking_policy": {
@@ -8797,14 +9501,14 @@ export interface components {
                         created_at: string;
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
                         /** @description Unique identifier for the object. */
                         id: string;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client.
@@ -8816,7 +9520,7 @@ export interface components {
                          * @enum {string}
                          */
                         object: "client";
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description External reference identifier for the client. */
                         reference_id: string | null;
@@ -8831,23 +9535,23 @@ export interface components {
                          */
                         updated_at: string;
                     };
-                    /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                     client_data: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client booking the appointment.
                          * @example en-US
                          */
                         locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description The client's external reference identifier. */
                         reference_id: string | null;
@@ -9029,14 +9733,14 @@ export interface components {
                     fields: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                     };
                     /** @description Unique identifier for the object. */
@@ -9048,8 +9752,7 @@ export interface components {
                     object: "appointment";
                     /**
                      * Provider
-                     * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                     *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                     * @description A provider represents a staff member who can provide services to clients.
                      * @example {
                      *       "created_at": "2017-09-12T12:34:55Z",
                      *       "display_name": "John Smith",
@@ -9262,8 +9965,7 @@ export interface components {
                     }[];
                     /**
                      * Service
-                     * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                     *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                     * @description A service represents a type of appointment.
                      * @example {
                      *       "appointment_type": "in_person",
                      *       "booking_policy": {
@@ -9880,14 +10582,14 @@ export interface components {
                         created_at: string;
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
                         /** @description Unique identifier for the object. */
                         id: string;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client.
@@ -9899,7 +10601,7 @@ export interface components {
                          * @enum {string}
                          */
                         object: "client";
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description External reference identifier for the client. */
                         reference_id: string | null;
@@ -9914,23 +10616,23 @@ export interface components {
                          */
                         updated_at: string;
                     };
-                    /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                     client_data: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client booking the appointment.
                          * @example en-US
                          */
                         locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description The client's external reference identifier. */
                         reference_id: string | null;
@@ -10112,14 +10814,14 @@ export interface components {
                     fields: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                     };
                     /** @description Unique identifier for the object. */
@@ -10131,8 +10833,7 @@ export interface components {
                     object: "appointment";
                     /**
                      * Provider
-                     * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                     *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                     * @description A provider represents a staff member who can provide services to clients.
                      * @example {
                      *       "created_at": "2017-09-12T12:34:55Z",
                      *       "display_name": "John Smith",
@@ -10345,8 +11046,7 @@ export interface components {
                     }[];
                     /**
                      * Service
-                     * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                     *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                     * @description A service represents a type of appointment.
                      * @example {
                      *       "appointment_type": "in_person",
                      *       "booking_policy": {
@@ -10963,14 +11663,14 @@ export interface components {
                         created_at: string;
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
                         /** @description Unique identifier for the object. */
                         id: string;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client.
@@ -10982,7 +11682,7 @@ export interface components {
                          * @enum {string}
                          */
                         object: "client";
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description External reference identifier for the client. */
                         reference_id: string | null;
@@ -10997,23 +11697,23 @@ export interface components {
                          */
                         updated_at: string;
                     };
-                    /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                     client_data: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
                         /**
                          * @description The locale of the client booking the appointment.
                          * @example en-US
                          */
                         locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                         /** @description The client's external reference identifier. */
                         reference_id: string | null;
@@ -11195,14 +11895,14 @@ export interface components {
                     fields: {
                         /**
                          * Format: email
-                         * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                          */
                         email?: string | null;
-                        /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                         first_name?: string | null;
-                        /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                         last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                         phone?: string | null;
                     };
                     /** @description Unique identifier for the object. */
@@ -11214,8 +11914,7 @@ export interface components {
                     object: "appointment";
                     /**
                      * Provider
-                     * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                     *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                     * @description A provider represents a staff member who can provide services to clients.
                      * @example {
                      *       "created_at": "2017-09-12T12:34:55Z",
                      *       "display_name": "John Smith",
@@ -11428,8 +12127,7 @@ export interface components {
                     }[];
                     /**
                      * Service
-                     * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                     *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                     * @description A service represents a type of appointment.
                      * @example {
                      *       "appointment_type": "in_person",
                      *       "booking_policy": {
@@ -12105,8 +12803,203 @@ export interface components {
                 type: "block.deleted";
             } | {
                 /**
+                 * Client
+                 * @description This is an object representing a client.
+                 * @example {
+                 *       "created_at": "2025-01-15T14:30:00Z",
+                 *       "email": "jane.smith@example.com",
+                 *       "first_name": "Jane",
+                 *       "id": "clnt_a1b2c3d4e5f6",
+                 *       "last_name": "Smith",
+                 *       "locale": "en-US",
+                 *       "object": "client",
+                 *       "phone": "+15551234567",
+                 *       "reference_id": "ext_12345",
+                 *       "time_zone": "America/Chicago",
+                 *       "updated_at": "2025-03-10T09:45:00Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: email
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
+                     */
+                    email?: string | null;
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
+                    first_name?: string | null;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
+                    last_name?: string | null;
+                    /**
+                     * @description The locale of the client.
+                     * @example en-US
+                     */
+                    locale: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "client";
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
+                    phone?: string | null;
+                    /** @description External reference identifier for the client. */
+                    reference_id: string | null;
+                    /**
+                     * @description The client's time zone (IANA format).
+                     * @example America/Chicago
+                     */
+                    time_zone: string;
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "client.created";
+            } | {
+                /**
+                 * Client
+                 * @description This is an object representing a client.
+                 * @example {
+                 *       "created_at": "2025-01-15T14:30:00Z",
+                 *       "email": "jane.smith@example.com",
+                 *       "first_name": "Jane",
+                 *       "id": "clnt_a1b2c3d4e5f6",
+                 *       "last_name": "Smith",
+                 *       "locale": "en-US",
+                 *       "object": "client",
+                 *       "phone": "+15551234567",
+                 *       "reference_id": "ext_12345",
+                 *       "time_zone": "America/Chicago",
+                 *       "updated_at": "2025-03-10T09:45:00Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: email
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
+                     */
+                    email?: string | null;
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
+                    first_name?: string | null;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
+                    last_name?: string | null;
+                    /**
+                     * @description The locale of the client.
+                     * @example en-US
+                     */
+                    locale: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "client";
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
+                    phone?: string | null;
+                    /** @description External reference identifier for the client. */
+                    reference_id: string | null;
+                    /**
+                     * @description The client's time zone (IANA format).
+                     * @example America/Chicago
+                     */
+                    time_zone: string;
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "client.deleted";
+            } | {
+                /**
+                 * Client
+                 * @description This is an object representing a client.
+                 * @example {
+                 *       "created_at": "2025-01-15T14:30:00Z",
+                 *       "email": "jane.smith@example.com",
+                 *       "first_name": "Jane",
+                 *       "id": "clnt_a1b2c3d4e5f6",
+                 *       "last_name": "Smith",
+                 *       "locale": "en-US",
+                 *       "object": "client",
+                 *       "phone": "+15551234567",
+                 *       "reference_id": "ext_12345",
+                 *       "time_zone": "America/Chicago",
+                 *       "updated_at": "2025-03-10T09:45:00Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: email
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
+                     */
+                    email?: string | null;
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
+                    first_name?: string | null;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
+                    last_name?: string | null;
+                    /**
+                     * @description The locale of the client.
+                     * @example en-US
+                     */
+                    locale: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "client";
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
+                    phone?: string | null;
+                    /** @description External reference identifier for the client. */
+                    reference_id: string | null;
+                    /**
+                     * @description The client's time zone (IANA format).
+                     * @example America/Chicago
+                     */
+                    time_zone: string;
+                    /**
+                     * Format: date-time
+                     * @description Time at which the object was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "client.updated";
+            } | {
+                /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+                 * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12174,7 +13067,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+                 * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12242,7 +13135,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+                 * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12310,7 +13203,7 @@ export interface components {
             } | {
                 /**
                  * ConnectedAccount
-                 * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+                 * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
                  * @example {
                  *       "connection_scope": "user",
                  *       "created_at": "2025-03-12T12:34:55Z",
@@ -12378,8 +13271,7 @@ export interface components {
             } | {
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -12428,8 +13320,7 @@ export interface components {
             } | {
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -12478,8 +13369,7 @@ export interface components {
             } | {
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -12528,8 +13418,7 @@ export interface components {
             } | {
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -12575,6 +13464,1113 @@ export interface components {
                  * @enum {string}
                  */
                 type: "provider.reactivated";
+            } | {
+                /**
+                 * ProviderSchedule
+                 * @description A provider schedule represents a schedule for a provider at a location.
+                 * @example {
+                 *       "created_at": "2025-02-17T17:49:19Z",
+                 *       "effective_from": "2025-01-01",
+                 *       "effective_to": "2025-12-31",
+                 *       "id": "psch_d025a96ac0c6",
+                 *       "object": "provider_schedule",
+                 *       "public_bookings": {
+                 *         "enabled": true
+                 *       },
+                 *       "updated_at": "2025-02-17T17:49:19Z",
+                 *       "weekly_rules": [
+                 *         {
+                 *           "day": "mo",
+                 *           "end_time": "17:00",
+                 *           "start_time": "09:00"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: datetime
+                     * @description When the service was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: date
+                     * @description The start date of the schedule.
+                     */
+                    effective_from: string;
+                    /**
+                     * Format: date
+                     * @description The end date of the schedule.
+                     */
+                    effective_to: string | null;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider_schedule";
+                    /**
+                     * @description Public booking settings for the schedule.
+                     * @example {
+                     *       "enabled": true
+                     *     }
+                     */
+                    public_bookings: {
+                        /** @description Whether public bookings are enabled for the schedule. */
+                        enabled: boolean;
+                    };
+                    /**
+                     * Format: datetime
+                     * @description When the schedule was last updated.
+                     */
+                    updated_at: string;
+                    /** @description Weekly rules for the schedule. */
+                    weekly_rules: {
+                        /**
+                         * @description The day of the week.
+                         * @enum {string}
+                         */
+                        day: "mo" | "tu" | "we" | "th" | "fr" | "sa" | "su";
+                        /** @description The end time of the rule. */
+                        end_time: string;
+                        /** @description The start time of the rule. */
+                        start_time: string;
+                    }[];
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider_schedule.created";
+            } | {
+                /**
+                 * ProviderSchedule
+                 * @description A provider schedule represents a schedule for a provider at a location.
+                 * @example {
+                 *       "created_at": "2025-02-17T17:49:19Z",
+                 *       "effective_from": "2025-01-01",
+                 *       "effective_to": "2025-12-31",
+                 *       "id": "psch_d025a96ac0c6",
+                 *       "object": "provider_schedule",
+                 *       "public_bookings": {
+                 *         "enabled": true
+                 *       },
+                 *       "updated_at": "2025-02-17T17:49:19Z",
+                 *       "weekly_rules": [
+                 *         {
+                 *           "day": "mo",
+                 *           "end_time": "17:00",
+                 *           "start_time": "09:00"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: datetime
+                     * @description When the service was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: date
+                     * @description The start date of the schedule.
+                     */
+                    effective_from: string;
+                    /**
+                     * Format: date
+                     * @description The end date of the schedule.
+                     */
+                    effective_to: string | null;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider_schedule";
+                    /**
+                     * @description Public booking settings for the schedule.
+                     * @example {
+                     *       "enabled": true
+                     *     }
+                     */
+                    public_bookings: {
+                        /** @description Whether public bookings are enabled for the schedule. */
+                        enabled: boolean;
+                    };
+                    /**
+                     * Format: datetime
+                     * @description When the schedule was last updated.
+                     */
+                    updated_at: string;
+                    /** @description Weekly rules for the schedule. */
+                    weekly_rules: {
+                        /**
+                         * @description The day of the week.
+                         * @enum {string}
+                         */
+                        day: "mo" | "tu" | "we" | "th" | "fr" | "sa" | "su";
+                        /** @description The end time of the rule. */
+                        end_time: string;
+                        /** @description The start time of the rule. */
+                        start_time: string;
+                    }[];
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider_schedule.deleted";
+            } | {
+                /**
+                 * ProviderSchedule
+                 * @description A provider schedule represents a schedule for a provider at a location.
+                 * @example {
+                 *       "created_at": "2025-02-17T17:49:19Z",
+                 *       "effective_from": "2025-01-01",
+                 *       "effective_to": "2025-12-31",
+                 *       "id": "psch_d025a96ac0c6",
+                 *       "object": "provider_schedule",
+                 *       "public_bookings": {
+                 *         "enabled": true
+                 *       },
+                 *       "updated_at": "2025-02-17T17:49:19Z",
+                 *       "weekly_rules": [
+                 *         {
+                 *           "day": "mo",
+                 *           "end_time": "17:00",
+                 *           "start_time": "09:00"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: datetime
+                     * @description When the service was created.
+                     */
+                    created_at: string;
+                    /**
+                     * Format: date
+                     * @description The start date of the schedule.
+                     */
+                    effective_from: string;
+                    /**
+                     * Format: date
+                     * @description The end date of the schedule.
+                     */
+                    effective_to: string | null;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "provider_schedule";
+                    /**
+                     * @description Public booking settings for the schedule.
+                     * @example {
+                     *       "enabled": true
+                     *     }
+                     */
+                    public_bookings: {
+                        /** @description Whether public bookings are enabled for the schedule. */
+                        enabled: boolean;
+                    };
+                    /**
+                     * Format: datetime
+                     * @description When the schedule was last updated.
+                     */
+                    updated_at: string;
+                    /** @description Weekly rules for the schedule. */
+                    weekly_rules: {
+                        /**
+                         * @description The day of the week.
+                         * @enum {string}
+                         */
+                        day: "mo" | "tu" | "we" | "th" | "fr" | "sa" | "su";
+                        /** @description The end time of the rule. */
+                        end_time: string;
+                        /** @description The start time of the rule. */
+                        start_time: string;
+                    }[];
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "provider_schedule.updated";
+            } | {
+                /**
+                 * Service
+                 * @description A service represents a type of appointment.
+                 * @example {
+                 *       "appointment_type": "in_person",
+                 *       "booking_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_booking": true,
+                 *         "disabled_message": "Booking is disabled for this service.",
+                 *         "maximize_utilization": {
+                 *           "enabled": true
+                 *         }
+                 *       },
+                 *       "cancellation_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_cancellation": true,
+                 *         "disabled_message": "Cancellation is disabled for this service."
+                 *       },
+                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+                 *       "created_at": "2025-02-17T17:49:19Z",
+                 *       "duration": "PT1H30M",
+                 *       "id": "srv_d025a96ac0c6",
+                 *       "name": "Initial Consult",
+                 *       "object": "service",
+                 *       "rescheduling_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_rescheduling": true,
+                 *         "disabled_message": "Rescheduling is disabled for this service."
+                 *       },
+                 *       "slot_rules": [
+                 *         {
+                 *           "recurrence_rule": {
+                 *             "byday": [
+                 *               "mo",
+                 *               "we",
+                 *               "fr"
+                 *             ],
+                 *             "freq": "weekly"
+                 *           },
+                 *           "start_times": [
+                 *             "09:00",
+                 *             "10:00"
+                 *           ]
+                 *         }
+                 *       ],
+                 *       "updated_at": "2025-02-17T17:49:19Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The type of appointment.
+                     * @enum {string}
+                     */
+                    appointment_type: "in_person" | "virtual";
+                    /**
+                     * BookingPolicy
+                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_booking": true,
+                     *       "disabled_message": "Booking is disabled for this service.",
+                     *       "maximize_utilization": {
+                     *         "enabled": true
+                     *       }
+                     *     }
+                     */
+                    booking_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public booking is allowed for the service. */
+                        allow_booking: boolean;
+                        /** @description The message to display when public booking is disabled. */
+                        disabled_message: string | null;
+                        /**
+                         * MaximizeUtilizationPolicy
+                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
+                         * @example {
+                         *       "enabled": true
+                         *     }
+                         */
+                        maximize_utilization: {
+                            /** @description Whether maximize utilization is enabled for the service. */
+                            enabled: boolean;
+                        };
+                    };
+                    /**
+                     * CancellationPolicy
+                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_cancellation": true,
+                     *       "disabled_message": "Cancellation is disabled for this service."
+                     *     }
+                     */
+                    cancellation_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public cancellation is allowed for the service. */
+                        allow_cancellation: boolean;
+                        /** @description The message to display when public cancellation is disabled. */
+                        disabled_message: string | null;
+                    };
+                    /**
+                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
+                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
+                     */
+                    change_policy_text: string;
+                    /**
+                     * Format: datetime
+                     * @description When the service was created.
+                     */
+                    created_at: string;
+                    /**
+                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+                     * @example `PT30M`
+                     */
+                    duration: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The name of the service. */
+                    name: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "service";
+                    /**
+                     * ReschedulingPolicy
+                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_rescheduling": true,
+                     *       "disabled_message": "Rescheduling is disabled for this service."
+                     *     }
+                     */
+                    rescheduling_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public rescheduling is allowed for the service. */
+                        allow_rescheduling: boolean;
+                        /** @description The message to display when public rescheduling is disabled. */
+                        disabled_message: string | null;
+                    };
+                    /** @description Array of slot rules for the service. */
+                    slot_rules: {
+                        /**
+                         * RecurrenceRule
+                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
+                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
+                         *     but are a subset of the full specification.
+                         * @example {
+                         *       "byday": [
+                         *         "mo",
+                         *         "we",
+                         *         "fr"
+                         *       ],
+                         *       "freq": "weekly"
+                         *     }
+                         */
+                        recurrence_rule: {
+                            /**
+                             * @description The days of the week on which the recurrence occurs.
+                             * @example [
+                             *       "mo",
+                             *       "we",
+                             *       "fr"
+                             *     ]
+                             */
+                            byday?: string[];
+                            /** @description Number of occurrences at which to end the recurrence. */
+                            count?: number | null;
+                            /**
+                             * @description The frequency of the recurrence.
+                             * @enum {string}
+                             */
+                            freq: "daily" | "weekly";
+                            /**
+                             * @description How often the recurrence rule repeats.
+                             * @example 2
+                             */
+                            interval?: number;
+                            /**
+                             * @description Date at which to end the recurrence (in ISO-8601 format).
+                             * @example 2024-01-02
+                             */
+                            until?: Record<string, never> | null;
+                        };
+                        /** @description Array of start times for slots. */
+                        start_times: string[];
+                    }[];
+                    /**
+                     * Format: datetime
+                     * @description When the service was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "service.created";
+            } | {
+                /**
+                 * Service
+                 * @description A service represents a type of appointment.
+                 * @example {
+                 *       "appointment_type": "in_person",
+                 *       "booking_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_booking": true,
+                 *         "disabled_message": "Booking is disabled for this service.",
+                 *         "maximize_utilization": {
+                 *           "enabled": true
+                 *         }
+                 *       },
+                 *       "cancellation_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_cancellation": true,
+                 *         "disabled_message": "Cancellation is disabled for this service."
+                 *       },
+                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+                 *       "created_at": "2025-02-17T17:49:19Z",
+                 *       "duration": "PT1H30M",
+                 *       "id": "srv_d025a96ac0c6",
+                 *       "name": "Initial Consult",
+                 *       "object": "service",
+                 *       "rescheduling_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_rescheduling": true,
+                 *         "disabled_message": "Rescheduling is disabled for this service."
+                 *       },
+                 *       "slot_rules": [
+                 *         {
+                 *           "recurrence_rule": {
+                 *             "byday": [
+                 *               "mo",
+                 *               "we",
+                 *               "fr"
+                 *             ],
+                 *             "freq": "weekly"
+                 *           },
+                 *           "start_times": [
+                 *             "09:00",
+                 *             "10:00"
+                 *           ]
+                 *         }
+                 *       ],
+                 *       "updated_at": "2025-02-17T17:49:19Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The type of appointment.
+                     * @enum {string}
+                     */
+                    appointment_type: "in_person" | "virtual";
+                    /**
+                     * BookingPolicy
+                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_booking": true,
+                     *       "disabled_message": "Booking is disabled for this service.",
+                     *       "maximize_utilization": {
+                     *         "enabled": true
+                     *       }
+                     *     }
+                     */
+                    booking_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public booking is allowed for the service. */
+                        allow_booking: boolean;
+                        /** @description The message to display when public booking is disabled. */
+                        disabled_message: string | null;
+                        /**
+                         * MaximizeUtilizationPolicy
+                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
+                         * @example {
+                         *       "enabled": true
+                         *     }
+                         */
+                        maximize_utilization: {
+                            /** @description Whether maximize utilization is enabled for the service. */
+                            enabled: boolean;
+                        };
+                    };
+                    /**
+                     * CancellationPolicy
+                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_cancellation": true,
+                     *       "disabled_message": "Cancellation is disabled for this service."
+                     *     }
+                     */
+                    cancellation_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public cancellation is allowed for the service. */
+                        allow_cancellation: boolean;
+                        /** @description The message to display when public cancellation is disabled. */
+                        disabled_message: string | null;
+                    };
+                    /**
+                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
+                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
+                     */
+                    change_policy_text: string;
+                    /**
+                     * Format: datetime
+                     * @description When the service was created.
+                     */
+                    created_at: string;
+                    /**
+                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+                     * @example `PT30M`
+                     */
+                    duration: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The name of the service. */
+                    name: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "service";
+                    /**
+                     * ReschedulingPolicy
+                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_rescheduling": true,
+                     *       "disabled_message": "Rescheduling is disabled for this service."
+                     *     }
+                     */
+                    rescheduling_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public rescheduling is allowed for the service. */
+                        allow_rescheduling: boolean;
+                        /** @description The message to display when public rescheduling is disabled. */
+                        disabled_message: string | null;
+                    };
+                    /** @description Array of slot rules for the service. */
+                    slot_rules: {
+                        /**
+                         * RecurrenceRule
+                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
+                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
+                         *     but are a subset of the full specification.
+                         * @example {
+                         *       "byday": [
+                         *         "mo",
+                         *         "we",
+                         *         "fr"
+                         *       ],
+                         *       "freq": "weekly"
+                         *     }
+                         */
+                        recurrence_rule: {
+                            /**
+                             * @description The days of the week on which the recurrence occurs.
+                             * @example [
+                             *       "mo",
+                             *       "we",
+                             *       "fr"
+                             *     ]
+                             */
+                            byday?: string[];
+                            /** @description Number of occurrences at which to end the recurrence. */
+                            count?: number | null;
+                            /**
+                             * @description The frequency of the recurrence.
+                             * @enum {string}
+                             */
+                            freq: "daily" | "weekly";
+                            /**
+                             * @description How often the recurrence rule repeats.
+                             * @example 2
+                             */
+                            interval?: number;
+                            /**
+                             * @description Date at which to end the recurrence (in ISO-8601 format).
+                             * @example 2024-01-02
+                             */
+                            until?: Record<string, never> | null;
+                        };
+                        /** @description Array of start times for slots. */
+                        start_times: string[];
+                    }[];
+                    /**
+                     * Format: datetime
+                     * @description When the service was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "service.deleted";
+            } | {
+                /**
+                 * Service
+                 * @description A service represents a type of appointment.
+                 * @example {
+                 *       "appointment_type": "in_person",
+                 *       "booking_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_booking": true,
+                 *         "disabled_message": "Booking is disabled for this service.",
+                 *         "maximize_utilization": {
+                 *           "enabled": true
+                 *         }
+                 *       },
+                 *       "cancellation_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_cancellation": true,
+                 *         "disabled_message": "Cancellation is disabled for this service."
+                 *       },
+                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+                 *       "created_at": "2025-02-17T17:49:19Z",
+                 *       "duration": "PT1H30M",
+                 *       "id": "srv_d025a96ac0c6",
+                 *       "name": "Initial Consult",
+                 *       "object": "service",
+                 *       "rescheduling_policy": {
+                 *         "advance_notice": {
+                 *           "enabled": true,
+                 *           "minimum_duration": "PT1H"
+                 *         },
+                 *         "allow_rescheduling": true,
+                 *         "disabled_message": "Rescheduling is disabled for this service."
+                 *       },
+                 *       "slot_rules": [
+                 *         {
+                 *           "recurrence_rule": {
+                 *             "byday": [
+                 *               "mo",
+                 *               "we",
+                 *               "fr"
+                 *             ],
+                 *             "freq": "weekly"
+                 *           },
+                 *           "start_times": [
+                 *             "09:00",
+                 *             "10:00"
+                 *           ]
+                 *         }
+                 *       ],
+                 *       "updated_at": "2025-02-17T17:49:19Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * @description The type of appointment.
+                     * @enum {string}
+                     */
+                    appointment_type: "in_person" | "virtual";
+                    /**
+                     * BookingPolicy
+                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_booking": true,
+                     *       "disabled_message": "Booking is disabled for this service.",
+                     *       "maximize_utilization": {
+                     *         "enabled": true
+                     *       }
+                     *     }
+                     */
+                    booking_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public booking is allowed for the service. */
+                        allow_booking: boolean;
+                        /** @description The message to display when public booking is disabled. */
+                        disabled_message: string | null;
+                        /**
+                         * MaximizeUtilizationPolicy
+                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
+                         * @example {
+                         *       "enabled": true
+                         *     }
+                         */
+                        maximize_utilization: {
+                            /** @description Whether maximize utilization is enabled for the service. */
+                            enabled: boolean;
+                        };
+                    };
+                    /**
+                     * CancellationPolicy
+                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_cancellation": true,
+                     *       "disabled_message": "Cancellation is disabled for this service."
+                     *     }
+                     */
+                    cancellation_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public cancellation is allowed for the service. */
+                        allow_cancellation: boolean;
+                        /** @description The message to display when public cancellation is disabled. */
+                        disabled_message: string | null;
+                    };
+                    /**
+                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
+                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
+                     */
+                    change_policy_text: string;
+                    /**
+                     * Format: datetime
+                     * @description When the service was created.
+                     */
+                    created_at: string;
+                    /**
+                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+                     * @example `PT30M`
+                     */
+                    duration: string;
+                    /** @description Unique identifier for the object. */
+                    id: string;
+                    /** @description The name of the service. */
+                    name: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "service";
+                    /**
+                     * ReschedulingPolicy
+                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
+                     * @example {
+                     *       "advance_notice": {
+                     *         "enabled": true,
+                     *         "minimum_duration": "PT1H"
+                     *       },
+                     *       "allow_rescheduling": true,
+                     *       "disabled_message": "Rescheduling is disabled for this service."
+                     *     }
+                     */
+                    rescheduling_policy: {
+                        /**
+                         * AdvanceNoticePolicy
+                         * @description A policy for requiring minimum advance notice.
+                         * @example {
+                         *       "enabled": true,
+                         *       "minimum_duration": "PT1H"
+                         *     }
+                         */
+                        advance_notice: {
+                            /** @description Whether advance notice is enabled. */
+                            enabled: boolean;
+                            /** @description The minimum duration of advance notice. */
+                            minimum_duration: string | null;
+                        };
+                        /** @description Whether public rescheduling is allowed for the service. */
+                        allow_rescheduling: boolean;
+                        /** @description The message to display when public rescheduling is disabled. */
+                        disabled_message: string | null;
+                    };
+                    /** @description Array of slot rules for the service. */
+                    slot_rules: {
+                        /**
+                         * RecurrenceRule
+                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
+                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
+                         *     but are a subset of the full specification.
+                         * @example {
+                         *       "byday": [
+                         *         "mo",
+                         *         "we",
+                         *         "fr"
+                         *       ],
+                         *       "freq": "weekly"
+                         *     }
+                         */
+                        recurrence_rule: {
+                            /**
+                             * @description The days of the week on which the recurrence occurs.
+                             * @example [
+                             *       "mo",
+                             *       "we",
+                             *       "fr"
+                             *     ]
+                             */
+                            byday?: string[];
+                            /** @description Number of occurrences at which to end the recurrence. */
+                            count?: number | null;
+                            /**
+                             * @description The frequency of the recurrence.
+                             * @enum {string}
+                             */
+                            freq: "daily" | "weekly";
+                            /**
+                             * @description How often the recurrence rule repeats.
+                             * @example 2
+                             */
+                            interval?: number;
+                            /**
+                             * @description Date at which to end the recurrence (in ISO-8601 format).
+                             * @example 2024-01-02
+                             */
+                            until?: Record<string, never> | null;
+                        };
+                        /** @description Array of start times for slots. */
+                        start_times: string[];
+                    }[];
+                    /**
+                     * Format: datetime
+                     * @description When the service was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "service.updated";
+            } | {
+                /**
+                 * ServiceProvider
+                 * @description A service provider
+                 * @example {
+                 *       "created_at": "2025-02-19T17:36:36Z",
+                 *       "id": "sp_d025a96ac0c6",
+                 *       "object": "service_provider",
+                 *       "provider": {
+                 *         "created_at": "2017-09-12T12:34:55Z",
+                 *         "display_name": "John Smith",
+                 *         "first_name": "John",
+                 *         "id": "prov_d025a96ac0c6",
+                 *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
+                 *         "object": "provider",
+                 *         "updated_at": "2017-09-13T10:11:12Z"
+                 *       },
+                 *       "service_id": "srv_d025a96ac0c6",
+                 *       "updated_at": "2025-02-19T17:36:36Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description When the service provider was created.
+                     */
+                    created_at: string;
+                    /** @description Service Provider ID */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "service_provider";
+                    provider: components["schemas"]["Provider"];
+                    /** @description Service ID */
+                    service_id: string;
+                    /**
+                     * Format: date-time
+                     * @description When the service provider was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "service_provider.created";
+            } | {
+                /**
+                 * ServiceProvider
+                 * @description A service provider
+                 * @example {
+                 *       "created_at": "2025-02-19T17:36:36Z",
+                 *       "id": "sp_d025a96ac0c6",
+                 *       "object": "service_provider",
+                 *       "provider": {
+                 *         "created_at": "2017-09-12T12:34:55Z",
+                 *         "display_name": "John Smith",
+                 *         "first_name": "John",
+                 *         "id": "prov_d025a96ac0c6",
+                 *         "last_name": "Smith",
+                 *         "metadata": {
+                 *           "external_id": "123"
+                 *         },
+                 *         "object": "provider",
+                 *         "updated_at": "2017-09-13T10:11:12Z"
+                 *       },
+                 *       "service_id": "srv_d025a96ac0c6",
+                 *       "updated_at": "2025-02-19T17:36:36Z"
+                 *     }
+                 */
+                object: {
+                    /**
+                     * Format: date-time
+                     * @description When the service provider was created.
+                     */
+                    created_at: string;
+                    /** @description Service Provider ID */
+                    id: string;
+                    /**
+                     * @description String representing the object's type.
+                     * @enum {string}
+                     */
+                    object: "service_provider";
+                    provider: components["schemas"]["Provider"];
+                    /** @description Service ID */
+                    service_id: string;
+                    /**
+                     * Format: date-time
+                     * @description When the service provider was last updated.
+                     */
+                    updated_at: string;
+                };
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "service_provider.deleted";
             };
             /** @description Unique identifier for the object. */
             id: string;
@@ -12608,8 +14604,7 @@ export interface components {
         ProviderCreatedEventData: {
             /**
              * Provider
-             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @description A provider represents a staff member who can provide services to clients.
              * @example {
              *       "created_at": "2017-09-12T12:34:55Z",
              *       "display_name": "John Smith",
@@ -12655,6 +14650,78 @@ export interface components {
              * @enum {string}
              */
             type: "provider.created";
+        };
+        /**
+         * AccountUserCreatedEventData
+         * @description This is an object representing data for the account user created event.
+         * @example {
+         *       "object": {
+         *         "object": "account_user",
+         *         "passive": false,
+         *         "roles": [
+         *           {
+         *             "id": "role_123456789012",
+         *             "name": "Admin",
+         *             "object": "role",
+         *             "type": "admin"
+         *           }
+         *         ],
+         *         "user": {
+         *           "created_at": "2025-03-15T13:01:08Z",
+         *           "email": "avery@tendermedical.com",
+         *           "first_name": "Avery",
+         *           "id": "user_d025a96ac0c6",
+         *           "last_name": "Evans",
+         *           "object": "user",
+         *           "updated_at": "2025-03-15T13:01:08Z"
+         *         }
+         *       },
+         *       "type": "account_user.created"
+         *     }
+         */
+        AccountUserCreatedEventData: {
+            /**
+             * AccountUser
+             * @description This is an object representing a user in an account.
+             * @example {
+             *       "object": "account_user",
+             *       "passive": false,
+             *       "roles": [
+             *         {
+             *           "id": "role_123456789012",
+             *           "name": "Admin",
+             *           "object": "role",
+             *           "type": "admin"
+             *         }
+             *       ],
+             *       "user": {
+             *         "created_at": "2025-03-15T13:01:08Z",
+             *         "email": "avery@tendermedical.com",
+             *         "first_name": "Avery",
+             *         "id": "user_d025a96ac0c6",
+             *         "last_name": "Evans",
+             *         "object": "user",
+             *         "updated_at": "2025-03-15T13:01:08Z"
+             *       }
+             *     }
+             */
+            object: {
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "account_user";
+                /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+                passive: boolean;
+                /** @description The roles assigned to the user in this account. */
+                roles: components["schemas"]["Role"][];
+                user: components["schemas"]["User"];
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "account_user.created";
         };
         /**
          * AppointmentsResponse
@@ -13568,6 +15635,92 @@ export interface components {
             name?: string;
         };
         /**
+         * ClientUpdatedEventData
+         * @description This is an object representing data for the client updated event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-01-15T14:30:00Z",
+         *         "email": "jane.smith@example.com",
+         *         "first_name": "Jane",
+         *         "id": "clnt_a1b2c3d4e5f6",
+         *         "last_name": "Smith",
+         *         "locale": "en-US",
+         *         "object": "client",
+         *         "phone": "+15551234567",
+         *         "reference_id": "ext_12345",
+         *         "time_zone": "America/Chicago",
+         *         "updated_at": "2025-03-10T09:45:00Z"
+         *       },
+         *       "type": "client.updated"
+         *     }
+         */
+        ClientUpdatedEventData: {
+            /**
+             * Client
+             * @description This is an object representing a client.
+             * @example {
+             *       "created_at": "2025-01-15T14:30:00Z",
+             *       "email": "jane.smith@example.com",
+             *       "first_name": "Jane",
+             *       "id": "clnt_a1b2c3d4e5f6",
+             *       "last_name": "Smith",
+             *       "locale": "en-US",
+             *       "object": "client",
+             *       "phone": "+15551234567",
+             *       "reference_id": "ext_12345",
+             *       "time_zone": "America/Chicago",
+             *       "updated_at": "2025-03-10T09:45:00Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: email
+                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
+                 */
+                email?: string | null;
+                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
+                first_name?: string | null;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
+                last_name?: string | null;
+                /**
+                 * @description The locale of the client.
+                 * @example en-US
+                 */
+                locale: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "client";
+                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
+                phone?: string | null;
+                /** @description External reference identifier for the client. */
+                reference_id: string | null;
+                /**
+                 * @description The client's time zone (IANA format).
+                 * @example America/Chicago
+                 */
+                time_zone: string;
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "client.updated";
+        };
+        /**
          * ProvidersResponse
          * @description Response schema for multiple providers
          * @example {
@@ -13801,8 +15954,7 @@ export interface components {
         };
         /**
          * Service
-         * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-         *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+         * @description A service represents a type of appointment.
          * @example {
          *       "appointment_type": "in_person",
          *       "booking_policy": {
@@ -14072,8 +16224,7 @@ export interface components {
         ProviderReactivatedEventData: {
             /**
              * Provider
-             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @description A provider represents a staff member who can provide services to clients.
              * @example {
              *       "created_at": "2017-09-12T12:34:55Z",
              *       "display_name": "John Smith",
@@ -14119,6 +16270,78 @@ export interface components {
              * @enum {string}
              */
             type: "provider.reactivated";
+        };
+        /**
+         * AccountUserDeletedEventData
+         * @description This is an object representing data for the account user deleted event.
+         * @example {
+         *       "object": {
+         *         "object": "account_user",
+         *         "passive": false,
+         *         "roles": [
+         *           {
+         *             "id": "role_123456789012",
+         *             "name": "Admin",
+         *             "object": "role",
+         *             "type": "admin"
+         *           }
+         *         ],
+         *         "user": {
+         *           "created_at": "2025-03-15T13:01:08Z",
+         *           "email": "avery@tendermedical.com",
+         *           "first_name": "Avery",
+         *           "id": "user_d025a96ac0c6",
+         *           "last_name": "Evans",
+         *           "object": "user",
+         *           "updated_at": "2025-03-15T13:01:08Z"
+         *         }
+         *       },
+         *       "type": "account_user.deleted"
+         *     }
+         */
+        AccountUserDeletedEventData: {
+            /**
+             * AccountUser
+             * @description This is an object representing a user in an account.
+             * @example {
+             *       "object": "account_user",
+             *       "passive": false,
+             *       "roles": [
+             *         {
+             *           "id": "role_123456789012",
+             *           "name": "Admin",
+             *           "object": "role",
+             *           "type": "admin"
+             *         }
+             *       ],
+             *       "user": {
+             *         "created_at": "2025-03-15T13:01:08Z",
+             *         "email": "avery@tendermedical.com",
+             *         "first_name": "Avery",
+             *         "id": "user_d025a96ac0c6",
+             *         "last_name": "Evans",
+             *         "object": "user",
+             *         "updated_at": "2025-03-15T13:01:08Z"
+             *       }
+             *     }
+             */
+            object: {
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "account_user";
+                /** @description Whether this user is passive. Passive users do not receive direct email notifications (e.g., OAuth reconnection notices). */
+                passive: boolean;
+                /** @description The roles assigned to the user in this account. */
+                roles: components["schemas"]["Role"][];
+                user: components["schemas"]["User"];
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "account_user.deleted";
         };
         /**
          * ProviderResponse
@@ -14279,6 +16502,323 @@ export interface components {
             initiated_by: "user" | "client";
         };
         /**
+         * ServiceUpdatedEventData
+         * @description This is an object representing data for the service updated event.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "booking_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_booking": true,
+         *           "disabled_message": "Booking is disabled for this service.",
+         *           "maximize_utilization": {
+         *             "enabled": true
+         *           }
+         *         },
+         *         "cancellation_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_cancellation": true,
+         *           "disabled_message": "Cancellation is disabled for this service."
+         *         },
+         *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "duration": "PT1H30M",
+         *         "id": "srv_d025a96ac0c6",
+         *         "name": "Initial Consult",
+         *         "object": "service",
+         *         "rescheduling_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_rescheduling": true,
+         *           "disabled_message": "Rescheduling is disabled for this service."
+         *         },
+         *         "slot_rules": [
+         *           {
+         *             "recurrence_rule": {
+         *               "byday": [
+         *                 "mo",
+         *                 "we",
+         *                 "fr"
+         *               ],
+         *               "freq": "weekly"
+         *             },
+         *             "start_times": [
+         *               "09:00",
+         *               "10:00"
+         *             ]
+         *           }
+         *         ],
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "type": "service.updated"
+         *     }
+         */
+        ServiceUpdatedEventData: {
+            /**
+             * Service
+             * @description A service represents a type of appointment.
+             * @example {
+             *       "appointment_type": "in_person",
+             *       "booking_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_booking": true,
+             *         "disabled_message": "Booking is disabled for this service.",
+             *         "maximize_utilization": {
+             *           "enabled": true
+             *         }
+             *       },
+             *       "cancellation_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_cancellation": true,
+             *         "disabled_message": "Cancellation is disabled for this service."
+             *       },
+             *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+             *       "created_at": "2025-02-17T17:49:19Z",
+             *       "duration": "PT1H30M",
+             *       "id": "srv_d025a96ac0c6",
+             *       "name": "Initial Consult",
+             *       "object": "service",
+             *       "rescheduling_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_rescheduling": true,
+             *         "disabled_message": "Rescheduling is disabled for this service."
+             *       },
+             *       "slot_rules": [
+             *         {
+             *           "recurrence_rule": {
+             *             "byday": [
+             *               "mo",
+             *               "we",
+             *               "fr"
+             *             ],
+             *             "freq": "weekly"
+             *           },
+             *           "start_times": [
+             *             "09:00",
+             *             "10:00"
+             *           ]
+             *         }
+             *       ],
+             *       "updated_at": "2025-02-17T17:49:19Z"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The type of appointment.
+                 * @enum {string}
+                 */
+                appointment_type: "in_person" | "virtual";
+                /**
+                 * BookingPolicy
+                 * @description A booking policy defines the rules for booking a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_booking": true,
+                 *       "disabled_message": "Booking is disabled for this service.",
+                 *       "maximize_utilization": {
+                 *         "enabled": true
+                 *       }
+                 *     }
+                 */
+                booking_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public booking is allowed for the service. */
+                    allow_booking: boolean;
+                    /** @description The message to display when public booking is disabled. */
+                    disabled_message: string | null;
+                    /**
+                     * MaximizeUtilizationPolicy
+                     * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
+                     * @example {
+                     *       "enabled": true
+                     *     }
+                     */
+                    maximize_utilization: {
+                        /** @description Whether maximize utilization is enabled for the service. */
+                        enabled: boolean;
+                    };
+                };
+                /**
+                 * CancellationPolicy
+                 * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_cancellation": true,
+                 *       "disabled_message": "Cancellation is disabled for this service."
+                 *     }
+                 */
+                cancellation_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public cancellation is allowed for the service. */
+                    allow_cancellation: boolean;
+                    /** @description The message to display when public cancellation is disabled. */
+                    disabled_message: string | null;
+                };
+                /**
+                 * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
+                 * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
+                 */
+                change_policy_text: string;
+                /**
+                 * Format: datetime
+                 * @description When the service was created.
+                 */
+                created_at: string;
+                /**
+                 * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+                 * @example `PT30M`
+                 */
+                duration: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The name of the service. */
+                name: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "service";
+                /**
+                 * ReschedulingPolicy
+                 * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_rescheduling": true,
+                 *       "disabled_message": "Rescheduling is disabled for this service."
+                 *     }
+                 */
+                rescheduling_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public rescheduling is allowed for the service. */
+                    allow_rescheduling: boolean;
+                    /** @description The message to display when public rescheduling is disabled. */
+                    disabled_message: string | null;
+                };
+                /** @description Array of slot rules for the service. */
+                slot_rules: {
+                    /**
+                     * RecurrenceRule
+                     * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
+                     *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
+                     *     but are a subset of the full specification.
+                     * @example {
+                     *       "byday": [
+                     *         "mo",
+                     *         "we",
+                     *         "fr"
+                     *       ],
+                     *       "freq": "weekly"
+                     *     }
+                     */
+                    recurrence_rule: {
+                        /**
+                         * @description The days of the week on which the recurrence occurs.
+                         * @example [
+                         *       "mo",
+                         *       "we",
+                         *       "fr"
+                         *     ]
+                         */
+                        byday?: string[];
+                        /** @description Number of occurrences at which to end the recurrence. */
+                        count?: number | null;
+                        /**
+                         * @description The frequency of the recurrence.
+                         * @enum {string}
+                         */
+                        freq: "daily" | "weekly";
+                        /**
+                         * @description How often the recurrence rule repeats.
+                         * @example 2
+                         */
+                        interval?: number;
+                        /**
+                         * @description Date at which to end the recurrence (in ISO-8601 format).
+                         * @example 2024-01-02
+                         */
+                        until?: Record<string, never> | null;
+                    };
+                    /** @description Array of start times for slots. */
+                    start_times: string[];
+                }[];
+                /**
+                 * Format: datetime
+                 * @description When the service was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "service.updated";
+        };
+        /**
          * CancellationEvent
          * @description This is an object representing when an appointment was canceled.
          * @example {
@@ -14407,7 +16947,7 @@ export interface components {
         ConnectedAccountCreatedEventData: {
             /**
              * ConnectedAccount
-             * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+             * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
              * @example {
              *       "connection_scope": "user",
              *       "created_at": "2025-03-12T12:34:55Z",
@@ -14472,6 +17012,111 @@ export interface components {
              * @enum {string}
              */
             type: "connected_account.created";
+        };
+        /**
+         * ProviderScheduleCreatedEventData
+         * @description This is an object representing data for the provider schedule created event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "effective_from": "2025-01-01",
+         *         "effective_to": "2025-12-31",
+         *         "id": "psch_d025a96ac0c6",
+         *         "object": "provider_schedule",
+         *         "public_bookings": {
+         *           "enabled": true
+         *         },
+         *         "updated_at": "2025-02-17T17:49:19Z",
+         *         "weekly_rules": [
+         *           {
+         *             "day": "mo",
+         *             "end_time": "17:00",
+         *             "start_time": "09:00"
+         *           }
+         *         ]
+         *       },
+         *       "type": "provider_schedule.created"
+         *     }
+         */
+        ProviderScheduleCreatedEventData: {
+            /**
+             * ProviderSchedule
+             * @description A provider schedule represents a schedule for a provider at a location.
+             * @example {
+             *       "created_at": "2025-02-17T17:49:19Z",
+             *       "effective_from": "2025-01-01",
+             *       "effective_to": "2025-12-31",
+             *       "id": "psch_d025a96ac0c6",
+             *       "object": "provider_schedule",
+             *       "public_bookings": {
+             *         "enabled": true
+             *       },
+             *       "updated_at": "2025-02-17T17:49:19Z",
+             *       "weekly_rules": [
+             *         {
+             *           "day": "mo",
+             *           "end_time": "17:00",
+             *           "start_time": "09:00"
+             *         }
+             *       ]
+             *     }
+             */
+            object: {
+                /**
+                 * Format: datetime
+                 * @description When the service was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: date
+                 * @description The start date of the schedule.
+                 */
+                effective_from: string;
+                /**
+                 * Format: date
+                 * @description The end date of the schedule.
+                 */
+                effective_to: string | null;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider_schedule";
+                /**
+                 * @description Public booking settings for the schedule.
+                 * @example {
+                 *       "enabled": true
+                 *     }
+                 */
+                public_bookings: {
+                    /** @description Whether public bookings are enabled for the schedule. */
+                    enabled: boolean;
+                };
+                /**
+                 * Format: datetime
+                 * @description When the schedule was last updated.
+                 */
+                updated_at: string;
+                /** @description Weekly rules for the schedule. */
+                weekly_rules: {
+                    /**
+                     * @description The day of the week.
+                     * @enum {string}
+                     */
+                    day: "mo" | "tu" | "we" | "th" | "fr" | "sa" | "su";
+                    /** @description The end time of the rule. */
+                    end_time: string;
+                    /** @description The start time of the rule. */
+                    start_time: string;
+                }[];
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider_schedule.created";
         };
         /**
          * CancellationReasonsResponse
@@ -15360,14 +18005,14 @@ export interface components {
                     created_at: string;
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
                     /** @description Unique identifier for the object. */
                     id: string;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client.
@@ -15379,7 +18024,7 @@ export interface components {
                      * @enum {string}
                      */
                     object: "client";
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description External reference identifier for the client. */
                     reference_id: string | null;
@@ -15394,23 +18039,23 @@ export interface components {
                      */
                     updated_at: string;
                 };
-                /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                 client_data: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client booking the appointment.
                      * @example en-US
                      */
                     locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description The client's external reference identifier. */
                     reference_id: string | null;
@@ -15592,14 +18237,14 @@ export interface components {
                 fields: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                 };
                 /** @description Unique identifier for the object. */
@@ -15611,8 +18256,7 @@ export interface components {
                 object: "appointment";
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -15825,8 +18469,7 @@ export interface components {
                 }[];
                 /**
                  * Service
-                 * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                 *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                 * @description A service represents a type of appointment.
                  * @example {
                  *       "appointment_type": "in_person",
                  *       "booking_policy": {
@@ -16165,9 +18808,113 @@ export interface components {
             user_id: string;
         };
         /**
+         * ProviderScheduleUpdatedEventData
+         * @description This is an object representing data for the provider schedule updated event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "effective_from": "2025-01-01",
+         *         "effective_to": "2025-12-31",
+         *         "id": "psch_d025a96ac0c6",
+         *         "object": "provider_schedule",
+         *         "public_bookings": {
+         *           "enabled": true
+         *         },
+         *         "updated_at": "2025-02-17T17:49:19Z",
+         *         "weekly_rules": [
+         *           {
+         *             "day": "mo",
+         *             "end_time": "17:00",
+         *             "start_time": "09:00"
+         *           }
+         *         ]
+         *       },
+         *       "type": "provider_schedule.updated"
+         *     }
+         */
+        ProviderScheduleUpdatedEventData: {
+            /**
+             * ProviderSchedule
+             * @description A provider schedule represents a schedule for a provider at a location.
+             * @example {
+             *       "created_at": "2025-02-17T17:49:19Z",
+             *       "effective_from": "2025-01-01",
+             *       "effective_to": "2025-12-31",
+             *       "id": "psch_d025a96ac0c6",
+             *       "object": "provider_schedule",
+             *       "public_bookings": {
+             *         "enabled": true
+             *       },
+             *       "updated_at": "2025-02-17T17:49:19Z",
+             *       "weekly_rules": [
+             *         {
+             *           "day": "mo",
+             *           "end_time": "17:00",
+             *           "start_time": "09:00"
+             *         }
+             *       ]
+             *     }
+             */
+            object: {
+                /**
+                 * Format: datetime
+                 * @description When the service was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: date
+                 * @description The start date of the schedule.
+                 */
+                effective_from: string;
+                /**
+                 * Format: date
+                 * @description The end date of the schedule.
+                 */
+                effective_to: string | null;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "provider_schedule";
+                /**
+                 * @description Public booking settings for the schedule.
+                 * @example {
+                 *       "enabled": true
+                 *     }
+                 */
+                public_bookings: {
+                    /** @description Whether public bookings are enabled for the schedule. */
+                    enabled: boolean;
+                };
+                /**
+                 * Format: datetime
+                 * @description When the schedule was last updated.
+                 */
+                updated_at: string;
+                /** @description Weekly rules for the schedule. */
+                weekly_rules: {
+                    /**
+                     * @description The day of the week.
+                     * @enum {string}
+                     */
+                    day: "mo" | "tu" | "we" | "th" | "fr" | "sa" | "su";
+                    /** @description The end time of the rule. */
+                    end_time: string;
+                    /** @description The start time of the rule. */
+                    start_time: string;
+                }[];
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "provider_schedule.updated";
+        };
+        /**
          * Provider
-         * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-         *     to [clients](https://developers.savvycal.app/api/schemas/client).
+         * @description A provider represents a staff member who can provide services to clients.
          * @example {
          *       "created_at": "2017-09-12T12:34:55Z",
          *       "display_name": "John Smith",
@@ -16416,6 +19163,84 @@ export interface components {
              * @description Time at which the object was last updated.
              */
             updated_at: string;
+        };
+        /**
+         * ServiceProviderDeletedEventData
+         * @description This is an object representing data for the service provider deleted event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-19T17:36:36Z",
+         *         "id": "sp_d025a96ac0c6",
+         *         "object": "service_provider",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "updated_at": "2025-02-19T17:36:36Z"
+         *       },
+         *       "type": "service_provider.deleted"
+         *     }
+         */
+        ServiceProviderDeletedEventData: {
+            /**
+             * ServiceProvider
+             * @description A service provider
+             * @example {
+             *       "created_at": "2025-02-19T17:36:36Z",
+             *       "id": "sp_d025a96ac0c6",
+             *       "object": "service_provider",
+             *       "provider": {
+             *         "created_at": "2017-09-12T12:34:55Z",
+             *         "display_name": "John Smith",
+             *         "first_name": "John",
+             *         "id": "prov_d025a96ac0c6",
+             *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
+             *         "object": "provider",
+             *         "updated_at": "2017-09-13T10:11:12Z"
+             *       },
+             *       "service_id": "srv_d025a96ac0c6",
+             *       "updated_at": "2025-02-19T17:36:36Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description When the service provider was created.
+                 */
+                created_at: string;
+                /** @description Service Provider ID */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "service_provider";
+                provider: components["schemas"]["Provider"];
+                /** @description Service ID */
+                service_id: string;
+                /**
+                 * Format: date-time
+                 * @description When the service provider was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "service_provider.deleted";
         };
         /**
          * ConnectedAccountsResponse
@@ -17262,14 +20087,14 @@ export interface components {
                     created_at: string;
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
                     /** @description Unique identifier for the object. */
                     id: string;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client.
@@ -17281,7 +20106,7 @@ export interface components {
                      * @enum {string}
                      */
                     object: "client";
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description External reference identifier for the client. */
                     reference_id: string | null;
@@ -17296,23 +20121,23 @@ export interface components {
                      */
                     updated_at: string;
                 };
-                /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                 client_data: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client booking the appointment.
                      * @example en-US
                      */
                     locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description The client's external reference identifier. */
                     reference_id: string | null;
@@ -17494,14 +20319,14 @@ export interface components {
                 fields: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                 };
                 /** @description Unique identifier for the object. */
@@ -17513,8 +20338,7 @@ export interface components {
                 object: "appointment";
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -17727,8 +20551,7 @@ export interface components {
                 }[];
                 /**
                  * Service
-                 * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                 *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                 * @description A service represents a type of appointment.
                  * @example {
                  *       "appointment_type": "in_person",
                  *       "booking_policy": {
@@ -18048,6 +20871,92 @@ export interface components {
              * @enum {string}
              */
             type: "appointment.deleted";
+        };
+        /**
+         * ClientCreatedEventData
+         * @description This is an object representing data for the client created event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-01-15T14:30:00Z",
+         *         "email": "jane.smith@example.com",
+         *         "first_name": "Jane",
+         *         "id": "clnt_a1b2c3d4e5f6",
+         *         "last_name": "Smith",
+         *         "locale": "en-US",
+         *         "object": "client",
+         *         "phone": "+15551234567",
+         *         "reference_id": "ext_12345",
+         *         "time_zone": "America/Chicago",
+         *         "updated_at": "2025-03-10T09:45:00Z"
+         *       },
+         *       "type": "client.created"
+         *     }
+         */
+        ClientCreatedEventData: {
+            /**
+             * Client
+             * @description This is an object representing a client.
+             * @example {
+             *       "created_at": "2025-01-15T14:30:00Z",
+             *       "email": "jane.smith@example.com",
+             *       "first_name": "Jane",
+             *       "id": "clnt_a1b2c3d4e5f6",
+             *       "last_name": "Smith",
+             *       "locale": "en-US",
+             *       "object": "client",
+             *       "phone": "+15551234567",
+             *       "reference_id": "ext_12345",
+             *       "time_zone": "America/Chicago",
+             *       "updated_at": "2025-03-10T09:45:00Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was created.
+                 */
+                created_at: string;
+                /**
+                 * Format: email
+                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
+                 */
+                email?: string | null;
+                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
+                first_name?: string | null;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
+                last_name?: string | null;
+                /**
+                 * @description The locale of the client.
+                 * @example en-US
+                 */
+                locale: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "client";
+                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
+                phone?: string | null;
+                /** @description External reference identifier for the client. */
+                reference_id: string | null;
+                /**
+                 * @description The client's time zone (IANA format).
+                 * @example America/Chicago
+                 */
+                time_zone: string;
+                /**
+                 * Format: date-time
+                 * @description Time at which the object was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "client.created";
         };
         /**
          * UnauthorizedResponse
@@ -18507,14 +21416,14 @@ export interface components {
                 created_at: string;
                 /**
                  * Format: email
-                 * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                  */
                 email?: string | null;
-                /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                 first_name?: string | null;
                 /** @description Unique identifier for the object. */
                 id: string;
-                /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                 last_name?: string | null;
                 /**
                  * @description The locale of the client.
@@ -18526,7 +21435,7 @@ export interface components {
                  * @enum {string}
                  */
                 object: "client";
-                /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                 phone?: string | null;
                 /** @description External reference identifier for the client. */
                 reference_id: string | null;
@@ -18541,23 +21450,23 @@ export interface components {
                  */
                 updated_at: string;
             };
-            /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+            /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
             client_data: {
                 /**
                  * Format: email
-                 * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                  */
                 email?: string | null;
-                /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                 first_name?: string | null;
-                /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                 last_name?: string | null;
                 /**
                  * @description The locale of the client booking the appointment.
                  * @example en-US
                  */
                 locale: string | null;
-                /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                 phone?: string | null;
                 /** @description The client's external reference identifier. */
                 reference_id: string | null;
@@ -18739,14 +21648,14 @@ export interface components {
             fields: {
                 /**
                  * Format: email
-                 * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                  */
                 email?: string | null;
-                /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                 first_name?: string | null;
-                /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                 last_name?: string | null;
-                /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                 phone?: string | null;
             };
             /** @description Unique identifier for the object. */
@@ -18758,8 +21667,7 @@ export interface components {
             object: "appointment";
             /**
              * Provider
-             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @description A provider represents a staff member who can provide services to clients.
              * @example {
              *       "created_at": "2017-09-12T12:34:55Z",
              *       "display_name": "John Smith",
@@ -18972,8 +21880,7 @@ export interface components {
             }[];
             /**
              * Service
-             * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-             *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+             * @description A service represents a type of appointment.
              * @example {
              *       "appointment_type": "in_person",
              *       "booking_policy": {
@@ -19310,8 +22217,7 @@ export interface components {
         ProviderDeactivatedEventData: {
             /**
              * Provider
-             * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-             *     to [clients](https://developers.savvycal.app/api/schemas/client).
+             * @description A provider represents a staff member who can provide services to clients.
              * @example {
              *       "created_at": "2017-09-12T12:34:55Z",
              *       "display_name": "John Smith",
@@ -19396,6 +22302,84 @@ export interface components {
             data: components["schemas"]["PublicAppointment"];
         };
         /**
+         * ServiceProviderCreatedEventData
+         * @description This is an object representing data for the service provider created event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-19T17:36:36Z",
+         *         "id": "sp_d025a96ac0c6",
+         *         "object": "service_provider",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "updated_at": "2025-02-19T17:36:36Z"
+         *       },
+         *       "type": "service_provider.created"
+         *     }
+         */
+        ServiceProviderCreatedEventData: {
+            /**
+             * ServiceProvider
+             * @description A service provider
+             * @example {
+             *       "created_at": "2025-02-19T17:36:36Z",
+             *       "id": "sp_d025a96ac0c6",
+             *       "object": "service_provider",
+             *       "provider": {
+             *         "created_at": "2017-09-12T12:34:55Z",
+             *         "display_name": "John Smith",
+             *         "first_name": "John",
+             *         "id": "prov_d025a96ac0c6",
+             *         "last_name": "Smith",
+             *         "metadata": {
+             *           "external_id": "123"
+             *         },
+             *         "object": "provider",
+             *         "updated_at": "2017-09-13T10:11:12Z"
+             *       },
+             *       "service_id": "srv_d025a96ac0c6",
+             *       "updated_at": "2025-02-19T17:36:36Z"
+             *     }
+             */
+            object: {
+                /**
+                 * Format: date-time
+                 * @description When the service provider was created.
+                 */
+                created_at: string;
+                /** @description Service Provider ID */
+                id: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "service_provider";
+                provider: components["schemas"]["Provider"];
+                /** @description Service ID */
+                service_id: string;
+                /**
+                 * Format: date-time
+                 * @description When the service provider was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "service_provider.created";
+        };
+        /**
          * AggregatedSlot
          * @description An aggregated time slot with start, end times and count
          * @example {
@@ -19460,8 +22444,325 @@ export interface components {
             data?: components["schemas"]["AccountUser"][];
         };
         /**
+         * ServiceCreatedEventData
+         * @description This is an object representing data for the service created event.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "booking_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_booking": true,
+         *           "disabled_message": "Booking is disabled for this service.",
+         *           "maximize_utilization": {
+         *             "enabled": true
+         *           }
+         *         },
+         *         "cancellation_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_cancellation": true,
+         *           "disabled_message": "Cancellation is disabled for this service."
+         *         },
+         *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "duration": "PT1H30M",
+         *         "id": "srv_d025a96ac0c6",
+         *         "name": "Initial Consult",
+         *         "object": "service",
+         *         "rescheduling_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_rescheduling": true,
+         *           "disabled_message": "Rescheduling is disabled for this service."
+         *         },
+         *         "slot_rules": [
+         *           {
+         *             "recurrence_rule": {
+         *               "byday": [
+         *                 "mo",
+         *                 "we",
+         *                 "fr"
+         *               ],
+         *               "freq": "weekly"
+         *             },
+         *             "start_times": [
+         *               "09:00",
+         *               "10:00"
+         *             ]
+         *           }
+         *         ],
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "type": "service.created"
+         *     }
+         */
+        ServiceCreatedEventData: {
+            /**
+             * Service
+             * @description A service represents a type of appointment.
+             * @example {
+             *       "appointment_type": "in_person",
+             *       "booking_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_booking": true,
+             *         "disabled_message": "Booking is disabled for this service.",
+             *         "maximize_utilization": {
+             *           "enabled": true
+             *         }
+             *       },
+             *       "cancellation_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_cancellation": true,
+             *         "disabled_message": "Cancellation is disabled for this service."
+             *       },
+             *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+             *       "created_at": "2025-02-17T17:49:19Z",
+             *       "duration": "PT1H30M",
+             *       "id": "srv_d025a96ac0c6",
+             *       "name": "Initial Consult",
+             *       "object": "service",
+             *       "rescheduling_policy": {
+             *         "advance_notice": {
+             *           "enabled": true,
+             *           "minimum_duration": "PT1H"
+             *         },
+             *         "allow_rescheduling": true,
+             *         "disabled_message": "Rescheduling is disabled for this service."
+             *       },
+             *       "slot_rules": [
+             *         {
+             *           "recurrence_rule": {
+             *             "byday": [
+             *               "mo",
+             *               "we",
+             *               "fr"
+             *             ],
+             *             "freq": "weekly"
+             *           },
+             *           "start_times": [
+             *             "09:00",
+             *             "10:00"
+             *           ]
+             *         }
+             *       ],
+             *       "updated_at": "2025-02-17T17:49:19Z"
+             *     }
+             */
+            object: {
+                /**
+                 * @description The type of appointment.
+                 * @enum {string}
+                 */
+                appointment_type: "in_person" | "virtual";
+                /**
+                 * BookingPolicy
+                 * @description A booking policy defines the rules for booking a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_booking": true,
+                 *       "disabled_message": "Booking is disabled for this service.",
+                 *       "maximize_utilization": {
+                 *         "enabled": true
+                 *       }
+                 *     }
+                 */
+                booking_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public booking is allowed for the service. */
+                    allow_booking: boolean;
+                    /** @description The message to display when public booking is disabled. */
+                    disabled_message: string | null;
+                    /**
+                     * MaximizeUtilizationPolicy
+                     * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
+                     * @example {
+                     *       "enabled": true
+                     *     }
+                     */
+                    maximize_utilization: {
+                        /** @description Whether maximize utilization is enabled for the service. */
+                        enabled: boolean;
+                    };
+                };
+                /**
+                 * CancellationPolicy
+                 * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_cancellation": true,
+                 *       "disabled_message": "Cancellation is disabled for this service."
+                 *     }
+                 */
+                cancellation_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public cancellation is allowed for the service. */
+                    allow_cancellation: boolean;
+                    /** @description The message to display when public cancellation is disabled. */
+                    disabled_message: string | null;
+                };
+                /**
+                 * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
+                 * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
+                 */
+                change_policy_text: string;
+                /**
+                 * Format: datetime
+                 * @description When the service was created.
+                 */
+                created_at: string;
+                /**
+                 * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
+                 * @example `PT30M`
+                 */
+                duration: string;
+                /** @description Unique identifier for the object. */
+                id: string;
+                /** @description The name of the service. */
+                name: string;
+                /**
+                 * @description String representing the object's type.
+                 * @enum {string}
+                 */
+                object: "service";
+                /**
+                 * ReschedulingPolicy
+                 * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
+                 * @example {
+                 *       "advance_notice": {
+                 *         "enabled": true,
+                 *         "minimum_duration": "PT1H"
+                 *       },
+                 *       "allow_rescheduling": true,
+                 *       "disabled_message": "Rescheduling is disabled for this service."
+                 *     }
+                 */
+                rescheduling_policy: {
+                    /**
+                     * AdvanceNoticePolicy
+                     * @description A policy for requiring minimum advance notice.
+                     * @example {
+                     *       "enabled": true,
+                     *       "minimum_duration": "PT1H"
+                     *     }
+                     */
+                    advance_notice: {
+                        /** @description Whether advance notice is enabled. */
+                        enabled: boolean;
+                        /** @description The minimum duration of advance notice. */
+                        minimum_duration: string | null;
+                    };
+                    /** @description Whether public rescheduling is allowed for the service. */
+                    allow_rescheduling: boolean;
+                    /** @description The message to display when public rescheduling is disabled. */
+                    disabled_message: string | null;
+                };
+                /** @description Array of slot rules for the service. */
+                slot_rules: {
+                    /**
+                     * RecurrenceRule
+                     * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
+                     *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
+                     *     but are a subset of the full specification.
+                     * @example {
+                     *       "byday": [
+                     *         "mo",
+                     *         "we",
+                     *         "fr"
+                     *       ],
+                     *       "freq": "weekly"
+                     *     }
+                     */
+                    recurrence_rule: {
+                        /**
+                         * @description The days of the week on which the recurrence occurs.
+                         * @example [
+                         *       "mo",
+                         *       "we",
+                         *       "fr"
+                         *     ]
+                         */
+                        byday?: string[];
+                        /** @description Number of occurrences at which to end the recurrence. */
+                        count?: number | null;
+                        /**
+                         * @description The frequency of the recurrence.
+                         * @enum {string}
+                         */
+                        freq: "daily" | "weekly";
+                        /**
+                         * @description How often the recurrence rule repeats.
+                         * @example 2
+                         */
+                        interval?: number;
+                        /**
+                         * @description Date at which to end the recurrence (in ISO-8601 format).
+                         * @example 2024-01-02
+                         */
+                        until?: Record<string, never> | null;
+                    };
+                    /** @description Array of start times for slots. */
+                    start_times: string[];
+                }[];
+                /**
+                 * Format: datetime
+                 * @description When the service was last updated.
+                 */
+                updated_at: string;
+            };
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "service.created";
+        };
+        /**
          * ConnectedAccount
-         * @description This is an object representing a connected calendar account (e.g., a Google Calendar or Microsoft 365 integration).
+         * @description This is an object representing a connected external account (e.g., a Google Calendar or Microsoft 365 integration).
          * @example {
          *       "connection_scope": "user",
          *       "created_at": "2025-03-12T12:34:55Z",
@@ -20269,14 +23570,14 @@ export interface components {
                     created_at: string;
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
                     /** @description Unique identifier for the object. */
                     id: string;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client.
@@ -20288,7 +23589,7 @@ export interface components {
                      * @enum {string}
                      */
                     object: "client";
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description External reference identifier for the client. */
                     reference_id: string | null;
@@ -20303,23 +23604,23 @@ export interface components {
                      */
                     updated_at: string;
                 };
-                /** @description Client data provided while creating the appointment. Some fields are only included if `include_sensitive` is `true`. */
+                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
                 client_data: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
                     /**
                      * @description The locale of the client booking the appointment.
                      * @example en-US
                      */
                     locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                     /** @description The client's external reference identifier. */
                     reference_id: string | null;
@@ -20501,14 +23802,14 @@ export interface components {
                 fields: {
                     /**
                      * Format: email
-                     * @description The client's email address. This field is only included if `include_sensitive` is `true`.
+                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                      */
                     email?: string | null;
-                    /** @description The client's first name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                     first_name?: string | null;
-                    /** @description The client's last name. This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
                     last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field is only included if `include_sensitive` is `true`. */
+                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
                     phone?: string | null;
                 };
                 /** @description Unique identifier for the object. */
@@ -20520,8 +23821,7 @@ export interface components {
                 object: "appointment";
                 /**
                  * Provider
-                 * @description A provider represents a staff member who can provide [services](https://developers.savvycal.app/api/schemas/service)
-                 *     to [clients](https://developers.savvycal.app/api/schemas/client).
+                 * @description A provider represents a staff member who can provide services to clients.
                  * @example {
                  *       "created_at": "2017-09-12T12:34:55Z",
                  *       "display_name": "John Smith",
@@ -20734,8 +24034,7 @@ export interface components {
                 }[];
                 /**
                  * Service
-                 * @description A service represents a service offering that [clients](https://developers.savvycal.app/api/schemas/client)
-                 *     can book with a [provider](https://developers.savvycal.app/api/schemas/provider).
+                 * @description A service represents a type of appointment.
                  * @example {
                  *       "appointment_type": "in_person",
                  *       "booking_policy": {

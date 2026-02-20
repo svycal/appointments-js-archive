@@ -68,6 +68,12 @@ const sidebar: SidebarsConfig = {
       items: [
         {
           type: "doc",
+          id: "api/schemas/dashboardsession",
+          label: "DashboardSession",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/create-dashboard-session",
           label: "Create dashboard session",
           className: "api-method post",
@@ -768,6 +774,24 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/accountuserupdatedeventdata",
+          label: "AccountUserUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/clientdeletedeventdata",
+          label: "ClientDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/providerscheduledeletedeventdata",
+          label: "ProviderScheduleDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/publicserviceearliestslotresponse",
           label: "PublicServiceEarliestSlotResponse",
           className: "schema",
@@ -812,6 +836,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/connectedaccountresponse",
           label: "ConnectedAccountResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/servicedeletedeventdata",
+          label: "ServiceDeletedEventData",
           className: "schema",
         },
         {
@@ -876,6 +906,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/accountusercreatedeventdata",
+          label: "AccountUserCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/appointmentsresponse",
           label: "AppointmentsResponse",
           className: "schema",
@@ -890,12 +926,6 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/updateclientrequest",
           label: "UpdateClientRequest",
-          className: "schema",
-        },
-        {
-          type: "doc",
-          id: "api/schemas/dashboardsession",
-          label: "DashboardSession",
           className: "schema",
         },
         {
@@ -936,6 +966,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/clientupdatedeventdata",
+          label: "ClientUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/providersresponse",
           label: "ProvidersResponse",
           className: "schema",
@@ -956,6 +992,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providerreactivatedeventdata",
           label: "ProviderReactivatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/accountuserdeletedeventdata",
+          label: "AccountUserDeletedEventData",
           className: "schema",
         },
         {
@@ -990,6 +1032,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/serviceupdatedeventdata",
+          label: "ServiceUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/cancellationevent",
           label: "CancellationEvent",
           className: "schema",
@@ -1004,6 +1052,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/connectedaccountcreatedeventdata",
           label: "ConnectedAccountCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/providerschedulecreatedeventdata",
+          label: "ProviderScheduleCreatedEventData",
           className: "schema",
         },
         {
@@ -1062,6 +1116,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/providerscheduleupdatedeventdata",
+          label: "ProviderScheduleUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/createproviderschedulerequest",
           label: "CreateProviderScheduleRequest",
           className: "schema",
@@ -1070,6 +1130,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/recurrencerule",
           label: "RecurrenceRule",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/serviceproviderdeletedeventdata",
+          label: "ServiceProviderDeletedEventData",
           className: "schema",
         },
         {
@@ -1116,6 +1182,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/clientcreatedeventdata",
+          label: "ClientCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/unauthorizedresponse",
           label: "UnauthorizedResponse",
           className: "schema",
@@ -1158,6 +1230,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/serviceprovidercreatedeventdata",
+          label: "ServiceProviderCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/aggregatedslot",
           label: "AggregatedSlot",
           className: "schema",
@@ -1166,6 +1244,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/accountusersresponse",
           label: "AccountUsersResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/servicecreatedeventdata",
+          label: "ServiceCreatedEventData",
           className: "schema",
         },
         {

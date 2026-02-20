@@ -11,8 +11,14 @@ export type AccountEvent = Schemas["AccountEvent"];
 export type AccountResponse = Schemas["AccountResponse"];
 export type AccountsResponse = Schemas["AccountsResponse"];
 export type AccountUser = Schemas["AccountUser"];
+export type AccountUserCreatedEventData =
+  Schemas["AccountUserCreatedEventData"];
+export type AccountUserDeletedEventData =
+  Schemas["AccountUserDeletedEventData"];
 export type AccountUserResponse = Schemas["AccountUserResponse"];
 export type AccountUsersResponse = Schemas["AccountUsersResponse"];
+export type AccountUserUpdatedEventData =
+  Schemas["AccountUserUpdatedEventData"];
 export type AdvanceNoticePolicy = Schemas["AdvanceNoticePolicy"];
 export type AggregatedSlot = Schemas["AggregatedSlot"];
 export type Appointment = Schemas["Appointment"];
@@ -45,8 +51,11 @@ export type CancellationReasonsResponse =
 export type CancelPublicAppointmentRequest =
   Schemas["CancelPublicAppointmentRequest"];
 export type Client = Schemas["Client"];
+export type ClientCreatedEventData = Schemas["ClientCreatedEventData"];
+export type ClientDeletedEventData = Schemas["ClientDeletedEventData"];
 export type ClientResponse = Schemas["ClientResponse"];
 export type ClientsResponse = Schemas["ClientsResponse"];
+export type ClientUpdatedEventData = Schemas["ClientUpdatedEventData"];
 export type ConfirmAppointmentRequest = Schemas["ConfirmAppointmentRequest"];
 export type ConfirmationEvent = Schemas["ConfirmationEvent"];
 export type ConnectedAccount = Schemas["ConnectedAccount"];
@@ -94,8 +103,14 @@ export type ProviderReactivatedEventData =
   Schemas["ProviderReactivatedEventData"];
 export type ProviderResponse = Schemas["ProviderResponse"];
 export type ProviderSchedule = Schemas["ProviderSchedule"];
+export type ProviderScheduleCreatedEventData =
+  Schemas["ProviderScheduleCreatedEventData"];
+export type ProviderScheduleDeletedEventData =
+  Schemas["ProviderScheduleDeletedEventData"];
 export type ProviderScheduleResponse = Schemas["ProviderScheduleResponse"];
 export type ProviderSchedulesResponse = Schemas["ProviderSchedulesResponse"];
+export type ProviderScheduleUpdatedEventData =
+  Schemas["ProviderScheduleUpdatedEventData"];
 export type ProvidersResponse = Schemas["ProvidersResponse"];
 export type ProviderUpdatedEventData = Schemas["ProviderUpdatedEventData"];
 export type PublicAppointment = Schemas["PublicAppointment"];
@@ -116,12 +131,19 @@ export type ReschedulingPolicy = Schemas["ReschedulingPolicy"];
 export type Role = Schemas["Role"];
 export type RolesResponse = Schemas["RolesResponse"];
 export type Service = Schemas["Service"];
+export type ServiceCreatedEventData = Schemas["ServiceCreatedEventData"];
+export type ServiceDeletedEventData = Schemas["ServiceDeletedEventData"];
 export type ServiceProvider = Schemas["ServiceProvider"];
+export type ServiceProviderCreatedEventData =
+  Schemas["ServiceProviderCreatedEventData"];
+export type ServiceProviderDeletedEventData =
+  Schemas["ServiceProviderDeletedEventData"];
 export type ServiceProviderResponse = Schemas["ServiceProviderResponse"];
 export type ServiceProvidersResponse = Schemas["ServiceProvidersResponse"];
 export type ServiceResponse = Schemas["ServiceResponse"];
 export type ServiceSlotResponse = Schemas["ServiceSlotResponse"];
 export type ServicesResponse = Schemas["ServicesResponse"];
+export type ServiceUpdatedEventData = Schemas["ServiceUpdatedEventData"];
 export type Slot = Schemas["Slot"];
 export type SlotRule = Schemas["SlotRule"];
 export type UnauthorizedResponse = Schemas["UnauthorizedResponse"];
