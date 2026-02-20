@@ -22,6 +22,7 @@ import apisidebar from "./docs/api/sidebar";
 const sidebars: SidebarsConfig = {
   docSidebar: [
     "index",
+    "users-and-accounts",
     "data-model",
     "authentication",
     "metadata-filtering",
