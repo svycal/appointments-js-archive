@@ -9,7 +9,6 @@ import {
   isSameDay,
   startOfMonth,
   toISODate,
-  toISONaiveDateTime,
 } from "./index";
 
 describe("endOfMonth", () => {
@@ -183,42 +182,5 @@ describe("toISODate", () => {
   it("handles date-only string input", () => {
     const result = toISODate("2025-12-04");
     expect(result).toBe("2025-12-04");
-  });
-});
-
-describe("toISONaiveDateTime", () => {
-  it("returns YYYY-MM-DDTHH:mm:ss for Date in specified timezone", () => {
-    // 2025-12-04T19:30:00Z in America/New_York (EST = UTC-5) is 14:30:00
-    const date = new Date("2025-12-04T19:30:00Z");
-    const result = toISONaiveDateTime(date, "America/New_York");
-    expect(result).toBe("2025-12-04T14:30:00");
-  });
-
-  it("handles timestamp input", () => {
-    // 1733337000000 ms = 2024-12-04T18:30:00Z
-    // In America/New_York (EST = UTC-5) = 13:30:00
-    const result = toISONaiveDateTime(1733337000000, "America/New_York");
-    expect(result).toBe("2024-12-04T13:30:00");
-  });
-
-  it("handles ISO string input", () => {
-    const result = toISONaiveDateTime(
-      "2025-12-04T19:30:00Z",
-      "America/New_York",
-    );
-    expect(result).toBe("2025-12-04T14:30:00");
-  });
-
-  it("handles UTC timezone", () => {
-    const date = new Date("2025-12-04T14:30:00Z");
-    const result = toISONaiveDateTime(date, "UTC");
-    expect(result).toBe("2025-12-04T14:30:00");
-  });
-
-  it("handles timezone with positive offset", () => {
-    // 2025-12-04T14:30:00Z in Asia/Tokyo (UTC+9) is 23:30:00
-    const date = new Date("2025-12-04T14:30:00Z");
-    const result = toISONaiveDateTime(date, "Asia/Tokyo");
-    expect(result).toBe("2025-12-04T23:30:00");
   });
 });
