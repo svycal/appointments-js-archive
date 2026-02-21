@@ -7,12 +7,12 @@ The SavvyCal API uses string-based date and time values in several formats. Unde
 
 ## Date Formats
 
-| Format | Example | Where Used |
-| --- | --- | --- |
-| ISO date | `2025-10-27` | Calendar dates (e.g., block `start_date`) |
-| ISO datetime | `2025-03-01T03:00:00Z` | UTC timestamps (e.g., `created_at`, `updated_at`) |
-| Offset-aware datetime | `2025-03-01T10:00:00-05:00` | Local time with offset (used in request bodies) |
-| Time | `09:00` | Time of day (e.g., schedule rule `start_time`) |
+| Format                | Example                     | Where Used                                        |
+| --------------------- | --------------------------- | ------------------------------------------------- |
+| ISO date              | `2025-10-27`                | Calendar dates (e.g., block `start_date`)         |
+| ISO datetime          | `2025-03-01T03:00:00Z`      | UTC timestamps (e.g., `created_at`, `updated_at`) |
+| Offset-aware datetime | `2025-03-01T10:00:00-05:00` | Local time with offset (used in request bodies)   |
+| Time                  | `09:00`                     | Time of day (e.g., schedule rule `start_time`)    |
 
 ## ZonedDateTime
 
@@ -28,13 +28,13 @@ Several response fields (such as appointment `start_at` and `end_at`) return a *
 }
 ```
 
-| Field | Description |
-| --- | --- |
-| `local` | Naive datetime in the event's local timezone |
-| `utc` | ISO datetime in UTC |
-| `unix_ts` | Unix timestamp in seconds |
-| `time_zone` | IANA timezone identifier |
-| `object` | Always `"zoned_date_time"` |
+| Field       | Description                                  |
+| ----------- | -------------------------------------------- |
+| `local`     | Naive datetime in the event's local timezone |
+| `utc`       | ISO datetime in UTC                          |
+| `unix_ts`   | Unix timestamp in seconds                    |
+| `time_zone` | IANA timezone identifier                     |
+| `object`    | Always `"zoned_date_time"`                   |
 
 ## Slots
 
@@ -51,11 +51,11 @@ The [public slots endpoint](/api/list-public-service-slots) returns **Slot** obj
 }
 ```
 
-| Field | Description |
-| --- | --- |
-| `start_at` / `end_at` | ISO datetime with timezone offset |
-| `start_at_ts` / `end_at_ts` | Unix timestamps in seconds |
-| `time_zone` | IANA timezone identifier |
+| Field                       | Description                       |
+| --------------------------- | --------------------------------- |
+| `start_at` / `end_at`       | ISO datetime with timezone offset |
+| `start_at_ts` / `end_at_ts` | Unix timestamps in seconds        |
+| `time_zone`                 | IANA timezone identifier          |
 
 ## Creating Appointments
 
@@ -95,18 +95,13 @@ npm install @savvycal/appointments-utils
 Common operations:
 
 ```ts
-import {
-  fromUnixTime,
-  toISODateTime,
-  isSameDay,
-} from "@savvycal/appointments-utils";
+import { fromUnixTime, isSameDay } from "@savvycal/appointments-utils";
 
 // Convert a slot's unix timestamp to a Date
 const date = fromUnixTime(slot.start_at_ts);
 
-// Format a Date as an offset-aware datetime for a create request
-const iso = toISODateTime(date, "America/New_York");
-// => "2025-03-01T10:00:00-05:00"
+// Slot start_at/end_at values are already offset-aware strings
+// (e.g., "2025-03-10T09:00:00-04:00") — pass them directly to create requests
 
 // Compare two dates in a specific timezone
 isSameDay(date1, date2, "America/New_York");

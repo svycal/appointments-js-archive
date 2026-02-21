@@ -148,34 +148,3 @@ export function toISODate(date: Date | number | string): string {
     return Temporal.PlainDate.from(date.split("T")[0]).toString();
   }
 }
-
-/**
- * Converts a date to naive datetime string.
- *
- * @param date - The date to convert.
- * @param timeZone - The time zone to convert to.
- * @returns The naive datetime string.
- *
- * @example
- * ```ts
- * toISONaiveDateTime(new Date(), "America/New_York");
- * // "2025-12-04T14:22:00"
- * ```
- */
-export function toISONaiveDateTime(
-  date: Date | number | string,
-  timeZone: string,
-): string {
-  let instant: Temporal.Instant;
-
-  if (date instanceof Date) {
-    instant = Temporal.Instant.fromEpochMilliseconds(date.getTime());
-  } else if (typeof date === "number") {
-    instant = Temporal.Instant.fromEpochMilliseconds(date);
-  } else {
-    instant = Temporal.Instant.from(date);
-  }
-
-  const zonedDateTime = instant.toZonedDateTimeISO(timeZone);
-  return zonedDateTime.toPlainDateTime().toString({ smallestUnit: "second" });
-}

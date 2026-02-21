@@ -18,7 +18,6 @@ import {
   isSameDay,
   startOfMonth,
   toISODate,
-  toISONaiveDateTime,
 } from "@savvycal/appointments-utils";
 import clsx from "clsx";
 import {
@@ -156,9 +155,9 @@ const PublicBookingForm = ({
           reference_id: clientData.reference_id ?? clientData.email,
           time_zone: timeZone,
         },
-        end_at: toISONaiveDateTime(selectedSlot.end_at, timeZone),
+        end_at: selectedSlot.end_at,
         service_id: serviceId,
-        start_at: toISONaiveDateTime(selectedSlot.start_at, timeZone),
+        start_at: selectedSlot.start_at,
         time_zone: timeZone,
       },
     });

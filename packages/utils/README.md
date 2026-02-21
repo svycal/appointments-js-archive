@@ -49,17 +49,6 @@ toISODate("2025-12-04T14:30:00Z");
 // "2025-12-04"
 ```
 
-### `toISONaiveDateTime(date, timeZone)`
-
-Converts a date to a naive datetime string (without timezone info) in the specified timezone.
-
-```typescript
-import { toISONaiveDateTime } from "@savvycal/appointments-utils";
-
-toISONaiveDateTime(new Date("2025-12-04T19:22:00Z"), "America/New_York");
-// "2025-12-04T14:22:00"
-```
-
 ### `formatDate(date, options)`
 
 Formats a date for display using `Intl.DateTimeFormat`.
