@@ -4397,23 +4397,25 @@ export interface components {
          * ReschedulePublicAppointmentRequest
          * @description Request schema for rescheduling a public appointment
          * @example {
-         *       "end_at": "2025-03-01T11:00:00",
+         *       "end_at": "2025-03-01T11:00:00-05:00",
          *       "provider_id": "prv_1234567890",
-         *       "start_at": "2025-03-01T10:00:00",
+         *       "start_at": "2025-03-01T10:00:00-05:00",
          *       "time_zone": "America/New_York"
          *     }
          */
         ReschedulePublicAppointmentRequest: {
             /**
-             * @description The new end time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T11:00:00
+             * Format: date-time
+             * @description The new end time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T11:00:00-05:00` or `2025-03-01T16:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T11:00:00-05:00
              */
             end_at: string;
             /** @description The ID of the provider to assign to the appointment. If not provided, the provider assigned to the original appointment will be used. */
             provider_id?: string | null;
             /**
-             * @description The new start time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T10:00:00
+             * Format: date-time
+             * @description The new start time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T10:00:00-05:00` or `2025-03-01T15:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T10:00:00-05:00
              */
             start_at: string;
             /**
@@ -19398,9 +19400,9 @@ export interface components {
          *         "reference_id": "1234567890",
          *         "time_zone": "America/New_York"
          *       },
-         *       "end_at": "2025-03-01T11:00:00",
+         *       "end_at": "2025-03-01T11:00:00-05:00",
          *       "service_id": "srv_1234567890",
-         *       "start_at": "2025-03-01T10:00:00",
+         *       "start_at": "2025-03-01T10:00:00-05:00",
          *       "time_zone": "America/New_York",
          *       "validate_slot": true
          *     }
@@ -19445,8 +19447,9 @@ export interface components {
                 time_zone: string;
             };
             /**
-             * @description The end time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T11:00:00
+             * Format: date-time
+             * @description The end time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T11:00:00-05:00` or `2025-03-01T16:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T11:00:00-05:00
              */
             end_at: string;
             /** @description The ID of the provider to assign to the appointment. If not provided, an available provider will be randomly assigned. */
@@ -19454,8 +19457,9 @@ export interface components {
             /** @description The ID of the service for this appointment. */
             service_id: string;
             /**
-             * @description The start time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T10:00:00
+             * Format: date-time
+             * @description The start time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T10:00:00-05:00` or `2025-03-01T15:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T10:00:00-05:00
              */
             start_at: string;
             /**
@@ -20993,9 +20997,9 @@ export interface components {
          *         "reference_id": "1234567890",
          *         "time_zone": "America/New_York"
          *       },
-         *       "end_at": "2025-03-01T11:00:00",
+         *       "end_at": "2025-03-01T11:00:00-05:00",
          *       "service_id": "srv_1234567890",
-         *       "start_at": "2025-03-01T10:00:00",
+         *       "start_at": "2025-03-01T10:00:00-05:00",
          *       "time_zone": "America/New_York"
          *     }
          */
@@ -21039,8 +21043,9 @@ export interface components {
                 time_zone: string;
             };
             /**
-             * @description The end time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T11:00:00
+             * Format: date-time
+             * @description The end time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T11:00:00-05:00` or `2025-03-01T16:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T11:00:00-05:00
              */
             end_at: string;
             /** @description The ID of the provider to assign to the appointment. If not provided, an available provider will be randomly assigned. */
@@ -21048,8 +21053,9 @@ export interface components {
             /** @description The ID of the service for this appointment. */
             service_id: string;
             /**
-             * @description The start time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T10:00:00
+             * Format: date-time
+             * @description The start time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T10:00:00-05:00` or `2025-03-01T15:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T10:00:00-05:00
              */
             start_at: string;
             /**
@@ -24359,17 +24365,18 @@ export interface components {
          * RescheduleAppointmentRequest
          * @description Request schema for rescheduling an appointment
          * @example {
-         *       "end_at": "2025-03-01T11:00:00",
+         *       "end_at": "2025-03-01T11:00:00-05:00",
          *       "initiated_by": "client",
          *       "provider_id": "prv_1234567890",
-         *       "start_at": "2025-03-01T10:00:00",
+         *       "start_at": "2025-03-01T10:00:00-05:00",
          *       "time_zone": "America/New_York"
          *     }
          */
         RescheduleAppointmentRequest: {
             /**
-             * @description The new end time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T11:00:00
+             * Format: date-time
+             * @description The new end time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T11:00:00-05:00` or `2025-03-01T16:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T11:00:00-05:00
              */
             end_at: string;
             /**
@@ -24381,8 +24388,9 @@ export interface components {
             /** @description The ID of the provider to assign to the appointment. If not provided, the provider assigned to the original appointment will be used. */
             provider_id?: string | null;
             /**
-             * @description The new start time of the appointment in local time (in naive ISO-8601 format, without time zone information). The time zone for the appointment is specified in the `time_zone` field.
-             * @example 2025-03-01T10:00:00
+             * Format: date-time
+             * @description The new start time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T10:00:00-05:00` or `2025-03-01T15:00:00Z`). The `time_zone` field determines the canonical timezone.
+             * @example 2025-03-01T10:00:00-05:00
              */
             start_at: string;
             /**
