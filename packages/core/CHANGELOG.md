@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 0.7.0
+
+### Minor Changes
+
+- [`8f5493c`](https://github.com/svycal/appointments/commit/8f5493cacf7c38468def077222e707b7f0b091b0) Thanks [@derrickreimer](https://github.com/derrickreimer)! - Clarify offset-aware datetimes for local
+
 ## 0.6.0
 
 ### Minor Changes
