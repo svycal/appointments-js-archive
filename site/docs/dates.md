@@ -21,20 +21,20 @@ Several response fields (such as appointment `start_at` and `end_at`) return a *
 ```json
 {
   "object": "zoned_date_time",
-  "local": "2025-03-01T10:00:00",
+  "local": "2025-03-01T10:00:00-05:00",
   "utc": "2025-03-01T15:00:00Z",
   "unix_ts": 1740841200,
   "time_zone": "America/New_York"
 }
 ```
 
-| Field       | Description                                  |
-| ----------- | -------------------------------------------- |
-| `local`     | Naive datetime in the event's local timezone |
-| `utc`       | ISO datetime in UTC                          |
-| `unix_ts`   | Unix timestamp in seconds                    |
-| `time_zone` | IANA timezone identifier                     |
-| `object`    | Always `"zoned_date_time"`                   |
+| Field       | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `local`     | Offset-aware datetime in the event's local time zone |
+| `utc`       | ISO datetime in UTC                                  |
+| `unix_ts`   | Unix timestamp in seconds                            |
+| `time_zone` | IANA time zone identifier                            |
+| `object`    | Always `"zoned_date_time"`                           |
 
 ## Slots
 
@@ -51,11 +51,11 @@ The [public slots endpoint](/api/list-public-service-slots) returns **Slot** obj
 }
 ```
 
-| Field                       | Description                       |
-| --------------------------- | --------------------------------- |
-| `start_at` / `end_at`       | ISO datetime with timezone offset |
-| `start_at_ts` / `end_at_ts` | Unix timestamps in seconds        |
-| `time_zone`                 | IANA timezone identifier          |
+| Field                       | Description                                                   |
+| --------------------------- | ------------------------------------------------------------- |
+| `start_at` / `end_at`       | ISO datetime with time zone offset in the requested time zone |
+| `start_at_ts` / `end_at_ts` | Unix timestamps in seconds                                    |
+| `time_zone`                 | IANA time zone identifier                                     |
 
 ## Creating Appointments
 
@@ -70,7 +70,7 @@ When creating or rescheduling an appointment, the API expects **offset-aware ISO
 }
 ```
 
-The offset in `start_at` and `end_at` tells the API the exact moment in time. The `time_zone` field identifies the IANA timezone for the appointment (used for display and DST-aware operations). You can also use UTC:
+The offset in `start_at` and `end_at` tells the API the exact moment in time. The `time_zone` field identifies the IANA time zone for the appointment (used for display and DST-aware operations). You can also use UTC:
 
 ```json
 {
@@ -103,7 +103,7 @@ const date = fromUnixTime(slot.start_at_ts);
 // Slot start_at/end_at values are already offset-aware strings
 // (e.g., "2025-03-10T09:00:00-04:00") — pass them directly to create requests
 
-// Compare two dates in a specific timezone
+// Compare two dates in a specific time zone
 isSameDay(date1, date2, "America/New_York");
 // => true
 ```

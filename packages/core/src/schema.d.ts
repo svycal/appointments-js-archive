@@ -992,7 +992,7 @@ export interface components {
          * @example {
          *       "actor": null,
          *       "end_at": {
-         *         "local": "2023-01-01T01:00:00",
+         *         "local": "2023-01-01T01:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736464800,
@@ -1003,7 +1003,7 @@ export interface components {
          *       "occurred_at": "2023-01-01T03:00:00Z",
          *       "source": "client_ui",
          *       "start_at": {
-         *         "local": "2023-01-01T00:00:00",
+         *         "local": "2023-01-01T00:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736461200,
@@ -1016,9 +1016,9 @@ export interface components {
             actor: string | null;
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -1027,8 +1027,9 @@ export interface components {
              */
             end_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -1072,9 +1073,9 @@ export interface components {
             source: "client_ui" | "dashboard" | "api";
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -1083,8 +1084,9 @@ export interface components {
              */
             start_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -1120,7 +1122,7 @@ export interface components {
          *       },
          *       "confirmed_at": "2025-03-10T15:30:00Z",
          *       "end_at": {
-         *         "local": "2025-03-01T11:00:00",
+         *         "local": "2025-03-01T11:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736464800,
@@ -1133,7 +1135,7 @@ export interface components {
          *         "disabled_message": "Rescheduling is not available within 24 hours of your appointment"
          *       },
          *       "start_at": {
-         *         "local": "2025-03-01T10:00:00",
+         *         "local": "2025-03-01T10:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736461200,
@@ -1157,9 +1159,9 @@ export interface components {
             confirmed_at: string | null;
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -1168,8 +1170,9 @@ export interface components {
              */
             end_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -1210,9 +1213,9 @@ export interface components {
             };
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -1221,8 +1224,9 @@ export interface components {
              */
             start_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -1518,7 +1522,7 @@ export interface components {
          *           {
          *             "actor": null,
          *             "end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
@@ -1529,7 +1533,7 @@ export interface components {
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "source": "client_ui",
          *             "start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -1540,7 +1544,7 @@ export interface components {
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "created_at": "2025-03-10T14:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -1571,14 +1575,14 @@ export interface components {
          *             "actor": null,
          *             "initiated_by": "client",
          *             "new_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "new_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -1587,14 +1591,14 @@ export interface components {
          *             "object": "reschedule_event",
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "previous_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "previous_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -1657,7 +1661,7 @@ export interface components {
          *           "updated_at": "2025-02-17T17:49:19Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -1688,14 +1692,14 @@ export interface components {
          *       },
          *       "previous_attributes": {
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -1756,7 +1760,7 @@ export interface components {
              *         {
              *           "actor": null,
              *           "end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
@@ -1767,7 +1771,7 @@ export interface components {
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "source": "client_ui",
              *           "start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -1778,7 +1782,7 @@ export interface components {
              *       "confirmed_at": "2025-03-10T15:30:00Z",
              *       "created_at": "2025-03-10T14:30:00Z",
              *       "end_at": {
-             *         "local": "2025-03-01T11:00:00",
+             *         "local": "2025-03-01T11:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736464800,
@@ -1809,14 +1813,14 @@ export interface components {
              *           "actor": null,
              *           "initiated_by": "client",
              *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -1825,14 +1829,14 @@ export interface components {
              *           "object": "reschedule_event",
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -1895,7 +1899,7 @@ export interface components {
              *         "updated_at": "2025-02-17T17:49:19Z"
              *       },
              *       "start_at": {
-             *         "local": "2025-03-01T10:00:00",
+             *         "local": "2025-03-01T10:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736461200,
@@ -2084,9 +2088,9 @@ export interface components {
                     actor: string | null;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -2095,8 +2099,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -2140,9 +2145,9 @@ export interface components {
                     source: "client_ui" | "dashboard" | "api";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -2151,8 +2156,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -2190,9 +2196,9 @@ export interface components {
                 created_at: string;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -2201,8 +2207,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -2300,9 +2307,9 @@ export interface components {
                     initiated_by: "user" | "client";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -2311,8 +2318,9 @@ export interface components {
                      */
                     new_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -2339,9 +2347,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -2350,8 +2358,9 @@ export interface components {
                      */
                     new_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -2385,9 +2394,9 @@ export interface components {
                     occurred_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -2396,8 +2405,9 @@ export interface components {
                      */
                     previous_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -2424,9 +2434,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -2435,8 +2445,9 @@ export interface components {
                      */
                     previous_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -2716,9 +2727,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -2727,8 +2738,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -2784,9 +2796,9 @@ export interface components {
             previous_attributes: {
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -2795,8 +2807,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -2823,9 +2836,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -2834,8 +2847,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -3462,14 +3476,14 @@ export interface components {
          *       "actor": null,
          *       "initiated_by": "client",
          *       "new_end_at": {
-         *         "local": "2023-01-01T01:00:00",
+         *         "local": "2023-01-01T01:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736464800,
          *         "utc": "2023-01-01T04:00:00Z"
          *       },
          *       "new_start_at": {
-         *         "local": "2023-01-01T00:00:00",
+         *         "local": "2023-01-01T00:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736461200,
@@ -3478,14 +3492,14 @@ export interface components {
          *       "object": "reschedule_event",
          *       "occurred_at": "2023-01-01T03:00:00Z",
          *       "previous_end_at": {
-         *         "local": "2023-01-01T01:00:00",
+         *         "local": "2023-01-01T01:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736464800,
          *         "utc": "2023-01-01T04:00:00Z"
          *       },
          *       "previous_start_at": {
-         *         "local": "2023-01-01T00:00:00",
+         *         "local": "2023-01-01T00:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736461200,
@@ -3500,9 +3514,9 @@ export interface components {
             initiated_by: "user" | "client";
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -3511,8 +3525,9 @@ export interface components {
              */
             new_end_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -3539,9 +3554,9 @@ export interface components {
             };
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -3550,8 +3565,9 @@ export interface components {
              */
             new_start_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -3585,9 +3601,9 @@ export interface components {
             occurred_at: string;
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -3596,8 +3612,9 @@ export interface components {
              */
             previous_end_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -3624,9 +3641,9 @@ export interface components {
             };
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -3635,8 +3652,9 @@ export interface components {
              */
             previous_start_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -5180,7 +5198,7 @@ export interface components {
          *           {
          *             "actor": null,
          *             "end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
@@ -5191,7 +5209,7 @@ export interface components {
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "source": "client_ui",
          *             "start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -5202,7 +5220,7 @@ export interface components {
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "created_at": "2025-03-10T14:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -5233,14 +5251,14 @@ export interface components {
          *             "actor": null,
          *             "initiated_by": "client",
          *             "new_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "new_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -5249,14 +5267,14 @@ export interface components {
          *             "object": "reschedule_event",
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "previous_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "previous_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -5319,7 +5337,7 @@ export interface components {
          *           "updated_at": "2025-02-17T17:49:19Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -5402,7 +5420,7 @@ export interface components {
              *         {
              *           "actor": null,
              *           "end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
@@ -5413,7 +5431,7 @@ export interface components {
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "source": "client_ui",
              *           "start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -5424,7 +5442,7 @@ export interface components {
              *       "confirmed_at": "2025-03-10T15:30:00Z",
              *       "created_at": "2025-03-10T14:30:00Z",
              *       "end_at": {
-             *         "local": "2025-03-01T11:00:00",
+             *         "local": "2025-03-01T11:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736464800,
@@ -5455,14 +5473,14 @@ export interface components {
              *           "actor": null,
              *           "initiated_by": "client",
              *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -5471,14 +5489,14 @@ export interface components {
              *           "object": "reschedule_event",
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -5541,7 +5559,7 @@ export interface components {
              *         "updated_at": "2025-02-17T17:49:19Z"
              *       },
              *       "start_at": {
-             *         "local": "2025-03-01T10:00:00",
+             *         "local": "2025-03-01T10:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736461200,
@@ -5730,9 +5748,9 @@ export interface components {
                     actor: string | null;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -5741,8 +5759,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -5786,9 +5805,9 @@ export interface components {
                     source: "client_ui" | "dashboard" | "api";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -5797,8 +5816,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -5836,9 +5856,9 @@ export interface components {
                 created_at: string;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -5847,8 +5867,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -5946,9 +5967,9 @@ export interface components {
                     initiated_by: "user" | "client";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -5957,8 +5978,9 @@ export interface components {
                      */
                     new_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -5985,9 +6007,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -5996,8 +6018,9 @@ export interface components {
                      */
                     new_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -6031,9 +6054,9 @@ export interface components {
                     occurred_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -6042,8 +6065,9 @@ export interface components {
                      */
                     previous_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -6070,9 +6094,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -6081,8 +6105,9 @@ export interface components {
                      */
                     previous_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -6362,9 +6387,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -6373,8 +6398,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -6653,7 +6679,7 @@ export interface components {
          *             {
          *               "actor": null,
          *               "end_at": {
-         *                 "local": "2023-01-01T01:00:00",
+         *                 "local": "2023-01-01T01:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736464800,
@@ -6664,7 +6690,7 @@ export interface components {
          *               "occurred_at": "2023-01-01T03:00:00Z",
          *               "source": "client_ui",
          *               "start_at": {
-         *                 "local": "2023-01-01T00:00:00",
+         *                 "local": "2023-01-01T00:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736461200,
@@ -6675,7 +6701,7 @@ export interface components {
          *           "confirmed_at": "2025-03-10T15:30:00Z",
          *           "created_at": "2025-03-10T14:30:00Z",
          *           "end_at": {
-         *             "local": "2025-03-01T11:00:00",
+         *             "local": "2025-03-01T11:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
@@ -6706,14 +6732,14 @@ export interface components {
          *               "actor": null,
          *               "initiated_by": "client",
          *               "new_end_at": {
-         *                 "local": "2023-01-01T01:00:00",
+         *                 "local": "2023-01-01T01:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736464800,
          *                 "utc": "2023-01-01T04:00:00Z"
          *               },
          *               "new_start_at": {
-         *                 "local": "2023-01-01T00:00:00",
+         *                 "local": "2023-01-01T00:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736461200,
@@ -6722,14 +6748,14 @@ export interface components {
          *               "object": "reschedule_event",
          *               "occurred_at": "2023-01-01T03:00:00Z",
          *               "previous_end_at": {
-         *                 "local": "2023-01-01T01:00:00",
+         *                 "local": "2023-01-01T01:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736464800,
          *                 "utc": "2023-01-01T04:00:00Z"
          *               },
          *               "previous_start_at": {
-         *                 "local": "2023-01-01T00:00:00",
+         *                 "local": "2023-01-01T00:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736461200,
@@ -6792,7 +6818,7 @@ export interface components {
          *             "updated_at": "2025-02-17T17:49:19Z"
          *           },
          *           "start_at": {
-         *             "local": "2025-03-01T10:00:00",
+         *             "local": "2025-03-01T10:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736461200,
@@ -7015,7 +7041,7 @@ export interface components {
                  *         {
                  *           "actor": null,
                  *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
@@ -7026,7 +7052,7 @@ export interface components {
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "source": "client_ui",
                  *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -7037,7 +7063,7 @@ export interface components {
                  *       "confirmed_at": "2025-03-10T15:30:00Z",
                  *       "created_at": "2025-03-10T14:30:00Z",
                  *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00",
+                 *         "local": "2025-03-01T11:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736464800,
@@ -7068,14 +7094,14 @@ export interface components {
                  *           "actor": null,
                  *           "initiated_by": "client",
                  *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -7084,14 +7110,14 @@ export interface components {
                  *           "object": "reschedule_event",
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -7154,7 +7180,7 @@ export interface components {
                  *         "updated_at": "2025-02-17T17:49:19Z"
                  *       },
                  *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00",
+                 *         "local": "2025-03-01T10:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736461200,
@@ -7343,9 +7369,9 @@ export interface components {
                         actor: string | null;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -7354,8 +7380,9 @@ export interface components {
                          */
                         end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -7399,9 +7426,9 @@ export interface components {
                         source: "client_ui" | "dashboard" | "api";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -7410,8 +7437,9 @@ export interface components {
                          */
                         start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -7449,9 +7477,9 @@ export interface components {
                     created_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -7460,8 +7488,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -7559,9 +7588,9 @@ export interface components {
                         initiated_by: "user" | "client";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -7570,8 +7599,9 @@ export interface components {
                          */
                         new_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -7598,9 +7628,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -7609,8 +7639,9 @@ export interface components {
                          */
                         new_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -7644,9 +7675,9 @@ export interface components {
                         occurred_at: string;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -7655,8 +7686,9 @@ export interface components {
                          */
                         previous_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -7683,9 +7715,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -7694,8 +7726,9 @@ export interface components {
                          */
                         previous_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -7975,9 +8008,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -7986,8 +8019,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -8096,7 +8130,7 @@ export interface components {
                  *         {
                  *           "actor": null,
                  *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
@@ -8107,7 +8141,7 @@ export interface components {
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "source": "client_ui",
                  *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -8118,7 +8152,7 @@ export interface components {
                  *       "confirmed_at": "2025-03-10T15:30:00Z",
                  *       "created_at": "2025-03-10T14:30:00Z",
                  *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00",
+                 *         "local": "2025-03-01T11:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736464800,
@@ -8149,14 +8183,14 @@ export interface components {
                  *           "actor": null,
                  *           "initiated_by": "client",
                  *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -8165,14 +8199,14 @@ export interface components {
                  *           "object": "reschedule_event",
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -8235,7 +8269,7 @@ export interface components {
                  *         "updated_at": "2025-02-17T17:49:19Z"
                  *       },
                  *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00",
+                 *         "local": "2025-03-01T10:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736461200,
@@ -8424,9 +8458,9 @@ export interface components {
                         actor: string | null;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -8435,8 +8469,9 @@ export interface components {
                          */
                         end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -8480,9 +8515,9 @@ export interface components {
                         source: "client_ui" | "dashboard" | "api";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -8491,8 +8526,9 @@ export interface components {
                          */
                         start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -8530,9 +8566,9 @@ export interface components {
                     created_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -8541,8 +8577,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -8640,9 +8677,9 @@ export interface components {
                         initiated_by: "user" | "client";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -8651,8 +8688,9 @@ export interface components {
                          */
                         new_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -8679,9 +8717,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -8690,8 +8728,9 @@ export interface components {
                          */
                         new_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -8725,9 +8764,9 @@ export interface components {
                         occurred_at: string;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -8736,8 +8775,9 @@ export interface components {
                          */
                         previous_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -8764,9 +8804,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -8775,8 +8815,9 @@ export interface components {
                          */
                         previous_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -9056,9 +9097,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -9067,8 +9108,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -9124,9 +9166,9 @@ export interface components {
                 previous_attributes: {
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -9135,8 +9177,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -9163,9 +9206,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -9174,8 +9217,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -9257,7 +9301,7 @@ export interface components {
                  *         {
                  *           "actor": null,
                  *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
@@ -9268,7 +9312,7 @@ export interface components {
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "source": "client_ui",
                  *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -9279,7 +9323,7 @@ export interface components {
                  *       "confirmed_at": "2025-03-10T15:30:00Z",
                  *       "created_at": "2025-03-10T14:30:00Z",
                  *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00",
+                 *         "local": "2025-03-01T11:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736464800,
@@ -9310,14 +9354,14 @@ export interface components {
                  *           "actor": null,
                  *           "initiated_by": "client",
                  *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -9326,14 +9370,14 @@ export interface components {
                  *           "object": "reschedule_event",
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -9396,7 +9440,7 @@ export interface components {
                  *         "updated_at": "2025-02-17T17:49:19Z"
                  *       },
                  *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00",
+                 *         "local": "2025-03-01T10:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736461200,
@@ -9585,9 +9629,9 @@ export interface components {
                         actor: string | null;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -9596,8 +9640,9 @@ export interface components {
                          */
                         end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -9641,9 +9686,9 @@ export interface components {
                         source: "client_ui" | "dashboard" | "api";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -9652,8 +9697,9 @@ export interface components {
                          */
                         start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -9691,9 +9737,9 @@ export interface components {
                     created_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -9702,8 +9748,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -9801,9 +9848,9 @@ export interface components {
                         initiated_by: "user" | "client";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -9812,8 +9859,9 @@ export interface components {
                          */
                         new_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -9840,9 +9888,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -9851,8 +9899,9 @@ export interface components {
                          */
                         new_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -9886,9 +9935,9 @@ export interface components {
                         occurred_at: string;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -9897,8 +9946,9 @@ export interface components {
                          */
                         previous_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -9925,9 +9975,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -9936,8 +9986,9 @@ export interface components {
                          */
                         previous_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -10217,9 +10268,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -10228,8 +10279,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -10338,7 +10390,7 @@ export interface components {
                  *         {
                  *           "actor": null,
                  *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
@@ -10349,7 +10401,7 @@ export interface components {
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "source": "client_ui",
                  *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -10360,7 +10412,7 @@ export interface components {
                  *       "confirmed_at": "2025-03-10T15:30:00Z",
                  *       "created_at": "2025-03-10T14:30:00Z",
                  *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00",
+                 *         "local": "2025-03-01T11:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736464800,
@@ -10391,14 +10443,14 @@ export interface components {
                  *           "actor": null,
                  *           "initiated_by": "client",
                  *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -10407,14 +10459,14 @@ export interface components {
                  *           "object": "reschedule_event",
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -10477,7 +10529,7 @@ export interface components {
                  *         "updated_at": "2025-02-17T17:49:19Z"
                  *       },
                  *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00",
+                 *         "local": "2025-03-01T10:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736461200,
@@ -10666,9 +10718,9 @@ export interface components {
                         actor: string | null;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -10677,8 +10729,9 @@ export interface components {
                          */
                         end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -10722,9 +10775,9 @@ export interface components {
                         source: "client_ui" | "dashboard" | "api";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -10733,8 +10786,9 @@ export interface components {
                          */
                         start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -10772,9 +10826,9 @@ export interface components {
                     created_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -10783,8 +10837,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -10882,9 +10937,9 @@ export interface components {
                         initiated_by: "user" | "client";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -10893,8 +10948,9 @@ export interface components {
                          */
                         new_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -10921,9 +10977,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -10932,8 +10988,9 @@ export interface components {
                          */
                         new_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -10967,9 +11024,9 @@ export interface components {
                         occurred_at: string;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -10978,8 +11035,9 @@ export interface components {
                          */
                         previous_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -11006,9 +11064,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -11017,8 +11075,9 @@ export interface components {
                          */
                         previous_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -11298,9 +11357,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -11309,8 +11368,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -11419,7 +11479,7 @@ export interface components {
                  *         {
                  *           "actor": null,
                  *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
@@ -11430,7 +11490,7 @@ export interface components {
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "source": "client_ui",
                  *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -11441,7 +11501,7 @@ export interface components {
                  *       "confirmed_at": "2025-03-10T15:30:00Z",
                  *       "created_at": "2025-03-10T14:30:00Z",
                  *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00",
+                 *         "local": "2025-03-01T11:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736464800,
@@ -11472,14 +11532,14 @@ export interface components {
                  *           "actor": null,
                  *           "initiated_by": "client",
                  *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -11488,14 +11548,14 @@ export interface components {
                  *           "object": "reschedule_event",
                  *           "occurred_at": "2023-01-01T03:00:00Z",
                  *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00",
+                 *             "local": "2023-01-01T01:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736464800,
                  *             "utc": "2023-01-01T04:00:00Z"
                  *           },
                  *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00",
+                 *             "local": "2023-01-01T00:00:00-05:00",
                  *             "object": "zoned_date_time",
                  *             "time_zone": "America/New_York",
                  *             "unix_ts": 1736461200,
@@ -11558,7 +11618,7 @@ export interface components {
                  *         "updated_at": "2025-02-17T17:49:19Z"
                  *       },
                  *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00",
+                 *         "local": "2025-03-01T10:00:00-05:00",
                  *         "object": "zoned_date_time",
                  *         "time_zone": "America/New_York",
                  *         "unix_ts": 1736461200,
@@ -11747,9 +11807,9 @@ export interface components {
                         actor: string | null;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -11758,8 +11818,9 @@ export interface components {
                          */
                         end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -11803,9 +11864,9 @@ export interface components {
                         source: "client_ui" | "dashboard" | "api";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -11814,8 +11875,9 @@ export interface components {
                          */
                         start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -11853,9 +11915,9 @@ export interface components {
                     created_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -11864,8 +11926,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -11963,9 +12026,9 @@ export interface components {
                         initiated_by: "user" | "client";
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -11974,8 +12037,9 @@ export interface components {
                          */
                         new_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -12002,9 +12066,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -12013,8 +12077,9 @@ export interface components {
                          */
                         new_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -12048,9 +12113,9 @@ export interface components {
                         occurred_at: string;
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -12059,8 +12124,9 @@ export interface components {
                          */
                         previous_end_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -12087,9 +12153,9 @@ export interface components {
                         };
                         /**
                          * ZonedDateTime
-                         * @description An object describing a date/time in local time (naive) and in UTC.
+                         * @description An object describing a date/time in local time and in UTC.
                          * @example {
-                         *       "local": "2025-03-01T10:00:00",
+                         *       "local": "2025-03-01T10:00:00-05:00",
                          *       "object": "zoned_date_time",
                          *       "time_zone": "America/New_York",
                          *       "unix_ts": 1736461200,
@@ -12098,8 +12164,9 @@ export interface components {
                          */
                         previous_start_at: {
                             /**
-                             * @description The local date/time in ISO-8601 format (without time zone information).
-                             * @example 2025-03-01T10:00:00
+                             * Format: date-time
+                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                             * @example 2025-03-01T10:00:00-05:00
                              */
                             local: string;
                             /**
@@ -12379,9 +12446,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -12390,8 +12457,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -14777,7 +14845,7 @@ export interface components {
          *             {
          *               "actor": null,
          *               "end_at": {
-         *                 "local": "2023-01-01T01:00:00",
+         *                 "local": "2023-01-01T01:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736464800,
@@ -14788,7 +14856,7 @@ export interface components {
          *               "occurred_at": "2023-01-01T03:00:00Z",
          *               "source": "client_ui",
          *               "start_at": {
-         *                 "local": "2023-01-01T00:00:00",
+         *                 "local": "2023-01-01T00:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736461200,
@@ -14799,7 +14867,7 @@ export interface components {
          *           "confirmed_at": "2025-03-10T15:30:00Z",
          *           "created_at": "2025-03-10T14:30:00Z",
          *           "end_at": {
-         *             "local": "2025-03-01T11:00:00",
+         *             "local": "2025-03-01T11:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
@@ -14830,14 +14898,14 @@ export interface components {
          *               "actor": null,
          *               "initiated_by": "client",
          *               "new_end_at": {
-         *                 "local": "2023-01-01T01:00:00",
+         *                 "local": "2023-01-01T01:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736464800,
          *                 "utc": "2023-01-01T04:00:00Z"
          *               },
          *               "new_start_at": {
-         *                 "local": "2023-01-01T00:00:00",
+         *                 "local": "2023-01-01T00:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736461200,
@@ -14846,14 +14914,14 @@ export interface components {
          *               "object": "reschedule_event",
          *               "occurred_at": "2023-01-01T03:00:00Z",
          *               "previous_end_at": {
-         *                 "local": "2023-01-01T01:00:00",
+         *                 "local": "2023-01-01T01:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736464800,
          *                 "utc": "2023-01-01T04:00:00Z"
          *               },
          *               "previous_start_at": {
-         *                 "local": "2023-01-01T00:00:00",
+         *                 "local": "2023-01-01T00:00:00-05:00",
          *                 "object": "zoned_date_time",
          *                 "time_zone": "America/New_York",
          *                 "unix_ts": 1736461200,
@@ -14916,7 +14984,7 @@ export interface components {
          *             "updated_at": "2025-02-17T17:49:19Z"
          *           },
          *           "start_at": {
-         *             "local": "2025-03-01T10:00:00",
+         *             "local": "2025-03-01T10:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736461200,
@@ -15396,7 +15464,7 @@ export interface components {
          *           {
          *             "actor": null,
          *             "end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
@@ -15407,7 +15475,7 @@ export interface components {
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "source": "client_ui",
          *             "start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -15418,7 +15486,7 @@ export interface components {
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "created_at": "2025-03-10T14:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -15449,14 +15517,14 @@ export interface components {
          *             "actor": null,
          *             "initiated_by": "client",
          *             "new_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "new_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -15465,14 +15533,14 @@ export interface components {
          *             "object": "reschedule_event",
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "previous_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "previous_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -15535,7 +15603,7 @@ export interface components {
          *           "updated_at": "2025-02-17T17:49:19Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -17539,7 +17607,7 @@ export interface components {
          *           {
          *             "actor": null,
          *             "end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
@@ -17550,7 +17618,7 @@ export interface components {
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "source": "client_ui",
          *             "start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -17561,7 +17629,7 @@ export interface components {
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "created_at": "2025-03-10T14:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -17592,14 +17660,14 @@ export interface components {
          *             "actor": null,
          *             "initiated_by": "client",
          *             "new_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "new_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -17608,14 +17676,14 @@ export interface components {
          *             "object": "reschedule_event",
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "previous_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "previous_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -17678,7 +17746,7 @@ export interface components {
          *           "updated_at": "2025-02-17T17:49:19Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -17761,7 +17829,7 @@ export interface components {
              *         {
              *           "actor": null,
              *           "end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
@@ -17772,7 +17840,7 @@ export interface components {
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "source": "client_ui",
              *           "start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -17783,7 +17851,7 @@ export interface components {
              *       "confirmed_at": "2025-03-10T15:30:00Z",
              *       "created_at": "2025-03-10T14:30:00Z",
              *       "end_at": {
-             *         "local": "2025-03-01T11:00:00",
+             *         "local": "2025-03-01T11:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736464800,
@@ -17814,14 +17882,14 @@ export interface components {
              *           "actor": null,
              *           "initiated_by": "client",
              *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -17830,14 +17898,14 @@ export interface components {
              *           "object": "reschedule_event",
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -17900,7 +17968,7 @@ export interface components {
              *         "updated_at": "2025-02-17T17:49:19Z"
              *       },
              *       "start_at": {
-             *         "local": "2025-03-01T10:00:00",
+             *         "local": "2025-03-01T10:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736461200,
@@ -18089,9 +18157,9 @@ export interface components {
                     actor: string | null;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -18100,8 +18168,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -18145,9 +18214,9 @@ export interface components {
                     source: "client_ui" | "dashboard" | "api";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -18156,8 +18225,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -18195,9 +18265,9 @@ export interface components {
                 created_at: string;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -18206,8 +18276,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -18305,9 +18376,9 @@ export interface components {
                     initiated_by: "user" | "client";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -18316,8 +18387,9 @@ export interface components {
                      */
                     new_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -18344,9 +18416,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -18355,8 +18427,9 @@ export interface components {
                      */
                     new_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -18390,9 +18463,9 @@ export interface components {
                     occurred_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -18401,8 +18474,9 @@ export interface components {
                      */
                     previous_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -18429,9 +18503,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -18440,8 +18514,9 @@ export interface components {
                      */
                     previous_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -18721,9 +18796,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -18732,8 +18807,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -19623,7 +19699,7 @@ export interface components {
          *           {
          *             "actor": null,
          *             "end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
@@ -19634,7 +19710,7 @@ export interface components {
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "source": "client_ui",
          *             "start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -19645,7 +19721,7 @@ export interface components {
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "created_at": "2025-03-10T14:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -19676,14 +19752,14 @@ export interface components {
          *             "actor": null,
          *             "initiated_by": "client",
          *             "new_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "new_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -19692,14 +19768,14 @@ export interface components {
          *             "object": "reschedule_event",
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "previous_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "previous_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -19762,7 +19838,7 @@ export interface components {
          *           "updated_at": "2025-02-17T17:49:19Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -19845,7 +19921,7 @@ export interface components {
              *         {
              *           "actor": null,
              *           "end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
@@ -19856,7 +19932,7 @@ export interface components {
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "source": "client_ui",
              *           "start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -19867,7 +19943,7 @@ export interface components {
              *       "confirmed_at": "2025-03-10T15:30:00Z",
              *       "created_at": "2025-03-10T14:30:00Z",
              *       "end_at": {
-             *         "local": "2025-03-01T11:00:00",
+             *         "local": "2025-03-01T11:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736464800,
@@ -19898,14 +19974,14 @@ export interface components {
              *           "actor": null,
              *           "initiated_by": "client",
              *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -19914,14 +19990,14 @@ export interface components {
              *           "object": "reschedule_event",
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -19984,7 +20060,7 @@ export interface components {
              *         "updated_at": "2025-02-17T17:49:19Z"
              *       },
              *       "start_at": {
-             *         "local": "2025-03-01T10:00:00",
+             *         "local": "2025-03-01T10:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736461200,
@@ -20173,9 +20249,9 @@ export interface components {
                     actor: string | null;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -20184,8 +20260,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -20229,9 +20306,9 @@ export interface components {
                     source: "client_ui" | "dashboard" | "api";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -20240,8 +20317,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -20279,9 +20357,9 @@ export interface components {
                 created_at: string;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -20290,8 +20368,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -20389,9 +20468,9 @@ export interface components {
                     initiated_by: "user" | "client";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -20400,8 +20479,9 @@ export interface components {
                      */
                     new_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -20428,9 +20508,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -20439,8 +20519,9 @@ export interface components {
                      */
                     new_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -20474,9 +20555,9 @@ export interface components {
                     occurred_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -20485,8 +20566,9 @@ export interface components {
                      */
                     previous_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -20513,9 +20595,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -20524,8 +20606,9 @@ export interface components {
                      */
                     previous_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -20805,9 +20888,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -20816,8 +20899,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -21176,7 +21260,7 @@ export interface components {
          *         {
          *           "actor": null,
          *           "end_at": {
-         *             "local": "2023-01-01T01:00:00",
+         *             "local": "2023-01-01T01:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
@@ -21187,7 +21271,7 @@ export interface components {
          *           "occurred_at": "2023-01-01T03:00:00Z",
          *           "source": "client_ui",
          *           "start_at": {
-         *             "local": "2023-01-01T00:00:00",
+         *             "local": "2023-01-01T00:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736461200,
@@ -21198,7 +21282,7 @@ export interface components {
          *       "confirmed_at": "2025-03-10T15:30:00Z",
          *       "created_at": "2025-03-10T14:30:00Z",
          *       "end_at": {
-         *         "local": "2025-03-01T11:00:00",
+         *         "local": "2025-03-01T11:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736464800,
@@ -21229,14 +21313,14 @@ export interface components {
          *           "actor": null,
          *           "initiated_by": "client",
          *           "new_end_at": {
-         *             "local": "2023-01-01T01:00:00",
+         *             "local": "2023-01-01T01:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
          *             "utc": "2023-01-01T04:00:00Z"
          *           },
          *           "new_start_at": {
-         *             "local": "2023-01-01T00:00:00",
+         *             "local": "2023-01-01T00:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736461200,
@@ -21245,14 +21329,14 @@ export interface components {
          *           "object": "reschedule_event",
          *           "occurred_at": "2023-01-01T03:00:00Z",
          *           "previous_end_at": {
-         *             "local": "2023-01-01T01:00:00",
+         *             "local": "2023-01-01T01:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
          *             "utc": "2023-01-01T04:00:00Z"
          *           },
          *           "previous_start_at": {
-         *             "local": "2023-01-01T00:00:00",
+         *             "local": "2023-01-01T00:00:00-05:00",
          *             "object": "zoned_date_time",
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736461200,
@@ -21315,7 +21399,7 @@ export interface components {
          *         "updated_at": "2025-02-17T17:49:19Z"
          *       },
          *       "start_at": {
-         *         "local": "2025-03-01T10:00:00",
+         *         "local": "2025-03-01T10:00:00-05:00",
          *         "object": "zoned_date_time",
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736461200,
@@ -21504,9 +21588,9 @@ export interface components {
                 actor: string | null;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -21515,8 +21599,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -21560,9 +21645,9 @@ export interface components {
                 source: "client_ui" | "dashboard" | "api";
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -21571,8 +21656,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -21610,9 +21696,9 @@ export interface components {
             created_at: string;
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -21621,8 +21707,9 @@ export interface components {
              */
             end_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -21720,9 +21807,9 @@ export interface components {
                 initiated_by: "user" | "client";
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -21731,8 +21818,9 @@ export interface components {
                  */
                 new_end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -21759,9 +21847,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -21770,8 +21858,9 @@ export interface components {
                  */
                 new_start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -21805,9 +21894,9 @@ export interface components {
                 occurred_at: string;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -21816,8 +21905,9 @@ export interface components {
                  */
                 previous_end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -21844,9 +21934,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -21855,8 +21945,9 @@ export interface components {
                  */
                 previous_start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -22136,9 +22227,9 @@ export interface components {
             };
             /**
              * ZonedDateTime
-             * @description An object describing a date/time in local time (naive) and in UTC.
+             * @description An object describing a date/time in local time and in UTC.
              * @example {
-             *       "local": "2025-03-01T10:00:00",
+             *       "local": "2025-03-01T10:00:00-05:00",
              *       "object": "zoned_date_time",
              *       "time_zone": "America/New_York",
              *       "unix_ts": 1736461200,
@@ -22147,8 +22238,9 @@ export interface components {
              */
             start_at: {
                 /**
-                 * @description The local date/time in ISO-8601 format (without time zone information).
-                 * @example 2025-03-01T10:00:00
+                 * Format: date-time
+                 * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                 * @example 2025-03-01T10:00:00-05:00
                  */
                 local: string;
                 /**
@@ -22281,7 +22373,7 @@ export interface components {
          *         },
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -22294,7 +22386,7 @@ export interface components {
          *           "disabled_message": "Rescheduling is not available within 24 hours of your appointment"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -23108,7 +23200,7 @@ export interface components {
          *           {
          *             "actor": null,
          *             "end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
@@ -23119,7 +23211,7 @@ export interface components {
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "source": "client_ui",
          *             "start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -23130,7 +23222,7 @@ export interface components {
          *         "confirmed_at": "2025-03-10T15:30:00Z",
          *         "created_at": "2025-03-10T14:30:00Z",
          *         "end_at": {
-         *           "local": "2025-03-01T11:00:00",
+         *           "local": "2025-03-01T11:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
@@ -23161,14 +23253,14 @@ export interface components {
          *             "actor": null,
          *             "initiated_by": "client",
          *             "new_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "new_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -23177,14 +23269,14 @@ export interface components {
          *             "object": "reschedule_event",
          *             "occurred_at": "2023-01-01T03:00:00Z",
          *             "previous_end_at": {
-         *               "local": "2023-01-01T01:00:00",
+         *               "local": "2023-01-01T01:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736464800,
          *               "utc": "2023-01-01T04:00:00Z"
          *             },
          *             "previous_start_at": {
-         *               "local": "2023-01-01T00:00:00",
+         *               "local": "2023-01-01T00:00:00-05:00",
          *               "object": "zoned_date_time",
          *               "time_zone": "America/New_York",
          *               "unix_ts": 1736461200,
@@ -23247,7 +23339,7 @@ export interface components {
          *           "updated_at": "2025-02-17T17:49:19Z"
          *         },
          *         "start_at": {
-         *           "local": "2025-03-01T10:00:00",
+         *           "local": "2025-03-01T10:00:00-05:00",
          *           "object": "zoned_date_time",
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736461200,
@@ -23330,7 +23422,7 @@ export interface components {
              *         {
              *           "actor": null,
              *           "end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
@@ -23341,7 +23433,7 @@ export interface components {
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "source": "client_ui",
              *           "start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -23352,7 +23444,7 @@ export interface components {
              *       "confirmed_at": "2025-03-10T15:30:00Z",
              *       "created_at": "2025-03-10T14:30:00Z",
              *       "end_at": {
-             *         "local": "2025-03-01T11:00:00",
+             *         "local": "2025-03-01T11:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736464800,
@@ -23383,14 +23475,14 @@ export interface components {
              *           "actor": null,
              *           "initiated_by": "client",
              *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -23399,14 +23491,14 @@ export interface components {
              *           "object": "reschedule_event",
              *           "occurred_at": "2023-01-01T03:00:00Z",
              *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00",
+             *             "local": "2023-01-01T01:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736464800,
              *             "utc": "2023-01-01T04:00:00Z"
              *           },
              *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00",
+             *             "local": "2023-01-01T00:00:00-05:00",
              *             "object": "zoned_date_time",
              *             "time_zone": "America/New_York",
              *             "unix_ts": 1736461200,
@@ -23469,7 +23561,7 @@ export interface components {
              *         "updated_at": "2025-02-17T17:49:19Z"
              *       },
              *       "start_at": {
-             *         "local": "2025-03-01T10:00:00",
+             *         "local": "2025-03-01T10:00:00-05:00",
              *         "object": "zoned_date_time",
              *         "time_zone": "America/New_York",
              *         "unix_ts": 1736461200,
@@ -23658,9 +23750,9 @@ export interface components {
                     actor: string | null;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -23669,8 +23761,9 @@ export interface components {
                      */
                     end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -23714,9 +23807,9 @@ export interface components {
                     source: "client_ui" | "dashboard" | "api";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -23725,8 +23818,9 @@ export interface components {
                      */
                     start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -23764,9 +23858,9 @@ export interface components {
                 created_at: string;
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -23775,8 +23869,9 @@ export interface components {
                  */
                 end_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -23874,9 +23969,9 @@ export interface components {
                     initiated_by: "user" | "client";
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -23885,8 +23980,9 @@ export interface components {
                      */
                     new_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -23913,9 +24009,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -23924,8 +24020,9 @@ export interface components {
                      */
                     new_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -23959,9 +24056,9 @@ export interface components {
                     occurred_at: string;
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -23970,8 +24067,9 @@ export interface components {
                      */
                     previous_end_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -23998,9 +24096,9 @@ export interface components {
                     };
                     /**
                      * ZonedDateTime
-                     * @description An object describing a date/time in local time (naive) and in UTC.
+                     * @description An object describing a date/time in local time and in UTC.
                      * @example {
-                     *       "local": "2025-03-01T10:00:00",
+                     *       "local": "2025-03-01T10:00:00-05:00",
                      *       "object": "zoned_date_time",
                      *       "time_zone": "America/New_York",
                      *       "unix_ts": 1736461200,
@@ -24009,8 +24107,9 @@ export interface components {
                      */
                     previous_start_at: {
                         /**
-                         * @description The local date/time in ISO-8601 format (without time zone information).
-                         * @example 2025-03-01T10:00:00
+                         * Format: date-time
+                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                         * @example 2025-03-01T10:00:00-05:00
                          */
                         local: string;
                         /**
@@ -24290,9 +24389,9 @@ export interface components {
                 };
                 /**
                  * ZonedDateTime
-                 * @description An object describing a date/time in local time (naive) and in UTC.
+                 * @description An object describing a date/time in local time and in UTC.
                  * @example {
-                 *       "local": "2025-03-01T10:00:00",
+                 *       "local": "2025-03-01T10:00:00-05:00",
                  *       "object": "zoned_date_time",
                  *       "time_zone": "America/New_York",
                  *       "unix_ts": 1736461200,
@@ -24301,8 +24400,9 @@ export interface components {
                  */
                 start_at: {
                     /**
-                     * @description The local date/time in ISO-8601 format (without time zone information).
-                     * @example 2025-03-01T10:00:00
+                     * Format: date-time
+                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+                     * @example 2025-03-01T10:00:00-05:00
                      */
                     local: string;
                     /**
@@ -24430,9 +24530,9 @@ export interface components {
         };
         /**
          * ZonedDateTime
-         * @description An object describing a date/time in local time (naive) and in UTC.
+         * @description An object describing a date/time in local time and in UTC.
          * @example {
-         *       "local": "2025-03-01T10:00:00",
+         *       "local": "2025-03-01T10:00:00-05:00",
          *       "object": "zoned_date_time",
          *       "time_zone": "America/New_York",
          *       "unix_ts": 1736461200,
@@ -24441,8 +24541,9 @@ export interface components {
          */
         ZonedDateTime: {
             /**
-             * @description The local date/time in ISO-8601 format (without time zone information).
-             * @example 2025-03-01T10:00:00
+             * Format: date-time
+             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
+             * @example 2025-03-01T10:00:00-05:00
              */
             local: string;
             /**
