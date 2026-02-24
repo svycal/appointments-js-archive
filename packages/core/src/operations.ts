@@ -10,6 +10,27 @@ import type {
   RequestBody,
 } from "./client";
 
+export function abandonBookingIntent(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_intents/{booking_intent_id}/abandon", "post">,
+) {
+  return client.POST("/v1/booking_intents/{booking_intent_id}/abandon", {
+    params: { path },
+  });
+}
+
+export function abandonPublicBookingIntent(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/public/booking_intents/{booking_intent_id}/abandon",
+    "post"
+  >,
+) {
+  return client.POST("/v1/public/booking_intents/{booking_intent_id}/abandon", {
+    params: { path },
+  });
+}
+
 export function cancelAppointment(
   client: FetchClient,
   path: PathParams<"/v1/appointments/{appointment_id}/cancel", "post">,
@@ -30,6 +51,37 @@ export function cancelPublicAppointment(
     body,
     params: { path },
   });
+}
+
+export function completeBookingIntent(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_intents/{booking_intent_id}/complete", "post">,
+  body: RequestBody<"/v1/booking_intents/{booking_intent_id}/complete", "post">,
+) {
+  return client.POST("/v1/booking_intents/{booking_intent_id}/complete", {
+    body,
+    params: { path },
+  });
+}
+
+export function completePublicBookingIntent(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/public/booking_intents/{booking_intent_id}/complete",
+    "post"
+  >,
+  body: RequestBody<
+    "/v1/public/booking_intents/{booking_intent_id}/complete",
+    "post"
+  >,
+) {
+  return client.POST(
+    "/v1/public/booking_intents/{booking_intent_id}/complete",
+    {
+      body,
+      params: { path },
+    },
+  );
 }
 
 export function confirmAppointment(
@@ -75,6 +127,15 @@ export function createBlock(
   body: RequestBody<"/v1/blocks", "post">,
 ) {
   return client.POST("/v1/blocks", {
+    body,
+  });
+}
+
+export function createBookingIntent(
+  client: FetchClient,
+  body: RequestBody<"/v1/booking_intents", "post">,
+) {
+  return client.POST("/v1/booking_intents", {
     body,
   });
 }
@@ -131,6 +192,15 @@ export function createPublicAppointment(
   body: RequestBody<"/v1/public/appointments", "post">,
 ) {
   return client.POST("/v1/public/appointments", {
+    body,
+  });
+}
+
+export function createPublicBookingIntent(
+  client: FetchClient,
+  body: RequestBody<"/v1/public/booking_intents", "post">,
+) {
+  return client.POST("/v1/public/booking_intents", {
     body,
   });
 }
@@ -258,6 +328,16 @@ export function getBlock(
   });
 }
 
+export function getBookingIntent(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_intents/{booking_intent_id}", "get">,
+  query?: QueryParams<"/v1/booking_intents/{booking_intent_id}", "get">,
+) {
+  return client.GET("/v1/booking_intents/{booking_intent_id}", {
+    params: { path, query },
+  });
+}
+
 export function getCancellationReason(
   client: FetchClient,
   path: PathParams<"/v1/cancellation_reasons/{cancellation_reason_id}", "get">,
@@ -334,6 +414,15 @@ export function getPublicAppointment(
   });
 }
 
+export function getPublicBookingIntent(
+  client: FetchClient,
+  path: PathParams<"/v1/public/booking_intents/{booking_intent_id}", "get">,
+) {
+  return client.GET("/v1/public/booking_intents/{booking_intent_id}", {
+    params: { path },
+  });
+}
+
 export function getService(
   client: FetchClient,
   path: PathParams<"/v1/services/{service_id}", "get">,
@@ -370,6 +459,15 @@ export function listBlocks(
   query?: QueryParams<"/v1/blocks", "get">,
 ) {
   return client.GET("/v1/blocks", {
+    params: { query },
+  });
+}
+
+export function listBookingIntents(
+  client: FetchClient,
+  query?: QueryParams<"/v1/booking_intents", "get">,
+) {
+  return client.GET("/v1/booking_intents", {
     params: { query },
   });
 }
@@ -532,6 +630,17 @@ export function updateBlock(
   });
 }
 
+export function updateBookingIntent(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_intents/{booking_intent_id}", "patch">,
+  body: RequestBody<"/v1/booking_intents/{booking_intent_id}", "patch">,
+) {
+  return client.PATCH("/v1/booking_intents/{booking_intent_id}", {
+    body,
+    params: { path },
+  });
+}
+
 export function updateCancellationReason(
   client: FetchClient,
   path: PathParams<
@@ -588,6 +697,17 @@ export function updateProviderSchedule(
   body: RequestBody<"/v1/provider_schedules/{provider_schedule_id}", "patch">,
 ) {
   return client.PATCH("/v1/provider_schedules/{provider_schedule_id}", {
+    body,
+    params: { path },
+  });
+}
+
+export function updatePublicBookingIntent(
+  client: FetchClient,
+  path: PathParams<"/v1/public/booking_intents/{booking_intent_id}", "patch">,
+  body: RequestBody<"/v1/public/booking_intents/{booking_intent_id}", "patch">,
+) {
+  return client.PATCH("/v1/public/booking_intents/{booking_intent_id}", {
     body,
     params: { path },
   });

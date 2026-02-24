@@ -40,6 +40,9 @@ export type BlockDeletedEventData = Schemas["BlockDeletedEventData"];
 export type BlockResponse = Schemas["BlockResponse"];
 export type BlocksResponse = Schemas["BlocksResponse"];
 export type BlockUpdatedEventData = Schemas["BlockUpdatedEventData"];
+export type BookingIntent = Schemas["BookingIntent"];
+export type BookingIntentResponse = Schemas["BookingIntentResponse"];
+export type BookingIntentsResponse = Schemas["BookingIntentsResponse"];
 export type BookingPolicy = Schemas["BookingPolicy"];
 export type CancelAppointmentRequest = Schemas["CancelAppointmentRequest"];
 export type CancellationEvent = Schemas["CancellationEvent"];
@@ -56,6 +59,10 @@ export type ClientDeletedEventData = Schemas["ClientDeletedEventData"];
 export type ClientResponse = Schemas["ClientResponse"];
 export type ClientsResponse = Schemas["ClientsResponse"];
 export type ClientUpdatedEventData = Schemas["ClientUpdatedEventData"];
+export type CompleteBookingIntentRequest =
+  Schemas["CompleteBookingIntentRequest"];
+export type CompletePublicBookingIntentRequest =
+  Schemas["CompletePublicBookingIntentRequest"];
 export type ConfirmAppointmentRequest = Schemas["ConfirmAppointmentRequest"];
 export type ConfirmationEvent = Schemas["ConfirmationEvent"];
 export type ConnectedAccount = Schemas["ConnectedAccount"];
@@ -73,6 +80,7 @@ export type CreateAccountRequest = Schemas["CreateAccountRequest"];
 export type CreateAccountUserRequest = Schemas["CreateAccountUserRequest"];
 export type CreateAppointmentRequest = Schemas["CreateAppointmentRequest"];
 export type CreateBlockRequest = Schemas["CreateBlockRequest"];
+export type CreateBookingIntentRequest = Schemas["CreateBookingIntentRequest"];
 export type CreateCancellationReasonRequest =
   Schemas["CreateCancellationReasonRequest"];
 export type CreateClientRequest = Schemas["CreateClientRequest"];
@@ -83,12 +91,15 @@ export type CreateProviderScheduleRequest =
   Schemas["CreateProviderScheduleRequest"];
 export type CreatePublicAppointmentRequest =
   Schemas["CreatePublicAppointmentRequest"];
+export type CreatePublicBookingIntentRequest =
+  Schemas["CreatePublicBookingIntentRequest"];
 export type CreateServiceProviderRequest =
   Schemas["CreateServiceProviderRequest"];
 export type CreateServiceRequest = Schemas["CreateServiceRequest"];
 export type DashboardSession = Schemas["DashboardSession"];
 export type DashboardSessionResponse = Schemas["DashboardSessionResponse"];
 export type GenericErrorResponse = Schemas["GenericErrorResponse"];
+export type HoldPolicy = Schemas["HoldPolicy"];
 export type JsonErrorResponse = Schemas["JsonErrorResponse"];
 export type MaximizeUtilizationPolicy = Schemas["MaximizeUtilizationPolicy"];
 export type NotFoundResponse = Schemas["NotFoundResponse"];
@@ -115,6 +126,9 @@ export type ProvidersResponse = Schemas["ProvidersResponse"];
 export type ProviderUpdatedEventData = Schemas["ProviderUpdatedEventData"];
 export type PublicAppointment = Schemas["PublicAppointment"];
 export type PublicAppointmentResponse = Schemas["PublicAppointmentResponse"];
+export type PublicBookingIntent = Schemas["PublicBookingIntent"];
+export type PublicBookingIntentResponse =
+  Schemas["PublicBookingIntentResponse"];
 export type PublicCancellationReason = Schemas["PublicCancellationReason"];
 export type PublicCancellationReasonsResponse =
   Schemas["PublicCancellationReasonsResponse"];
@@ -150,6 +164,7 @@ export type UnauthorizedResponse = Schemas["UnauthorizedResponse"];
 export type UpdateAccountRequest = Schemas["UpdateAccountRequest"];
 export type UpdateAccountUserRequest = Schemas["UpdateAccountUserRequest"];
 export type UpdateBlockRequest = Schemas["UpdateBlockRequest"];
+export type UpdateBookingIntentRequest = Schemas["UpdateBookingIntentRequest"];
 export type UpdateCancellationReasonRequest =
   Schemas["UpdateCancellationReasonRequest"];
 export type UpdateClientRequest = Schemas["UpdateClientRequest"];
@@ -158,6 +173,8 @@ export type UpdateConnectedAccountRequest =
 export type UpdateProviderRequest = Schemas["UpdateProviderRequest"];
 export type UpdateProviderScheduleRequest =
   Schemas["UpdateProviderScheduleRequest"];
+export type UpdatePublicBookingIntentRequest =
+  Schemas["UpdatePublicBookingIntentRequest"];
 export type UpdateServiceRequest = Schemas["UpdateServiceRequest"];
 export type User = Schemas["User"];
 export type WeeklyRule = Schemas["WeeklyRule"];

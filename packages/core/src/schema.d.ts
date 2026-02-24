@@ -24,6 +24,35 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/booking_intents/{booking_intent_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get booking intent
+         * @description Get an existing booking intent.
+         */
+        get: operations["getBookingIntent"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update booking intent
+         * @description Update an existing booking intent.
+         *
+         *     Accepts slot fields, client data, and metadata. When all slot fields
+         *     (provider_id, start_at, end_at, time_zone) are present, automatically
+         *     transitions to `slot_selected`. Cannot update intents in terminal status
+         *     (completed or abandoned).
+         */
+        patch: operations["updateBookingIntent"];
+        trace?: never;
+    };
     "/v1/dashboard_sessions": {
         parameters: {
             query?: never;
@@ -82,6 +111,35 @@ export interface paths {
          * @description Create a new account (requires a platform token).
          */
         post: operations["createAccount"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/booking_intents/{booking_intent_id}/complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Complete booking intent
+         * @description Complete a booking intent by creating an appointment from the accumulated
+         *     intent data.
+         *
+         *     Update fields (service_id, provider_id, client_id, slot fields, client_data,
+         *     metadata) may be provided inline alongside `validate_slot`. These updates are
+         *     applied atomically before completion — if the update or completion fails, the
+         *     entire operation is rolled back.
+         *
+         *     Requires the intent to be in `slot_selected` status with a service assigned
+         *     (either before or after applying inline updates).
+         */
+        post: operations["completeBookingIntent"];
         delete?: never;
         options?: never;
         head?: never;
@@ -186,6 +244,29 @@ export interface paths {
         patch: operations["updateClient"];
         trace?: never;
     };
+    "/v1/booking_intents/{booking_intent_id}/abandon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Abandon booking intent
+         * @description Transition a non-terminal booking intent to `abandoned`.
+         *
+         *     Works from both `pending` and `slot_selected` statuses. Cannot abandon
+         *     intents that are already completed or abandoned.
+         */
+        post: operations["abandonBookingIntent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/public/appointments/{appointment_id}": {
         parameters: {
             query?: never;
@@ -270,6 +351,28 @@ export interface paths {
         get: operations["listPublicCancellationReasons"];
         put?: never;
         post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/booking_intents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create booking intent
+         * @description Create a new booking intent via a public interface (no authentication required).
+         *
+         *     The `account_id` field is required to identify which account the intent belongs to.
+         */
+        post: operations["createPublicBookingIntent"];
         delete?: never;
         options?: never;
         head?: never;
@@ -456,6 +559,32 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/public/booking_intents/{booking_intent_id}/complete": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Complete booking intent
+         * @description Complete a booking intent by creating an appointment from the accumulated
+         *     intent data via a public interface (no authentication required).
+         *
+         *     Update fields (service_id, provider_id, slot fields, client_data)
+         *     may be provided inline. These updates are applied atomically before
+         *     completion — if the update or completion fails, the entire operation is
+         *     rolled back.
+         */
+        post: operations["completePublicBookingIntent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/cancellation_reasons": {
         parameters: {
             query?: never;
@@ -552,6 +681,35 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/public/booking_intents/{booking_intent_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get booking intent
+         * @description Get an existing booking intent via a public interface (no authentication required).
+         */
+        get: operations["getPublicBookingIntent"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update booking intent
+         * @description Update an existing booking intent via a public interface (no authentication required).
+         *
+         *     Accepts slot fields and client data. When all slot fields
+         *     (provider_id, start_at, end_at, time_zone) are present, automatically
+         *     transitions to `slot_selected`. Cannot update intents in terminal status
+         *     (completed or abandoned).
+         */
+        patch: operations["updatePublicBookingIntent"];
+        trace?: never;
+    };
     "/v1/public/appointments/{appointment_id}/reschedule": {
         parameters: {
             query?: never;
@@ -570,6 +728,55 @@ export interface paths {
          *     This action will fail with a 403 Forbidden response if rescheduling is not allowed for the appointment based on the service's rescheduling policy.
          */
         post: operations["reschedulePublicAppointment"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/booking_intents": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List booking intents
+         * @description List all booking intents that belong to the account.
+         */
+        get: operations["listBookingIntents"];
+        put?: never;
+        /**
+         * Create booking intent
+         * @description Create a new booking intent.
+         *
+         *     A booking intent tracks the lifecycle of a multi-step booking flow. It starts
+         *     in `pending` status and automatically transitions to `slot_selected` when all
+         *     slot fields (provider_id, start_at, end_at, time_zone) are provided.
+         */
+        post: operations["createBookingIntent"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/public/booking_intents/{booking_intent_id}/abandon": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Abandon booking intent
+         * @description Transition a non-terminal booking intent to `abandoned` via a public
+         *     interface (no authentication required).
+         */
+        post: operations["abandonPublicBookingIntent"];
         delete?: never;
         options?: never;
         head?: never;
@@ -1453,7 +1660,9 @@ export interface components {
                 /** @description The provider's last name. */
                 last_name: string;
                 /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                metadata?: Record<string, never>;
+                metadata?: {
+                    [key: string]: unknown;
+                };
                 /**
                  * @description String representing the object's type.
                  * @enum {string}
@@ -1616,6 +1825,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -1710,1170 +1923,10 @@ export interface components {
          *     }
          */
         AppointmentRescheduledEventData: {
-            /**
-             * Appointment
-             * @description An appointment represents a booking that a client has made with a provider for a service.
-             * @example {
-             *       "appointment_type": "in_person",
-             *       "cancellation_events": [
-             *         {
-             *           "actor": null,
-             *           "cancellation_reason": {
-             *             "id": "cr_a1b2c3d4e5f6",
-             *             "name": "Distance too far",
-             *             "object": "cancellation_reason",
-             *             "sort_order": 1
-             *           },
-             *           "custom_reason_text": "I'm sick",
-             *           "initiated_by": "client",
-             *           "object": "cancellation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "client": {
-             *         "created_at": "2025-01-15T14:30:00Z",
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "id": "clnt_a1b2c3d4e5f6",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "object": "client",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago",
-             *         "updated_at": "2025-03-10T09:45:00Z"
-             *       },
-             *       "client_data": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago"
-             *       },
-             *       "client_locale": "en-US",
-             *       "client_reference_id": "ext_12345",
-             *       "client_time_zone": "America/Chicago",
-             *       "confirmation_events": [
-             *         {
-             *           "actor": null,
-             *           "end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "initiated_by": "client",
-             *           "object": "confirmation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui",
-             *           "start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           }
-             *         }
-             *       ],
-             *       "confirmed_at": "2025-03-10T15:30:00Z",
-             *       "created_at": "2025-03-10T14:30:00Z",
-             *       "end_at": {
-             *         "local": "2025-03-01T11:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736464800,
-             *         "utc": "2025-03-01T04:00:00Z"
-             *       },
-             *       "fields": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "phone": "+15551234567"
-             *       },
-             *       "id": "appt_a1b2c3d4e5f6",
-             *       "object": "appointment",
-             *       "provider": {
-             *         "created_at": "2017-09-12T12:34:55Z",
-             *         "display_name": "John Smith",
-             *         "first_name": "John",
-             *         "id": "prov_d025a96ac0c6",
-             *         "last_name": "Smith",
-             *         "metadata": {
-             *           "external_id": "123"
-             *         },
-             *         "object": "provider",
-             *         "updated_at": "2017-09-13T10:11:12Z"
-             *       },
-             *       "reschedule_events": [
-             *         {
-             *           "actor": null,
-             *           "initiated_by": "client",
-             *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "object": "reschedule_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "service": {
-             *         "appointment_type": "in_person",
-             *         "booking_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_booking": true,
-             *           "disabled_message": "Booking is disabled for this service.",
-             *           "maximize_utilization": {
-             *             "enabled": true
-             *           }
-             *         },
-             *         "cancellation_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_cancellation": true,
-             *           "disabled_message": "Cancellation is disabled for this service."
-             *         },
-             *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-             *         "created_at": "2025-02-17T17:49:19Z",
-             *         "duration": "PT1H30M",
-             *         "id": "srv_d025a96ac0c6",
-             *         "name": "Initial Consult",
-             *         "object": "service",
-             *         "rescheduling_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_rescheduling": true,
-             *           "disabled_message": "Rescheduling is disabled for this service."
-             *         },
-             *         "slot_rules": [
-             *           {
-             *             "recurrence_rule": {
-             *               "byday": [
-             *                 "mo",
-             *                 "we",
-             *                 "fr"
-             *               ],
-             *               "freq": "weekly"
-             *             },
-             *             "start_times": [
-             *               "09:00",
-             *               "10:00"
-             *             ]
-             *           }
-             *         ],
-             *         "updated_at": "2025-02-17T17:49:19Z"
-             *       },
-             *       "start_at": {
-             *         "local": "2025-03-01T10:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736461200,
-             *         "utc": "2025-03-01T03:00:00Z"
-             *       },
-             *       "status": "scheduled",
-             *       "updated_at": "2025-03-10T14:30:00Z",
-             *       "urls": {
-             *         "add_to_google_calendar": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-             *         ],
-             *         "cancel": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-             *         ],
-             *         "confirm": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-             *         ],
-             *         "ics": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-             *         ],
-             *         "join": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-             *         ],
-             *         "reschedule": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-             *         ]
-             *       }
-             *     }
-             */
-            object: {
-                /**
-                 * @description The type of appointment.
-                 * @enum {string}
-                 */
-                appointment_type: "in_person" | "virtual";
-                cancellation_events: {
-                    /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * CancellationReason
-                     * @description This is an object representing a cancellation reason.
-                     * @example {
-                     *       "id": "cr_a1b2c3d4e5f6",
-                     *       "name": "Distance too far",
-                     *       "object": "cancellation_reason",
-                     *       "sort_order": 1
-                     *     }
-                     */
-                    cancellation_reason: {
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the cancellation reason. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "cancellation_reason";
-                        /** @description The sort order of the cancellation reason. */
-                        sort_order: number;
-                    } | null;
-                    /** @description Custom reason text for the cancellation. */
-                    custom_reason_text: string | null;
-                    /**
-                     * @description The entity that initiated the cancellation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "cancellation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the cancellation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the cancellation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Client
-                 * @description This is an object representing a client.
-                 * @example {
-                 *       "created_at": "2025-01-15T14:30:00Z",
-                 *       "email": "jane.smith@example.com",
-                 *       "first_name": "Jane",
-                 *       "id": "clnt_a1b2c3d4e5f6",
-                 *       "last_name": "Smith",
-                 *       "locale": "en-US",
-                 *       "object": "client",
-                 *       "phone": "+15551234567",
-                 *       "reference_id": "ext_12345",
-                 *       "time_zone": "America/Chicago",
-                 *       "updated_at": "2025-03-10T09:45:00Z"
-                 *     }
-                 */
-                client: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client.
-                     * @example en-US
-                     */
-                    locale: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "client";
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description External reference identifier for the client. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                client_data: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client booking the appointment.
-                     * @example en-US
-                     */
-                    locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description The client's external reference identifier. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data.locale` instead.
-                 * @example en-US
-                 */
-                client_locale?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.reference_id` instead.
-                 */
-                client_reference_id?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.time_zone` instead.
-                 * @example America/Chicago
-                 */
-                client_time_zone?: string;
-                confirmation_events: {
-                    /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The entity that initiated the confirmation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "confirmation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the confirmation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the confirmation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                }[];
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was confirmed.
-                 */
-                confirmed_at: string | null;
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was created.
-                 */
-                created_at: string;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data` instead.
-                 */
-                fields: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                };
-                /** @description Unique identifier for the object. */
-                id: string;
-                /**
-                 * @description String representing the object's type.
-                 * @enum {string}
-                 */
-                object: "appointment";
-                /**
-                 * Provider
-                 * @description A provider represents a staff member who can provide services to clients.
-                 * @example {
-                 *       "created_at": "2017-09-12T12:34:55Z",
-                 *       "display_name": "John Smith",
-                 *       "first_name": "John",
-                 *       "id": "prov_d025a96ac0c6",
-                 *       "last_name": "Smith",
-                 *       "metadata": {
-                 *         "external_id": "123"
-                 *       },
-                 *       "object": "provider",
-                 *       "updated_at": "2017-09-13T10:11:12Z"
-                 *     }
-                 */
-                provider: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /** @description The provider's display name. */
-                    display_name: string;
-                    /** @description The provider's first name. */
-                    first_name: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The provider's last name. */
-                    last_name: string;
-                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "provider";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                reschedule_events: {
-                    actor: string | null;
-                    /** @enum {string} */
-                    initiated_by: "user" | "client";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    object: "reschedule_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the reschedule occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Service
-                 * @description A service represents a type of appointment.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "booking_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_booking": true,
-                 *         "disabled_message": "Booking is disabled for this service.",
-                 *         "maximize_utilization": {
-                 *           "enabled": true
-                 *         }
-                 *       },
-                 *       "cancellation_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_cancellation": true,
-                 *         "disabled_message": "Cancellation is disabled for this service."
-                 *       },
-                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *       "created_at": "2025-02-17T17:49:19Z",
-                 *       "duration": "PT1H30M",
-                 *       "id": "srv_d025a96ac0c6",
-                 *       "name": "Initial Consult",
-                 *       "object": "service",
-                 *       "rescheduling_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_rescheduling": true,
-                 *         "disabled_message": "Rescheduling is disabled for this service."
-                 *       },
-                 *       "slot_rules": [
-                 *         {
-                 *           "recurrence_rule": {
-                 *             "byday": [
-                 *               "mo",
-                 *               "we",
-                 *               "fr"
-                 *             ],
-                 *             "freq": "weekly"
-                 *           },
-                 *           "start_times": [
-                 *             "09:00",
-                 *             "10:00"
-                 *           ]
-                 *         }
-                 *       ],
-                 *       "updated_at": "2025-02-17T17:49:19Z"
-                 *     }
-                 */
-                service: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    /**
-                     * BookingPolicy
-                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_booking": true,
-                     *       "disabled_message": "Booking is disabled for this service.",
-                     *       "maximize_utilization": {
-                     *         "enabled": true
-                     *       }
-                     *     }
-                     */
-                    booking_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public booking is allowed for the service. */
-                        allow_booking: boolean;
-                        /** @description The message to display when public booking is disabled. */
-                        disabled_message: string | null;
-                        /**
-                         * MaximizeUtilizationPolicy
-                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                         * @example {
-                         *       "enabled": true
-                         *     }
-                         */
-                        maximize_utilization: {
-                            /** @description Whether maximize utilization is enabled for the service. */
-                            enabled: boolean;
-                        };
-                    };
-                    /**
-                     * CancellationPolicy
-                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_cancellation": true,
-                     *       "disabled_message": "Cancellation is disabled for this service."
-                     *     }
-                     */
-                    cancellation_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public cancellation is allowed for the service. */
-                        allow_cancellation: boolean;
-                        /** @description The message to display when public cancellation is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /**
-                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                     */
-                    change_policy_text: string;
-                    /**
-                     * Format: datetime
-                     * @description When the service was created.
-                     */
-                    created_at: string;
-                    /**
-                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                     * @example `PT30M`
-                     */
-                    duration: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The name of the service. */
-                    name: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "service";
-                    /**
-                     * ReschedulingPolicy
-                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_rescheduling": true,
-                     *       "disabled_message": "Rescheduling is disabled for this service."
-                     *     }
-                     */
-                    rescheduling_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public rescheduling is allowed for the service. */
-                        allow_rescheduling: boolean;
-                        /** @description The message to display when public rescheduling is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /** @description Array of slot rules for the service. */
-                    slot_rules: {
-                        /**
-                         * RecurrenceRule
-                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                         *     but are a subset of the full specification.
-                         * @example {
-                         *       "byday": [
-                         *         "mo",
-                         *         "we",
-                         *         "fr"
-                         *       ],
-                         *       "freq": "weekly"
-                         *     }
-                         */
-                        recurrence_rule: {
-                            /**
-                             * @description The days of the week on which the recurrence occurs.
-                             * @example [
-                             *       "mo",
-                             *       "we",
-                             *       "fr"
-                             *     ]
-                             */
-                            byday?: string[];
-                            /** @description Number of occurrences at which to end the recurrence. */
-                            count?: number | null;
-                            /**
-                             * @description The frequency of the recurrence.
-                             * @enum {string}
-                             */
-                            freq: "daily" | "weekly";
-                            /**
-                             * @description How often the recurrence rule repeats.
-                             * @example 2
-                             */
-                            interval?: number;
-                            /**
-                             * @description Date at which to end the recurrence (in ISO-8601 format).
-                             * @example 2024-01-02
-                             */
-                            until?: Record<string, never> | null;
-                        };
-                        /** @description Array of start times for slots. */
-                        start_times: string[];
-                    }[];
-                    /**
-                     * Format: datetime
-                     * @description When the service was last updated.
-                     */
-                    updated_at: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @description The status of the appointment.
-                 * @enum {string}
-                 */
-                status: "scheduled" | "canceled";
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was last updated.
-                 */
-                updated_at?: string;
-                /** @description URLs for this appointment. */
-                urls?: {
-                    /** @description URLs for the client to use to add this appointment to their calendar. */
-                    add_to_calendar?: string[];
-                    /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                    add_to_google_calendar: string[];
-                    /** @description URLs for the client to use to cancel this appointment. */
-                    cancel: string[];
-                    /** @description URLs for the client to use to confirm this appointment. */
-                    confirm: string[];
-                    /** @description URLs for the client to use to download an iCal file for this appointment. */
-                    ics: string[];
-                    /** @description URLs for the client to use to join this appointment. */
-                    join: string[];
-                    /** @description URLs for the client to use to reschedule this appointment. */
-                    reschedule: string[];
-                };
-            };
+            object: components["schemas"]["Appointment"];
             previous_attributes: {
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
+                end_at: components["schemas"]["ZonedDateTime"];
+                start_at: components["schemas"]["ZonedDateTime"];
             };
             /**
              * @description The event type. (enum property replaced by openapi-typescript)
@@ -3206,6 +2259,77 @@ export interface components {
             display_name?: string | null;
         };
         /**
+         * HoldPolicy
+         * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+         * @example {
+         *       "duration": "PT10M",
+         *       "enabled": true
+         *     }
+         */
+        HoldPolicy: {
+            /** @description The duration of the hold. */
+            duration: string | null;
+            /** @description Whether slot holds are enabled for the service. */
+            enabled: boolean;
+        };
+        /**
+         * CreateBookingIntentRequest
+         * @description Request schema for creating a booking intent
+         * @example {
+         *       "hold_duration": "PT10M",
+         *       "hold_enabled": true,
+         *       "metadata": {
+         *         "source": "web"
+         *       },
+         *       "service_id": "srv_1234567890"
+         *     }
+         */
+        CreateBookingIntentRequest: {
+            /** @description Progressive client data to collect during the booking flow. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /** @description The ID of an existing client to link. */
+            client_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M). When omitted, falls back to the service's hold policy duration. */
+            hold_duration?: string | null;
+            /** @description Whether to enable slot holding. When omitted, falls back to the service's hold policy. */
+            hold_enabled?: boolean | null;
+            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. */
+            locked_fields?: string[] | null;
+            /** @description Custom metadata key-value pairs. */
+            metadata?: {
+                [key: string]: unknown;
+            } | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service for this booking intent. */
+            service_id?: string | null;
+            /**
+             * @description Whether the slot has been prevalidated. When true, public completion skips slot validation.
+             * @default false
+             */
+            slot_prevalidated: boolean;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
+        };
+        /**
          * GenericErrorResponse
          * @description Response schema for generic error messages
          * @example {
@@ -3322,7 +2446,9 @@ export interface components {
             /** @description The provider's last name. */
             last_name: string;
             /** @description Set of key-value pairs to attach to this provider. Maximum size is 16 KB. */
-            metadata?: Record<string, never>;
+            metadata?: {
+                [key: string]: unknown;
+            };
             /**
              * @description Whether to send an email notification to the user (if `add_user` is true). If they don't already have an account, they will receive an email with instructions to set their password when this property is true.
              * @default false
@@ -3409,6 +2535,10 @@ export interface components {
          *           },
          *           "allow_booking": true,
          *           "disabled_message": "Booking is disabled for this service.",
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           },
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
@@ -3822,6 +2952,189 @@ export interface components {
             type: "connected_account.deleted";
         };
         /**
+         * CompleteBookingIntentRequest
+         * @description Request schema for completing a booking intent. Update fields (service_id, provider_id, etc.) may be provided inline and are applied atomically before completion.
+         * @example {
+         *       "client_data": {
+         *         "email": "jane@example.com",
+         *         "first_name": "Jane"
+         *       },
+         *       "end_at": "2026-02-23T10:30:00-05:00",
+         *       "provider_id": "prov_1234567890",
+         *       "service_id": "srv_1234567890",
+         *       "start_at": "2026-02-23T10:00:00-05:00",
+         *       "time_zone": "America/New_York"
+         *     }
+         */
+        CompleteBookingIntentRequest: {
+            /** @description Progressive client data. Provided fields are merged with existing values. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /** @description The ID of an existing client to link. */
+            client_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description Custom metadata key-value pairs. Replaces existing metadata entirely. */
+            metadata?: {
+                [key: string]: unknown;
+            } | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service. */
+            service_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
+        };
+        /**
+         * BookingIntentsResponse
+         * @description Response schema for multiple booking intents
+         * @example {
+         *       "data": [
+         *         {
+         *           "abandoned_at": null,
+         *           "appointment": null,
+         *           "client": null,
+         *           "client_data": {
+         *             "email": "jane@example.com",
+         *             "first_name": "Jane",
+         *             "last_name": "Doe",
+         *             "locale": "en",
+         *             "phone": "+15551234567",
+         *             "reference_id": "ext_123",
+         *             "time_zone": "America/New_York"
+         *           },
+         *           "completed_at": null,
+         *           "created_at": "2026-02-22T10:00:00Z",
+         *           "end_at": {
+         *             "local": "2026-02-23T10:30:00-05:00",
+         *             "object": "zoned_date_time",
+         *             "time_zone": "America/New_York",
+         *             "unix_ts": 1771947000,
+         *             "utc": "2026-02-23T15:30:00Z"
+         *           },
+         *           "hold_duration": "PT10M",
+         *           "hold_enabled": true,
+         *           "hold_until": "2026-02-22T10:10:00Z",
+         *           "id": "bi_abc123def456abc123def456",
+         *           "locked_fields": [
+         *             "provider_id",
+         *             "start_at",
+         *             "end_at",
+         *             "time_zone"
+         *           ],
+         *           "metadata": {
+         *             "source": "web"
+         *           },
+         *           "object": "booking_intent",
+         *           "provider": {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           },
+         *           "service": {
+         *             "appointment_type": "in_person",
+         *             "booking_policy": {
+         *               "advance_notice": {
+         *                 "enabled": true,
+         *                 "minimum_duration": "PT1H"
+         *               },
+         *               "allow_booking": true,
+         *               "disabled_message": "Booking is disabled for this service.",
+         *               "hold": {
+         *                 "duration": "PT10M",
+         *                 "enabled": true
+         *               },
+         *               "maximize_utilization": {
+         *                 "enabled": true
+         *               }
+         *             },
+         *             "cancellation_policy": {
+         *               "advance_notice": {
+         *                 "enabled": true,
+         *                 "minimum_duration": "PT1H"
+         *               },
+         *               "allow_cancellation": true,
+         *               "disabled_message": "Cancellation is disabled for this service."
+         *             },
+         *             "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "duration": "PT1H30M",
+         *             "id": "srv_d025a96ac0c6",
+         *             "name": "Initial Consult",
+         *             "object": "service",
+         *             "rescheduling_policy": {
+         *               "advance_notice": {
+         *                 "enabled": true,
+         *                 "minimum_duration": "PT1H"
+         *               },
+         *               "allow_rescheduling": true,
+         *               "disabled_message": "Rescheduling is disabled for this service."
+         *             },
+         *             "slot_rules": [
+         *               {
+         *                 "recurrence_rule": {
+         *                   "byday": [
+         *                     "mo",
+         *                     "we",
+         *                     "fr"
+         *                   ],
+         *                   "freq": "weekly"
+         *                 },
+         *                 "start_times": [
+         *                   "09:00",
+         *                   "10:00"
+         *                 ]
+         *               }
+         *             ],
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           },
+         *           "start_at": {
+         *             "local": "2026-02-23T10:00:00-05:00",
+         *             "object": "zoned_date_time",
+         *             "time_zone": "America/New_York",
+         *             "unix_ts": 1771945200,
+         *             "utc": "2026-02-23T15:00:00Z"
+         *           },
+         *           "status": "slot_selected",
+         *           "updated_at": "2026-02-22T10:00:00Z"
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        BookingIntentsResponse: {
+            /** @description The booking intent details */
+            data: components["schemas"]["BookingIntent"][];
+            meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
          * RolesResponse
          * @description Response schema for multiple roles
          * @example {
@@ -4231,7 +3544,9 @@ export interface components {
             /** @description Provider's last name */
             last_name?: string;
             /** @description Set of key-value pairs to attach to this provider. Maximum size is 16 KB. */
-            metadata?: Record<string, never>;
+            metadata?: {
+                [key: string]: unknown;
+            };
         };
         /**
          * PublicCancellationReason
@@ -4464,7 +3779,7 @@ export interface components {
             object: "cancellation_reason";
             /** @description The sort order of the cancellation reason. */
             sort_order: number;
-        } | null;
+        };
         /**
          * SlotRule
          * @description A slot rule defines the recurring time slots available for a service.
@@ -4747,6 +4062,10 @@ export interface components {
          *           },
          *           "allow_booking": true,
          *           "disabled_message": "Booking is disabled for this service.",
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           },
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
@@ -4807,6 +4126,10 @@ export interface components {
              *         },
              *         "allow_booking": true,
              *         "disabled_message": "Booking is disabled for this service.",
+             *         "hold": {
+             *           "duration": "PT10M",
+             *           "enabled": true
+             *         },
              *         "maximize_utilization": {
              *           "enabled": true
              *         }
@@ -4868,6 +4191,10 @@ export interface components {
                  *       },
                  *       "allow_booking": true,
                  *       "disabled_message": "Booking is disabled for this service.",
+                 *       "hold": {
+                 *         "duration": "PT10M",
+                 *         "enabled": true
+                 *       },
                  *       "maximize_utilization": {
                  *         "enabled": true
                  *       }
@@ -4892,6 +4219,20 @@ export interface components {
                     allow_booking: boolean;
                     /** @description The message to display when public booking is disabled. */
                     disabled_message: string | null;
+                    /**
+                     * HoldPolicy
+                     * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                     * @example {
+                     *       "duration": "PT10M",
+                     *       "enabled": true
+                     *     }
+                     */
+                    hold: {
+                        /** @description The duration of the hold. */
+                        duration: string | null;
+                        /** @description Whether slot holds are enabled for the service. */
+                        enabled: boolean;
+                    };
                     /**
                      * MaximizeUtilizationPolicy
                      * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -5292,6 +4633,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -5370,1089 +4715,7 @@ export interface components {
          *     }
          */
         AppointmentConfirmedEventData: {
-            /**
-             * Appointment
-             * @description An appointment represents a booking that a client has made with a provider for a service.
-             * @example {
-             *       "appointment_type": "in_person",
-             *       "cancellation_events": [
-             *         {
-             *           "actor": null,
-             *           "cancellation_reason": {
-             *             "id": "cr_a1b2c3d4e5f6",
-             *             "name": "Distance too far",
-             *             "object": "cancellation_reason",
-             *             "sort_order": 1
-             *           },
-             *           "custom_reason_text": "I'm sick",
-             *           "initiated_by": "client",
-             *           "object": "cancellation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "client": {
-             *         "created_at": "2025-01-15T14:30:00Z",
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "id": "clnt_a1b2c3d4e5f6",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "object": "client",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago",
-             *         "updated_at": "2025-03-10T09:45:00Z"
-             *       },
-             *       "client_data": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago"
-             *       },
-             *       "client_locale": "en-US",
-             *       "client_reference_id": "ext_12345",
-             *       "client_time_zone": "America/Chicago",
-             *       "confirmation_events": [
-             *         {
-             *           "actor": null,
-             *           "end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "initiated_by": "client",
-             *           "object": "confirmation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui",
-             *           "start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           }
-             *         }
-             *       ],
-             *       "confirmed_at": "2025-03-10T15:30:00Z",
-             *       "created_at": "2025-03-10T14:30:00Z",
-             *       "end_at": {
-             *         "local": "2025-03-01T11:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736464800,
-             *         "utc": "2025-03-01T04:00:00Z"
-             *       },
-             *       "fields": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "phone": "+15551234567"
-             *       },
-             *       "id": "appt_a1b2c3d4e5f6",
-             *       "object": "appointment",
-             *       "provider": {
-             *         "created_at": "2017-09-12T12:34:55Z",
-             *         "display_name": "John Smith",
-             *         "first_name": "John",
-             *         "id": "prov_d025a96ac0c6",
-             *         "last_name": "Smith",
-             *         "metadata": {
-             *           "external_id": "123"
-             *         },
-             *         "object": "provider",
-             *         "updated_at": "2017-09-13T10:11:12Z"
-             *       },
-             *       "reschedule_events": [
-             *         {
-             *           "actor": null,
-             *           "initiated_by": "client",
-             *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "object": "reschedule_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "service": {
-             *         "appointment_type": "in_person",
-             *         "booking_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_booking": true,
-             *           "disabled_message": "Booking is disabled for this service.",
-             *           "maximize_utilization": {
-             *             "enabled": true
-             *           }
-             *         },
-             *         "cancellation_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_cancellation": true,
-             *           "disabled_message": "Cancellation is disabled for this service."
-             *         },
-             *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-             *         "created_at": "2025-02-17T17:49:19Z",
-             *         "duration": "PT1H30M",
-             *         "id": "srv_d025a96ac0c6",
-             *         "name": "Initial Consult",
-             *         "object": "service",
-             *         "rescheduling_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_rescheduling": true,
-             *           "disabled_message": "Rescheduling is disabled for this service."
-             *         },
-             *         "slot_rules": [
-             *           {
-             *             "recurrence_rule": {
-             *               "byday": [
-             *                 "mo",
-             *                 "we",
-             *                 "fr"
-             *               ],
-             *               "freq": "weekly"
-             *             },
-             *             "start_times": [
-             *               "09:00",
-             *               "10:00"
-             *             ]
-             *           }
-             *         ],
-             *         "updated_at": "2025-02-17T17:49:19Z"
-             *       },
-             *       "start_at": {
-             *         "local": "2025-03-01T10:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736461200,
-             *         "utc": "2025-03-01T03:00:00Z"
-             *       },
-             *       "status": "scheduled",
-             *       "updated_at": "2025-03-10T14:30:00Z",
-             *       "urls": {
-             *         "add_to_google_calendar": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-             *         ],
-             *         "cancel": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-             *         ],
-             *         "confirm": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-             *         ],
-             *         "ics": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-             *         ],
-             *         "join": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-             *         ],
-             *         "reschedule": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-             *         ]
-             *       }
-             *     }
-             */
-            object: {
-                /**
-                 * @description The type of appointment.
-                 * @enum {string}
-                 */
-                appointment_type: "in_person" | "virtual";
-                cancellation_events: {
-                    /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * CancellationReason
-                     * @description This is an object representing a cancellation reason.
-                     * @example {
-                     *       "id": "cr_a1b2c3d4e5f6",
-                     *       "name": "Distance too far",
-                     *       "object": "cancellation_reason",
-                     *       "sort_order": 1
-                     *     }
-                     */
-                    cancellation_reason: {
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the cancellation reason. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "cancellation_reason";
-                        /** @description The sort order of the cancellation reason. */
-                        sort_order: number;
-                    } | null;
-                    /** @description Custom reason text for the cancellation. */
-                    custom_reason_text: string | null;
-                    /**
-                     * @description The entity that initiated the cancellation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "cancellation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the cancellation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the cancellation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Client
-                 * @description This is an object representing a client.
-                 * @example {
-                 *       "created_at": "2025-01-15T14:30:00Z",
-                 *       "email": "jane.smith@example.com",
-                 *       "first_name": "Jane",
-                 *       "id": "clnt_a1b2c3d4e5f6",
-                 *       "last_name": "Smith",
-                 *       "locale": "en-US",
-                 *       "object": "client",
-                 *       "phone": "+15551234567",
-                 *       "reference_id": "ext_12345",
-                 *       "time_zone": "America/Chicago",
-                 *       "updated_at": "2025-03-10T09:45:00Z"
-                 *     }
-                 */
-                client: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client.
-                     * @example en-US
-                     */
-                    locale: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "client";
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description External reference identifier for the client. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                client_data: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client booking the appointment.
-                     * @example en-US
-                     */
-                    locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description The client's external reference identifier. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data.locale` instead.
-                 * @example en-US
-                 */
-                client_locale?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.reference_id` instead.
-                 */
-                client_reference_id?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.time_zone` instead.
-                 * @example America/Chicago
-                 */
-                client_time_zone?: string;
-                confirmation_events: {
-                    /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The entity that initiated the confirmation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "confirmation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the confirmation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the confirmation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                }[];
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was confirmed.
-                 */
-                confirmed_at: string | null;
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was created.
-                 */
-                created_at: string;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data` instead.
-                 */
-                fields: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                };
-                /** @description Unique identifier for the object. */
-                id: string;
-                /**
-                 * @description String representing the object's type.
-                 * @enum {string}
-                 */
-                object: "appointment";
-                /**
-                 * Provider
-                 * @description A provider represents a staff member who can provide services to clients.
-                 * @example {
-                 *       "created_at": "2017-09-12T12:34:55Z",
-                 *       "display_name": "John Smith",
-                 *       "first_name": "John",
-                 *       "id": "prov_d025a96ac0c6",
-                 *       "last_name": "Smith",
-                 *       "metadata": {
-                 *         "external_id": "123"
-                 *       },
-                 *       "object": "provider",
-                 *       "updated_at": "2017-09-13T10:11:12Z"
-                 *     }
-                 */
-                provider: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /** @description The provider's display name. */
-                    display_name: string;
-                    /** @description The provider's first name. */
-                    first_name: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The provider's last name. */
-                    last_name: string;
-                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "provider";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                reschedule_events: {
-                    actor: string | null;
-                    /** @enum {string} */
-                    initiated_by: "user" | "client";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    object: "reschedule_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the reschedule occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Service
-                 * @description A service represents a type of appointment.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "booking_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_booking": true,
-                 *         "disabled_message": "Booking is disabled for this service.",
-                 *         "maximize_utilization": {
-                 *           "enabled": true
-                 *         }
-                 *       },
-                 *       "cancellation_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_cancellation": true,
-                 *         "disabled_message": "Cancellation is disabled for this service."
-                 *       },
-                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *       "created_at": "2025-02-17T17:49:19Z",
-                 *       "duration": "PT1H30M",
-                 *       "id": "srv_d025a96ac0c6",
-                 *       "name": "Initial Consult",
-                 *       "object": "service",
-                 *       "rescheduling_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_rescheduling": true,
-                 *         "disabled_message": "Rescheduling is disabled for this service."
-                 *       },
-                 *       "slot_rules": [
-                 *         {
-                 *           "recurrence_rule": {
-                 *             "byday": [
-                 *               "mo",
-                 *               "we",
-                 *               "fr"
-                 *             ],
-                 *             "freq": "weekly"
-                 *           },
-                 *           "start_times": [
-                 *             "09:00",
-                 *             "10:00"
-                 *           ]
-                 *         }
-                 *       ],
-                 *       "updated_at": "2025-02-17T17:49:19Z"
-                 *     }
-                 */
-                service: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    /**
-                     * BookingPolicy
-                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_booking": true,
-                     *       "disabled_message": "Booking is disabled for this service.",
-                     *       "maximize_utilization": {
-                     *         "enabled": true
-                     *       }
-                     *     }
-                     */
-                    booking_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public booking is allowed for the service. */
-                        allow_booking: boolean;
-                        /** @description The message to display when public booking is disabled. */
-                        disabled_message: string | null;
-                        /**
-                         * MaximizeUtilizationPolicy
-                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                         * @example {
-                         *       "enabled": true
-                         *     }
-                         */
-                        maximize_utilization: {
-                            /** @description Whether maximize utilization is enabled for the service. */
-                            enabled: boolean;
-                        };
-                    };
-                    /**
-                     * CancellationPolicy
-                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_cancellation": true,
-                     *       "disabled_message": "Cancellation is disabled for this service."
-                     *     }
-                     */
-                    cancellation_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public cancellation is allowed for the service. */
-                        allow_cancellation: boolean;
-                        /** @description The message to display when public cancellation is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /**
-                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                     */
-                    change_policy_text: string;
-                    /**
-                     * Format: datetime
-                     * @description When the service was created.
-                     */
-                    created_at: string;
-                    /**
-                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                     * @example `PT30M`
-                     */
-                    duration: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The name of the service. */
-                    name: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "service";
-                    /**
-                     * ReschedulingPolicy
-                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_rescheduling": true,
-                     *       "disabled_message": "Rescheduling is disabled for this service."
-                     *     }
-                     */
-                    rescheduling_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public rescheduling is allowed for the service. */
-                        allow_rescheduling: boolean;
-                        /** @description The message to display when public rescheduling is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /** @description Array of slot rules for the service. */
-                    slot_rules: {
-                        /**
-                         * RecurrenceRule
-                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                         *     but are a subset of the full specification.
-                         * @example {
-                         *       "byday": [
-                         *         "mo",
-                         *         "we",
-                         *         "fr"
-                         *       ],
-                         *       "freq": "weekly"
-                         *     }
-                         */
-                        recurrence_rule: {
-                            /**
-                             * @description The days of the week on which the recurrence occurs.
-                             * @example [
-                             *       "mo",
-                             *       "we",
-                             *       "fr"
-                             *     ]
-                             */
-                            byday?: string[];
-                            /** @description Number of occurrences at which to end the recurrence. */
-                            count?: number | null;
-                            /**
-                             * @description The frequency of the recurrence.
-                             * @enum {string}
-                             */
-                            freq: "daily" | "weekly";
-                            /**
-                             * @description How often the recurrence rule repeats.
-                             * @example 2
-                             */
-                            interval?: number;
-                            /**
-                             * @description Date at which to end the recurrence (in ISO-8601 format).
-                             * @example 2024-01-02
-                             */
-                            until?: Record<string, never> | null;
-                        };
-                        /** @description Array of start times for slots. */
-                        start_times: string[];
-                    }[];
-                    /**
-                     * Format: datetime
-                     * @description When the service was last updated.
-                     */
-                    updated_at: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @description The status of the appointment.
-                 * @enum {string}
-                 */
-                status: "scheduled" | "canceled";
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was last updated.
-                 */
-                updated_at?: string;
-                /** @description URLs for this appointment. */
-                urls?: {
-                    /** @description URLs for the client to use to add this appointment to their calendar. */
-                    add_to_calendar?: string[];
-                    /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                    add_to_google_calendar: string[];
-                    /** @description URLs for the client to use to cancel this appointment. */
-                    cancel: string[];
-                    /** @description URLs for the client to use to confirm this appointment. */
-                    confirm: string[];
-                    /** @description URLs for the client to use to download an iCal file for this appointment. */
-                    ics: string[];
-                    /** @description URLs for the client to use to join this appointment. */
-                    join: string[];
-                    /** @description URLs for the client to use to reschedule this appointment. */
-                    reschedule: string[];
-                };
-            };
+            object: components["schemas"]["Appointment"];
             /**
              * @description The event type. (enum property replaced by openapi-typescript)
              * @enum {string}
@@ -6773,6 +5036,10 @@ export interface components {
          *               },
          *               "allow_booking": true,
          *               "disabled_message": "Booking is disabled for this service.",
+         *               "hold": {
+         *                 "duration": "PT10M",
+         *                 "enabled": true
+         *               },
          *               "maximize_utilization": {
          *                 "enabled": true
          *               }
@@ -6991,2259 +5258,17 @@ export interface components {
                  */
                 type: "account_user.updated";
             } | {
-                /**
-                 * Appointment
-                 * @description An appointment represents a booking that a client has made with a provider for a service.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "cancellation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "cancellation_reason": {
-                 *             "id": "cr_a1b2c3d4e5f6",
-                 *             "name": "Distance too far",
-                 *             "object": "cancellation_reason",
-                 *             "sort_order": 1
-                 *           },
-                 *           "custom_reason_text": "I'm sick",
-                 *           "initiated_by": "client",
-                 *           "object": "cancellation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "client": {
-                 *         "created_at": "2025-01-15T14:30:00Z",
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "id": "clnt_a1b2c3d4e5f6",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "object": "client",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago",
-                 *         "updated_at": "2025-03-10T09:45:00Z"
-                 *       },
-                 *       "client_data": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago"
-                 *       },
-                 *       "client_locale": "en-US",
-                 *       "client_reference_id": "ext_12345",
-                 *       "client_time_zone": "America/Chicago",
-                 *       "confirmation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "initiated_by": "client",
-                 *           "object": "confirmation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui",
-                 *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           }
-                 *         }
-                 *       ],
-                 *       "confirmed_at": "2025-03-10T15:30:00Z",
-                 *       "created_at": "2025-03-10T14:30:00Z",
-                 *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736464800,
-                 *         "utc": "2025-03-01T04:00:00Z"
-                 *       },
-                 *       "fields": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "phone": "+15551234567"
-                 *       },
-                 *       "id": "appt_a1b2c3d4e5f6",
-                 *       "object": "appointment",
-                 *       "provider": {
-                 *         "created_at": "2017-09-12T12:34:55Z",
-                 *         "display_name": "John Smith",
-                 *         "first_name": "John",
-                 *         "id": "prov_d025a96ac0c6",
-                 *         "last_name": "Smith",
-                 *         "metadata": {
-                 *           "external_id": "123"
-                 *         },
-                 *         "object": "provider",
-                 *         "updated_at": "2017-09-13T10:11:12Z"
-                 *       },
-                 *       "reschedule_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "initiated_by": "client",
-                 *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "object": "reschedule_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "service": {
-                 *         "appointment_type": "in_person",
-                 *         "booking_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_booking": true,
-                 *           "disabled_message": "Booking is disabled for this service.",
-                 *           "maximize_utilization": {
-                 *             "enabled": true
-                 *           }
-                 *         },
-                 *         "cancellation_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_cancellation": true,
-                 *           "disabled_message": "Cancellation is disabled for this service."
-                 *         },
-                 *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *         "created_at": "2025-02-17T17:49:19Z",
-                 *         "duration": "PT1H30M",
-                 *         "id": "srv_d025a96ac0c6",
-                 *         "name": "Initial Consult",
-                 *         "object": "service",
-                 *         "rescheduling_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_rescheduling": true,
-                 *           "disabled_message": "Rescheduling is disabled for this service."
-                 *         },
-                 *         "slot_rules": [
-                 *           {
-                 *             "recurrence_rule": {
-                 *               "byday": [
-                 *                 "mo",
-                 *                 "we",
-                 *                 "fr"
-                 *               ],
-                 *               "freq": "weekly"
-                 *             },
-                 *             "start_times": [
-                 *               "09:00",
-                 *               "10:00"
-                 *             ]
-                 *           }
-                 *         ],
-                 *         "updated_at": "2025-02-17T17:49:19Z"
-                 *       },
-                 *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736461200,
-                 *         "utc": "2025-03-01T03:00:00Z"
-                 *       },
-                 *       "status": "scheduled",
-                 *       "updated_at": "2025-03-10T14:30:00Z",
-                 *       "urls": {
-                 *         "add_to_google_calendar": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-                 *         ],
-                 *         "cancel": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-                 *         ],
-                 *         "confirm": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-                 *         ],
-                 *         "ics": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-                 *         ],
-                 *         "join": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-                 *         ],
-                 *         "reschedule": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-                 *         ]
-                 *       }
-                 *     }
-                 */
-                object: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    cancellation_events: {
-                        /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * CancellationReason
-                         * @description This is an object representing a cancellation reason.
-                         * @example {
-                         *       "id": "cr_a1b2c3d4e5f6",
-                         *       "name": "Distance too far",
-                         *       "object": "cancellation_reason",
-                         *       "sort_order": 1
-                         *     }
-                         */
-                        cancellation_reason: {
-                            /** @description Unique identifier for the object. */
-                            id: string;
-                            /** @description The name of the cancellation reason. */
-                            name: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "cancellation_reason";
-                            /** @description The sort order of the cancellation reason. */
-                            sort_order: number;
-                        } | null;
-                        /** @description Custom reason text for the cancellation. */
-                        custom_reason_text: string | null;
-                        /**
-                         * @description The entity that initiated the cancellation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "cancellation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the cancellation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the cancellation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Client
-                     * @description This is an object representing a client.
-                     * @example {
-                     *       "created_at": "2025-01-15T14:30:00Z",
-                     *       "email": "jane.smith@example.com",
-                     *       "first_name": "Jane",
-                     *       "id": "clnt_a1b2c3d4e5f6",
-                     *       "last_name": "Smith",
-                     *       "locale": "en-US",
-                     *       "object": "client",
-                     *       "phone": "+15551234567",
-                     *       "reference_id": "ext_12345",
-                     *       "time_zone": "America/Chicago",
-                     *       "updated_at": "2025-03-10T09:45:00Z"
-                     *     }
-                     */
-                    client: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client.
-                         * @example en-US
-                         */
-                        locale: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "client";
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description External reference identifier for the client. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                    client_data: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client booking the appointment.
-                         * @example en-US
-                         */
-                        locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description The client's external reference identifier. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.locale` instead.
-                     * @example en-US
-                     */
-                    client_locale?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.reference_id` instead.
-                     */
-                    client_reference_id?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.time_zone` instead.
-                     * @example America/Chicago
-                     */
-                    client_time_zone?: string;
-                    confirmation_events: {
-                        /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * @description The entity that initiated the confirmation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "confirmation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the confirmation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the confirmation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                    }[];
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was confirmed.
-                     */
-                    confirmed_at: string | null;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data` instead.
-                     */
-                    fields: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                    };
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "appointment";
-                    /**
-                     * Provider
-                     * @description A provider represents a staff member who can provide services to clients.
-                     * @example {
-                     *       "created_at": "2017-09-12T12:34:55Z",
-                     *       "display_name": "John Smith",
-                     *       "first_name": "John",
-                     *       "id": "prov_d025a96ac0c6",
-                     *       "last_name": "Smith",
-                     *       "metadata": {
-                     *         "external_id": "123"
-                     *       },
-                     *       "object": "provider",
-                     *       "updated_at": "2017-09-13T10:11:12Z"
-                     *     }
-                     */
-                    provider: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /** @description The provider's display name. */
-                        display_name: string;
-                        /** @description The provider's first name. */
-                        first_name: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The provider's last name. */
-                        last_name: string;
-                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                        metadata?: Record<string, never>;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "provider";
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    reschedule_events: {
-                        actor: string | null;
-                        /** @enum {string} */
-                        initiated_by: "user" | "client";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        object: "reschedule_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the reschedule occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Service
-                     * @description A service represents a type of appointment.
-                     * @example {
-                     *       "appointment_type": "in_person",
-                     *       "booking_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_booking": true,
-                     *         "disabled_message": "Booking is disabled for this service.",
-                     *         "maximize_utilization": {
-                     *           "enabled": true
-                     *         }
-                     *       },
-                     *       "cancellation_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_cancellation": true,
-                     *         "disabled_message": "Cancellation is disabled for this service."
-                     *       },
-                     *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                     *       "created_at": "2025-02-17T17:49:19Z",
-                     *       "duration": "PT1H30M",
-                     *       "id": "srv_d025a96ac0c6",
-                     *       "name": "Initial Consult",
-                     *       "object": "service",
-                     *       "rescheduling_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_rescheduling": true,
-                     *         "disabled_message": "Rescheduling is disabled for this service."
-                     *       },
-                     *       "slot_rules": [
-                     *         {
-                     *           "recurrence_rule": {
-                     *             "byday": [
-                     *               "mo",
-                     *               "we",
-                     *               "fr"
-                     *             ],
-                     *             "freq": "weekly"
-                     *           },
-                     *           "start_times": [
-                     *             "09:00",
-                     *             "10:00"
-                     *           ]
-                     *         }
-                     *       ],
-                     *       "updated_at": "2025-02-17T17:49:19Z"
-                     *     }
-                     */
-                    service: {
-                        /**
-                         * @description The type of appointment.
-                         * @enum {string}
-                         */
-                        appointment_type: "in_person" | "virtual";
-                        /**
-                         * BookingPolicy
-                         * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_booking": true,
-                         *       "disabled_message": "Booking is disabled for this service.",
-                         *       "maximize_utilization": {
-                         *         "enabled": true
-                         *       }
-                         *     }
-                         */
-                        booking_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public booking is allowed for the service. */
-                            allow_booking: boolean;
-                            /** @description The message to display when public booking is disabled. */
-                            disabled_message: string | null;
-                            /**
-                             * MaximizeUtilizationPolicy
-                             * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                             * @example {
-                             *       "enabled": true
-                             *     }
-                             */
-                            maximize_utilization: {
-                                /** @description Whether maximize utilization is enabled for the service. */
-                                enabled: boolean;
-                            };
-                        };
-                        /**
-                         * CancellationPolicy
-                         * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_cancellation": true,
-                         *       "disabled_message": "Cancellation is disabled for this service."
-                         *     }
-                         */
-                        cancellation_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public cancellation is allowed for the service. */
-                            allow_cancellation: boolean;
-                            /** @description The message to display when public cancellation is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /**
-                         * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                         * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                         */
-                        change_policy_text: string;
-                        /**
-                         * Format: datetime
-                         * @description When the service was created.
-                         */
-                        created_at: string;
-                        /**
-                         * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                         * @example `PT30M`
-                         */
-                        duration: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the service. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "service";
-                        /**
-                         * ReschedulingPolicy
-                         * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_rescheduling": true,
-                         *       "disabled_message": "Rescheduling is disabled for this service."
-                         *     }
-                         */
-                        rescheduling_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public rescheduling is allowed for the service. */
-                            allow_rescheduling: boolean;
-                            /** @description The message to display when public rescheduling is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /** @description Array of slot rules for the service. */
-                        slot_rules: {
-                            /**
-                             * RecurrenceRule
-                             * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                             *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                             *     but are a subset of the full specification.
-                             * @example {
-                             *       "byday": [
-                             *         "mo",
-                             *         "we",
-                             *         "fr"
-                             *       ],
-                             *       "freq": "weekly"
-                             *     }
-                             */
-                            recurrence_rule: {
-                                /**
-                                 * @description The days of the week on which the recurrence occurs.
-                                 * @example [
-                                 *       "mo",
-                                 *       "we",
-                                 *       "fr"
-                                 *     ]
-                                 */
-                                byday?: string[];
-                                /** @description Number of occurrences at which to end the recurrence. */
-                                count?: number | null;
-                                /**
-                                 * @description The frequency of the recurrence.
-                                 * @enum {string}
-                                 */
-                                freq: "daily" | "weekly";
-                                /**
-                                 * @description How often the recurrence rule repeats.
-                                 * @example 2
-                                 */
-                                interval?: number;
-                                /**
-                                 * @description Date at which to end the recurrence (in ISO-8601 format).
-                                 * @example 2024-01-02
-                                 */
-                                until?: Record<string, never> | null;
-                            };
-                            /** @description Array of start times for slots. */
-                            start_times: string[];
-                        }[];
-                        /**
-                         * Format: datetime
-                         * @description When the service was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The status of the appointment.
-                     * @enum {string}
-                     */
-                    status: "scheduled" | "canceled";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at?: string;
-                    /** @description URLs for this appointment. */
-                    urls?: {
-                        /** @description URLs for the client to use to add this appointment to their calendar. */
-                        add_to_calendar?: string[];
-                        /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                        add_to_google_calendar: string[];
-                        /** @description URLs for the client to use to cancel this appointment. */
-                        cancel: string[];
-                        /** @description URLs for the client to use to confirm this appointment. */
-                        confirm: string[];
-                        /** @description URLs for the client to use to download an iCal file for this appointment. */
-                        ics: string[];
-                        /** @description URLs for the client to use to join this appointment. */
-                        join: string[];
-                        /** @description URLs for the client to use to reschedule this appointment. */
-                        reschedule: string[];
-                    };
-                };
+                object: components["schemas"]["Appointment"];
                 /**
                  * @description The event type.
                  * @enum {string}
                  */
                 type: "appointment.created";
             } | {
-                /**
-                 * Appointment
-                 * @description An appointment represents a booking that a client has made with a provider for a service.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "cancellation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "cancellation_reason": {
-                 *             "id": "cr_a1b2c3d4e5f6",
-                 *             "name": "Distance too far",
-                 *             "object": "cancellation_reason",
-                 *             "sort_order": 1
-                 *           },
-                 *           "custom_reason_text": "I'm sick",
-                 *           "initiated_by": "client",
-                 *           "object": "cancellation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "client": {
-                 *         "created_at": "2025-01-15T14:30:00Z",
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "id": "clnt_a1b2c3d4e5f6",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "object": "client",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago",
-                 *         "updated_at": "2025-03-10T09:45:00Z"
-                 *       },
-                 *       "client_data": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago"
-                 *       },
-                 *       "client_locale": "en-US",
-                 *       "client_reference_id": "ext_12345",
-                 *       "client_time_zone": "America/Chicago",
-                 *       "confirmation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "initiated_by": "client",
-                 *           "object": "confirmation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui",
-                 *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           }
-                 *         }
-                 *       ],
-                 *       "confirmed_at": "2025-03-10T15:30:00Z",
-                 *       "created_at": "2025-03-10T14:30:00Z",
-                 *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736464800,
-                 *         "utc": "2025-03-01T04:00:00Z"
-                 *       },
-                 *       "fields": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "phone": "+15551234567"
-                 *       },
-                 *       "id": "appt_a1b2c3d4e5f6",
-                 *       "object": "appointment",
-                 *       "provider": {
-                 *         "created_at": "2017-09-12T12:34:55Z",
-                 *         "display_name": "John Smith",
-                 *         "first_name": "John",
-                 *         "id": "prov_d025a96ac0c6",
-                 *         "last_name": "Smith",
-                 *         "metadata": {
-                 *           "external_id": "123"
-                 *         },
-                 *         "object": "provider",
-                 *         "updated_at": "2017-09-13T10:11:12Z"
-                 *       },
-                 *       "reschedule_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "initiated_by": "client",
-                 *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "object": "reschedule_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "service": {
-                 *         "appointment_type": "in_person",
-                 *         "booking_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_booking": true,
-                 *           "disabled_message": "Booking is disabled for this service.",
-                 *           "maximize_utilization": {
-                 *             "enabled": true
-                 *           }
-                 *         },
-                 *         "cancellation_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_cancellation": true,
-                 *           "disabled_message": "Cancellation is disabled for this service."
-                 *         },
-                 *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *         "created_at": "2025-02-17T17:49:19Z",
-                 *         "duration": "PT1H30M",
-                 *         "id": "srv_d025a96ac0c6",
-                 *         "name": "Initial Consult",
-                 *         "object": "service",
-                 *         "rescheduling_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_rescheduling": true,
-                 *           "disabled_message": "Rescheduling is disabled for this service."
-                 *         },
-                 *         "slot_rules": [
-                 *           {
-                 *             "recurrence_rule": {
-                 *               "byday": [
-                 *                 "mo",
-                 *                 "we",
-                 *                 "fr"
-                 *               ],
-                 *               "freq": "weekly"
-                 *             },
-                 *             "start_times": [
-                 *               "09:00",
-                 *               "10:00"
-                 *             ]
-                 *           }
-                 *         ],
-                 *         "updated_at": "2025-02-17T17:49:19Z"
-                 *       },
-                 *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736461200,
-                 *         "utc": "2025-03-01T03:00:00Z"
-                 *       },
-                 *       "status": "scheduled",
-                 *       "updated_at": "2025-03-10T14:30:00Z",
-                 *       "urls": {
-                 *         "add_to_google_calendar": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-                 *         ],
-                 *         "cancel": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-                 *         ],
-                 *         "confirm": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-                 *         ],
-                 *         "ics": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-                 *         ],
-                 *         "join": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-                 *         ],
-                 *         "reschedule": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-                 *         ]
-                 *       }
-                 *     }
-                 */
-                object: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    cancellation_events: {
-                        /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * CancellationReason
-                         * @description This is an object representing a cancellation reason.
-                         * @example {
-                         *       "id": "cr_a1b2c3d4e5f6",
-                         *       "name": "Distance too far",
-                         *       "object": "cancellation_reason",
-                         *       "sort_order": 1
-                         *     }
-                         */
-                        cancellation_reason: {
-                            /** @description Unique identifier for the object. */
-                            id: string;
-                            /** @description The name of the cancellation reason. */
-                            name: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "cancellation_reason";
-                            /** @description The sort order of the cancellation reason. */
-                            sort_order: number;
-                        } | null;
-                        /** @description Custom reason text for the cancellation. */
-                        custom_reason_text: string | null;
-                        /**
-                         * @description The entity that initiated the cancellation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "cancellation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the cancellation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the cancellation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Client
-                     * @description This is an object representing a client.
-                     * @example {
-                     *       "created_at": "2025-01-15T14:30:00Z",
-                     *       "email": "jane.smith@example.com",
-                     *       "first_name": "Jane",
-                     *       "id": "clnt_a1b2c3d4e5f6",
-                     *       "last_name": "Smith",
-                     *       "locale": "en-US",
-                     *       "object": "client",
-                     *       "phone": "+15551234567",
-                     *       "reference_id": "ext_12345",
-                     *       "time_zone": "America/Chicago",
-                     *       "updated_at": "2025-03-10T09:45:00Z"
-                     *     }
-                     */
-                    client: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client.
-                         * @example en-US
-                         */
-                        locale: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "client";
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description External reference identifier for the client. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                    client_data: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client booking the appointment.
-                         * @example en-US
-                         */
-                        locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description The client's external reference identifier. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.locale` instead.
-                     * @example en-US
-                     */
-                    client_locale?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.reference_id` instead.
-                     */
-                    client_reference_id?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.time_zone` instead.
-                     * @example America/Chicago
-                     */
-                    client_time_zone?: string;
-                    confirmation_events: {
-                        /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * @description The entity that initiated the confirmation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "confirmation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the confirmation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the confirmation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                    }[];
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was confirmed.
-                     */
-                    confirmed_at: string | null;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data` instead.
-                     */
-                    fields: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                    };
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "appointment";
-                    /**
-                     * Provider
-                     * @description A provider represents a staff member who can provide services to clients.
-                     * @example {
-                     *       "created_at": "2017-09-12T12:34:55Z",
-                     *       "display_name": "John Smith",
-                     *       "first_name": "John",
-                     *       "id": "prov_d025a96ac0c6",
-                     *       "last_name": "Smith",
-                     *       "metadata": {
-                     *         "external_id": "123"
-                     *       },
-                     *       "object": "provider",
-                     *       "updated_at": "2017-09-13T10:11:12Z"
-                     *     }
-                     */
-                    provider: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /** @description The provider's display name. */
-                        display_name: string;
-                        /** @description The provider's first name. */
-                        first_name: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The provider's last name. */
-                        last_name: string;
-                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                        metadata?: Record<string, never>;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "provider";
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    reschedule_events: {
-                        actor: string | null;
-                        /** @enum {string} */
-                        initiated_by: "user" | "client";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        object: "reschedule_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the reschedule occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Service
-                     * @description A service represents a type of appointment.
-                     * @example {
-                     *       "appointment_type": "in_person",
-                     *       "booking_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_booking": true,
-                     *         "disabled_message": "Booking is disabled for this service.",
-                     *         "maximize_utilization": {
-                     *           "enabled": true
-                     *         }
-                     *       },
-                     *       "cancellation_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_cancellation": true,
-                     *         "disabled_message": "Cancellation is disabled for this service."
-                     *       },
-                     *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                     *       "created_at": "2025-02-17T17:49:19Z",
-                     *       "duration": "PT1H30M",
-                     *       "id": "srv_d025a96ac0c6",
-                     *       "name": "Initial Consult",
-                     *       "object": "service",
-                     *       "rescheduling_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_rescheduling": true,
-                     *         "disabled_message": "Rescheduling is disabled for this service."
-                     *       },
-                     *       "slot_rules": [
-                     *         {
-                     *           "recurrence_rule": {
-                     *             "byday": [
-                     *               "mo",
-                     *               "we",
-                     *               "fr"
-                     *             ],
-                     *             "freq": "weekly"
-                     *           },
-                     *           "start_times": [
-                     *             "09:00",
-                     *             "10:00"
-                     *           ]
-                     *         }
-                     *       ],
-                     *       "updated_at": "2025-02-17T17:49:19Z"
-                     *     }
-                     */
-                    service: {
-                        /**
-                         * @description The type of appointment.
-                         * @enum {string}
-                         */
-                        appointment_type: "in_person" | "virtual";
-                        /**
-                         * BookingPolicy
-                         * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_booking": true,
-                         *       "disabled_message": "Booking is disabled for this service.",
-                         *       "maximize_utilization": {
-                         *         "enabled": true
-                         *       }
-                         *     }
-                         */
-                        booking_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public booking is allowed for the service. */
-                            allow_booking: boolean;
-                            /** @description The message to display when public booking is disabled. */
-                            disabled_message: string | null;
-                            /**
-                             * MaximizeUtilizationPolicy
-                             * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                             * @example {
-                             *       "enabled": true
-                             *     }
-                             */
-                            maximize_utilization: {
-                                /** @description Whether maximize utilization is enabled for the service. */
-                                enabled: boolean;
-                            };
-                        };
-                        /**
-                         * CancellationPolicy
-                         * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_cancellation": true,
-                         *       "disabled_message": "Cancellation is disabled for this service."
-                         *     }
-                         */
-                        cancellation_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public cancellation is allowed for the service. */
-                            allow_cancellation: boolean;
-                            /** @description The message to display when public cancellation is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /**
-                         * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                         * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                         */
-                        change_policy_text: string;
-                        /**
-                         * Format: datetime
-                         * @description When the service was created.
-                         */
-                        created_at: string;
-                        /**
-                         * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                         * @example `PT30M`
-                         */
-                        duration: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the service. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "service";
-                        /**
-                         * ReschedulingPolicy
-                         * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_rescheduling": true,
-                         *       "disabled_message": "Rescheduling is disabled for this service."
-                         *     }
-                         */
-                        rescheduling_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public rescheduling is allowed for the service. */
-                            allow_rescheduling: boolean;
-                            /** @description The message to display when public rescheduling is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /** @description Array of slot rules for the service. */
-                        slot_rules: {
-                            /**
-                             * RecurrenceRule
-                             * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                             *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                             *     but are a subset of the full specification.
-                             * @example {
-                             *       "byday": [
-                             *         "mo",
-                             *         "we",
-                             *         "fr"
-                             *       ],
-                             *       "freq": "weekly"
-                             *     }
-                             */
-                            recurrence_rule: {
-                                /**
-                                 * @description The days of the week on which the recurrence occurs.
-                                 * @example [
-                                 *       "mo",
-                                 *       "we",
-                                 *       "fr"
-                                 *     ]
-                                 */
-                                byday?: string[];
-                                /** @description Number of occurrences at which to end the recurrence. */
-                                count?: number | null;
-                                /**
-                                 * @description The frequency of the recurrence.
-                                 * @enum {string}
-                                 */
-                                freq: "daily" | "weekly";
-                                /**
-                                 * @description How often the recurrence rule repeats.
-                                 * @example 2
-                                 */
-                                interval?: number;
-                                /**
-                                 * @description Date at which to end the recurrence (in ISO-8601 format).
-                                 * @example 2024-01-02
-                                 */
-                                until?: Record<string, never> | null;
-                            };
-                            /** @description Array of start times for slots. */
-                            start_times: string[];
-                        }[];
-                        /**
-                         * Format: datetime
-                         * @description When the service was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The status of the appointment.
-                     * @enum {string}
-                     */
-                    status: "scheduled" | "canceled";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at?: string;
-                    /** @description URLs for this appointment. */
-                    urls?: {
-                        /** @description URLs for the client to use to add this appointment to their calendar. */
-                        add_to_calendar?: string[];
-                        /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                        add_to_google_calendar: string[];
-                        /** @description URLs for the client to use to cancel this appointment. */
-                        cancel: string[];
-                        /** @description URLs for the client to use to confirm this appointment. */
-                        confirm: string[];
-                        /** @description URLs for the client to use to download an iCal file for this appointment. */
-                        ics: string[];
-                        /** @description URLs for the client to use to join this appointment. */
-                        join: string[];
-                        /** @description URLs for the client to use to reschedule this appointment. */
-                        reschedule: string[];
-                    };
-                };
+                object: components["schemas"]["Appointment"];
                 previous_attributes: {
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
+                    end_at: components["schemas"]["ZonedDateTime"];
+                    start_at: components["schemas"]["ZonedDateTime"];
                 };
                 /**
                  * @description The event type.
@@ -9251,3267 +5276,21 @@ export interface components {
                  */
                 type: "appointment.rescheduled";
             } | {
-                /**
-                 * Appointment
-                 * @description An appointment represents a booking that a client has made with a provider for a service.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "cancellation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "cancellation_reason": {
-                 *             "id": "cr_a1b2c3d4e5f6",
-                 *             "name": "Distance too far",
-                 *             "object": "cancellation_reason",
-                 *             "sort_order": 1
-                 *           },
-                 *           "custom_reason_text": "I'm sick",
-                 *           "initiated_by": "client",
-                 *           "object": "cancellation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "client": {
-                 *         "created_at": "2025-01-15T14:30:00Z",
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "id": "clnt_a1b2c3d4e5f6",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "object": "client",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago",
-                 *         "updated_at": "2025-03-10T09:45:00Z"
-                 *       },
-                 *       "client_data": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago"
-                 *       },
-                 *       "client_locale": "en-US",
-                 *       "client_reference_id": "ext_12345",
-                 *       "client_time_zone": "America/Chicago",
-                 *       "confirmation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "initiated_by": "client",
-                 *           "object": "confirmation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui",
-                 *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           }
-                 *         }
-                 *       ],
-                 *       "confirmed_at": "2025-03-10T15:30:00Z",
-                 *       "created_at": "2025-03-10T14:30:00Z",
-                 *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736464800,
-                 *         "utc": "2025-03-01T04:00:00Z"
-                 *       },
-                 *       "fields": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "phone": "+15551234567"
-                 *       },
-                 *       "id": "appt_a1b2c3d4e5f6",
-                 *       "object": "appointment",
-                 *       "provider": {
-                 *         "created_at": "2017-09-12T12:34:55Z",
-                 *         "display_name": "John Smith",
-                 *         "first_name": "John",
-                 *         "id": "prov_d025a96ac0c6",
-                 *         "last_name": "Smith",
-                 *         "metadata": {
-                 *           "external_id": "123"
-                 *         },
-                 *         "object": "provider",
-                 *         "updated_at": "2017-09-13T10:11:12Z"
-                 *       },
-                 *       "reschedule_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "initiated_by": "client",
-                 *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "object": "reschedule_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "service": {
-                 *         "appointment_type": "in_person",
-                 *         "booking_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_booking": true,
-                 *           "disabled_message": "Booking is disabled for this service.",
-                 *           "maximize_utilization": {
-                 *             "enabled": true
-                 *           }
-                 *         },
-                 *         "cancellation_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_cancellation": true,
-                 *           "disabled_message": "Cancellation is disabled for this service."
-                 *         },
-                 *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *         "created_at": "2025-02-17T17:49:19Z",
-                 *         "duration": "PT1H30M",
-                 *         "id": "srv_d025a96ac0c6",
-                 *         "name": "Initial Consult",
-                 *         "object": "service",
-                 *         "rescheduling_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_rescheduling": true,
-                 *           "disabled_message": "Rescheduling is disabled for this service."
-                 *         },
-                 *         "slot_rules": [
-                 *           {
-                 *             "recurrence_rule": {
-                 *               "byday": [
-                 *                 "mo",
-                 *                 "we",
-                 *                 "fr"
-                 *               ],
-                 *               "freq": "weekly"
-                 *             },
-                 *             "start_times": [
-                 *               "09:00",
-                 *               "10:00"
-                 *             ]
-                 *           }
-                 *         ],
-                 *         "updated_at": "2025-02-17T17:49:19Z"
-                 *       },
-                 *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736461200,
-                 *         "utc": "2025-03-01T03:00:00Z"
-                 *       },
-                 *       "status": "scheduled",
-                 *       "updated_at": "2025-03-10T14:30:00Z",
-                 *       "urls": {
-                 *         "add_to_google_calendar": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-                 *         ],
-                 *         "cancel": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-                 *         ],
-                 *         "confirm": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-                 *         ],
-                 *         "ics": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-                 *         ],
-                 *         "join": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-                 *         ],
-                 *         "reschedule": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-                 *         ]
-                 *       }
-                 *     }
-                 */
-                object: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    cancellation_events: {
-                        /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * CancellationReason
-                         * @description This is an object representing a cancellation reason.
-                         * @example {
-                         *       "id": "cr_a1b2c3d4e5f6",
-                         *       "name": "Distance too far",
-                         *       "object": "cancellation_reason",
-                         *       "sort_order": 1
-                         *     }
-                         */
-                        cancellation_reason: {
-                            /** @description Unique identifier for the object. */
-                            id: string;
-                            /** @description The name of the cancellation reason. */
-                            name: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "cancellation_reason";
-                            /** @description The sort order of the cancellation reason. */
-                            sort_order: number;
-                        } | null;
-                        /** @description Custom reason text for the cancellation. */
-                        custom_reason_text: string | null;
-                        /**
-                         * @description The entity that initiated the cancellation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "cancellation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the cancellation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the cancellation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Client
-                     * @description This is an object representing a client.
-                     * @example {
-                     *       "created_at": "2025-01-15T14:30:00Z",
-                     *       "email": "jane.smith@example.com",
-                     *       "first_name": "Jane",
-                     *       "id": "clnt_a1b2c3d4e5f6",
-                     *       "last_name": "Smith",
-                     *       "locale": "en-US",
-                     *       "object": "client",
-                     *       "phone": "+15551234567",
-                     *       "reference_id": "ext_12345",
-                     *       "time_zone": "America/Chicago",
-                     *       "updated_at": "2025-03-10T09:45:00Z"
-                     *     }
-                     */
-                    client: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client.
-                         * @example en-US
-                         */
-                        locale: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "client";
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description External reference identifier for the client. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                    client_data: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client booking the appointment.
-                         * @example en-US
-                         */
-                        locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description The client's external reference identifier. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.locale` instead.
-                     * @example en-US
-                     */
-                    client_locale?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.reference_id` instead.
-                     */
-                    client_reference_id?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.time_zone` instead.
-                     * @example America/Chicago
-                     */
-                    client_time_zone?: string;
-                    confirmation_events: {
-                        /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * @description The entity that initiated the confirmation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "confirmation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the confirmation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the confirmation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                    }[];
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was confirmed.
-                     */
-                    confirmed_at: string | null;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data` instead.
-                     */
-                    fields: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                    };
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "appointment";
-                    /**
-                     * Provider
-                     * @description A provider represents a staff member who can provide services to clients.
-                     * @example {
-                     *       "created_at": "2017-09-12T12:34:55Z",
-                     *       "display_name": "John Smith",
-                     *       "first_name": "John",
-                     *       "id": "prov_d025a96ac0c6",
-                     *       "last_name": "Smith",
-                     *       "metadata": {
-                     *         "external_id": "123"
-                     *       },
-                     *       "object": "provider",
-                     *       "updated_at": "2017-09-13T10:11:12Z"
-                     *     }
-                     */
-                    provider: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /** @description The provider's display name. */
-                        display_name: string;
-                        /** @description The provider's first name. */
-                        first_name: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The provider's last name. */
-                        last_name: string;
-                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                        metadata?: Record<string, never>;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "provider";
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    reschedule_events: {
-                        actor: string | null;
-                        /** @enum {string} */
-                        initiated_by: "user" | "client";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        object: "reschedule_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the reschedule occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Service
-                     * @description A service represents a type of appointment.
-                     * @example {
-                     *       "appointment_type": "in_person",
-                     *       "booking_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_booking": true,
-                     *         "disabled_message": "Booking is disabled for this service.",
-                     *         "maximize_utilization": {
-                     *           "enabled": true
-                     *         }
-                     *       },
-                     *       "cancellation_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_cancellation": true,
-                     *         "disabled_message": "Cancellation is disabled for this service."
-                     *       },
-                     *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                     *       "created_at": "2025-02-17T17:49:19Z",
-                     *       "duration": "PT1H30M",
-                     *       "id": "srv_d025a96ac0c6",
-                     *       "name": "Initial Consult",
-                     *       "object": "service",
-                     *       "rescheduling_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_rescheduling": true,
-                     *         "disabled_message": "Rescheduling is disabled for this service."
-                     *       },
-                     *       "slot_rules": [
-                     *         {
-                     *           "recurrence_rule": {
-                     *             "byday": [
-                     *               "mo",
-                     *               "we",
-                     *               "fr"
-                     *             ],
-                     *             "freq": "weekly"
-                     *           },
-                     *           "start_times": [
-                     *             "09:00",
-                     *             "10:00"
-                     *           ]
-                     *         }
-                     *       ],
-                     *       "updated_at": "2025-02-17T17:49:19Z"
-                     *     }
-                     */
-                    service: {
-                        /**
-                         * @description The type of appointment.
-                         * @enum {string}
-                         */
-                        appointment_type: "in_person" | "virtual";
-                        /**
-                         * BookingPolicy
-                         * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_booking": true,
-                         *       "disabled_message": "Booking is disabled for this service.",
-                         *       "maximize_utilization": {
-                         *         "enabled": true
-                         *       }
-                         *     }
-                         */
-                        booking_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public booking is allowed for the service. */
-                            allow_booking: boolean;
-                            /** @description The message to display when public booking is disabled. */
-                            disabled_message: string | null;
-                            /**
-                             * MaximizeUtilizationPolicy
-                             * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                             * @example {
-                             *       "enabled": true
-                             *     }
-                             */
-                            maximize_utilization: {
-                                /** @description Whether maximize utilization is enabled for the service. */
-                                enabled: boolean;
-                            };
-                        };
-                        /**
-                         * CancellationPolicy
-                         * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_cancellation": true,
-                         *       "disabled_message": "Cancellation is disabled for this service."
-                         *     }
-                         */
-                        cancellation_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public cancellation is allowed for the service. */
-                            allow_cancellation: boolean;
-                            /** @description The message to display when public cancellation is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /**
-                         * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                         * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                         */
-                        change_policy_text: string;
-                        /**
-                         * Format: datetime
-                         * @description When the service was created.
-                         */
-                        created_at: string;
-                        /**
-                         * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                         * @example `PT30M`
-                         */
-                        duration: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the service. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "service";
-                        /**
-                         * ReschedulingPolicy
-                         * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_rescheduling": true,
-                         *       "disabled_message": "Rescheduling is disabled for this service."
-                         *     }
-                         */
-                        rescheduling_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public rescheduling is allowed for the service. */
-                            allow_rescheduling: boolean;
-                            /** @description The message to display when public rescheduling is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /** @description Array of slot rules for the service. */
-                        slot_rules: {
-                            /**
-                             * RecurrenceRule
-                             * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                             *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                             *     but are a subset of the full specification.
-                             * @example {
-                             *       "byday": [
-                             *         "mo",
-                             *         "we",
-                             *         "fr"
-                             *       ],
-                             *       "freq": "weekly"
-                             *     }
-                             */
-                            recurrence_rule: {
-                                /**
-                                 * @description The days of the week on which the recurrence occurs.
-                                 * @example [
-                                 *       "mo",
-                                 *       "we",
-                                 *       "fr"
-                                 *     ]
-                                 */
-                                byday?: string[];
-                                /** @description Number of occurrences at which to end the recurrence. */
-                                count?: number | null;
-                                /**
-                                 * @description The frequency of the recurrence.
-                                 * @enum {string}
-                                 */
-                                freq: "daily" | "weekly";
-                                /**
-                                 * @description How often the recurrence rule repeats.
-                                 * @example 2
-                                 */
-                                interval?: number;
-                                /**
-                                 * @description Date at which to end the recurrence (in ISO-8601 format).
-                                 * @example 2024-01-02
-                                 */
-                                until?: Record<string, never> | null;
-                            };
-                            /** @description Array of start times for slots. */
-                            start_times: string[];
-                        }[];
-                        /**
-                         * Format: datetime
-                         * @description When the service was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The status of the appointment.
-                     * @enum {string}
-                     */
-                    status: "scheduled" | "canceled";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at?: string;
-                    /** @description URLs for this appointment. */
-                    urls?: {
-                        /** @description URLs for the client to use to add this appointment to their calendar. */
-                        add_to_calendar?: string[];
-                        /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                        add_to_google_calendar: string[];
-                        /** @description URLs for the client to use to cancel this appointment. */
-                        cancel: string[];
-                        /** @description URLs for the client to use to confirm this appointment. */
-                        confirm: string[];
-                        /** @description URLs for the client to use to download an iCal file for this appointment. */
-                        ics: string[];
-                        /** @description URLs for the client to use to join this appointment. */
-                        join: string[];
-                        /** @description URLs for the client to use to reschedule this appointment. */
-                        reschedule: string[];
-                    };
-                };
+                object: components["schemas"]["Appointment"];
                 /**
                  * @description The event type.
                  * @enum {string}
                  */
                 type: "appointment.canceled";
             } | {
-                /**
-                 * Appointment
-                 * @description An appointment represents a booking that a client has made with a provider for a service.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "cancellation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "cancellation_reason": {
-                 *             "id": "cr_a1b2c3d4e5f6",
-                 *             "name": "Distance too far",
-                 *             "object": "cancellation_reason",
-                 *             "sort_order": 1
-                 *           },
-                 *           "custom_reason_text": "I'm sick",
-                 *           "initiated_by": "client",
-                 *           "object": "cancellation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "client": {
-                 *         "created_at": "2025-01-15T14:30:00Z",
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "id": "clnt_a1b2c3d4e5f6",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "object": "client",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago",
-                 *         "updated_at": "2025-03-10T09:45:00Z"
-                 *       },
-                 *       "client_data": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago"
-                 *       },
-                 *       "client_locale": "en-US",
-                 *       "client_reference_id": "ext_12345",
-                 *       "client_time_zone": "America/Chicago",
-                 *       "confirmation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "initiated_by": "client",
-                 *           "object": "confirmation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui",
-                 *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           }
-                 *         }
-                 *       ],
-                 *       "confirmed_at": "2025-03-10T15:30:00Z",
-                 *       "created_at": "2025-03-10T14:30:00Z",
-                 *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736464800,
-                 *         "utc": "2025-03-01T04:00:00Z"
-                 *       },
-                 *       "fields": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "phone": "+15551234567"
-                 *       },
-                 *       "id": "appt_a1b2c3d4e5f6",
-                 *       "object": "appointment",
-                 *       "provider": {
-                 *         "created_at": "2017-09-12T12:34:55Z",
-                 *         "display_name": "John Smith",
-                 *         "first_name": "John",
-                 *         "id": "prov_d025a96ac0c6",
-                 *         "last_name": "Smith",
-                 *         "metadata": {
-                 *           "external_id": "123"
-                 *         },
-                 *         "object": "provider",
-                 *         "updated_at": "2017-09-13T10:11:12Z"
-                 *       },
-                 *       "reschedule_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "initiated_by": "client",
-                 *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "object": "reschedule_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "service": {
-                 *         "appointment_type": "in_person",
-                 *         "booking_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_booking": true,
-                 *           "disabled_message": "Booking is disabled for this service.",
-                 *           "maximize_utilization": {
-                 *             "enabled": true
-                 *           }
-                 *         },
-                 *         "cancellation_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_cancellation": true,
-                 *           "disabled_message": "Cancellation is disabled for this service."
-                 *         },
-                 *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *         "created_at": "2025-02-17T17:49:19Z",
-                 *         "duration": "PT1H30M",
-                 *         "id": "srv_d025a96ac0c6",
-                 *         "name": "Initial Consult",
-                 *         "object": "service",
-                 *         "rescheduling_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_rescheduling": true,
-                 *           "disabled_message": "Rescheduling is disabled for this service."
-                 *         },
-                 *         "slot_rules": [
-                 *           {
-                 *             "recurrence_rule": {
-                 *               "byday": [
-                 *                 "mo",
-                 *                 "we",
-                 *                 "fr"
-                 *               ],
-                 *               "freq": "weekly"
-                 *             },
-                 *             "start_times": [
-                 *               "09:00",
-                 *               "10:00"
-                 *             ]
-                 *           }
-                 *         ],
-                 *         "updated_at": "2025-02-17T17:49:19Z"
-                 *       },
-                 *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736461200,
-                 *         "utc": "2025-03-01T03:00:00Z"
-                 *       },
-                 *       "status": "scheduled",
-                 *       "updated_at": "2025-03-10T14:30:00Z",
-                 *       "urls": {
-                 *         "add_to_google_calendar": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-                 *         ],
-                 *         "cancel": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-                 *         ],
-                 *         "confirm": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-                 *         ],
-                 *         "ics": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-                 *         ],
-                 *         "join": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-                 *         ],
-                 *         "reschedule": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-                 *         ]
-                 *       }
-                 *     }
-                 */
-                object: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    cancellation_events: {
-                        /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * CancellationReason
-                         * @description This is an object representing a cancellation reason.
-                         * @example {
-                         *       "id": "cr_a1b2c3d4e5f6",
-                         *       "name": "Distance too far",
-                         *       "object": "cancellation_reason",
-                         *       "sort_order": 1
-                         *     }
-                         */
-                        cancellation_reason: {
-                            /** @description Unique identifier for the object. */
-                            id: string;
-                            /** @description The name of the cancellation reason. */
-                            name: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "cancellation_reason";
-                            /** @description The sort order of the cancellation reason. */
-                            sort_order: number;
-                        } | null;
-                        /** @description Custom reason text for the cancellation. */
-                        custom_reason_text: string | null;
-                        /**
-                         * @description The entity that initiated the cancellation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "cancellation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the cancellation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the cancellation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Client
-                     * @description This is an object representing a client.
-                     * @example {
-                     *       "created_at": "2025-01-15T14:30:00Z",
-                     *       "email": "jane.smith@example.com",
-                     *       "first_name": "Jane",
-                     *       "id": "clnt_a1b2c3d4e5f6",
-                     *       "last_name": "Smith",
-                     *       "locale": "en-US",
-                     *       "object": "client",
-                     *       "phone": "+15551234567",
-                     *       "reference_id": "ext_12345",
-                     *       "time_zone": "America/Chicago",
-                     *       "updated_at": "2025-03-10T09:45:00Z"
-                     *     }
-                     */
-                    client: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client.
-                         * @example en-US
-                         */
-                        locale: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "client";
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description External reference identifier for the client. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                    client_data: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client booking the appointment.
-                         * @example en-US
-                         */
-                        locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description The client's external reference identifier. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.locale` instead.
-                     * @example en-US
-                     */
-                    client_locale?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.reference_id` instead.
-                     */
-                    client_reference_id?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.time_zone` instead.
-                     * @example America/Chicago
-                     */
-                    client_time_zone?: string;
-                    confirmation_events: {
-                        /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * @description The entity that initiated the confirmation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "confirmation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the confirmation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the confirmation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                    }[];
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was confirmed.
-                     */
-                    confirmed_at: string | null;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data` instead.
-                     */
-                    fields: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                    };
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "appointment";
-                    /**
-                     * Provider
-                     * @description A provider represents a staff member who can provide services to clients.
-                     * @example {
-                     *       "created_at": "2017-09-12T12:34:55Z",
-                     *       "display_name": "John Smith",
-                     *       "first_name": "John",
-                     *       "id": "prov_d025a96ac0c6",
-                     *       "last_name": "Smith",
-                     *       "metadata": {
-                     *         "external_id": "123"
-                     *       },
-                     *       "object": "provider",
-                     *       "updated_at": "2017-09-13T10:11:12Z"
-                     *     }
-                     */
-                    provider: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /** @description The provider's display name. */
-                        display_name: string;
-                        /** @description The provider's first name. */
-                        first_name: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The provider's last name. */
-                        last_name: string;
-                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                        metadata?: Record<string, never>;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "provider";
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    reschedule_events: {
-                        actor: string | null;
-                        /** @enum {string} */
-                        initiated_by: "user" | "client";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        object: "reschedule_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the reschedule occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Service
-                     * @description A service represents a type of appointment.
-                     * @example {
-                     *       "appointment_type": "in_person",
-                     *       "booking_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_booking": true,
-                     *         "disabled_message": "Booking is disabled for this service.",
-                     *         "maximize_utilization": {
-                     *           "enabled": true
-                     *         }
-                     *       },
-                     *       "cancellation_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_cancellation": true,
-                     *         "disabled_message": "Cancellation is disabled for this service."
-                     *       },
-                     *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                     *       "created_at": "2025-02-17T17:49:19Z",
-                     *       "duration": "PT1H30M",
-                     *       "id": "srv_d025a96ac0c6",
-                     *       "name": "Initial Consult",
-                     *       "object": "service",
-                     *       "rescheduling_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_rescheduling": true,
-                     *         "disabled_message": "Rescheduling is disabled for this service."
-                     *       },
-                     *       "slot_rules": [
-                     *         {
-                     *           "recurrence_rule": {
-                     *             "byday": [
-                     *               "mo",
-                     *               "we",
-                     *               "fr"
-                     *             ],
-                     *             "freq": "weekly"
-                     *           },
-                     *           "start_times": [
-                     *             "09:00",
-                     *             "10:00"
-                     *           ]
-                     *         }
-                     *       ],
-                     *       "updated_at": "2025-02-17T17:49:19Z"
-                     *     }
-                     */
-                    service: {
-                        /**
-                         * @description The type of appointment.
-                         * @enum {string}
-                         */
-                        appointment_type: "in_person" | "virtual";
-                        /**
-                         * BookingPolicy
-                         * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_booking": true,
-                         *       "disabled_message": "Booking is disabled for this service.",
-                         *       "maximize_utilization": {
-                         *         "enabled": true
-                         *       }
-                         *     }
-                         */
-                        booking_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public booking is allowed for the service. */
-                            allow_booking: boolean;
-                            /** @description The message to display when public booking is disabled. */
-                            disabled_message: string | null;
-                            /**
-                             * MaximizeUtilizationPolicy
-                             * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                             * @example {
-                             *       "enabled": true
-                             *     }
-                             */
-                            maximize_utilization: {
-                                /** @description Whether maximize utilization is enabled for the service. */
-                                enabled: boolean;
-                            };
-                        };
-                        /**
-                         * CancellationPolicy
-                         * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_cancellation": true,
-                         *       "disabled_message": "Cancellation is disabled for this service."
-                         *     }
-                         */
-                        cancellation_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public cancellation is allowed for the service. */
-                            allow_cancellation: boolean;
-                            /** @description The message to display when public cancellation is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /**
-                         * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                         * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                         */
-                        change_policy_text: string;
-                        /**
-                         * Format: datetime
-                         * @description When the service was created.
-                         */
-                        created_at: string;
-                        /**
-                         * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                         * @example `PT30M`
-                         */
-                        duration: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the service. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "service";
-                        /**
-                         * ReschedulingPolicy
-                         * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_rescheduling": true,
-                         *       "disabled_message": "Rescheduling is disabled for this service."
-                         *     }
-                         */
-                        rescheduling_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public rescheduling is allowed for the service. */
-                            allow_rescheduling: boolean;
-                            /** @description The message to display when public rescheduling is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /** @description Array of slot rules for the service. */
-                        slot_rules: {
-                            /**
-                             * RecurrenceRule
-                             * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                             *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                             *     but are a subset of the full specification.
-                             * @example {
-                             *       "byday": [
-                             *         "mo",
-                             *         "we",
-                             *         "fr"
-                             *       ],
-                             *       "freq": "weekly"
-                             *     }
-                             */
-                            recurrence_rule: {
-                                /**
-                                 * @description The days of the week on which the recurrence occurs.
-                                 * @example [
-                                 *       "mo",
-                                 *       "we",
-                                 *       "fr"
-                                 *     ]
-                                 */
-                                byday?: string[];
-                                /** @description Number of occurrences at which to end the recurrence. */
-                                count?: number | null;
-                                /**
-                                 * @description The frequency of the recurrence.
-                                 * @enum {string}
-                                 */
-                                freq: "daily" | "weekly";
-                                /**
-                                 * @description How often the recurrence rule repeats.
-                                 * @example 2
-                                 */
-                                interval?: number;
-                                /**
-                                 * @description Date at which to end the recurrence (in ISO-8601 format).
-                                 * @example 2024-01-02
-                                 */
-                                until?: Record<string, never> | null;
-                            };
-                            /** @description Array of start times for slots. */
-                            start_times: string[];
-                        }[];
-                        /**
-                         * Format: datetime
-                         * @description When the service was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The status of the appointment.
-                     * @enum {string}
-                     */
-                    status: "scheduled" | "canceled";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at?: string;
-                    /** @description URLs for this appointment. */
-                    urls?: {
-                        /** @description URLs for the client to use to add this appointment to their calendar. */
-                        add_to_calendar?: string[];
-                        /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                        add_to_google_calendar: string[];
-                        /** @description URLs for the client to use to cancel this appointment. */
-                        cancel: string[];
-                        /** @description URLs for the client to use to confirm this appointment. */
-                        confirm: string[];
-                        /** @description URLs for the client to use to download an iCal file for this appointment. */
-                        ics: string[];
-                        /** @description URLs for the client to use to join this appointment. */
-                        join: string[];
-                        /** @description URLs for the client to use to reschedule this appointment. */
-                        reschedule: string[];
-                    };
-                };
+                object: components["schemas"]["Appointment"];
                 /**
                  * @description The event type.
                  * @enum {string}
                  */
                 type: "appointment.confirmed";
             } | {
-                /**
-                 * Appointment
-                 * @description An appointment represents a booking that a client has made with a provider for a service.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "cancellation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "cancellation_reason": {
-                 *             "id": "cr_a1b2c3d4e5f6",
-                 *             "name": "Distance too far",
-                 *             "object": "cancellation_reason",
-                 *             "sort_order": 1
-                 *           },
-                 *           "custom_reason_text": "I'm sick",
-                 *           "initiated_by": "client",
-                 *           "object": "cancellation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "client": {
-                 *         "created_at": "2025-01-15T14:30:00Z",
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "id": "clnt_a1b2c3d4e5f6",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "object": "client",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago",
-                 *         "updated_at": "2025-03-10T09:45:00Z"
-                 *       },
-                 *       "client_data": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "locale": "en-US",
-                 *         "phone": "+15551234567",
-                 *         "reference_id": "ext_12345",
-                 *         "time_zone": "America/Chicago"
-                 *       },
-                 *       "client_locale": "en-US",
-                 *       "client_reference_id": "ext_12345",
-                 *       "client_time_zone": "America/Chicago",
-                 *       "confirmation_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "initiated_by": "client",
-                 *           "object": "confirmation_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "source": "client_ui",
-                 *           "start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           }
-                 *         }
-                 *       ],
-                 *       "confirmed_at": "2025-03-10T15:30:00Z",
-                 *       "created_at": "2025-03-10T14:30:00Z",
-                 *       "end_at": {
-                 *         "local": "2025-03-01T11:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736464800,
-                 *         "utc": "2025-03-01T04:00:00Z"
-                 *       },
-                 *       "fields": {
-                 *         "email": "jane.smith@example.com",
-                 *         "first_name": "Jane",
-                 *         "last_name": "Smith",
-                 *         "phone": "+15551234567"
-                 *       },
-                 *       "id": "appt_a1b2c3d4e5f6",
-                 *       "object": "appointment",
-                 *       "provider": {
-                 *         "created_at": "2017-09-12T12:34:55Z",
-                 *         "display_name": "John Smith",
-                 *         "first_name": "John",
-                 *         "id": "prov_d025a96ac0c6",
-                 *         "last_name": "Smith",
-                 *         "metadata": {
-                 *           "external_id": "123"
-                 *         },
-                 *         "object": "provider",
-                 *         "updated_at": "2017-09-13T10:11:12Z"
-                 *       },
-                 *       "reschedule_events": [
-                 *         {
-                 *           "actor": null,
-                 *           "initiated_by": "client",
-                 *           "new_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "new_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "object": "reschedule_event",
-                 *           "occurred_at": "2023-01-01T03:00:00Z",
-                 *           "previous_end_at": {
-                 *             "local": "2023-01-01T01:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736464800,
-                 *             "utc": "2023-01-01T04:00:00Z"
-                 *           },
-                 *           "previous_start_at": {
-                 *             "local": "2023-01-01T00:00:00-05:00",
-                 *             "object": "zoned_date_time",
-                 *             "time_zone": "America/New_York",
-                 *             "unix_ts": 1736461200,
-                 *             "utc": "2023-01-01T03:00:00Z"
-                 *           },
-                 *           "source": "client_ui"
-                 *         }
-                 *       ],
-                 *       "service": {
-                 *         "appointment_type": "in_person",
-                 *         "booking_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_booking": true,
-                 *           "disabled_message": "Booking is disabled for this service.",
-                 *           "maximize_utilization": {
-                 *             "enabled": true
-                 *           }
-                 *         },
-                 *         "cancellation_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_cancellation": true,
-                 *           "disabled_message": "Cancellation is disabled for this service."
-                 *         },
-                 *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *         "created_at": "2025-02-17T17:49:19Z",
-                 *         "duration": "PT1H30M",
-                 *         "id": "srv_d025a96ac0c6",
-                 *         "name": "Initial Consult",
-                 *         "object": "service",
-                 *         "rescheduling_policy": {
-                 *           "advance_notice": {
-                 *             "enabled": true,
-                 *             "minimum_duration": "PT1H"
-                 *           },
-                 *           "allow_rescheduling": true,
-                 *           "disabled_message": "Rescheduling is disabled for this service."
-                 *         },
-                 *         "slot_rules": [
-                 *           {
-                 *             "recurrence_rule": {
-                 *               "byday": [
-                 *                 "mo",
-                 *                 "we",
-                 *                 "fr"
-                 *               ],
-                 *               "freq": "weekly"
-                 *             },
-                 *             "start_times": [
-                 *               "09:00",
-                 *               "10:00"
-                 *             ]
-                 *           }
-                 *         ],
-                 *         "updated_at": "2025-02-17T17:49:19Z"
-                 *       },
-                 *       "start_at": {
-                 *         "local": "2025-03-01T10:00:00-05:00",
-                 *         "object": "zoned_date_time",
-                 *         "time_zone": "America/New_York",
-                 *         "unix_ts": 1736461200,
-                 *         "utc": "2025-03-01T03:00:00Z"
-                 *       },
-                 *       "status": "scheduled",
-                 *       "updated_at": "2025-03-10T14:30:00Z",
-                 *       "urls": {
-                 *         "add_to_google_calendar": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-                 *         ],
-                 *         "cancel": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-                 *         ],
-                 *         "confirm": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-                 *         ],
-                 *         "ics": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-                 *         ],
-                 *         "join": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-                 *         ],
-                 *         "reschedule": [
-                 *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-                 *         ]
-                 *       }
-                 *     }
-                 */
-                object: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    cancellation_events: {
-                        /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * CancellationReason
-                         * @description This is an object representing a cancellation reason.
-                         * @example {
-                         *       "id": "cr_a1b2c3d4e5f6",
-                         *       "name": "Distance too far",
-                         *       "object": "cancellation_reason",
-                         *       "sort_order": 1
-                         *     }
-                         */
-                        cancellation_reason: {
-                            /** @description Unique identifier for the object. */
-                            id: string;
-                            /** @description The name of the cancellation reason. */
-                            name: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "cancellation_reason";
-                            /** @description The sort order of the cancellation reason. */
-                            sort_order: number;
-                        } | null;
-                        /** @description Custom reason text for the cancellation. */
-                        custom_reason_text: string | null;
-                        /**
-                         * @description The entity that initiated the cancellation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "cancellation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the cancellation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the cancellation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Client
-                     * @description This is an object representing a client.
-                     * @example {
-                     *       "created_at": "2025-01-15T14:30:00Z",
-                     *       "email": "jane.smith@example.com",
-                     *       "first_name": "Jane",
-                     *       "id": "clnt_a1b2c3d4e5f6",
-                     *       "last_name": "Smith",
-                     *       "locale": "en-US",
-                     *       "object": "client",
-                     *       "phone": "+15551234567",
-                     *       "reference_id": "ext_12345",
-                     *       "time_zone": "America/Chicago",
-                     *       "updated_at": "2025-03-10T09:45:00Z"
-                     *     }
-                     */
-                    client: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client.
-                         * @example en-US
-                         */
-                        locale: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "client";
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description External reference identifier for the client. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                    client_data: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /**
-                         * @description The locale of the client booking the appointment.
-                         * @example en-US
-                         */
-                        locale: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                        /** @description The client's external reference identifier. */
-                        reference_id: string | null;
-                        /**
-                         * @description The client's time zone (IANA format).
-                         * @example America/Chicago
-                         */
-                        time_zone: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.locale` instead.
-                     * @example en-US
-                     */
-                    client_locale?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.reference_id` instead.
-                     */
-                    client_reference_id?: string | null;
-                    /**
-                     * @deprecated
-                     * @description Use `client_data.time_zone` instead.
-                     * @example America/Chicago
-                     */
-                    client_time_zone?: string;
-                    confirmation_events: {
-                        /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                        actor: string | null;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * @description The entity that initiated the confirmation.
-                         * @enum {string}
-                         */
-                        initiated_by: "user" | "client";
-                        /** @enum {string} */
-                        object: "confirmation_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the confirmation occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * @description The source of the confirmation event.
-                         * @enum {string}
-                         */
-                        source: "client_ui" | "dashboard" | "api";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                    }[];
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was confirmed.
-                     */
-                    confirmed_at: string | null;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @deprecated
-                     * @description Use `client_data` instead.
-                     */
-                    fields: {
-                        /**
-                         * Format: email
-                         * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                         */
-                        email?: string | null;
-                        /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                        first_name?: string | null;
-                        /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                        last_name?: string | null;
-                        /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                        phone?: string | null;
-                    };
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "appointment";
-                    /**
-                     * Provider
-                     * @description A provider represents a staff member who can provide services to clients.
-                     * @example {
-                     *       "created_at": "2017-09-12T12:34:55Z",
-                     *       "display_name": "John Smith",
-                     *       "first_name": "John",
-                     *       "id": "prov_d025a96ac0c6",
-                     *       "last_name": "Smith",
-                     *       "metadata": {
-                     *         "external_id": "123"
-                     *       },
-                     *       "object": "provider",
-                     *       "updated_at": "2017-09-13T10:11:12Z"
-                     *     }
-                     */
-                    provider: {
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was created.
-                         */
-                        created_at: string;
-                        /** @description The provider's display name. */
-                        display_name: string;
-                        /** @description The provider's first name. */
-                        first_name: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The provider's last name. */
-                        last_name: string;
-                        /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                        metadata?: Record<string, never>;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "provider";
-                        /**
-                         * Format: date-time
-                         * @description Time at which the object was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    reschedule_events: {
-                        actor: string | null;
-                        /** @enum {string} */
-                        initiated_by: "user" | "client";
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        new_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        object: "reschedule_event";
-                        /**
-                         * Format: datetime
-                         * @description The time at which the reschedule occurred (ISO-8601 format).
-                         */
-                        occurred_at: string;
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_end_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /**
-                         * ZonedDateTime
-                         * @description An object describing a date/time in local time and in UTC.
-                         * @example {
-                         *       "local": "2025-03-01T10:00:00-05:00",
-                         *       "object": "zoned_date_time",
-                         *       "time_zone": "America/New_York",
-                         *       "unix_ts": 1736461200,
-                         *       "utc": "2025-03-01T03:00:00Z"
-                         *     }
-                         */
-                        previous_start_at: {
-                            /**
-                             * Format: date-time
-                             * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                             * @example 2025-03-01T10:00:00-05:00
-                             */
-                            local: string;
-                            /**
-                             * @description String representing the object's type.
-                             * @enum {string}
-                             */
-                            object: "zoned_date_time";
-                            /**
-                             * @description The time zone of the local time (IANA format).
-                             * @example America/New_York
-                             */
-                            time_zone: string;
-                            /**
-                             * @description The UTC date/time in Unix timestamp format (seconds).
-                             * @example 1736461200
-                             */
-                            unix_ts: number;
-                            /**
-                             * Format: date-time
-                             * @description The UTC date/time in ISO-8601 format (with time zone information).
-                             * @example 2025-03-01T03:00:00Z
-                             */
-                            utc: string;
-                        };
-                        /** @enum {string} */
-                        source: "client_ui" | "dashboard" | "api";
-                    }[];
-                    /**
-                     * Service
-                     * @description A service represents a type of appointment.
-                     * @example {
-                     *       "appointment_type": "in_person",
-                     *       "booking_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_booking": true,
-                     *         "disabled_message": "Booking is disabled for this service.",
-                     *         "maximize_utilization": {
-                     *           "enabled": true
-                     *         }
-                     *       },
-                     *       "cancellation_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_cancellation": true,
-                     *         "disabled_message": "Cancellation is disabled for this service."
-                     *       },
-                     *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                     *       "created_at": "2025-02-17T17:49:19Z",
-                     *       "duration": "PT1H30M",
-                     *       "id": "srv_d025a96ac0c6",
-                     *       "name": "Initial Consult",
-                     *       "object": "service",
-                     *       "rescheduling_policy": {
-                     *         "advance_notice": {
-                     *           "enabled": true,
-                     *           "minimum_duration": "PT1H"
-                     *         },
-                     *         "allow_rescheduling": true,
-                     *         "disabled_message": "Rescheduling is disabled for this service."
-                     *       },
-                     *       "slot_rules": [
-                     *         {
-                     *           "recurrence_rule": {
-                     *             "byday": [
-                     *               "mo",
-                     *               "we",
-                     *               "fr"
-                     *             ],
-                     *             "freq": "weekly"
-                     *           },
-                     *           "start_times": [
-                     *             "09:00",
-                     *             "10:00"
-                     *           ]
-                     *         }
-                     *       ],
-                     *       "updated_at": "2025-02-17T17:49:19Z"
-                     *     }
-                     */
-                    service: {
-                        /**
-                         * @description The type of appointment.
-                         * @enum {string}
-                         */
-                        appointment_type: "in_person" | "virtual";
-                        /**
-                         * BookingPolicy
-                         * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_booking": true,
-                         *       "disabled_message": "Booking is disabled for this service.",
-                         *       "maximize_utilization": {
-                         *         "enabled": true
-                         *       }
-                         *     }
-                         */
-                        booking_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public booking is allowed for the service. */
-                            allow_booking: boolean;
-                            /** @description The message to display when public booking is disabled. */
-                            disabled_message: string | null;
-                            /**
-                             * MaximizeUtilizationPolicy
-                             * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                             * @example {
-                             *       "enabled": true
-                             *     }
-                             */
-                            maximize_utilization: {
-                                /** @description Whether maximize utilization is enabled for the service. */
-                                enabled: boolean;
-                            };
-                        };
-                        /**
-                         * CancellationPolicy
-                         * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_cancellation": true,
-                         *       "disabled_message": "Cancellation is disabled for this service."
-                         *     }
-                         */
-                        cancellation_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public cancellation is allowed for the service. */
-                            allow_cancellation: boolean;
-                            /** @description The message to display when public cancellation is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /**
-                         * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                         * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                         */
-                        change_policy_text: string;
-                        /**
-                         * Format: datetime
-                         * @description When the service was created.
-                         */
-                        created_at: string;
-                        /**
-                         * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                         * @example `PT30M`
-                         */
-                        duration: string;
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the service. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "service";
-                        /**
-                         * ReschedulingPolicy
-                         * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                         * @example {
-                         *       "advance_notice": {
-                         *         "enabled": true,
-                         *         "minimum_duration": "PT1H"
-                         *       },
-                         *       "allow_rescheduling": true,
-                         *       "disabled_message": "Rescheduling is disabled for this service."
-                         *     }
-                         */
-                        rescheduling_policy: {
-                            /**
-                             * AdvanceNoticePolicy
-                             * @description A policy for requiring minimum advance notice.
-                             * @example {
-                             *       "enabled": true,
-                             *       "minimum_duration": "PT1H"
-                             *     }
-                             */
-                            advance_notice: {
-                                /** @description Whether advance notice is enabled. */
-                                enabled: boolean;
-                                /** @description The minimum duration of advance notice. */
-                                minimum_duration: string | null;
-                            };
-                            /** @description Whether public rescheduling is allowed for the service. */
-                            allow_rescheduling: boolean;
-                            /** @description The message to display when public rescheduling is disabled. */
-                            disabled_message: string | null;
-                        };
-                        /** @description Array of slot rules for the service. */
-                        slot_rules: {
-                            /**
-                             * RecurrenceRule
-                             * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                             *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                             *     but are a subset of the full specification.
-                             * @example {
-                             *       "byday": [
-                             *         "mo",
-                             *         "we",
-                             *         "fr"
-                             *       ],
-                             *       "freq": "weekly"
-                             *     }
-                             */
-                            recurrence_rule: {
-                                /**
-                                 * @description The days of the week on which the recurrence occurs.
-                                 * @example [
-                                 *       "mo",
-                                 *       "we",
-                                 *       "fr"
-                                 *     ]
-                                 */
-                                byday?: string[];
-                                /** @description Number of occurrences at which to end the recurrence. */
-                                count?: number | null;
-                                /**
-                                 * @description The frequency of the recurrence.
-                                 * @enum {string}
-                                 */
-                                freq: "daily" | "weekly";
-                                /**
-                                 * @description How often the recurrence rule repeats.
-                                 * @example 2
-                                 */
-                                interval?: number;
-                                /**
-                                 * @description Date at which to end the recurrence (in ISO-8601 format).
-                                 * @example 2024-01-02
-                                 */
-                                until?: Record<string, never> | null;
-                            };
-                            /** @description Array of start times for slots. */
-                            start_times: string[];
-                        }[];
-                        /**
-                         * Format: datetime
-                         * @description When the service was last updated.
-                         */
-                        updated_at: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The status of the appointment.
-                     * @enum {string}
-                     */
-                    status: "scheduled" | "canceled";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at?: string;
-                    /** @description URLs for this appointment. */
-                    urls?: {
-                        /** @description URLs for the client to use to add this appointment to their calendar. */
-                        add_to_calendar?: string[];
-                        /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                        add_to_google_calendar: string[];
-                        /** @description URLs for the client to use to cancel this appointment. */
-                        cancel: string[];
-                        /** @description URLs for the client to use to confirm this appointment. */
-                        confirm: string[];
-                        /** @description URLs for the client to use to download an iCal file for this appointment. */
-                        ics: string[];
-                        /** @description URLs for the client to use to join this appointment. */
-                        join: string[];
-                        /** @description URLs for the client to use to reschedule this appointment. */
-                        reschedule: string[];
-                    };
-                };
+                object: components["schemas"]["Appointment"];
                 /**
                  * @description The event type.
                  * @enum {string}
@@ -13370,7 +6149,9 @@ export interface components {
                     /** @description The provider's last name. */
                     last_name: string;
                     /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
+                    metadata?: {
+                        [key: string]: unknown;
+                    };
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -13419,7 +6200,9 @@ export interface components {
                     /** @description The provider's last name. */
                     last_name: string;
                     /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
+                    metadata?: {
+                        [key: string]: unknown;
+                    };
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -13468,7 +6251,9 @@ export interface components {
                     /** @description The provider's last name. */
                     last_name: string;
                     /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
+                    metadata?: {
+                        [key: string]: unknown;
+                    };
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -13517,7 +6302,9 @@ export interface components {
                     /** @description The provider's last name. */
                     last_name: string;
                     /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
+                    metadata?: {
+                        [key: string]: unknown;
+                    };
                     /**
                      * @description String representing the object's type.
                      * @enum {string}
@@ -13784,6 +6571,10 @@ export interface components {
                  *         },
                  *         "allow_booking": true,
                  *         "disabled_message": "Booking is disabled for this service.",
+                 *         "hold": {
+                 *           "duration": "PT10M",
+                 *           "enabled": true
+                 *         },
                  *         "maximize_utilization": {
                  *           "enabled": true
                  *         }
@@ -13845,6 +6636,10 @@ export interface components {
                      *       },
                      *       "allow_booking": true,
                      *       "disabled_message": "Booking is disabled for this service.",
+                     *       "hold": {
+                     *         "duration": "PT10M",
+                     *         "enabled": true
+                     *       },
                      *       "maximize_utilization": {
                      *         "enabled": true
                      *       }
@@ -13869,6 +6664,20 @@ export interface components {
                         allow_booking: boolean;
                         /** @description The message to display when public booking is disabled. */
                         disabled_message: string | null;
+                        /**
+                         * HoldPolicy
+                         * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                         * @example {
+                         *       "duration": "PT10M",
+                         *       "enabled": true
+                         *     }
+                         */
+                        hold: {
+                            /** @description The duration of the hold. */
+                            duration: string | null;
+                            /** @description Whether slot holds are enabled for the service. */
+                            enabled: boolean;
+                        };
                         /**
                          * MaximizeUtilizationPolicy
                          * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -14040,6 +6849,10 @@ export interface components {
                  *         },
                  *         "allow_booking": true,
                  *         "disabled_message": "Booking is disabled for this service.",
+                 *         "hold": {
+                 *           "duration": "PT10M",
+                 *           "enabled": true
+                 *         },
                  *         "maximize_utilization": {
                  *           "enabled": true
                  *         }
@@ -14101,6 +6914,10 @@ export interface components {
                      *       },
                      *       "allow_booking": true,
                      *       "disabled_message": "Booking is disabled for this service.",
+                     *       "hold": {
+                     *         "duration": "PT10M",
+                     *         "enabled": true
+                     *       },
                      *       "maximize_utilization": {
                      *         "enabled": true
                      *       }
@@ -14125,6 +6942,20 @@ export interface components {
                         allow_booking: boolean;
                         /** @description The message to display when public booking is disabled. */
                         disabled_message: string | null;
+                        /**
+                         * HoldPolicy
+                         * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                         * @example {
+                         *       "duration": "PT10M",
+                         *       "enabled": true
+                         *     }
+                         */
+                        hold: {
+                            /** @description The duration of the hold. */
+                            duration: string | null;
+                            /** @description Whether slot holds are enabled for the service. */
+                            enabled: boolean;
+                        };
                         /**
                          * MaximizeUtilizationPolicy
                          * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -14296,6 +7127,10 @@ export interface components {
                  *         },
                  *         "allow_booking": true,
                  *         "disabled_message": "Booking is disabled for this service.",
+                 *         "hold": {
+                 *           "duration": "PT10M",
+                 *           "enabled": true
+                 *         },
                  *         "maximize_utilization": {
                  *           "enabled": true
                  *         }
@@ -14357,6 +7192,10 @@ export interface components {
                      *       },
                      *       "allow_booking": true,
                      *       "disabled_message": "Booking is disabled for this service.",
+                     *       "hold": {
+                     *         "duration": "PT10M",
+                     *         "enabled": true
+                     *       },
                      *       "maximize_utilization": {
                      *         "enabled": true
                      *       }
@@ -14381,6 +7220,20 @@ export interface components {
                         allow_booking: boolean;
                         /** @description The message to display when public booking is disabled. */
                         disabled_message: string | null;
+                        /**
+                         * HoldPolicy
+                         * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                         * @example {
+                         *       "duration": "PT10M",
+                         *       "enabled": true
+                         *     }
+                         */
+                        hold: {
+                            /** @description The duration of the hold. */
+                            duration: string | null;
+                            /** @description Whether slot holds are enabled for the service. */
+                            enabled: boolean;
+                        };
                         /**
                          * MaximizeUtilizationPolicy
                          * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -14703,7 +7556,9 @@ export interface components {
                 /** @description The provider's last name. */
                 last_name: string;
                 /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                metadata?: Record<string, never>;
+                metadata?: {
+                    [key: string]: unknown;
+                };
                 /**
                  * @description String representing the object's type.
                  * @enum {string}
@@ -14720,6 +7575,62 @@ export interface components {
              * @enum {string}
              */
             type: "provider.created";
+        };
+        /**
+         * UpdateBookingIntentRequest
+         * @description Request schema for updating a booking intent
+         * @example {
+         *       "client_data": {
+         *         "email": "jane@example.com",
+         *         "first_name": "Jane"
+         *       },
+         *       "end_at": "2026-02-23T10:30:00-05:00",
+         *       "provider_id": "prov_1234567890",
+         *       "start_at": "2026-02-23T10:00:00-05:00",
+         *       "time_zone": "America/New_York"
+         *     }
+         */
+        UpdateBookingIntentRequest: {
+            /** @description Progressive client data. Provided fields are merged with existing values. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /** @description The ID of an existing client to link. */
+            client_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M). When omitted, falls back to the service's hold policy duration. */
+            hold_duration?: string | null;
+            /** @description Whether to enable slot holding. When omitted, falls back to the service's hold policy if service is changing. */
+            hold_enabled?: boolean | null;
+            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. Replaces existing locked_fields entirely. */
+            locked_fields?: string[] | null;
+            /** @description Custom metadata key-value pairs. Replaces existing metadata entirely. */
+            metadata?: {
+                [key: string]: unknown;
+            } | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service. */
+            service_id?: string | null;
+            /** @description Whether the slot has been prevalidated. Automatically reset to false when slot-relevant fields (service_id, provider_id, start_at, end_at, time_zone) change, unless explicitly set to true in the same request. */
+            slot_prevalidated?: boolean | null;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
         };
         /**
          * AccountUserCreatedEventData
@@ -14939,6 +7850,10 @@ export interface components {
          *               },
          *               "allow_booking": true,
          *               "disabled_message": "Booking is disabled for this service.",
+         *               "hold": {
+         *                 "duration": "PT10M",
+         *                 "enabled": true
+         *               },
          *               "maximize_utilization": {
          *                 "enabled": true
          *               }
@@ -15039,6 +7954,10 @@ export interface components {
          *         },
          *         "allow_booking": true,
          *         "disabled_message": "Booking is disabled for this service.",
+         *         "hold": {
+         *           "duration": "PT10M",
+         *           "enabled": true
+         *         },
          *         "maximize_utilization": {
          *           "enabled": true
          *         }
@@ -15096,6 +8015,10 @@ export interface components {
              *       },
              *       "allow_booking": true,
              *       "disabled_message": "Booking is disabled for this service.",
+             *       "hold": {
+             *         "duration": "PT10M",
+             *         "enabled": true
+             *       },
              *       "maximize_utilization": {
              *         "enabled": true
              *       }
@@ -15120,6 +8043,20 @@ export interface components {
                 allow_booking: boolean;
                 /** @description The message to display when public booking is disabled. */
                 disabled_message: string | null;
+                /**
+                 * HoldPolicy
+                 * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                 * @example {
+                 *       "duration": "PT10M",
+                 *       "enabled": true
+                 *     }
+                 */
+                hold: {
+                    /** @description The duration of the hold. */
+                    duration: string | null;
+                    /** @description Whether slot holds are enabled for the service. */
+                    enabled: boolean;
+                };
                 /**
                  * MaximizeUtilizationPolicy
                  * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -15558,6 +8495,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -15986,6 +8927,10 @@ export interface components {
          *       },
          *       "allow_booking": true,
          *       "disabled_message": "Booking is disabled for this service.",
+         *       "hold": {
+         *         "duration": "PT10M",
+         *         "enabled": true
+         *       },
          *       "maximize_utilization": {
          *         "enabled": true
          *       }
@@ -16011,6 +8956,20 @@ export interface components {
             /** @description The message to display when public booking is disabled. */
             disabled_message: string | null;
             /**
+             * HoldPolicy
+             * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+             * @example {
+             *       "duration": "PT10M",
+             *       "enabled": true
+             *     }
+             */
+            hold: {
+                /** @description The duration of the hold. */
+                duration: string | null;
+                /** @description Whether slot holds are enabled for the service. */
+                enabled: boolean;
+            };
+            /**
              * MaximizeUtilizationPolicy
              * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
              * @example {
@@ -16034,6 +8993,10 @@ export interface components {
          *         },
          *         "allow_booking": true,
          *         "disabled_message": "Booking is disabled for this service.",
+         *         "hold": {
+         *           "duration": "PT10M",
+         *           "enabled": true
+         *         },
          *         "maximize_utilization": {
          *           "enabled": true
          *         }
@@ -16095,6 +9058,10 @@ export interface components {
              *       },
              *       "allow_booking": true,
              *       "disabled_message": "Booking is disabled for this service.",
+             *       "hold": {
+             *         "duration": "PT10M",
+             *         "enabled": true
+             *       },
              *       "maximize_utilization": {
              *         "enabled": true
              *       }
@@ -16119,6 +9086,20 @@ export interface components {
                 allow_booking: boolean;
                 /** @description The message to display when public booking is disabled. */
                 disabled_message: string | null;
+                /**
+                 * HoldPolicy
+                 * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                 * @example {
+                 *       "duration": "PT10M",
+                 *       "enabled": true
+                 *     }
+                 */
+                hold: {
+                    /** @description The duration of the hold. */
+                    duration: string | null;
+                    /** @description Whether slot holds are enabled for the service. */
+                    enabled: boolean;
+                };
                 /**
                  * MaximizeUtilizationPolicy
                  * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -16323,7 +9304,9 @@ export interface components {
                 /** @description The provider's last name. */
                 last_name: string;
                 /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                metadata?: Record<string, never>;
+                metadata?: {
+                    [key: string]: unknown;
+                };
                 /**
                  * @description String representing the object's type.
                  * @enum {string}
@@ -16412,6 +9395,45 @@ export interface components {
              * @enum {string}
              */
             type: "account_user.deleted";
+        };
+        /**
+         * CompletePublicBookingIntentRequest
+         * @description Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion.
+         * @example {
+         *       "client_data": {
+         *         "email": "jane@example.com",
+         *         "first_name": "Jane"
+         *       },
+         *       "service_id": "srv_1234567890"
+         *     }
+         */
+        CompletePublicBookingIntentRequest: {
+            /** @description Progressive client data. Provided fields are merged with existing values. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service. */
+            service_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
         };
         /**
          * ProviderResponse
@@ -16584,6 +9606,10 @@ export interface components {
          *           },
          *           "allow_booking": true,
          *           "disabled_message": "Booking is disabled for this service.",
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           },
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
@@ -16644,6 +9670,10 @@ export interface components {
              *         },
              *         "allow_booking": true,
              *         "disabled_message": "Booking is disabled for this service.",
+             *         "hold": {
+             *           "duration": "PT10M",
+             *           "enabled": true
+             *         },
              *         "maximize_utilization": {
              *           "enabled": true
              *         }
@@ -16705,6 +9735,10 @@ export interface components {
                  *       },
                  *       "allow_booking": true,
                  *       "disabled_message": "Booking is disabled for this service.",
+                 *       "hold": {
+                 *         "duration": "PT10M",
+                 *         "enabled": true
+                 *       },
                  *       "maximize_utilization": {
                  *         "enabled": true
                  *       }
@@ -16729,6 +9763,20 @@ export interface components {
                     allow_booking: boolean;
                     /** @description The message to display when public booking is disabled. */
                     disabled_message: string | null;
+                    /**
+                     * HoldPolicy
+                     * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                     * @example {
+                     *       "duration": "PT10M",
+                     *       "enabled": true
+                     *     }
+                     */
+                    hold: {
+                        /** @description The duration of the hold. */
+                        duration: string | null;
+                        /** @description Whether slot holds are enabled for the service. */
+                        enabled: boolean;
+                    };
                     /**
                      * MaximizeUtilizationPolicy
                      * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -16909,29 +9957,8 @@ export interface components {
         CancellationEvent: {
             /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
             actor: string | null;
-            /**
-             * CancellationReason
-             * @description This is an object representing a cancellation reason.
-             * @example {
-             *       "id": "cr_a1b2c3d4e5f6",
-             *       "name": "Distance too far",
-             *       "object": "cancellation_reason",
-             *       "sort_order": 1
-             *     }
-             */
-            cancellation_reason: {
-                /** @description Unique identifier for the object. */
-                id: string;
-                /** @description The name of the cancellation reason. */
-                name: string;
-                /**
-                 * @description String representing the object's type.
-                 * @enum {string}
-                 */
-                object: "cancellation_reason";
-                /** @description The sort order of the cancellation reason. */
-                sort_order: number;
-            } | null;
+            /** @description The cancellation reason. */
+            cancellation_reason: components["schemas"]["CancellationReason"] | null;
             /** @description Custom reason text for the cancellation. */
             custom_reason_text: string | null;
             /**
@@ -17375,6 +10402,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -17510,6 +10541,60 @@ export interface components {
          */
         ProviderScheduleResponse: {
             data: components["schemas"]["ProviderSchedule"];
+        };
+        /**
+         * PublicBookingIntent
+         * @description A public booking intent that tracks the lifecycle of a booking attempt.
+         *     This is a simplified view without sensitive or admin-only fields.
+         * @example {
+         *       "appointment": null,
+         *       "end_at": {
+         *         "local": "2026-02-23T10:30:00-05:00",
+         *         "object": "zoned_date_time",
+         *         "time_zone": "America/New_York",
+         *         "unix_ts": 1771947000,
+         *         "utc": "2026-02-23T15:30:00Z"
+         *       },
+         *       "hold_until": "2026-02-22T10:10:00Z",
+         *       "id": "bi_abc123def456abc123def456",
+         *       "locked_fields": [],
+         *       "object": "public_booking_intent",
+         *       "start_at": {
+         *         "local": "2026-02-23T10:00:00-05:00",
+         *         "object": "zoned_date_time",
+         *         "time_zone": "America/New_York",
+         *         "unix_ts": 1771945200,
+         *         "utc": "2026-02-23T15:00:00Z"
+         *       },
+         *       "status": "slot_selected"
+         *     }
+         */
+        PublicBookingIntent: {
+            /** @description The linked appointment (set when completed) */
+            appointment?: components["schemas"]["PublicAppointment"] | null;
+            /** @description The end time of the selected slot */
+            end_at?: components["schemas"]["ZonedDateTime"] | null;
+            /**
+             * Format: date-time
+             * @description When the hold expires (UTC)
+             */
+            hold_until?: string | null;
+            /** @description The booking intent ID */
+            id: string;
+            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. */
+            locked_fields?: string[];
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "public_booking_intent";
+            /** @description The start time of the selected slot */
+            start_at?: components["schemas"]["ZonedDateTime"] | null;
+            /**
+             * @description The current status of the booking intent
+             * @enum {string}
+             */
+            status: "pending" | "slot_selected" | "completed" | "abandoned";
         };
         /**
          * UpdateAccountUserRequest
@@ -17701,6 +10786,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -17779,1094 +10868,54 @@ export interface components {
          *     }
          */
         AppointmentCanceledEventData: {
-            /**
-             * Appointment
-             * @description An appointment represents a booking that a client has made with a provider for a service.
-             * @example {
-             *       "appointment_type": "in_person",
-             *       "cancellation_events": [
-             *         {
-             *           "actor": null,
-             *           "cancellation_reason": {
-             *             "id": "cr_a1b2c3d4e5f6",
-             *             "name": "Distance too far",
-             *             "object": "cancellation_reason",
-             *             "sort_order": 1
-             *           },
-             *           "custom_reason_text": "I'm sick",
-             *           "initiated_by": "client",
-             *           "object": "cancellation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "client": {
-             *         "created_at": "2025-01-15T14:30:00Z",
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "id": "clnt_a1b2c3d4e5f6",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "object": "client",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago",
-             *         "updated_at": "2025-03-10T09:45:00Z"
-             *       },
-             *       "client_data": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago"
-             *       },
-             *       "client_locale": "en-US",
-             *       "client_reference_id": "ext_12345",
-             *       "client_time_zone": "America/Chicago",
-             *       "confirmation_events": [
-             *         {
-             *           "actor": null,
-             *           "end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "initiated_by": "client",
-             *           "object": "confirmation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui",
-             *           "start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           }
-             *         }
-             *       ],
-             *       "confirmed_at": "2025-03-10T15:30:00Z",
-             *       "created_at": "2025-03-10T14:30:00Z",
-             *       "end_at": {
-             *         "local": "2025-03-01T11:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736464800,
-             *         "utc": "2025-03-01T04:00:00Z"
-             *       },
-             *       "fields": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "phone": "+15551234567"
-             *       },
-             *       "id": "appt_a1b2c3d4e5f6",
-             *       "object": "appointment",
-             *       "provider": {
-             *         "created_at": "2017-09-12T12:34:55Z",
-             *         "display_name": "John Smith",
-             *         "first_name": "John",
-             *         "id": "prov_d025a96ac0c6",
-             *         "last_name": "Smith",
-             *         "metadata": {
-             *           "external_id": "123"
-             *         },
-             *         "object": "provider",
-             *         "updated_at": "2017-09-13T10:11:12Z"
-             *       },
-             *       "reschedule_events": [
-             *         {
-             *           "actor": null,
-             *           "initiated_by": "client",
-             *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "object": "reschedule_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "service": {
-             *         "appointment_type": "in_person",
-             *         "booking_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_booking": true,
-             *           "disabled_message": "Booking is disabled for this service.",
-             *           "maximize_utilization": {
-             *             "enabled": true
-             *           }
-             *         },
-             *         "cancellation_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_cancellation": true,
-             *           "disabled_message": "Cancellation is disabled for this service."
-             *         },
-             *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-             *         "created_at": "2025-02-17T17:49:19Z",
-             *         "duration": "PT1H30M",
-             *         "id": "srv_d025a96ac0c6",
-             *         "name": "Initial Consult",
-             *         "object": "service",
-             *         "rescheduling_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_rescheduling": true,
-             *           "disabled_message": "Rescheduling is disabled for this service."
-             *         },
-             *         "slot_rules": [
-             *           {
-             *             "recurrence_rule": {
-             *               "byday": [
-             *                 "mo",
-             *                 "we",
-             *                 "fr"
-             *               ],
-             *               "freq": "weekly"
-             *             },
-             *             "start_times": [
-             *               "09:00",
-             *               "10:00"
-             *             ]
-             *           }
-             *         ],
-             *         "updated_at": "2025-02-17T17:49:19Z"
-             *       },
-             *       "start_at": {
-             *         "local": "2025-03-01T10:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736461200,
-             *         "utc": "2025-03-01T03:00:00Z"
-             *       },
-             *       "status": "scheduled",
-             *       "updated_at": "2025-03-10T14:30:00Z",
-             *       "urls": {
-             *         "add_to_google_calendar": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-             *         ],
-             *         "cancel": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-             *         ],
-             *         "confirm": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-             *         ],
-             *         "ics": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-             *         ],
-             *         "join": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-             *         ],
-             *         "reschedule": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-             *         ]
-             *       }
-             *     }
-             */
-            object: {
-                /**
-                 * @description The type of appointment.
-                 * @enum {string}
-                 */
-                appointment_type: "in_person" | "virtual";
-                cancellation_events: {
-                    /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * CancellationReason
-                     * @description This is an object representing a cancellation reason.
-                     * @example {
-                     *       "id": "cr_a1b2c3d4e5f6",
-                     *       "name": "Distance too far",
-                     *       "object": "cancellation_reason",
-                     *       "sort_order": 1
-                     *     }
-                     */
-                    cancellation_reason: {
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the cancellation reason. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "cancellation_reason";
-                        /** @description The sort order of the cancellation reason. */
-                        sort_order: number;
-                    } | null;
-                    /** @description Custom reason text for the cancellation. */
-                    custom_reason_text: string | null;
-                    /**
-                     * @description The entity that initiated the cancellation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "cancellation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the cancellation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the cancellation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Client
-                 * @description This is an object representing a client.
-                 * @example {
-                 *       "created_at": "2025-01-15T14:30:00Z",
-                 *       "email": "jane.smith@example.com",
-                 *       "first_name": "Jane",
-                 *       "id": "clnt_a1b2c3d4e5f6",
-                 *       "last_name": "Smith",
-                 *       "locale": "en-US",
-                 *       "object": "client",
-                 *       "phone": "+15551234567",
-                 *       "reference_id": "ext_12345",
-                 *       "time_zone": "America/Chicago",
-                 *       "updated_at": "2025-03-10T09:45:00Z"
-                 *     }
-                 */
-                client: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client.
-                     * @example en-US
-                     */
-                    locale: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "client";
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description External reference identifier for the client. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                client_data: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client booking the appointment.
-                     * @example en-US
-                     */
-                    locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description The client's external reference identifier. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data.locale` instead.
-                 * @example en-US
-                 */
-                client_locale?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.reference_id` instead.
-                 */
-                client_reference_id?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.time_zone` instead.
-                 * @example America/Chicago
-                 */
-                client_time_zone?: string;
-                confirmation_events: {
-                    /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The entity that initiated the confirmation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "confirmation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the confirmation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the confirmation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                }[];
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was confirmed.
-                 */
-                confirmed_at: string | null;
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was created.
-                 */
-                created_at: string;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data` instead.
-                 */
-                fields: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                };
-                /** @description Unique identifier for the object. */
-                id: string;
-                /**
-                 * @description String representing the object's type.
-                 * @enum {string}
-                 */
-                object: "appointment";
-                /**
-                 * Provider
-                 * @description A provider represents a staff member who can provide services to clients.
-                 * @example {
-                 *       "created_at": "2017-09-12T12:34:55Z",
-                 *       "display_name": "John Smith",
-                 *       "first_name": "John",
-                 *       "id": "prov_d025a96ac0c6",
-                 *       "last_name": "Smith",
-                 *       "metadata": {
-                 *         "external_id": "123"
-                 *       },
-                 *       "object": "provider",
-                 *       "updated_at": "2017-09-13T10:11:12Z"
-                 *     }
-                 */
-                provider: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /** @description The provider's display name. */
-                    display_name: string;
-                    /** @description The provider's first name. */
-                    first_name: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The provider's last name. */
-                    last_name: string;
-                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "provider";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                reschedule_events: {
-                    actor: string | null;
-                    /** @enum {string} */
-                    initiated_by: "user" | "client";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    object: "reschedule_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the reschedule occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Service
-                 * @description A service represents a type of appointment.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "booking_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_booking": true,
-                 *         "disabled_message": "Booking is disabled for this service.",
-                 *         "maximize_utilization": {
-                 *           "enabled": true
-                 *         }
-                 *       },
-                 *       "cancellation_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_cancellation": true,
-                 *         "disabled_message": "Cancellation is disabled for this service."
-                 *       },
-                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *       "created_at": "2025-02-17T17:49:19Z",
-                 *       "duration": "PT1H30M",
-                 *       "id": "srv_d025a96ac0c6",
-                 *       "name": "Initial Consult",
-                 *       "object": "service",
-                 *       "rescheduling_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_rescheduling": true,
-                 *         "disabled_message": "Rescheduling is disabled for this service."
-                 *       },
-                 *       "slot_rules": [
-                 *         {
-                 *           "recurrence_rule": {
-                 *             "byday": [
-                 *               "mo",
-                 *               "we",
-                 *               "fr"
-                 *             ],
-                 *             "freq": "weekly"
-                 *           },
-                 *           "start_times": [
-                 *             "09:00",
-                 *             "10:00"
-                 *           ]
-                 *         }
-                 *       ],
-                 *       "updated_at": "2025-02-17T17:49:19Z"
-                 *     }
-                 */
-                service: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    /**
-                     * BookingPolicy
-                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_booking": true,
-                     *       "disabled_message": "Booking is disabled for this service.",
-                     *       "maximize_utilization": {
-                     *         "enabled": true
-                     *       }
-                     *     }
-                     */
-                    booking_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public booking is allowed for the service. */
-                        allow_booking: boolean;
-                        /** @description The message to display when public booking is disabled. */
-                        disabled_message: string | null;
-                        /**
-                         * MaximizeUtilizationPolicy
-                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                         * @example {
-                         *       "enabled": true
-                         *     }
-                         */
-                        maximize_utilization: {
-                            /** @description Whether maximize utilization is enabled for the service. */
-                            enabled: boolean;
-                        };
-                    };
-                    /**
-                     * CancellationPolicy
-                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_cancellation": true,
-                     *       "disabled_message": "Cancellation is disabled for this service."
-                     *     }
-                     */
-                    cancellation_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public cancellation is allowed for the service. */
-                        allow_cancellation: boolean;
-                        /** @description The message to display when public cancellation is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /**
-                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                     */
-                    change_policy_text: string;
-                    /**
-                     * Format: datetime
-                     * @description When the service was created.
-                     */
-                    created_at: string;
-                    /**
-                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                     * @example `PT30M`
-                     */
-                    duration: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The name of the service. */
-                    name: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "service";
-                    /**
-                     * ReschedulingPolicy
-                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_rescheduling": true,
-                     *       "disabled_message": "Rescheduling is disabled for this service."
-                     *     }
-                     */
-                    rescheduling_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public rescheduling is allowed for the service. */
-                        allow_rescheduling: boolean;
-                        /** @description The message to display when public rescheduling is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /** @description Array of slot rules for the service. */
-                    slot_rules: {
-                        /**
-                         * RecurrenceRule
-                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                         *     but are a subset of the full specification.
-                         * @example {
-                         *       "byday": [
-                         *         "mo",
-                         *         "we",
-                         *         "fr"
-                         *       ],
-                         *       "freq": "weekly"
-                         *     }
-                         */
-                        recurrence_rule: {
-                            /**
-                             * @description The days of the week on which the recurrence occurs.
-                             * @example [
-                             *       "mo",
-                             *       "we",
-                             *       "fr"
-                             *     ]
-                             */
-                            byday?: string[];
-                            /** @description Number of occurrences at which to end the recurrence. */
-                            count?: number | null;
-                            /**
-                             * @description The frequency of the recurrence.
-                             * @enum {string}
-                             */
-                            freq: "daily" | "weekly";
-                            /**
-                             * @description How often the recurrence rule repeats.
-                             * @example 2
-                             */
-                            interval?: number;
-                            /**
-                             * @description Date at which to end the recurrence (in ISO-8601 format).
-                             * @example 2024-01-02
-                             */
-                            until?: Record<string, never> | null;
-                        };
-                        /** @description Array of start times for slots. */
-                        start_times: string[];
-                    }[];
-                    /**
-                     * Format: datetime
-                     * @description When the service was last updated.
-                     */
-                    updated_at: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @description The status of the appointment.
-                 * @enum {string}
-                 */
-                status: "scheduled" | "canceled";
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was last updated.
-                 */
-                updated_at?: string;
-                /** @description URLs for this appointment. */
-                urls?: {
-                    /** @description URLs for the client to use to add this appointment to their calendar. */
-                    add_to_calendar?: string[];
-                    /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                    add_to_google_calendar: string[];
-                    /** @description URLs for the client to use to cancel this appointment. */
-                    cancel: string[];
-                    /** @description URLs for the client to use to confirm this appointment. */
-                    confirm: string[];
-                    /** @description URLs for the client to use to download an iCal file for this appointment. */
-                    ics: string[];
-                    /** @description URLs for the client to use to join this appointment. */
-                    join: string[];
-                    /** @description URLs for the client to use to reschedule this appointment. */
-                    reschedule: string[];
-                };
-            };
+            object: components["schemas"]["Appointment"];
             /**
              * @description The event type. (enum property replaced by openapi-typescript)
              * @enum {string}
              */
             type: "appointment.canceled";
+        };
+        /**
+         * UpdatePublicBookingIntentRequest
+         * @description Request schema for updating a booking intent via a public interface.
+         * @example {
+         *       "client_data": {
+         *         "email": "jane@example.com",
+         *         "first_name": "Jane"
+         *       },
+         *       "end_at": "2026-02-23T10:30:00-05:00",
+         *       "provider_id": "prov_1234567890",
+         *       "start_at": "2026-02-23T10:00:00-05:00",
+         *       "time_zone": "America/New_York"
+         *     }
+         */
+        UpdatePublicBookingIntentRequest: {
+            /** @description Progressive client data. Provided fields are merged with existing values. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service. */
+            service_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
         };
         /**
          * CreateDashboardSessionRequest
@@ -18991,6 +11040,37 @@ export interface components {
             type: "provider_schedule.updated";
         };
         /**
+         * PublicBookingIntentResponse
+         * @description Response schema for a single booking intent via a public interface.
+         * @example {
+         *       "data": {
+         *         "appointment": null,
+         *         "end_at": {
+         *           "local": "2026-02-23T10:30:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771947000,
+         *           "utc": "2026-02-23T15:30:00Z"
+         *         },
+         *         "hold_until": "2026-02-22T10:10:00Z",
+         *         "id": "bi_abc123def456abc123def456",
+         *         "locked_fields": [],
+         *         "object": "public_booking_intent",
+         *         "start_at": {
+         *           "local": "2026-02-23T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771945200,
+         *           "utc": "2026-02-23T15:00:00Z"
+         *         },
+         *         "status": "slot_selected"
+         *       }
+         *     }
+         */
+        PublicBookingIntentResponse: {
+            data: components["schemas"]["PublicBookingIntent"];
+        };
+        /**
          * Provider
          * @description A provider represents a staff member who can provide services to clients.
          * @example {
@@ -19021,7 +11101,9 @@ export interface components {
             /** @description The provider's last name. */
             last_name: string;
             /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-            metadata?: Record<string, never>;
+            metadata?: {
+                [key: string]: unknown;
+            };
             /**
              * @description String representing the object's type.
              * @enum {string}
@@ -19623,6 +11705,171 @@ export interface components {
             }[];
         };
         /**
+         * CreatePublicBookingIntentRequest
+         * @description Request schema for creating a booking intent via a public interface.
+         * @example {
+         *       "account_id": "acct_1234567890",
+         *       "end_at": "2026-02-23T10:30:00-05:00",
+         *       "service_id": "srv_1234567890",
+         *       "start_at": "2026-02-23T10:00:00-05:00",
+         *       "time_zone": "America/New_York"
+         *     }
+         */
+        CreatePublicBookingIntentRequest: {
+            /** @description The account ID. */
+            account_id: string;
+            /** @description Progressive client data to collect during the booking flow. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service for this booking intent. */
+            service_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
+        };
+        /**
+         * BookingIntentResponse
+         * @description Response schema for a single booking intent
+         * @example {
+         *       "data": {
+         *         "abandoned_at": null,
+         *         "appointment": null,
+         *         "client": null,
+         *         "client_data": {
+         *           "email": "jane@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Doe",
+         *           "locale": "en",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_123",
+         *           "time_zone": "America/New_York"
+         *         },
+         *         "completed_at": null,
+         *         "created_at": "2026-02-22T10:00:00Z",
+         *         "end_at": {
+         *           "local": "2026-02-23T10:30:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771947000,
+         *           "utc": "2026-02-23T15:30:00Z"
+         *         },
+         *         "hold_duration": "PT10M",
+         *         "hold_enabled": true,
+         *         "hold_until": "2026-02-22T10:10:00Z",
+         *         "id": "bi_abc123def456abc123def456",
+         *         "locked_fields": [
+         *           "provider_id",
+         *           "start_at",
+         *           "end_at",
+         *           "time_zone"
+         *         ],
+         *         "metadata": {
+         *           "source": "web"
+         *         },
+         *         "object": "booking_intent",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "id": "srv_d025a96ac0c6",
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2026-02-23T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771945200,
+         *           "utc": "2026-02-23T15:00:00Z"
+         *         },
+         *         "status": "slot_selected",
+         *         "updated_at": "2026-02-22T10:00:00Z"
+         *       }
+         *     }
+         */
+        BookingIntentResponse: {
+            data: components["schemas"]["BookingIntent"];
+        };
+        /**
          * Role
          * @description This is an object representing a role in the system.
          * @example {
@@ -19793,6 +12040,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -19871,1089 +12122,7 @@ export interface components {
          *     }
          */
         AppointmentDeletedEventData: {
-            /**
-             * Appointment
-             * @description An appointment represents a booking that a client has made with a provider for a service.
-             * @example {
-             *       "appointment_type": "in_person",
-             *       "cancellation_events": [
-             *         {
-             *           "actor": null,
-             *           "cancellation_reason": {
-             *             "id": "cr_a1b2c3d4e5f6",
-             *             "name": "Distance too far",
-             *             "object": "cancellation_reason",
-             *             "sort_order": 1
-             *           },
-             *           "custom_reason_text": "I'm sick",
-             *           "initiated_by": "client",
-             *           "object": "cancellation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "client": {
-             *         "created_at": "2025-01-15T14:30:00Z",
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "id": "clnt_a1b2c3d4e5f6",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "object": "client",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago",
-             *         "updated_at": "2025-03-10T09:45:00Z"
-             *       },
-             *       "client_data": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago"
-             *       },
-             *       "client_locale": "en-US",
-             *       "client_reference_id": "ext_12345",
-             *       "client_time_zone": "America/Chicago",
-             *       "confirmation_events": [
-             *         {
-             *           "actor": null,
-             *           "end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "initiated_by": "client",
-             *           "object": "confirmation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui",
-             *           "start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           }
-             *         }
-             *       ],
-             *       "confirmed_at": "2025-03-10T15:30:00Z",
-             *       "created_at": "2025-03-10T14:30:00Z",
-             *       "end_at": {
-             *         "local": "2025-03-01T11:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736464800,
-             *         "utc": "2025-03-01T04:00:00Z"
-             *       },
-             *       "fields": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "phone": "+15551234567"
-             *       },
-             *       "id": "appt_a1b2c3d4e5f6",
-             *       "object": "appointment",
-             *       "provider": {
-             *         "created_at": "2017-09-12T12:34:55Z",
-             *         "display_name": "John Smith",
-             *         "first_name": "John",
-             *         "id": "prov_d025a96ac0c6",
-             *         "last_name": "Smith",
-             *         "metadata": {
-             *           "external_id": "123"
-             *         },
-             *         "object": "provider",
-             *         "updated_at": "2017-09-13T10:11:12Z"
-             *       },
-             *       "reschedule_events": [
-             *         {
-             *           "actor": null,
-             *           "initiated_by": "client",
-             *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "object": "reschedule_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "service": {
-             *         "appointment_type": "in_person",
-             *         "booking_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_booking": true,
-             *           "disabled_message": "Booking is disabled for this service.",
-             *           "maximize_utilization": {
-             *             "enabled": true
-             *           }
-             *         },
-             *         "cancellation_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_cancellation": true,
-             *           "disabled_message": "Cancellation is disabled for this service."
-             *         },
-             *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-             *         "created_at": "2025-02-17T17:49:19Z",
-             *         "duration": "PT1H30M",
-             *         "id": "srv_d025a96ac0c6",
-             *         "name": "Initial Consult",
-             *         "object": "service",
-             *         "rescheduling_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_rescheduling": true,
-             *           "disabled_message": "Rescheduling is disabled for this service."
-             *         },
-             *         "slot_rules": [
-             *           {
-             *             "recurrence_rule": {
-             *               "byday": [
-             *                 "mo",
-             *                 "we",
-             *                 "fr"
-             *               ],
-             *               "freq": "weekly"
-             *             },
-             *             "start_times": [
-             *               "09:00",
-             *               "10:00"
-             *             ]
-             *           }
-             *         ],
-             *         "updated_at": "2025-02-17T17:49:19Z"
-             *       },
-             *       "start_at": {
-             *         "local": "2025-03-01T10:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736461200,
-             *         "utc": "2025-03-01T03:00:00Z"
-             *       },
-             *       "status": "scheduled",
-             *       "updated_at": "2025-03-10T14:30:00Z",
-             *       "urls": {
-             *         "add_to_google_calendar": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-             *         ],
-             *         "cancel": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-             *         ],
-             *         "confirm": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-             *         ],
-             *         "ics": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-             *         ],
-             *         "join": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-             *         ],
-             *         "reschedule": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-             *         ]
-             *       }
-             *     }
-             */
-            object: {
-                /**
-                 * @description The type of appointment.
-                 * @enum {string}
-                 */
-                appointment_type: "in_person" | "virtual";
-                cancellation_events: {
-                    /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * CancellationReason
-                     * @description This is an object representing a cancellation reason.
-                     * @example {
-                     *       "id": "cr_a1b2c3d4e5f6",
-                     *       "name": "Distance too far",
-                     *       "object": "cancellation_reason",
-                     *       "sort_order": 1
-                     *     }
-                     */
-                    cancellation_reason: {
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the cancellation reason. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "cancellation_reason";
-                        /** @description The sort order of the cancellation reason. */
-                        sort_order: number;
-                    } | null;
-                    /** @description Custom reason text for the cancellation. */
-                    custom_reason_text: string | null;
-                    /**
-                     * @description The entity that initiated the cancellation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "cancellation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the cancellation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the cancellation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Client
-                 * @description This is an object representing a client.
-                 * @example {
-                 *       "created_at": "2025-01-15T14:30:00Z",
-                 *       "email": "jane.smith@example.com",
-                 *       "first_name": "Jane",
-                 *       "id": "clnt_a1b2c3d4e5f6",
-                 *       "last_name": "Smith",
-                 *       "locale": "en-US",
-                 *       "object": "client",
-                 *       "phone": "+15551234567",
-                 *       "reference_id": "ext_12345",
-                 *       "time_zone": "America/Chicago",
-                 *       "updated_at": "2025-03-10T09:45:00Z"
-                 *     }
-                 */
-                client: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client.
-                     * @example en-US
-                     */
-                    locale: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "client";
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description External reference identifier for the client. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                client_data: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client booking the appointment.
-                     * @example en-US
-                     */
-                    locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description The client's external reference identifier. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data.locale` instead.
-                 * @example en-US
-                 */
-                client_locale?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.reference_id` instead.
-                 */
-                client_reference_id?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.time_zone` instead.
-                 * @example America/Chicago
-                 */
-                client_time_zone?: string;
-                confirmation_events: {
-                    /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The entity that initiated the confirmation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "confirmation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the confirmation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the confirmation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                }[];
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was confirmed.
-                 */
-                confirmed_at: string | null;
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was created.
-                 */
-                created_at: string;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data` instead.
-                 */
-                fields: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                };
-                /** @description Unique identifier for the object. */
-                id: string;
-                /**
-                 * @description String representing the object's type.
-                 * @enum {string}
-                 */
-                object: "appointment";
-                /**
-                 * Provider
-                 * @description A provider represents a staff member who can provide services to clients.
-                 * @example {
-                 *       "created_at": "2017-09-12T12:34:55Z",
-                 *       "display_name": "John Smith",
-                 *       "first_name": "John",
-                 *       "id": "prov_d025a96ac0c6",
-                 *       "last_name": "Smith",
-                 *       "metadata": {
-                 *         "external_id": "123"
-                 *       },
-                 *       "object": "provider",
-                 *       "updated_at": "2017-09-13T10:11:12Z"
-                 *     }
-                 */
-                provider: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /** @description The provider's display name. */
-                    display_name: string;
-                    /** @description The provider's first name. */
-                    first_name: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The provider's last name. */
-                    last_name: string;
-                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "provider";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                reschedule_events: {
-                    actor: string | null;
-                    /** @enum {string} */
-                    initiated_by: "user" | "client";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    object: "reschedule_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the reschedule occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Service
-                 * @description A service represents a type of appointment.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "booking_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_booking": true,
-                 *         "disabled_message": "Booking is disabled for this service.",
-                 *         "maximize_utilization": {
-                 *           "enabled": true
-                 *         }
-                 *       },
-                 *       "cancellation_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_cancellation": true,
-                 *         "disabled_message": "Cancellation is disabled for this service."
-                 *       },
-                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *       "created_at": "2025-02-17T17:49:19Z",
-                 *       "duration": "PT1H30M",
-                 *       "id": "srv_d025a96ac0c6",
-                 *       "name": "Initial Consult",
-                 *       "object": "service",
-                 *       "rescheduling_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_rescheduling": true,
-                 *         "disabled_message": "Rescheduling is disabled for this service."
-                 *       },
-                 *       "slot_rules": [
-                 *         {
-                 *           "recurrence_rule": {
-                 *             "byday": [
-                 *               "mo",
-                 *               "we",
-                 *               "fr"
-                 *             ],
-                 *             "freq": "weekly"
-                 *           },
-                 *           "start_times": [
-                 *             "09:00",
-                 *             "10:00"
-                 *           ]
-                 *         }
-                 *       ],
-                 *       "updated_at": "2025-02-17T17:49:19Z"
-                 *     }
-                 */
-                service: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    /**
-                     * BookingPolicy
-                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_booking": true,
-                     *       "disabled_message": "Booking is disabled for this service.",
-                     *       "maximize_utilization": {
-                     *         "enabled": true
-                     *       }
-                     *     }
-                     */
-                    booking_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public booking is allowed for the service. */
-                        allow_booking: boolean;
-                        /** @description The message to display when public booking is disabled. */
-                        disabled_message: string | null;
-                        /**
-                         * MaximizeUtilizationPolicy
-                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                         * @example {
-                         *       "enabled": true
-                         *     }
-                         */
-                        maximize_utilization: {
-                            /** @description Whether maximize utilization is enabled for the service. */
-                            enabled: boolean;
-                        };
-                    };
-                    /**
-                     * CancellationPolicy
-                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_cancellation": true,
-                     *       "disabled_message": "Cancellation is disabled for this service."
-                     *     }
-                     */
-                    cancellation_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public cancellation is allowed for the service. */
-                        allow_cancellation: boolean;
-                        /** @description The message to display when public cancellation is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /**
-                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                     */
-                    change_policy_text: string;
-                    /**
-                     * Format: datetime
-                     * @description When the service was created.
-                     */
-                    created_at: string;
-                    /**
-                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                     * @example `PT30M`
-                     */
-                    duration: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The name of the service. */
-                    name: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "service";
-                    /**
-                     * ReschedulingPolicy
-                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_rescheduling": true,
-                     *       "disabled_message": "Rescheduling is disabled for this service."
-                     *     }
-                     */
-                    rescheduling_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public rescheduling is allowed for the service. */
-                        allow_rescheduling: boolean;
-                        /** @description The message to display when public rescheduling is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /** @description Array of slot rules for the service. */
-                    slot_rules: {
-                        /**
-                         * RecurrenceRule
-                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                         *     but are a subset of the full specification.
-                         * @example {
-                         *       "byday": [
-                         *         "mo",
-                         *         "we",
-                         *         "fr"
-                         *       ],
-                         *       "freq": "weekly"
-                         *     }
-                         */
-                        recurrence_rule: {
-                            /**
-                             * @description The days of the week on which the recurrence occurs.
-                             * @example [
-                             *       "mo",
-                             *       "we",
-                             *       "fr"
-                             *     ]
-                             */
-                            byday?: string[];
-                            /** @description Number of occurrences at which to end the recurrence. */
-                            count?: number | null;
-                            /**
-                             * @description The frequency of the recurrence.
-                             * @enum {string}
-                             */
-                            freq: "daily" | "weekly";
-                            /**
-                             * @description How often the recurrence rule repeats.
-                             * @example 2
-                             */
-                            interval?: number;
-                            /**
-                             * @description Date at which to end the recurrence (in ISO-8601 format).
-                             * @example 2024-01-02
-                             */
-                            until?: Record<string, never> | null;
-                        };
-                        /** @description Array of start times for slots. */
-                        start_times: string[];
-                    }[];
-                    /**
-                     * Format: datetime
-                     * @description When the service was last updated.
-                     */
-                    updated_at: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @description The status of the appointment.
-                 * @enum {string}
-                 */
-                status: "scheduled" | "canceled";
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was last updated.
-                 */
-                updated_at?: string;
-                /** @description URLs for this appointment. */
-                urls?: {
-                    /** @description URLs for the client to use to add this appointment to their calendar. */
-                    add_to_calendar?: string[];
-                    /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                    add_to_google_calendar: string[];
-                    /** @description URLs for the client to use to cancel this appointment. */
-                    cancel: string[];
-                    /** @description URLs for the client to use to confirm this appointment. */
-                    confirm: string[];
-                    /** @description URLs for the client to use to download an iCal file for this appointment. */
-                    ics: string[];
-                    /** @description URLs for the client to use to join this appointment. */
-                    join: string[];
-                    /** @description URLs for the client to use to reschedule this appointment. */
-                    reschedule: string[];
-                };
-            };
+            object: components["schemas"]["Appointment"];
             /**
              * @description The event type. (enum property replaced by openapi-typescript)
              * @enum {string}
@@ -21354,6 +12523,10 @@ export interface components {
          *           },
          *           "allow_booking": true,
          *           "disabled_message": "Booking is disabled for this service.",
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           },
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
@@ -21435,52 +12608,7 @@ export interface components {
              * @enum {string}
              */
             appointment_type: "in_person" | "virtual";
-            cancellation_events: {
-                /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                actor: string | null;
-                /**
-                 * CancellationReason
-                 * @description This is an object representing a cancellation reason.
-                 * @example {
-                 *       "id": "cr_a1b2c3d4e5f6",
-                 *       "name": "Distance too far",
-                 *       "object": "cancellation_reason",
-                 *       "sort_order": 1
-                 *     }
-                 */
-                cancellation_reason: {
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The name of the cancellation reason. */
-                    name: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "cancellation_reason";
-                    /** @description The sort order of the cancellation reason. */
-                    sort_order: number;
-                } | null;
-                /** @description Custom reason text for the cancellation. */
-                custom_reason_text: string | null;
-                /**
-                 * @description The entity that initiated the cancellation.
-                 * @enum {string}
-                 */
-                initiated_by: "user" | "client";
-                /** @enum {string} */
-                object: "cancellation_event";
-                /**
-                 * Format: datetime
-                 * @description The time at which the cancellation occurred (ISO-8601 format).
-                 */
-                occurred_at: string;
-                /**
-                 * @description The source of the cancellation event.
-                 * @enum {string}
-                 */
-                source: "client_ui" | "dashboard" | "api";
-            }[];
+            cancellation_events: components["schemas"]["CancellationEvent"][];
             /**
              * Client
              * @description This is an object representing a client.
@@ -21583,107 +12711,7 @@ export interface components {
              * @example America/Chicago
              */
             client_time_zone?: string;
-            confirmation_events: {
-                /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                actor: string | null;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @description The entity that initiated the confirmation.
-                 * @enum {string}
-                 */
-                initiated_by: "user" | "client";
-                /** @enum {string} */
-                object: "confirmation_event";
-                /**
-                 * Format: datetime
-                 * @description The time at which the confirmation occurred (ISO-8601 format).
-                 */
-                occurred_at: string;
-                /**
-                 * @description The source of the confirmation event.
-                 * @enum {string}
-                 */
-                source: "client_ui" | "dashboard" | "api";
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-            }[];
+            confirmation_events: components["schemas"]["ConfirmationEvent"][];
             /**
              * Format: date-time
              * @description Time at which the object was confirmed.
@@ -21789,7 +12817,9 @@ export interface components {
                 /** @description The provider's last name. */
                 last_name: string;
                 /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                metadata?: Record<string, never>;
+                metadata?: {
+                    [key: string]: unknown;
+                };
                 /**
                  * @description String representing the object's type.
                  * @enum {string}
@@ -21801,180 +12831,7 @@ export interface components {
                  */
                 updated_at: string;
             };
-            reschedule_events: {
-                actor: string | null;
-                /** @enum {string} */
-                initiated_by: "user" | "client";
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                new_end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                new_start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /** @enum {string} */
-                object: "reschedule_event";
-                /**
-                 * Format: datetime
-                 * @description The time at which the reschedule occurred (ISO-8601 format).
-                 */
-                occurred_at: string;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                previous_end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                previous_start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /** @enum {string} */
-                source: "client_ui" | "dashboard" | "api";
-            }[];
+            reschedule_events: components["schemas"]["RescheduleEvent"][];
             /**
              * Service
              * @description A service represents a type of appointment.
@@ -21987,6 +12844,10 @@ export interface components {
              *         },
              *         "allow_booking": true,
              *         "disabled_message": "Booking is disabled for this service.",
+             *         "hold": {
+             *           "duration": "PT10M",
+             *           "enabled": true
+             *         },
              *         "maximize_utilization": {
              *           "enabled": true
              *         }
@@ -22048,6 +12909,10 @@ export interface components {
                  *       },
                  *       "allow_booking": true,
                  *       "disabled_message": "Booking is disabled for this service.",
+                 *       "hold": {
+                 *         "duration": "PT10M",
+                 *         "enabled": true
+                 *       },
                  *       "maximize_utilization": {
                  *         "enabled": true
                  *       }
@@ -22072,6 +12937,20 @@ export interface components {
                     allow_booking: boolean;
                     /** @description The message to display when public booking is disabled. */
                     disabled_message: string | null;
+                    /**
+                     * HoldPolicy
+                     * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                     * @example {
+                     *       "duration": "PT10M",
+                     *       "enabled": true
+                     *     }
+                     */
+                    hold: {
+                        /** @description The duration of the hold. */
+                        duration: string | null;
+                        /** @description Whether slot holds are enabled for the service. */
+                        enabled: boolean;
+                    };
                     /**
                      * MaximizeUtilizationPolicy
                      * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -22344,7 +13223,9 @@ export interface components {
                 /** @description The provider's last name. */
                 last_name: string;
                 /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                metadata?: Record<string, never>;
+                metadata?: {
+                    [key: string]: unknown;
+                };
                 /**
                  * @description String representing the object's type.
                  * @enum {string}
@@ -22554,6 +13435,10 @@ export interface components {
          *           },
          *           "allow_booking": true,
          *           "disabled_message": "Booking is disabled for this service.",
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           },
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
@@ -22614,6 +13499,10 @@ export interface components {
              *         },
              *         "allow_booking": true,
              *         "disabled_message": "Booking is disabled for this service.",
+             *         "hold": {
+             *           "duration": "PT10M",
+             *           "enabled": true
+             *         },
              *         "maximize_utilization": {
              *           "enabled": true
              *         }
@@ -22675,6 +13564,10 @@ export interface components {
                  *       },
                  *       "allow_booking": true,
                  *       "disabled_message": "Booking is disabled for this service.",
+                 *       "hold": {
+                 *         "duration": "PT10M",
+                 *         "enabled": true
+                 *       },
                  *       "maximize_utilization": {
                  *         "enabled": true
                  *       }
@@ -22699,6 +13592,20 @@ export interface components {
                     allow_booking: boolean;
                     /** @description The message to display when public booking is disabled. */
                     disabled_message: string | null;
+                    /**
+                     * HoldPolicy
+                     * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                     * @example {
+                     *       "duration": "PT10M",
+                     *       "enabled": true
+                     *     }
+                     */
+                    hold: {
+                        /** @description The duration of the hold. */
+                        duration: string | null;
+                        /** @description Whether slot holds are enabled for the service. */
+                        enabled: boolean;
+                    };
                     /**
                      * MaximizeUtilizationPolicy
                      * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -22921,6 +13828,198 @@ export interface components {
             user_id: string | null;
         };
         /**
+         * BookingIntent
+         * @description A booking intent that tracks the lifecycle of a booking attempt.
+         * @example {
+         *       "abandoned_at": null,
+         *       "appointment": null,
+         *       "client": null,
+         *       "client_data": {
+         *         "email": "jane@example.com",
+         *         "first_name": "Jane",
+         *         "last_name": "Doe",
+         *         "locale": "en",
+         *         "phone": "+15551234567",
+         *         "reference_id": "ext_123",
+         *         "time_zone": "America/New_York"
+         *       },
+         *       "completed_at": null,
+         *       "created_at": "2026-02-22T10:00:00Z",
+         *       "end_at": {
+         *         "local": "2026-02-23T10:30:00-05:00",
+         *         "object": "zoned_date_time",
+         *         "time_zone": "America/New_York",
+         *         "unix_ts": 1771947000,
+         *         "utc": "2026-02-23T15:30:00Z"
+         *       },
+         *       "hold_duration": "PT10M",
+         *       "hold_enabled": true,
+         *       "hold_until": "2026-02-22T10:10:00Z",
+         *       "id": "bi_abc123def456abc123def456",
+         *       "locked_fields": [
+         *         "provider_id",
+         *         "start_at",
+         *         "end_at",
+         *         "time_zone"
+         *       ],
+         *       "metadata": {
+         *         "source": "web"
+         *       },
+         *       "object": "booking_intent",
+         *       "provider": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "service": {
+         *         "appointment_type": "in_person",
+         *         "booking_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_booking": true,
+         *           "disabled_message": "Booking is disabled for this service.",
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           },
+         *           "maximize_utilization": {
+         *             "enabled": true
+         *           }
+         *         },
+         *         "cancellation_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_cancellation": true,
+         *           "disabled_message": "Cancellation is disabled for this service."
+         *         },
+         *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "duration": "PT1H30M",
+         *         "id": "srv_d025a96ac0c6",
+         *         "name": "Initial Consult",
+         *         "object": "service",
+         *         "rescheduling_policy": {
+         *           "advance_notice": {
+         *             "enabled": true,
+         *             "minimum_duration": "PT1H"
+         *           },
+         *           "allow_rescheduling": true,
+         *           "disabled_message": "Rescheduling is disabled for this service."
+         *         },
+         *         "slot_rules": [
+         *           {
+         *             "recurrence_rule": {
+         *               "byday": [
+         *                 "mo",
+         *                 "we",
+         *                 "fr"
+         *               ],
+         *               "freq": "weekly"
+         *             },
+         *             "start_times": [
+         *               "09:00",
+         *               "10:00"
+         *             ]
+         *           }
+         *         ],
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "start_at": {
+         *         "local": "2026-02-23T10:00:00-05:00",
+         *         "object": "zoned_date_time",
+         *         "time_zone": "America/New_York",
+         *         "unix_ts": 1771945200,
+         *         "utc": "2026-02-23T15:00:00Z"
+         *       },
+         *       "status": "slot_selected",
+         *       "updated_at": "2026-02-22T10:00:00Z"
+         *     }
+         */
+        BookingIntent: {
+            /**
+             * Format: date-time
+             * @description When the intent was abandoned
+             */
+            abandoned_at?: string | null;
+            /** @description The linked appointment (set when completed) */
+            appointment?: components["schemas"]["Appointment"] | null;
+            /** @description The linked client */
+            client?: components["schemas"]["Client"] | null;
+            /** @description Progressive client data collected during the booking flow. Sensitive fields (first_name, last_name, email, phone) are redacted unless include_sensitive is true. */
+            client_data?: {
+                email?: string | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /**
+             * Format: date-time
+             * @description When the intent was completed
+             */
+            completed_at?: string | null;
+            /**
+             * Format: date-time
+             * @description When the intent was created
+             */
+            created_at: string;
+            /** @description The end time of the selected slot */
+            end_at?: components["schemas"]["ZonedDateTime"] | null;
+            /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M) */
+            hold_duration?: string | null;
+            /** @description Whether slot holding is enabled */
+            hold_enabled: boolean;
+            /**
+             * Format: date-time
+             * @description When the hold expires (UTC)
+             */
+            hold_until?: string | null;
+            /** @description The booking intent ID */
+            id: string;
+            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. */
+            locked_fields?: string[];
+            /** @description Custom metadata key-value pairs */
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /**
+             * @description The object type
+             * @enum {string}
+             */
+            object: "booking_intent";
+            /** @description The assigned provider */
+            provider?: components["schemas"]["Provider"] | null;
+            /** @description The selected service */
+            service?: components["schemas"]["Service"] | null;
+            /** @description Whether the slot has been prevalidated. When true, public completion skips slot validation. */
+            slot_prevalidated?: boolean;
+            /** @description The start time of the selected slot */
+            start_at?: components["schemas"]["ZonedDateTime"] | null;
+            /**
+             * @description The current status of the booking intent
+             * @enum {string}
+             */
+            status: "pending" | "slot_selected" | "completed" | "abandoned";
+            /**
+             * Format: date-time
+             * @description When the intent was last updated
+             */
+            updated_at: string;
+        };
+        /**
          * CreateServiceRequest
          * @description Request schema for creating a service.
          * @example {
@@ -22932,6 +14031,10 @@ export interface components {
          *         },
          *         "allow_booking": true,
          *         "disabled_message": "Booking is disabled for this service.",
+         *         "hold": {
+         *           "duration": "PT10M",
+         *           "enabled": true
+         *         },
          *         "maximize_utilization": {
          *           "enabled": true
          *         }
@@ -22989,6 +14092,10 @@ export interface components {
              *       },
              *       "allow_booking": true,
              *       "disabled_message": "Booking is disabled for this service.",
+             *       "hold": {
+             *         "duration": "PT10M",
+             *         "enabled": true
+             *       },
              *       "maximize_utilization": {
              *         "enabled": true
              *       }
@@ -23013,6 +14120,20 @@ export interface components {
                 allow_booking: boolean;
                 /** @description The message to display when public booking is disabled. */
                 disabled_message: string | null;
+                /**
+                 * HoldPolicy
+                 * @description A policy for temporarily reserving a slot during the multi-step booking flow.
+                 * @example {
+                 *       "duration": "PT10M",
+                 *       "enabled": true
+                 *     }
+                 */
+                hold: {
+                    /** @description The duration of the hold. */
+                    duration: string | null;
+                    /** @description Whether slot holds are enabled for the service. */
+                    enabled: boolean;
+                };
                 /**
                  * MaximizeUtilizationPolicy
                  * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
@@ -23294,6 +14415,10 @@ export interface components {
          *             },
          *             "allow_booking": true,
          *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
@@ -23372,1089 +14497,7 @@ export interface components {
          *     }
          */
         AppointmentCreatedEventData: {
-            /**
-             * Appointment
-             * @description An appointment represents a booking that a client has made with a provider for a service.
-             * @example {
-             *       "appointment_type": "in_person",
-             *       "cancellation_events": [
-             *         {
-             *           "actor": null,
-             *           "cancellation_reason": {
-             *             "id": "cr_a1b2c3d4e5f6",
-             *             "name": "Distance too far",
-             *             "object": "cancellation_reason",
-             *             "sort_order": 1
-             *           },
-             *           "custom_reason_text": "I'm sick",
-             *           "initiated_by": "client",
-             *           "object": "cancellation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "client": {
-             *         "created_at": "2025-01-15T14:30:00Z",
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "id": "clnt_a1b2c3d4e5f6",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "object": "client",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago",
-             *         "updated_at": "2025-03-10T09:45:00Z"
-             *       },
-             *       "client_data": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "locale": "en-US",
-             *         "phone": "+15551234567",
-             *         "reference_id": "ext_12345",
-             *         "time_zone": "America/Chicago"
-             *       },
-             *       "client_locale": "en-US",
-             *       "client_reference_id": "ext_12345",
-             *       "client_time_zone": "America/Chicago",
-             *       "confirmation_events": [
-             *         {
-             *           "actor": null,
-             *           "end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "initiated_by": "client",
-             *           "object": "confirmation_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "source": "client_ui",
-             *           "start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           }
-             *         }
-             *       ],
-             *       "confirmed_at": "2025-03-10T15:30:00Z",
-             *       "created_at": "2025-03-10T14:30:00Z",
-             *       "end_at": {
-             *         "local": "2025-03-01T11:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736464800,
-             *         "utc": "2025-03-01T04:00:00Z"
-             *       },
-             *       "fields": {
-             *         "email": "jane.smith@example.com",
-             *         "first_name": "Jane",
-             *         "last_name": "Smith",
-             *         "phone": "+15551234567"
-             *       },
-             *       "id": "appt_a1b2c3d4e5f6",
-             *       "object": "appointment",
-             *       "provider": {
-             *         "created_at": "2017-09-12T12:34:55Z",
-             *         "display_name": "John Smith",
-             *         "first_name": "John",
-             *         "id": "prov_d025a96ac0c6",
-             *         "last_name": "Smith",
-             *         "metadata": {
-             *           "external_id": "123"
-             *         },
-             *         "object": "provider",
-             *         "updated_at": "2017-09-13T10:11:12Z"
-             *       },
-             *       "reschedule_events": [
-             *         {
-             *           "actor": null,
-             *           "initiated_by": "client",
-             *           "new_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "new_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "object": "reschedule_event",
-             *           "occurred_at": "2023-01-01T03:00:00Z",
-             *           "previous_end_at": {
-             *             "local": "2023-01-01T01:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736464800,
-             *             "utc": "2023-01-01T04:00:00Z"
-             *           },
-             *           "previous_start_at": {
-             *             "local": "2023-01-01T00:00:00-05:00",
-             *             "object": "zoned_date_time",
-             *             "time_zone": "America/New_York",
-             *             "unix_ts": 1736461200,
-             *             "utc": "2023-01-01T03:00:00Z"
-             *           },
-             *           "source": "client_ui"
-             *         }
-             *       ],
-             *       "service": {
-             *         "appointment_type": "in_person",
-             *         "booking_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_booking": true,
-             *           "disabled_message": "Booking is disabled for this service.",
-             *           "maximize_utilization": {
-             *             "enabled": true
-             *           }
-             *         },
-             *         "cancellation_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_cancellation": true,
-             *           "disabled_message": "Cancellation is disabled for this service."
-             *         },
-             *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-             *         "created_at": "2025-02-17T17:49:19Z",
-             *         "duration": "PT1H30M",
-             *         "id": "srv_d025a96ac0c6",
-             *         "name": "Initial Consult",
-             *         "object": "service",
-             *         "rescheduling_policy": {
-             *           "advance_notice": {
-             *             "enabled": true,
-             *             "minimum_duration": "PT1H"
-             *           },
-             *           "allow_rescheduling": true,
-             *           "disabled_message": "Rescheduling is disabled for this service."
-             *         },
-             *         "slot_rules": [
-             *           {
-             *             "recurrence_rule": {
-             *               "byday": [
-             *                 "mo",
-             *                 "we",
-             *                 "fr"
-             *               ],
-             *               "freq": "weekly"
-             *             },
-             *             "start_times": [
-             *               "09:00",
-             *               "10:00"
-             *             ]
-             *           }
-             *         ],
-             *         "updated_at": "2025-02-17T17:49:19Z"
-             *       },
-             *       "start_at": {
-             *         "local": "2025-03-01T10:00:00-05:00",
-             *         "object": "zoned_date_time",
-             *         "time_zone": "America/New_York",
-             *         "unix_ts": 1736461200,
-             *         "utc": "2025-03-01T03:00:00Z"
-             *       },
-             *       "status": "scheduled",
-             *       "updated_at": "2025-03-10T14:30:00Z",
-             *       "urls": {
-             *         "add_to_google_calendar": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
-             *         ],
-             *         "cancel": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
-             *         ],
-             *         "confirm": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
-             *         ],
-             *         "ics": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
-             *         ],
-             *         "join": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
-             *         ],
-             *         "reschedule": [
-             *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
-             *         ]
-             *       }
-             *     }
-             */
-            object: {
-                /**
-                 * @description The type of appointment.
-                 * @enum {string}
-                 */
-                appointment_type: "in_person" | "virtual";
-                cancellation_events: {
-                    /** @description The actor that initiated the cancellation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * CancellationReason
-                     * @description This is an object representing a cancellation reason.
-                     * @example {
-                     *       "id": "cr_a1b2c3d4e5f6",
-                     *       "name": "Distance too far",
-                     *       "object": "cancellation_reason",
-                     *       "sort_order": 1
-                     *     }
-                     */
-                    cancellation_reason: {
-                        /** @description Unique identifier for the object. */
-                        id: string;
-                        /** @description The name of the cancellation reason. */
-                        name: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "cancellation_reason";
-                        /** @description The sort order of the cancellation reason. */
-                        sort_order: number;
-                    } | null;
-                    /** @description Custom reason text for the cancellation. */
-                    custom_reason_text: string | null;
-                    /**
-                     * @description The entity that initiated the cancellation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "cancellation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the cancellation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the cancellation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Client
-                 * @description This is an object representing a client.
-                 * @example {
-                 *       "created_at": "2025-01-15T14:30:00Z",
-                 *       "email": "jane.smith@example.com",
-                 *       "first_name": "Jane",
-                 *       "id": "clnt_a1b2c3d4e5f6",
-                 *       "last_name": "Smith",
-                 *       "locale": "en-US",
-                 *       "object": "client",
-                 *       "phone": "+15551234567",
-                 *       "reference_id": "ext_12345",
-                 *       "time_zone": "America/Chicago",
-                 *       "updated_at": "2025-03-10T09:45:00Z"
-                 *     }
-                 */
-                client: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client.
-                     * @example en-US
-                     */
-                    locale: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "client";
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description External reference identifier for the client. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
-                client_data: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /**
-                     * @description The locale of the client booking the appointment.
-                     * @example en-US
-                     */
-                    locale: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                    /** @description The client's external reference identifier. */
-                    reference_id: string | null;
-                    /**
-                     * @description The client's time zone (IANA format).
-                     * @example America/Chicago
-                     */
-                    time_zone: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data.locale` instead.
-                 * @example en-US
-                 */
-                client_locale?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.reference_id` instead.
-                 */
-                client_reference_id?: string | null;
-                /**
-                 * @deprecated
-                 * @description Use `client_data.time_zone` instead.
-                 * @example America/Chicago
-                 */
-                client_time_zone?: string;
-                confirmation_events: {
-                    /** @description The actor that initiated the confirmation (user ID or bearer token ID). */
-                    actor: string | null;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * @description The entity that initiated the confirmation.
-                     * @enum {string}
-                     */
-                    initiated_by: "user" | "client";
-                    /** @enum {string} */
-                    object: "confirmation_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the confirmation occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * @description The source of the confirmation event.
-                     * @enum {string}
-                     */
-                    source: "client_ui" | "dashboard" | "api";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                }[];
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was confirmed.
-                 */
-                confirmed_at: string | null;
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was created.
-                 */
-                created_at: string;
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                end_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @deprecated
-                 * @description Use `client_data` instead.
-                 */
-                fields: {
-                    /**
-                     * Format: email
-                     * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                     */
-                    email?: string | null;
-                    /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                    first_name?: string | null;
-                    /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                    last_name?: string | null;
-                    /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                    phone?: string | null;
-                };
-                /** @description Unique identifier for the object. */
-                id: string;
-                /**
-                 * @description String representing the object's type.
-                 * @enum {string}
-                 */
-                object: "appointment";
-                /**
-                 * Provider
-                 * @description A provider represents a staff member who can provide services to clients.
-                 * @example {
-                 *       "created_at": "2017-09-12T12:34:55Z",
-                 *       "display_name": "John Smith",
-                 *       "first_name": "John",
-                 *       "id": "prov_d025a96ac0c6",
-                 *       "last_name": "Smith",
-                 *       "metadata": {
-                 *         "external_id": "123"
-                 *       },
-                 *       "object": "provider",
-                 *       "updated_at": "2017-09-13T10:11:12Z"
-                 *     }
-                 */
-                provider: {
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was created.
-                     */
-                    created_at: string;
-                    /** @description The provider's display name. */
-                    display_name: string;
-                    /** @description The provider's first name. */
-                    first_name: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The provider's last name. */
-                    last_name: string;
-                    /** @description Set of key-value pairs attached to this provider. Maximum size is 16 KB. */
-                    metadata?: Record<string, never>;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "provider";
-                    /**
-                     * Format: date-time
-                     * @description Time at which the object was last updated.
-                     */
-                    updated_at: string;
-                };
-                reschedule_events: {
-                    actor: string | null;
-                    /** @enum {string} */
-                    initiated_by: "user" | "client";
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    new_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    object: "reschedule_event";
-                    /**
-                     * Format: datetime
-                     * @description The time at which the reschedule occurred (ISO-8601 format).
-                     */
-                    occurred_at: string;
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_end_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /**
-                     * ZonedDateTime
-                     * @description An object describing a date/time in local time and in UTC.
-                     * @example {
-                     *       "local": "2025-03-01T10:00:00-05:00",
-                     *       "object": "zoned_date_time",
-                     *       "time_zone": "America/New_York",
-                     *       "unix_ts": 1736461200,
-                     *       "utc": "2025-03-01T03:00:00Z"
-                     *     }
-                     */
-                    previous_start_at: {
-                        /**
-                         * Format: date-time
-                         * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                         * @example 2025-03-01T10:00:00-05:00
-                         */
-                        local: string;
-                        /**
-                         * @description String representing the object's type.
-                         * @enum {string}
-                         */
-                        object: "zoned_date_time";
-                        /**
-                         * @description The time zone of the local time (IANA format).
-                         * @example America/New_York
-                         */
-                        time_zone: string;
-                        /**
-                         * @description The UTC date/time in Unix timestamp format (seconds).
-                         * @example 1736461200
-                         */
-                        unix_ts: number;
-                        /**
-                         * Format: date-time
-                         * @description The UTC date/time in ISO-8601 format (with time zone information).
-                         * @example 2025-03-01T03:00:00Z
-                         */
-                        utc: string;
-                    };
-                    /** @enum {string} */
-                    source: "client_ui" | "dashboard" | "api";
-                }[];
-                /**
-                 * Service
-                 * @description A service represents a type of appointment.
-                 * @example {
-                 *       "appointment_type": "in_person",
-                 *       "booking_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_booking": true,
-                 *         "disabled_message": "Booking is disabled for this service.",
-                 *         "maximize_utilization": {
-                 *           "enabled": true
-                 *         }
-                 *       },
-                 *       "cancellation_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_cancellation": true,
-                 *         "disabled_message": "Cancellation is disabled for this service."
-                 *       },
-                 *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
-                 *       "created_at": "2025-02-17T17:49:19Z",
-                 *       "duration": "PT1H30M",
-                 *       "id": "srv_d025a96ac0c6",
-                 *       "name": "Initial Consult",
-                 *       "object": "service",
-                 *       "rescheduling_policy": {
-                 *         "advance_notice": {
-                 *           "enabled": true,
-                 *           "minimum_duration": "PT1H"
-                 *         },
-                 *         "allow_rescheduling": true,
-                 *         "disabled_message": "Rescheduling is disabled for this service."
-                 *       },
-                 *       "slot_rules": [
-                 *         {
-                 *           "recurrence_rule": {
-                 *             "byday": [
-                 *               "mo",
-                 *               "we",
-                 *               "fr"
-                 *             ],
-                 *             "freq": "weekly"
-                 *           },
-                 *           "start_times": [
-                 *             "09:00",
-                 *             "10:00"
-                 *           ]
-                 *         }
-                 *       ],
-                 *       "updated_at": "2025-02-17T17:49:19Z"
-                 *     }
-                 */
-                service: {
-                    /**
-                     * @description The type of appointment.
-                     * @enum {string}
-                     */
-                    appointment_type: "in_person" | "virtual";
-                    /**
-                     * BookingPolicy
-                     * @description A booking policy defines the rules for booking a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_booking": true,
-                     *       "disabled_message": "Booking is disabled for this service.",
-                     *       "maximize_utilization": {
-                     *         "enabled": true
-                     *       }
-                     *     }
-                     */
-                    booking_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public booking is allowed for the service. */
-                        allow_booking: boolean;
-                        /** @description The message to display when public booking is disabled. */
-                        disabled_message: string | null;
-                        /**
-                         * MaximizeUtilizationPolicy
-                         * @description Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.
-                         * @example {
-                         *       "enabled": true
-                         *     }
-                         */
-                        maximize_utilization: {
-                            /** @description Whether maximize utilization is enabled for the service. */
-                            enabled: boolean;
-                        };
-                    };
-                    /**
-                     * CancellationPolicy
-                     * @description A cancellation policy defines the rules for canceling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_cancellation": true,
-                     *       "disabled_message": "Cancellation is disabled for this service."
-                     *     }
-                     */
-                    cancellation_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public cancellation is allowed for the service. */
-                        allow_cancellation: boolean;
-                        /** @description The message to display when public cancellation is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /**
-                     * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
-                     * @example Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.
-                     */
-                    change_policy_text: string;
-                    /**
-                     * Format: datetime
-                     * @description When the service was created.
-                     */
-                    created_at: string;
-                    /**
-                     * @description The duration of time slots in [ISO-8601 duration format](https://en.wikipedia.org/wiki/ISO_8601#Durations).
-                     * @example `PT30M`
-                     */
-                    duration: string;
-                    /** @description Unique identifier for the object. */
-                    id: string;
-                    /** @description The name of the service. */
-                    name: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "service";
-                    /**
-                     * ReschedulingPolicy
-                     * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
-                     * @example {
-                     *       "advance_notice": {
-                     *         "enabled": true,
-                     *         "minimum_duration": "PT1H"
-                     *       },
-                     *       "allow_rescheduling": true,
-                     *       "disabled_message": "Rescheduling is disabled for this service."
-                     *     }
-                     */
-                    rescheduling_policy: {
-                        /**
-                         * AdvanceNoticePolicy
-                         * @description A policy for requiring minimum advance notice.
-                         * @example {
-                         *       "enabled": true,
-                         *       "minimum_duration": "PT1H"
-                         *     }
-                         */
-                        advance_notice: {
-                            /** @description Whether advance notice is enabled. */
-                            enabled: boolean;
-                            /** @description The minimum duration of advance notice. */
-                            minimum_duration: string | null;
-                        };
-                        /** @description Whether public rescheduling is allowed for the service. */
-                        allow_rescheduling: boolean;
-                        /** @description The message to display when public rescheduling is disabled. */
-                        disabled_message: string | null;
-                    };
-                    /** @description Array of slot rules for the service. */
-                    slot_rules: {
-                        /**
-                         * RecurrenceRule
-                         * @description A recurrence rule describes a repeating pattern of times. Recurrences rules in SavvyCal are modeled
-                         *     after the conventions of [iCalendar](https://en.wikipedia.org/wiki/ICalendar) recurrence rules (RRULE),
-                         *     but are a subset of the full specification.
-                         * @example {
-                         *       "byday": [
-                         *         "mo",
-                         *         "we",
-                         *         "fr"
-                         *       ],
-                         *       "freq": "weekly"
-                         *     }
-                         */
-                        recurrence_rule: {
-                            /**
-                             * @description The days of the week on which the recurrence occurs.
-                             * @example [
-                             *       "mo",
-                             *       "we",
-                             *       "fr"
-                             *     ]
-                             */
-                            byday?: string[];
-                            /** @description Number of occurrences at which to end the recurrence. */
-                            count?: number | null;
-                            /**
-                             * @description The frequency of the recurrence.
-                             * @enum {string}
-                             */
-                            freq: "daily" | "weekly";
-                            /**
-                             * @description How often the recurrence rule repeats.
-                             * @example 2
-                             */
-                            interval?: number;
-                            /**
-                             * @description Date at which to end the recurrence (in ISO-8601 format).
-                             * @example 2024-01-02
-                             */
-                            until?: Record<string, never> | null;
-                        };
-                        /** @description Array of start times for slots. */
-                        start_times: string[];
-                    }[];
-                    /**
-                     * Format: datetime
-                     * @description When the service was last updated.
-                     */
-                    updated_at: string;
-                };
-                /**
-                 * ZonedDateTime
-                 * @description An object describing a date/time in local time and in UTC.
-                 * @example {
-                 *       "local": "2025-03-01T10:00:00-05:00",
-                 *       "object": "zoned_date_time",
-                 *       "time_zone": "America/New_York",
-                 *       "unix_ts": 1736461200,
-                 *       "utc": "2025-03-01T03:00:00Z"
-                 *     }
-                 */
-                start_at: {
-                    /**
-                     * Format: date-time
-                     * @description The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).
-                     * @example 2025-03-01T10:00:00-05:00
-                     */
-                    local: string;
-                    /**
-                     * @description String representing the object's type.
-                     * @enum {string}
-                     */
-                    object: "zoned_date_time";
-                    /**
-                     * @description The time zone of the local time (IANA format).
-                     * @example America/New_York
-                     */
-                    time_zone: string;
-                    /**
-                     * @description The UTC date/time in Unix timestamp format (seconds).
-                     * @example 1736461200
-                     */
-                    unix_ts: number;
-                    /**
-                     * Format: date-time
-                     * @description The UTC date/time in ISO-8601 format (with time zone information).
-                     * @example 2025-03-01T03:00:00Z
-                     */
-                    utc: string;
-                };
-                /**
-                 * @description The status of the appointment.
-                 * @enum {string}
-                 */
-                status: "scheduled" | "canceled";
-                /**
-                 * Format: date-time
-                 * @description Time at which the object was last updated.
-                 */
-                updated_at?: string;
-                /** @description URLs for this appointment. */
-                urls?: {
-                    /** @description URLs for the client to use to add this appointment to their calendar. */
-                    add_to_calendar?: string[];
-                    /** @description URLs for the client to use to add this appointment to Google Calendar. */
-                    add_to_google_calendar: string[];
-                    /** @description URLs for the client to use to cancel this appointment. */
-                    cancel: string[];
-                    /** @description URLs for the client to use to confirm this appointment. */
-                    confirm: string[];
-                    /** @description URLs for the client to use to download an iCal file for this appointment. */
-                    ics: string[];
-                    /** @description URLs for the client to use to join this appointment. */
-                    join: string[];
-                    /** @description URLs for the client to use to reschedule this appointment. */
-                    reschedule: string[];
-                };
-            };
+            object: components["schemas"]["Appointment"];
             /**
              * @description The event type. (enum property replaced by openapi-typescript)
              * @enum {string}
@@ -24627,6 +14670,117 @@ export interface operations {
             };
         };
     };
+    getBookingIntent: {
+        parameters: {
+            query?: {
+                /** @description Whether to include sensitive fields (such as client name, email, and phone) */
+                include_sensitive?: boolean;
+            };
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingIntentResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Update booking intent params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateBookingIntentRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingIntentResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     createDashboardSession: {
         parameters: {
             query?: never;
@@ -24767,6 +14921,67 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    completeBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Complete booking intent params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CompleteBookingIntentRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingIntentResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
                 };
             };
             /** @description Unprocessable Entity */
@@ -25176,6 +15391,62 @@ export interface operations {
             };
         };
     };
+    abandonBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingIntentResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     getPublicAppointment: {
         parameters: {
             query?: never;
@@ -25441,6 +15712,49 @@ export interface operations {
             };
             /** @description Unprocessable Entity */
             404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    createPublicBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Create public booking intent params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreatePublicBookingIntentRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicBookingIntentResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
                 headers: {
                     [name: string]: unknown;
                 };
@@ -26131,6 +16445,52 @@ export interface operations {
             };
         };
     };
+    completePublicBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Complete public booking intent params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CompletePublicBookingIntentRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicBookingIntentResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     listCancellationReasons: {
         parameters: {
             query?: never;
@@ -26523,6 +16883,84 @@ export interface operations {
             };
         };
     };
+    getPublicBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicBookingIntentResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    updatePublicBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Update public booking intent params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdatePublicBookingIntentRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicBookingIntentResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     reschedulePublicAppointment: {
         parameters: {
             query?: never;
@@ -26556,6 +16994,168 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    listBookingIntents: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+                /** @description Whether to include sensitive fields (such as client name, email, and phone) */
+                include_sensitive?: boolean;
+                /** @description Filter by status. */
+                status?: "pending" | "slot_selected" | "completed" | "abandoned";
+                /** @description Filter by provider ID(s). Accepts a single ID or comma-delimited list. */
+                provider_ids?: string;
+                /** @description Filter by service ID(s). Accepts a single ID or comma-delimited list. */
+                service_ids?: string;
+                /** @description Filter by client ID(s). Accepts a single ID or comma-delimited list. */
+                client_ids?: string;
+                /** @description Filter by metadata using bracket notation. See [Metadata Filtering](https://developers.savvycal.app/metadata-filtering) for more details. */
+                metadata?: {
+                    [key: string]: unknown;
+                };
+            };
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingIntentsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    createBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Create booking intent params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateBookingIntentRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingIntentResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    abandonPublicBookingIntent: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Intent ID */
+                booking_intent_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["PublicBookingIntentResponse"];
                 };
             };
             /** @description Unprocessable Entity */

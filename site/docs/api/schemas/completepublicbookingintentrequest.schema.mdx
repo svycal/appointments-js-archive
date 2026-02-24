@@ -1,0 +1,33 @@
+---
+id: completepublicbookingintentrequest
+title: "CompletePublicBookingIntentRequest"
+description: "Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion."
+sidebar_label: "CompletePublicBookingIntentRequest"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"client_data":{"email":"jane@example.com","first_name":"Jane"},"service_id":"srv_1234567890"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"CompletePublicBookingIntentRequest"}
+>
+</Heading>
+
+
+
+Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion.
+
+<Schema
+  schema={{"description":"Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion.","example":{"client_data":{"email":"jane@example.com","first_name":"Jane"},"service_id":"srv_1234567890"},"properties":{"client_data":{"description":"Progressive client data. Provided fields are merged with existing values.","nullable":true,"properties":{"email":{"nullable":true,"type":"string"},"first_name":{"nullable":true,"type":"string"},"last_name":{"nullable":true,"type":"string"},"locale":{"nullable":true,"type":"string"},"phone":{"nullable":true,"type":"string"},"reference_id":{"nullable":true,"type":"string"},"time_zone":{"nullable":true,"type":"string"}},"type":"object"},"end_at":{"description":"The end time of the slot as an ISO-8601 datetime string with a timezone offset.","format":"date-time","nullable":true,"type":"string"},"provider_id":{"description":"The ID of the provider to assign.","nullable":true,"type":"string"},"service_id":{"description":"The ID of the service.","nullable":true,"type":"string"},"start_at":{"description":"The start time of the slot as an ISO-8601 datetime string with a timezone offset.","format":"date-time","nullable":true,"type":"string"},"time_zone":{"description":"The local time zone for the slot (IANA format).","nullable":true,"type":"string"}},"title":"CompletePublicBookingIntentRequest","type":"object"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

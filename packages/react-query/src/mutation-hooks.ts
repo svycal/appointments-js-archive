@@ -3,19 +3,25 @@
  * Do not make direct changes to the file.
  */
 
+export { useAbandonBookingIntent } from "./mutation-hooks/use-abandon-booking-intent";
+export { useAbandonPublicBookingIntent } from "./mutation-hooks/use-abandon-public-booking-intent";
 export { useCancelAppointment } from "./mutation-hooks/use-cancel-appointment";
 export { useCancelPublicAppointment } from "./mutation-hooks/use-cancel-public-appointment";
+export { useCompleteBookingIntent } from "./mutation-hooks/use-complete-booking-intent";
+export { useCompletePublicBookingIntent } from "./mutation-hooks/use-complete-public-booking-intent";
 export { useConfirmAppointment } from "./mutation-hooks/use-confirm-appointment";
 export { useCreateAccount } from "./mutation-hooks/use-create-account";
 export { useCreateAccountUser } from "./mutation-hooks/use-create-account-user";
 export { useCreateAppointment } from "./mutation-hooks/use-create-appointment";
 export { useCreateBlock } from "./mutation-hooks/use-create-block";
+export { useCreateBookingIntent } from "./mutation-hooks/use-create-booking-intent";
 export { useCreateCancellationReason } from "./mutation-hooks/use-create-cancellation-reason";
 export { useCreateClient } from "./mutation-hooks/use-create-client";
 export { useCreateDashboardSession } from "./mutation-hooks/use-create-dashboard-session";
 export { useCreateProvider } from "./mutation-hooks/use-create-provider";
 export { useCreateProviderSchedule } from "./mutation-hooks/use-create-provider-schedule";
 export { useCreatePublicAppointment } from "./mutation-hooks/use-create-public-appointment";
+export { useCreatePublicBookingIntent } from "./mutation-hooks/use-create-public-booking-intent";
 export { useCreateService } from "./mutation-hooks/use-create-service";
 export { useCreateServiceProvider } from "./mutation-hooks/use-create-service-provider";
 export { useDeactivateProvider } from "./mutation-hooks/use-deactivate-provider";
@@ -31,9 +37,11 @@ export { useReschedulePublicAppointment } from "./mutation-hooks/use-reschedule-
 export { useUpdateAccount } from "./mutation-hooks/use-update-account";
 export { useUpdateAccountUser } from "./mutation-hooks/use-update-account-user";
 export { useUpdateBlock } from "./mutation-hooks/use-update-block";
+export { useUpdateBookingIntent } from "./mutation-hooks/use-update-booking-intent";
 export { useUpdateCancellationReason } from "./mutation-hooks/use-update-cancellation-reason";
 export { useUpdateClient } from "./mutation-hooks/use-update-client";
 export { useUpdateConnectedAccount } from "./mutation-hooks/use-update-connected-account";
 export { useUpdateProvider } from "./mutation-hooks/use-update-provider";
 export { useUpdateProviderSchedule } from "./mutation-hooks/use-update-provider-schedule";
+export { useUpdatePublicBookingIntent } from "./mutation-hooks/use-update-public-booking-intent";
 export { useUpdateService } from "./mutation-hooks/use-update-service";

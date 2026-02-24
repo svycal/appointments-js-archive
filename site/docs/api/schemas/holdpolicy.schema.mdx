@@ -1,0 +1,34 @@
+---
+id: holdpolicy
+title: "HoldPolicy"
+description: "A policy for temporarily reserving a slot during the multi-step booking flow."
+sidebar_label: "HoldPolicy"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"duration":"PT10M","enabled":true}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"HoldPolicy"}
+>
+</Heading>
+
+
+
+A policy for temporarily reserving a slot during the multi-step booking flow.
+
+
+<Schema
+  schema={{"description":"A policy for temporarily reserving a slot during the multi-step booking flow.\n","example":{"duration":"PT10M","enabled":true},"properties":{"duration":{"description":"The duration of the hold.","nullable":true,"pattern":"^PT(?:(\\d+)H)?(?:(\\d+)M)?$","type":"string"},"enabled":{"description":"Whether slot holds are enabled for the service.","type":"boolean"}},"required":["enabled","duration"],"title":"HoldPolicy","type":"object"}}
+  schemaType={"response"}
+>
+  
+</Schema>
+            

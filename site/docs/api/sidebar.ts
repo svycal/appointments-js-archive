@@ -60,6 +60,58 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Booking Intents",
+      link: {
+        type: "doc",
+        id: "api/booking-intents",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/bookingintent",
+          label: "BookingIntent",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/get-booking-intent",
+          label: "Get booking intent",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-booking-intent",
+          label: "Update booking intent",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/complete-booking-intent",
+          label: "Complete booking intent",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/abandon-booking-intent",
+          label: "Abandon booking intent",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/list-booking-intents",
+          label: "List booking intents",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-booking-intent",
+          label: "Create booking intent",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Dashboard Sessions",
       link: {
         type: "doc",
@@ -188,6 +240,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/publicbookingintent",
+          label: "PublicBookingIntent",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/create-public-appointment",
           label: "Create appointment",
           className: "api-method post",
@@ -212,14 +270,44 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/create-public-booking-intent",
+          label: "Create booking intent",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
           id: "api/get-earliest-public-service-slot",
           label: "Get earliest available slot",
           className: "api-method get",
         },
         {
           type: "doc",
+          id: "api/complete-public-booking-intent",
+          label: "Complete booking intent",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/get-public-booking-intent",
+          label: "Get booking intent",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-public-booking-intent",
+          label: "Update booking intent",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
           id: "api/reschedule-public-appointment",
           label: "Reschedule appointment",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/abandon-public-booking-intent",
+          label: "Abandon booking intent",
           className: "api-method post",
         },
         {
@@ -684,6 +772,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/holdpolicy",
+          label: "HoldPolicy",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/createbookingintentrequest",
+          label: "CreateBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/genericerrorresponse",
           label: "GenericErrorResponse",
           className: "schema",
@@ -752,6 +852,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/connectedaccountdeletedeventdata",
           label: "ConnectedAccountDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/completebookingintentrequest",
+          label: "CompleteBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookingintentsresponse",
+          label: "BookingIntentsResponse",
           className: "schema",
         },
         {
@@ -906,6 +1018,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/updatebookingintentrequest",
+          label: "UpdateBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/accountusercreatedeventdata",
           label: "AccountUserCreatedEventData",
           className: "schema",
@@ -998,6 +1116,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/accountuserdeletedeventdata",
           label: "AccountUserDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/completepublicbookingintentrequest",
+          label: "CompletePublicBookingIntentRequest",
           className: "schema",
         },
         {
@@ -1110,6 +1234,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/updatepublicbookingintentrequest",
+          label: "UpdatePublicBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/createdashboardsessionrequest",
           label: "CreateDashboardSessionRequest",
           className: "schema",
@@ -1118,6 +1248,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providerscheduleupdatedeventdata",
           label: "ProviderScheduleUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/publicbookingintentresponse",
+          label: "PublicBookingIntentResponse",
           className: "schema",
         },
         {
@@ -1172,6 +1308,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/createappointmentrequest",
           label: "CreateAppointmentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/createpublicbookingintentrequest",
+          label: "CreatePublicBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookingintentresponse",
+          label: "BookingIntentResponse",
           className: "schema",
         },
         {

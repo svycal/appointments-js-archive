@@ -44,6 +44,7 @@ const sidebars: SidebarsConfig = {
       type: "category",
     },
     "webhooks",
+    "changelog",
   ],
   openApiSidebar: [
     {
