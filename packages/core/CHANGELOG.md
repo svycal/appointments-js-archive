@@ -1,5 +1,13 @@
 # @savvycal/appointments-core
 
+## 0.9.0
+
+### Minor Changes
+
+- [`8bac62c`](https://github.com/svycal/appointments/commit/8bac62cb03f0609482624ed98cce9f2264a6e43f) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Auto-assign provider** -- Booking intent endpoints now accept an `auto_assign_provider` flag. When `true`, an available provider is automatically assigned for the selected time slot if no `provider_id` is specified. Supported on create, update, and complete operations for both [authenticated](https://developers.savvycal.app/api/create-booking-intent) and [public](https://developers.savvycal.app/api/create-public-booking-intent) booking intents.
+
+- [`8bac62c`](https://github.com/svycal/appointments/commit/8bac62cb03f0609482624ed98cce9f2264a6e43f) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Booking intent webhook events** -- Added webhook events for booking intents: `booking_intent.created`, `booking_intent.updated`, `booking_intent.completed`, and `booking_intent.abandoned`. See [Webhooks](https://developers.savvycal.app/webhooks).
+
 ## 0.8.0
 
 ### Minor Changes
