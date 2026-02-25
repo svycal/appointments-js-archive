@@ -17284,17 +17284,22 @@ export interface operations {
     };
     listPublicServiceSlots: {
         parameters: {
-            query: {
+            query?: {
                 /**
-                 * @description Start of time range (ISO date format)
+                 * @description Start of time range (ISO date format). Defaults to today if not provided.
                  * @example "2025-04-01"
                  */
-                from: string;
+                from?: string;
                 /**
-                 * @description End of time range (ISO date format)
+                 * @description End of time range (ISO date format). Either `until` or `limit` must be provided.
                  * @example "2025-04-07"
                  */
-                until: string;
+                until?: string;
+                /**
+                 * @description Maximum number of aggregated slots to return. Either `limit` or `until` must be provided.
+                 * @example 5
+                 */
+                limit?: number;
                 /**
                  * @description Time zone for the slots (IANA format)
                  * @example "America/New_York"
@@ -18060,17 +18065,22 @@ export interface operations {
     };
     listServiceSlots: {
         parameters: {
-            query: {
+            query?: {
                 /**
-                 * @description Start of time range (ISO date format)
+                 * @description Start of time range (ISO date format). Defaults to today if not provided.
                  * @example "2025-04-01"
                  */
-                from: string;
+                from?: string;
                 /**
-                 * @description End of time range (ISO date format)
+                 * @description End of time range (ISO date format). Either `until` or `limit` must be provided.
                  * @example "2025-04-07"
                  */
-                until: string;
+                until?: string;
+                /**
+                 * @description Maximum number of aggregated slots to return. Either `limit` or `until` must be provided.
+                 * @example 5
+                 */
+                limit?: number;
                 /**
                  * @description Time zone for the slots (IANA format)
                  * @example "America/New_York"

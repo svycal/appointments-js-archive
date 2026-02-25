@@ -530,7 +530,7 @@ export function listPublicCancellationReasons(
 export function listPublicServiceSlots(
   client: FetchClient,
   path: PathParams<"/v1/public/services/{service_id}/slots", "get">,
-  query: QueryParams<"/v1/public/services/{service_id}/slots", "get">,
+  query?: QueryParams<"/v1/public/services/{service_id}/slots", "get">,
 ) {
   return client.GET("/v1/public/services/{service_id}/slots", {
     params: { path, query },
@@ -562,7 +562,7 @@ export function listServices(
 export function listServiceSlots(
   client: FetchClient,
   path: PathParams<"/v1/services/{service_id}/slots", "get">,
-  query: QueryParams<"/v1/services/{service_id}/slots", "get">,
+  query?: QueryParams<"/v1/services/{service_id}/slots", "get">,
 ) {
   return client.GET("/v1/services/{service_id}/slots", {
     params: { path, query },
