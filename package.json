@@ -13,7 +13,8 @@
     "test": "pnpm -r --parallel test",
     "changeset": "changeset",
     "version": "changeset version",
-    "release": "pnpm --filter \"./packages/*\" build && changeset publish"
+    "release": "pnpm --filter \"./packages/*\" build && changeset publish",
+    "release:manual": "bash ./scripts/manual-release.sh"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.5.2",
