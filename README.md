@@ -31,6 +31,21 @@ pnpm test
 pnpm typecheck
 ```
 
+## Updating the API changelog
+
+This repo includes a Claude Code skill for updating the API changelog and generating changeset files. In Claude Code, run:
+
+```
+/update-changelog
+```
+
+Describe the changes (or let it inspect your staged/unstaged git diff) and it will:
+
+1. Add a dated entry to `site/docs/changelog.md`
+2. Create one `.changeset/*.md` file per changelog bullet with the appropriate package bumps
+
+Review the proposed entries before confirming.
+
 ## License
 
 MIT
