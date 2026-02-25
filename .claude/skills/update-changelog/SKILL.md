@@ -1,3 +1,8 @@
+---
+description: Update the API changelog and create changeset files for new or modified API endpoints, schemas, and fields.
+allowed-tools: Bash(git diff *), Bash(npx -y @changesets/cli*), Read, Write, Edit, Glob, Grep
+---
+
 # Update API Changelog
 
 Use this skill when the user asks to update the API changelog (e.g., `/update-changelog`).
