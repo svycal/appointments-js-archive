@@ -19,7 +19,7 @@ interface Options
 
 export const usePublicServiceSlots = (
   service_id: PublicServiceSlotsParams["path"]["service_id"],
-  queryParams: PublicServiceSlotsParams["query"],
+  queryParams?: PublicServiceSlotsParams["query"],
   options?: Options,
 ) => {
   const { client: overrideClient, ...queryOptions } = options ?? {};

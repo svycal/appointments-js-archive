@@ -760,6 +760,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/bookingintentcompletedeventdata",
+          label: "BookingIntentCompletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/accountresponse",
           label: "AccountResponse",
           className: "schema",
@@ -780,6 +786,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/createbookingintentrequest",
           label: "CreateBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookingintentabandonedeventdata",
+          label: "BookingIntentAbandonedEventData",
           className: "schema",
         },
         {
@@ -828,6 +840,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/serviceresponse",
           label: "ServiceResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookingintentupdatedeventdata",
+          label: "BookingIntentUpdatedEventData",
           className: "schema",
         },
         {
@@ -900,6 +918,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providerscheduledeletedeventdata",
           label: "ProviderScheduleDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookingintentcreatedeventdata",
+          label: "BookingIntentCreatedEventData",
           className: "schema",
         },
         {

@@ -41,8 +41,16 @@ export type BlockResponse = Schemas["BlockResponse"];
 export type BlocksResponse = Schemas["BlocksResponse"];
 export type BlockUpdatedEventData = Schemas["BlockUpdatedEventData"];
 export type BookingIntent = Schemas["BookingIntent"];
+export type BookingIntentAbandonedEventData =
+  Schemas["BookingIntentAbandonedEventData"];
+export type BookingIntentCompletedEventData =
+  Schemas["BookingIntentCompletedEventData"];
+export type BookingIntentCreatedEventData =
+  Schemas["BookingIntentCreatedEventData"];
 export type BookingIntentResponse = Schemas["BookingIntentResponse"];
 export type BookingIntentsResponse = Schemas["BookingIntentsResponse"];
+export type BookingIntentUpdatedEventData =
+  Schemas["BookingIntentUpdatedEventData"];
 export type BookingPolicy = Schemas["BookingPolicy"];
 export type CancelAppointmentRequest = Schemas["CancelAppointmentRequest"];
 export type CancellationEvent = Schemas["CancellationEvent"];

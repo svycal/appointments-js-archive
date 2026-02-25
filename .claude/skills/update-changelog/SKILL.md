@@ -1,6 +1,6 @@
 ---
 description: Update the API changelog and create changeset files for new or modified API endpoints, schemas, and fields.
-allowed-tools: Bash(git diff *), Bash(npx -y @changesets/cli*), Read, Write, Edit, Glob, Grep
+allowed-tools: Bash(git diff *), Bash(pnpm changeset *), Read, Write, Edit, Glob, Grep
 ---
 
 # Update API Changelog
@@ -26,7 +26,7 @@ Use this skill when the user asks to update the API changelog (e.g., `/update-ch
    - Link to relevant API reference pages using relative paths (e.g., `[BookingIntent](/api/schemas/bookingintent)`).
 
 5. **Create changeset files** using the [Changesets](https://github.com/changesets/changesets) convention. Create **one changeset file per changelog bullet point** so that each entry renders cleanly in the Changesets-generated package changelog (Changesets prepends contributor info to each file's content, so multi-bullet files produce awkward formatting).
-   - For each changelog entry, create a file at `.changeset/<random-name>.md` where `<random-name>` is a unique random three-word slug (e.g., `bright-dogs-smile.md`). Use `npx -y @changesets/cli@latest add --empty` to generate empty files, then edit each one.
+   - For each changelog entry, create a file at `.changeset/<random-name>.md` where `<random-name>` is a unique random three-word slug (e.g., `bright-dogs-smile.md`). Use `pnpm changeset add --empty` to generate empty files, then edit each one.
    - Each file has YAML front matter listing affected packages and their bump levels, followed by a single-line Markdown description (no bullet prefix).
    - **Determine affected packages** by inspecting which directories under `packages/` have changes:
      - `packages/core/` → `"@savvycal/appointments-core"`

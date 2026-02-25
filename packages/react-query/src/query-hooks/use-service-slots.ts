@@ -19,7 +19,7 @@ interface Options
 
 export const useServiceSlots = (
   service_id: ServiceSlotsParams["path"]["service_id"],
-  queryParams: ServiceSlotsParams["query"],
+  queryParams?: ServiceSlotsParams["query"],
   options?: Options,
 ) => {
   const { client: overrideClient, ...queryOptions } = options ?? {};

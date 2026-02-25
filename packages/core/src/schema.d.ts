@@ -2232,6 +2232,136 @@ export interface components {
             title?: string;
         };
         /**
+         * BookingIntentCompletedEventData
+         * @description This is an object representing data for the booking intent completed event.
+         * @example {
+         *       "object": {
+         *         "abandoned_at": null,
+         *         "appointment": null,
+         *         "client": null,
+         *         "client_data": {
+         *           "email": "jane@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Doe",
+         *           "locale": "en",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_123",
+         *           "time_zone": "America/New_York"
+         *         },
+         *         "completed_at": null,
+         *         "created_at": "2026-02-22T10:00:00Z",
+         *         "end_at": {
+         *           "local": "2026-02-23T10:30:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771947000,
+         *           "utc": "2026-02-23T15:30:00Z"
+         *         },
+         *         "hold_duration": "PT10M",
+         *         "hold_enabled": true,
+         *         "hold_until": "2026-02-22T10:10:00Z",
+         *         "id": "bi_abc123def456abc123def456",
+         *         "locked_fields": [
+         *           "provider_id",
+         *           "start_at",
+         *           "end_at",
+         *           "time_zone"
+         *         ],
+         *         "metadata": {
+         *           "source": "web"
+         *         },
+         *         "object": "booking_intent",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "id": "srv_d025a96ac0c6",
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2026-02-23T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771945200,
+         *           "utc": "2026-02-23T15:00:00Z"
+         *         },
+         *         "status": "slot_selected",
+         *         "updated_at": "2026-02-22T10:00:00Z"
+         *       },
+         *       "type": "booking_intent.completed"
+         *     }
+         */
+        BookingIntentCompletedEventData: {
+            object: components["schemas"]["BookingIntent"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_intent.completed";
+        };
+        /**
          * AccountResponse
          * @description Response schema for a single account
          * @example {
@@ -2285,6 +2415,8 @@ export interface components {
          *     }
          */
         CreateBookingIntentRequest: {
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
             /** @description Progressive client data to collect during the booking flow. */
             client_data?: {
                 email?: string | null;
@@ -2328,6 +2460,136 @@ export interface components {
             start_at?: string | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
+        };
+        /**
+         * BookingIntentAbandonedEventData
+         * @description This is an object representing data for the booking intent abandoned event.
+         * @example {
+         *       "object": {
+         *         "abandoned_at": null,
+         *         "appointment": null,
+         *         "client": null,
+         *         "client_data": {
+         *           "email": "jane@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Doe",
+         *           "locale": "en",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_123",
+         *           "time_zone": "America/New_York"
+         *         },
+         *         "completed_at": null,
+         *         "created_at": "2026-02-22T10:00:00Z",
+         *         "end_at": {
+         *           "local": "2026-02-23T10:30:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771947000,
+         *           "utc": "2026-02-23T15:30:00Z"
+         *         },
+         *         "hold_duration": "PT10M",
+         *         "hold_enabled": true,
+         *         "hold_until": "2026-02-22T10:10:00Z",
+         *         "id": "bi_abc123def456abc123def456",
+         *         "locked_fields": [
+         *           "provider_id",
+         *           "start_at",
+         *           "end_at",
+         *           "time_zone"
+         *         ],
+         *         "metadata": {
+         *           "source": "web"
+         *         },
+         *         "object": "booking_intent",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "id": "srv_d025a96ac0c6",
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2026-02-23T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771945200,
+         *           "utc": "2026-02-23T15:00:00Z"
+         *         },
+         *         "status": "slot_selected",
+         *         "updated_at": "2026-02-22T10:00:00Z"
+         *       },
+         *       "type": "booking_intent.abandoned"
+         *     }
+         */
+        BookingIntentAbandonedEventData: {
+            object: components["schemas"]["BookingIntent"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_intent.abandoned";
         };
         /**
          * GenericErrorResponse
@@ -2587,6 +2849,136 @@ export interface components {
          */
         ServiceResponse: {
             data: components["schemas"]["Service"];
+        };
+        /**
+         * BookingIntentUpdatedEventData
+         * @description This is an object representing data for the booking intent updated event.
+         * @example {
+         *       "object": {
+         *         "abandoned_at": null,
+         *         "appointment": null,
+         *         "client": null,
+         *         "client_data": {
+         *           "email": "jane@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Doe",
+         *           "locale": "en",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_123",
+         *           "time_zone": "America/New_York"
+         *         },
+         *         "completed_at": null,
+         *         "created_at": "2026-02-22T10:00:00Z",
+         *         "end_at": {
+         *           "local": "2026-02-23T10:30:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771947000,
+         *           "utc": "2026-02-23T15:30:00Z"
+         *         },
+         *         "hold_duration": "PT10M",
+         *         "hold_enabled": true,
+         *         "hold_until": "2026-02-22T10:10:00Z",
+         *         "id": "bi_abc123def456abc123def456",
+         *         "locked_fields": [
+         *           "provider_id",
+         *           "start_at",
+         *           "end_at",
+         *           "time_zone"
+         *         ],
+         *         "metadata": {
+         *           "source": "web"
+         *         },
+         *         "object": "booking_intent",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "id": "srv_d025a96ac0c6",
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2026-02-23T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771945200,
+         *           "utc": "2026-02-23T15:00:00Z"
+         *         },
+         *         "status": "slot_selected",
+         *         "updated_at": "2026-02-22T10:00:00Z"
+         *       },
+         *       "type": "booking_intent.updated"
+         *     }
+         */
+        BookingIntentUpdatedEventData: {
+            object: components["schemas"]["BookingIntent"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_intent.updated";
         };
         /**
          * CreateCancellationReasonRequest
@@ -2967,6 +3359,8 @@ export interface components {
          *     }
          */
         CompleteBookingIntentRequest: {
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
@@ -3457,6 +3851,136 @@ export interface components {
              * @enum {string}
              */
             type: "provider_schedule.deleted";
+        };
+        /**
+         * BookingIntentCreatedEventData
+         * @description This is an object representing data for the booking intent created event.
+         * @example {
+         *       "object": {
+         *         "abandoned_at": null,
+         *         "appointment": null,
+         *         "client": null,
+         *         "client_data": {
+         *           "email": "jane@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Doe",
+         *           "locale": "en",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_123",
+         *           "time_zone": "America/New_York"
+         *         },
+         *         "completed_at": null,
+         *         "created_at": "2026-02-22T10:00:00Z",
+         *         "end_at": {
+         *           "local": "2026-02-23T10:30:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771947000,
+         *           "utc": "2026-02-23T15:30:00Z"
+         *         },
+         *         "hold_duration": "PT10M",
+         *         "hold_enabled": true,
+         *         "hold_until": "2026-02-22T10:10:00Z",
+         *         "id": "bi_abc123def456abc123def456",
+         *         "locked_fields": [
+         *           "provider_id",
+         *           "start_at",
+         *           "end_at",
+         *           "time_zone"
+         *         ],
+         *         "metadata": {
+         *           "source": "web"
+         *         },
+         *         "object": "booking_intent",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "id": "srv_d025a96ac0c6",
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2026-02-23T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1771945200,
+         *           "utc": "2026-02-23T15:00:00Z"
+         *         },
+         *         "status": "slot_selected",
+         *         "updated_at": "2026-02-22T10:00:00Z"
+         *       },
+         *       "type": "booking_intent.created"
+         *     }
+         */
+        BookingIntentCreatedEventData: {
+            object: components["schemas"]["BookingIntent"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_intent.created";
         };
         /**
          * Account
@@ -5651,6 +6175,34 @@ export interface components {
                  */
                 type: "block.deleted";
             } | {
+                object: components["schemas"]["BookingIntent"];
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "booking_intent.abandoned";
+            } | {
+                object: components["schemas"]["BookingIntent"];
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "booking_intent.completed";
+            } | {
+                object: components["schemas"]["BookingIntent"];
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "booking_intent.created";
+            } | {
+                object: components["schemas"]["BookingIntent"];
+                /**
+                 * @description The event type.
+                 * @enum {string}
+                 */
+                type: "booking_intent.updated";
+            } | {
                 /**
                  * Client
                  * @description This is an object representing a client.
@@ -7591,6 +8143,8 @@ export interface components {
          *     }
          */
         UpdateBookingIntentRequest: {
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
@@ -9408,6 +9962,8 @@ export interface components {
          *     }
          */
         CompletePublicBookingIntentRequest: {
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
@@ -10890,6 +11446,8 @@ export interface components {
          *     }
          */
         UpdatePublicBookingIntentRequest: {
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
@@ -11718,6 +12276,8 @@ export interface components {
         CreatePublicBookingIntentRequest: {
             /** @description The account ID. */
             account_id: string;
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
             /** @description Progressive client data to collect during the booking flow. */
             client_data?: {
                 email?: string | null;
