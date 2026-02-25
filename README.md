@@ -33,7 +33,13 @@ pnpm typecheck
 
 ## Updating the API changelog
 
-This repo includes a Claude Code skill for updating the API changelog and generating changeset files. In Claude Code, run:
+This repo includes a Claude Code skill for updating the API changelog and generating changeset files. First, regenerate the API docs from the schema:
+
+```bash
+pnpm run generate
+```
+
+Then in Claude Code, run:
 
 ```
 /update-changelog
