@@ -1,0 +1,1 @@
+{"schema":{"description":"Request schema for updating a connected account","example":{"display_name":"Work Calendar"},"properties":{"display_name":{"description":"The display name for the connected account.","nullable":true,"type":"string"}},"title":"UpdateConnectedAccountRequest","type":"object"},"schemaType":"response"}

@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 Request schema for creating an account
 
 <Schema
-  schema={{"description":"Request schema for creating an account","example":{"name":"My Account","time_zone":"America/Chicago"},"properties":{"name":{"description":"The account name.","type":"string"},"time_zone":{"description":"The account time zone (IANA format).","type":"string"}},"required":["name","time_zone"],"title":"CreateAccountRequest","type":"object"}}
-  schemaType={"response"}
+  {...require("./createaccountrequest.Schema.json")}
 >
   
 </Schema>

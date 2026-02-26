@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 A cancellation reason that can be used when canceling an appointment.
 
 <Schema
-  schema={{"description":"A cancellation reason that can be used when canceling an appointment.","example":{"id":"cr_d025a96ac0c6","name":"Schedule conflict","object":"public_cancellation_reason","sort_order":0},"properties":{"id":{"description":"Unique identifier for the object.","pattern":"^cr_\\w{12}$","type":"string"},"name":{"description":"The name of the cancellation reason.","type":"string"},"object":{"description":"String representing the object's type.","enum":["public_cancellation_reason"],"type":"string"},"sort_order":{"description":"The sort order of the cancellation reason.","type":"integer"}},"required":["object","id","name","sort_order"],"title":"PublicCancellationReason","type":"object"}}
-  schemaType={"response"}
+  {...require("./publiccancellationreason.Schema.json")}
 >
   
 </Schema>

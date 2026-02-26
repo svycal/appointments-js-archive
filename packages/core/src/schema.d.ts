@@ -2606,6 +2606,8 @@ export interface components {
          */
         GenericErrorResponse: {
             errors: {
+                /** @description Machine-readable error code (e.g. slot_unavailable, no_available_provider) */
+                code?: string | null;
                 /** @description Error message */
                 detail: string;
                 /** @description HTTP status code */
@@ -12926,13 +12928,21 @@ export interface components {
         BlockResponse: {
             data: components["schemas"]["Block"];
         };
-        /** JsonErrorResponse */
+        /**
+         * JsonErrorResponse
+         * @description Response schema for validation errors
+         */
         JsonErrorResponse: {
             errors: {
-                /** @example null value where string expected */
+                /**
+                 * @description Machine-readable error code (e.g. slot_unavailable, no_available_provider, time_range_conflict)
+                 * @example slot_unavailable
+                 */
+                code?: string | null;
+                /** @example is not available */
                 detail: string;
                 source: {
-                    /** @example /data/attributes/petName */
+                    /** @example /start_at */
                     pointer: string;
                 };
                 /** @example Invalid value */

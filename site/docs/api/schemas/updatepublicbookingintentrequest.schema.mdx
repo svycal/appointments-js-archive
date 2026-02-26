@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 Request schema for updating a booking intent via a public interface.
 
 <Schema
-  schema={{"description":"Request schema for updating a booking intent via a public interface.","example":{"client_data":{"email":"jane@example.com","first_name":"Jane"},"end_at":"2026-02-23T10:30:00-05:00","provider_id":"prov_1234567890","start_at":"2026-02-23T10:00:00-05:00","time_zone":"America/New_York"},"properties":{"auto_assign_provider":{"description":"When true, automatically assigns an available provider for the selected time slot if no provider_id is specified.","nullable":true,"type":"boolean"},"client_data":{"description":"Progressive client data. Provided fields are merged with existing values.","nullable":true,"properties":{"email":{"nullable":true,"type":"string"},"first_name":{"nullable":true,"type":"string"},"last_name":{"nullable":true,"type":"string"},"locale":{"nullable":true,"type":"string"},"phone":{"nullable":true,"type":"string"},"reference_id":{"nullable":true,"type":"string"},"time_zone":{"nullable":true,"type":"string"}},"type":"object"},"end_at":{"description":"The end time of the slot as an ISO-8601 datetime string with a timezone offset.","format":"date-time","nullable":true,"type":"string"},"provider_id":{"description":"The ID of the provider to assign.","nullable":true,"type":"string"},"service_id":{"description":"The ID of the service.","nullable":true,"type":"string"},"start_at":{"description":"The start time of the slot as an ISO-8601 datetime string with a timezone offset.","format":"date-time","nullable":true,"type":"string"},"time_zone":{"description":"The local time zone for the slot (IANA format).","nullable":true,"type":"string"}},"title":"UpdatePublicBookingIntentRequest","type":"object"}}
-  schemaType={"response"}
+  {...require("./updatepublicbookingintentrequest.Schema.json")}
 >
   
 </Schema>

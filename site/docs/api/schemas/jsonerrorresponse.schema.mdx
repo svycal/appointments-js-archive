@@ -1,12 +1,12 @@
 ---
 id: jsonerrorresponse
 title: "JsonErrorResponse"
-description: ""
+description: "Response schema for validation errors"
 sidebar_label: "JsonErrorResponse"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"errors":[{"detail":"null value where string expected","source":{"pointer":"/data/attributes/petName"},"title":"Invalid value"}]}
+sample: {"errors":[{"code":"slot_unavailable","detail":"is not available","source":{"pointer":"/start_at"},"title":"Invalid value"}]}
 custom_edit_url: null
 ---
 
@@ -22,11 +22,10 @@ import Heading from "@theme/Heading";
 
 
 
-
+Response schema for validation errors
 
 <Schema
-  schema={{"properties":{"errors":{"items":{"properties":{"detail":{"example":"null value where string expected","type":"string"},"source":{"properties":{"pointer":{"example":"/data/attributes/petName","type":"string"}},"required":["pointer"],"type":"object"},"title":{"example":"Invalid value","type":"string"}},"required":["title","source","detail"],"type":"object"},"type":"array"}},"required":["errors"],"title":"JsonErrorResponse","type":"object"}}
-  schemaType={"response"}
+  {...require("./jsonerrorresponse.Schema.json")}
 >
   
 </Schema>

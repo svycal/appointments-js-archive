@@ -26,8 +26,7 @@ Avoid presenting overlapping time slots for service providers to eliminate gaps 
 
 
 <Schema
-  schema={{"description":"Avoid presenting overlapping time slots for service providers to eliminate gaps in the schedule.\n","example":{"enabled":true},"properties":{"enabled":{"description":"Whether maximize utilization is enabled for the service.","type":"boolean"}},"required":["enabled"],"title":"MaximizeUtilizationPolicy","type":"object"}}
-  schemaType={"response"}
+  {...require("./maximizeutilizationpolicy.Schema.json")}
 >
   
 </Schema>

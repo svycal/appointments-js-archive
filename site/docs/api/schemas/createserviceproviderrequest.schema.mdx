@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 Request schema for creating a service provider
 
 <Schema
-  schema={{"description":"Request schema for creating a service provider","example":{"provider_id":"prov_d025a96ac0c6"},"properties":{"provider_id":{"description":"Provider ID","pattern":"^prov_\\w{12}$","type":"string"}},"required":["provider_id"],"title":"CreateServiceProviderRequest","type":"object"}}
-  schemaType={"response"}
+  {...require("./createserviceproviderrequest.Schema.json")}
 >
   
 </Schema>

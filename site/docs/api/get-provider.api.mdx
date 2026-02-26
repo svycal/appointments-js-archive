@@ -19,6 +19,7 @@ import StatusCodes from "@theme/StatusCodes";
 import OperationTabs from "@theme/OperationTabs";
 import TabItem from "@theme/TabItem";
 import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
 
 <Heading
   as={"h1"}
@@ -43,27 +44,24 @@ Get a single provider by ID.
   id={"request"}
   as={"h2"}
   className={"openapi-tabs__heading"}
-  children={"Request"}
 >
+  <Translate id="theme.openapi.request.title">Request</Translate>
 </Heading>
 
 <ParamsDetails
-  parameters={[{"description":"When authenticating with a platform token, specifies the account ID for the request","example":"acct_1234567890","in":"header","name":"X-SavvyCal-Account","required":false,"schema":{"type":"string"}},{"description":"Provider ID","in":"path","name":"provider_id","required":true,"schema":{"type":"string"}}]}
+  {...require("./get-provider.ParamsDetails.json")}
 >
   
 </ParamsDetails>
 
 <RequestSchema
-  title={"Body"}
-  body={undefined}
+  {...require("./get-provider.RequestSchema.json")}
 >
   
 </RequestSchema>
 
 <StatusCodes
-  id={undefined}
-  label={undefined}
-  responses={{"200":{"content":{"application/json":{"schema":{"description":"Response schema for a single provider","example":{"data":{"created_at":"2017-09-12T12:34:55Z","display_name":"John Smith","first_name":"John","id":"prov_d025a96ac0c6","last_name":"Smith","metadata":{"external_id":"123"},"object":"provider","updated_at":"2017-09-13T10:11:12Z"}},"properties":{"data":{"description":"A provider represents a staff member who can provide services to clients.\n","example":{"created_at":"2017-09-12T12:34:55Z","display_name":"John Smith","first_name":"John","id":"prov_d025a96ac0c6","last_name":"Smith","metadata":{"external_id":"123"},"object":"provider","updated_at":"2017-09-13T10:11:12Z"},"properties":{"created_at":{"description":"Time at which the object was created.","format":"date-time","type":"string"},"display_name":{"description":"The provider's display name.","type":"string"},"first_name":{"description":"The provider's first name.","type":"string"},"id":{"description":"Unique identifier for the object.","pattern":"^prov_\\w{12}$","type":"string"},"last_name":{"description":"The provider's last name.","type":"string"},"metadata":{"additionalProperties":true,"description":"Set of key-value pairs attached to this provider. Maximum size is 16 KB.","type":"object"},"object":{"description":"String representing the object's type.","enum":["provider"],"type":"string"},"updated_at":{"description":"Time at which the object was last updated.","format":"date-time","type":"string"}},"required":["object","created_at","id","first_name","last_name","display_name","updated_at"],"title":"Provider","type":"object","x-tags":["Providers"]}},"required":["data"],"title":"ProviderResponse","type":"object"}}},"description":"Success"},"401":{"content":{"application/json":{"schema":{"description":"Response schema for unauthorized requests","example":{"errors":[{"detail":"Unauthorized","status":"401"}]},"properties":{"errors":{"items":{"properties":{"detail":{"description":"Error message","type":"string"},"status":{"description":"HTTP status code","type":"string"},"title":{"description":"Error title","type":"string"}},"required":["detail"],"type":"object"},"type":"array"}},"required":["errors"],"title":"UnauthorizedResponse","type":"object"}}},"description":"Unauthorized"},"404":{"content":{"application/json":{"schema":{"description":"Response schema for not found requests","example":{"errors":[{"detail":"Not Found","status":"404"}]},"properties":{"errors":{"items":{"properties":{"detail":{"description":"Error message","enum":["Not Found"],"type":"string"},"status":{"description":"HTTP status code","enum":["404"],"type":"string"}},"required":["status","detail"],"type":"object"},"type":"array"}},"required":["errors"],"title":"NotFoundResponse","type":"object"}}},"description":"Not Found"}}}
+  {...require("./get-provider.StatusCodes.json")}
 >
   
 </StatusCodes>

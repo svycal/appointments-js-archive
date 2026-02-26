@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 Response schema for generic error messages
 
 <Schema
-  schema={{"description":"Response schema for generic error messages","example":{"errors":[{"detail":"You must use an account-scoped token to access this endpoint.","status":"400","title":"Invalid value"}]},"properties":{"errors":{"items":{"properties":{"detail":{"description":"Error message","type":"string"},"status":{"description":"HTTP status code","type":"string"},"title":{"description":"Error title","type":"string"}},"required":["detail"],"type":"object"},"type":"array"}},"required":["errors"],"title":"GenericErrorResponse","type":"object"}}
-  schemaType={"response"}
+  {...require("./genericerrorresponse.Schema.json")}
 >
   
 </Schema>

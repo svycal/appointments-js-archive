@@ -1,0 +1,1 @@
+{"parameters":[{"description":"Appointment ID","in":"path","name":"appointment_id","required":true,"schema":{"type":"string"}}]}

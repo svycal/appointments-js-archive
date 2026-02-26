@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 Response schema for not found requests
 
 <Schema
-  schema={{"description":"Response schema for not found requests","example":{"errors":[{"detail":"Not Found","status":"404"}]},"properties":{"errors":{"items":{"properties":{"detail":{"description":"Error message","enum":["Not Found"],"type":"string"},"status":{"description":"HTTP status code","enum":["404"],"type":"string"}},"required":["status","detail"],"type":"object"},"type":"array"}},"required":["errors"],"title":"NotFoundResponse","type":"object"}}
-  schemaType={"response"}
+  {...require("./notfoundresponse.Schema.json")}
 >
   
 </Schema>

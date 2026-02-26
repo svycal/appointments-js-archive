@@ -26,8 +26,7 @@ A policy for temporarily reserving a slot during the multi-step booking flow.
 
 
 <Schema
-  schema={{"description":"A policy for temporarily reserving a slot during the multi-step booking flow.\n","example":{"duration":"PT10M","enabled":true},"properties":{"duration":{"description":"The duration of the hold.","nullable":true,"pattern":"^PT(?:(\\d+)H)?(?:(\\d+)M)?$","type":"string"},"enabled":{"description":"Whether slot holds are enabled for the service.","type":"boolean"}},"required":["enabled","duration"],"title":"HoldPolicy","type":"object"}}
-  schemaType={"response"}
+  {...require("./holdpolicy.Schema.json")}
 >
   
 </Schema>

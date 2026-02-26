@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 Request body for updating a provider
 
 <Schema
-  schema={{"description":"Request body for updating a provider","example":{"display_name":"John Smith","first_name":"John","last_name":"Smith","metadata":{"external_id":"123"}},"properties":{"display_name":{"description":"Provider's display name","type":"string"},"first_name":{"description":"Provider's first name","type":"string"},"last_name":{"description":"Provider's last name","type":"string"},"metadata":{"additionalProperties":true,"description":"Set of key-value pairs to attach to this provider. Maximum size is 16 KB.","type":"object"}},"title":"UpdateProviderRequest","type":"object"}}
-  schemaType={"response"}
+  {...require("./updateproviderrequest.Schema.json")}
 >
   
 </Schema>

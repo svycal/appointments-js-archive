@@ -25,8 +25,7 @@ import Heading from "@theme/Heading";
 An object describing a date/time in local time and in UTC.
 
 <Schema
-  schema={{"description":"An object describing a date/time in local time and in UTC.","example":{"local":"2025-03-01T10:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736461200,"utc":"2025-03-01T03:00:00Z"},"properties":{"local":{"description":"The local date/time in ISO-8601 format, including the UTC offset (e.g., `2025-03-01T10:00:00-05:00`).","example":"2025-03-01T10:00:00-05:00","format":"date-time","type":"string"},"object":{"description":"String representing the object's type.","enum":["zoned_date_time"],"type":"string"},"time_zone":{"description":"The time zone of the local time (IANA format).","example":"America/New_York","type":"string"},"unix_ts":{"description":"The UTC date/time in Unix timestamp format (seconds).","example":1736461200,"type":"integer"},"utc":{"description":"The UTC date/time in ISO-8601 format (with time zone information).","example":"2025-03-01T03:00:00Z","format":"date-time","type":"string"}},"required":["object","local","utc","time_zone","unix_ts"],"title":"ZonedDateTime","type":"object"}}
-  schemaType={"response"}
+  {...require("./zoneddatetime.Schema.json")}
 >
   
 </Schema>

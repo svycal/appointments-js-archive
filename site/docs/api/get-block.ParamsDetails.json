@@ -1,0 +1,1 @@
+{"parameters":[{"description":"Block ID","in":"path","name":"block_id","required":true,"schema":{"type":"string"}}]}
