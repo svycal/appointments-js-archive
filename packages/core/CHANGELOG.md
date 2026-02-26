@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 0.10.0
+
+### Minor Changes
+
+- [`3bac651`](https://github.com/svycal/appointments/commit/3bac6511150190728ff9d92280f5b55b46e167e7) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Error responses now include an optional `code` field containing a machine-readable error code (e.g. `slot_unavailable`, `no_available_provider`). See [GenericErrorResponse](https://developers.savvycal.app/api/schemas/genericerrorresponse) and [JsonErrorResponse](https://developers.savvycal.app/api/schemas/jsonerrorresponse).
+
 ## 0.9.0
 
 ### Minor Changes
