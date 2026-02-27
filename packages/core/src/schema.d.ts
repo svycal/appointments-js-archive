@@ -1348,7 +1348,24 @@ export interface components {
          *         "unix_ts": 1736461200,
          *         "utc": "2025-03-01T03:00:00Z"
          *       },
-         *       "status": "scheduled"
+         *       "status": "scheduled",
+         *       "urls": {
+         *         "add_to_calendar": [
+         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *         ],
+         *         "add_to_google_calendar": [
+         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *         ],
+         *         "cancel": [
+         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *         ],
+         *         "ics": [
+         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *         ],
+         *         "reschedule": [
+         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *         ]
+         *       }
          *     }
          */
         PublicAppointment: {
@@ -1463,6 +1480,19 @@ export interface components {
              * @enum {string}
              */
             status: "scheduled" | "canceled";
+            /** @description URLs related to the appointment for client-facing actions. */
+            urls: {
+                /** @description URLs for adding the appointment to a calendar. */
+                add_to_calendar: string[];
+                /** @description URLs for adding the appointment to Google Calendar. */
+                add_to_google_calendar: string[];
+                /** @description URLs for canceling the appointment. */
+                cancel: string[];
+                /** @description URLs for downloading an ICS file for the appointment. */
+                ics: string[];
+                /** @description URLs for rescheduling the appointment. */
+                reschedule: string[];
+            };
         };
         /**
          * BlocksResponse
@@ -13843,7 +13873,24 @@ export interface components {
          *           "unix_ts": 1736461200,
          *           "utc": "2025-03-01T03:00:00Z"
          *         },
-         *         "status": "scheduled"
+         *         "status": "scheduled",
+         *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
+         *           "add_to_google_calendar": [
+         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           ],
+         *           "cancel": [
+         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           ],
+         *           "ics": [
+         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           ],
+         *           "reschedule": [
+         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           ]
+         *         }
          *       }
          *     }
          */
