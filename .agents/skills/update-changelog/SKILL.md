@@ -1,4 +1,5 @@
 ---
+name: update-changelog
 description: Update the API changelog and create changeset files for new or modified API endpoints, schemas, and fields.
 allowed-tools: Bash(git diff *), Bash(pnpm changeset *), Read, Write, Edit, Glob, Grep
 ---
@@ -38,6 +39,7 @@ Use this skill when the user asks to update the API changelog (e.g., `/update-ch
      - `patch` -- bug fixes, doc-only changes, or non-functional tweaks
    - The Markdown body should mirror the corresponding changelog entry, but written as a plain sentence (not a bullet) and with full URLs (e.g., `https://developers.savvycal.app/api/schemas/bookingintent`) instead of relative paths.
    - Example — for a changelog with 2 entries, create 2 files:
+
      ```
      // .changeset/bright-dogs-smile.md
      ---
@@ -47,6 +49,7 @@ Use this skill when the user asks to update the API changelog (e.g., `/update-ch
 
      **New: Booking Intents** -- Added endpoints for managing multi-step booking flows. See [Booking Intents](https://developers.savvycal.app/api/create-booking-intent).
      ```
+
      ```
      // .changeset/warm-lions-dance.md
      ---
