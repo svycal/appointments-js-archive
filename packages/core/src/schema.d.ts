@@ -1877,6 +1877,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -2344,6 +2355,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -2574,6 +2596,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -2851,6 +2884,17 @@ export interface components {
          *         "id": "srv_d025a96ac0c6",
          *         "name": "Initial Consult",
          *         "object": "service",
+         *         "provider_notifications": {
+         *           "additional_recipients": [
+         *             "admin@example.com"
+         *           ],
+         *           "notify_provider": true,
+         *           "types": [
+         *             {
+         *               "type": "new_appointment"
+         *             }
+         *           ]
+         *         },
          *         "rescheduling_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -2965,6 +3009,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -3510,6 +3565,17 @@ export interface components {
          *             "id": "srv_d025a96ac0c6",
          *             "name": "Initial Consult",
          *             "object": "service",
+         *             "provider_notifications": {
+         *               "additional_recipients": [
+         *                 "admin@example.com"
+         *               ],
+         *               "notify_provider": true,
+         *               "types": [
+         *                 {
+         *                   "type": "new_appointment"
+         *                 }
+         *               ]
+         *             },
          *             "rescheduling_policy": {
          *               "advance_notice": {
          *                 "enabled": true,
@@ -3967,6 +4033,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -4640,6 +4717,17 @@ export interface components {
          *         "id": "srv_d025a96ac0c6",
          *         "name": "Initial Consult",
          *         "object": "service",
+         *         "provider_notifications": {
+         *           "additional_recipients": [
+         *             "admin@example.com"
+         *           ],
+         *           "notify_provider": true,
+         *           "types": [
+         *             {
+         *               "type": "new_appointment"
+         *             }
+         *           ]
+         *         },
          *         "rescheduling_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -4704,6 +4792,17 @@ export interface components {
              *       "id": "srv_d025a96ac0c6",
              *       "name": "Initial Consult",
              *       "object": "service",
+             *       "provider_notifications": {
+             *         "additional_recipients": [
+             *           "admin@example.com"
+             *         ],
+             *         "notify_provider": true,
+             *         "types": [
+             *           {
+             *             "type": "new_appointment"
+             *           }
+             *         ]
+             *       },
              *       "rescheduling_policy": {
              *         "advance_notice": {
              *           "enabled": true,
@@ -4857,6 +4956,36 @@ export interface components {
                  * @enum {string}
                  */
                 object: "service";
+                /**
+                 * ProviderNotificationConfig
+                 * @description Configuration for staff notification emails on a service, including which
+                 *     notification types are enabled and who receives them.
+                 * @example {
+                 *       "additional_recipients": [
+                 *         "admin@example.com"
+                 *       ],
+                 *       "notify_provider": true,
+                 *       "types": [
+                 *         {
+                 *           "type": "new_appointment"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                provider_notifications: {
+                    /** @description Additional email addresses that receive staff notification emails for this service. */
+                    additional_recipients: string[];
+                    /** @description Whether the assigned provider receives notification emails for this service. */
+                    notify_provider: boolean;
+                    /** @description Array of enabled staff notification types for the service. */
+                    types: {
+                        /**
+                         * @description The notification type.
+                         * @enum {string}
+                         */
+                        type: "new_appointment" | "rescheduled" | "canceled";
+                    }[];
+                };
                 /**
                  * ReschedulingPolicy
                  * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -5211,6 +5340,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -5614,6 +5754,17 @@ export interface components {
          *             "id": "srv_d025a96ac0c6",
          *             "name": "Initial Consult",
          *             "object": "service",
+         *             "provider_notifications": {
+         *               "additional_recipients": [
+         *                 "admin@example.com"
+         *               ],
+         *               "notify_provider": true,
+         *               "types": [
+         *                 {
+         *                   "type": "new_appointment"
+         *                 }
+         *               ]
+         *             },
          *             "rescheduling_policy": {
          *               "advance_notice": {
          *                 "enabled": true,
@@ -7177,6 +7328,17 @@ export interface components {
                  *       "id": "srv_d025a96ac0c6",
                  *       "name": "Initial Consult",
                  *       "object": "service",
+                 *       "provider_notifications": {
+                 *         "additional_recipients": [
+                 *           "admin@example.com"
+                 *         ],
+                 *         "notify_provider": true,
+                 *         "types": [
+                 *           {
+                 *             "type": "new_appointment"
+                 *           }
+                 *         ]
+                 *       },
                  *       "rescheduling_policy": {
                  *         "advance_notice": {
                  *           "enabled": true,
@@ -7330,6 +7492,36 @@ export interface components {
                      * @enum {string}
                      */
                     object: "service";
+                    /**
+                     * ProviderNotificationConfig
+                     * @description Configuration for staff notification emails on a service, including which
+                     *     notification types are enabled and who receives them.
+                     * @example {
+                     *       "additional_recipients": [
+                     *         "admin@example.com"
+                     *       ],
+                     *       "notify_provider": true,
+                     *       "types": [
+                     *         {
+                     *           "type": "new_appointment"
+                     *         }
+                     *       ]
+                     *     }
+                     */
+                    provider_notifications: {
+                        /** @description Additional email addresses that receive staff notification emails for this service. */
+                        additional_recipients: string[];
+                        /** @description Whether the assigned provider receives notification emails for this service. */
+                        notify_provider: boolean;
+                        /** @description Array of enabled staff notification types for the service. */
+                        types: {
+                            /**
+                             * @description The notification type.
+                             * @enum {string}
+                             */
+                            type: "new_appointment" | "rescheduled" | "canceled";
+                        }[];
+                    };
                     /**
                      * ReschedulingPolicy
                      * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -7455,6 +7647,17 @@ export interface components {
                  *       "id": "srv_d025a96ac0c6",
                  *       "name": "Initial Consult",
                  *       "object": "service",
+                 *       "provider_notifications": {
+                 *         "additional_recipients": [
+                 *           "admin@example.com"
+                 *         ],
+                 *         "notify_provider": true,
+                 *         "types": [
+                 *           {
+                 *             "type": "new_appointment"
+                 *           }
+                 *         ]
+                 *       },
                  *       "rescheduling_policy": {
                  *         "advance_notice": {
                  *           "enabled": true,
@@ -7608,6 +7811,36 @@ export interface components {
                      * @enum {string}
                      */
                     object: "service";
+                    /**
+                     * ProviderNotificationConfig
+                     * @description Configuration for staff notification emails on a service, including which
+                     *     notification types are enabled and who receives them.
+                     * @example {
+                     *       "additional_recipients": [
+                     *         "admin@example.com"
+                     *       ],
+                     *       "notify_provider": true,
+                     *       "types": [
+                     *         {
+                     *           "type": "new_appointment"
+                     *         }
+                     *       ]
+                     *     }
+                     */
+                    provider_notifications: {
+                        /** @description Additional email addresses that receive staff notification emails for this service. */
+                        additional_recipients: string[];
+                        /** @description Whether the assigned provider receives notification emails for this service. */
+                        notify_provider: boolean;
+                        /** @description Array of enabled staff notification types for the service. */
+                        types: {
+                            /**
+                             * @description The notification type.
+                             * @enum {string}
+                             */
+                            type: "new_appointment" | "rescheduled" | "canceled";
+                        }[];
+                    };
                     /**
                      * ReschedulingPolicy
                      * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -7733,6 +7966,17 @@ export interface components {
                  *       "id": "srv_d025a96ac0c6",
                  *       "name": "Initial Consult",
                  *       "object": "service",
+                 *       "provider_notifications": {
+                 *         "additional_recipients": [
+                 *           "admin@example.com"
+                 *         ],
+                 *         "notify_provider": true,
+                 *         "types": [
+                 *           {
+                 *             "type": "new_appointment"
+                 *           }
+                 *         ]
+                 *       },
                  *       "rescheduling_policy": {
                  *         "advance_notice": {
                  *           "enabled": true,
@@ -7886,6 +8130,36 @@ export interface components {
                      * @enum {string}
                      */
                     object: "service";
+                    /**
+                     * ProviderNotificationConfig
+                     * @description Configuration for staff notification emails on a service, including which
+                     *     notification types are enabled and who receives them.
+                     * @example {
+                     *       "additional_recipients": [
+                     *         "admin@example.com"
+                     *       ],
+                     *       "notify_provider": true,
+                     *       "types": [
+                     *         {
+                     *           "type": "new_appointment"
+                     *         }
+                     *       ]
+                     *     }
+                     */
+                    provider_notifications: {
+                        /** @description Additional email addresses that receive staff notification emails for this service. */
+                        additional_recipients: string[];
+                        /** @description Whether the assigned provider receives notification emails for this service. */
+                        notify_provider: boolean;
+                        /** @description Array of enabled staff notification types for the service. */
+                        types: {
+                            /**
+                             * @description The notification type.
+                             * @enum {string}
+                             */
+                            type: "new_appointment" | "rescheduled" | "canceled";
+                        }[];
+                    };
                     /**
                      * ReschedulingPolicy
                      * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -8458,6 +8732,17 @@ export interface components {
          *             "id": "srv_d025a96ac0c6",
          *             "name": "Initial Consult",
          *             "object": "service",
+         *             "provider_notifications": {
+         *               "additional_recipients": [
+         *                 "admin@example.com"
+         *               ],
+         *               "notify_provider": true,
+         *               "types": [
+         *                 {
+         *                   "type": "new_appointment"
+         *                 }
+         *               ]
+         *             },
          *             "rescheduling_policy": {
          *               "advance_notice": {
          *                 "enabled": true,
@@ -8559,6 +8844,17 @@ export interface components {
          *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *       "duration": "PT1H30M",
          *       "name": "Initial Consultation",
+         *       "provider_notifications": {
+         *         "additional_recipients": [
+         *           "admin@example.com"
+         *         ],
+         *         "notify_provider": true,
+         *         "types": [
+         *           {
+         *             "type": "new_appointment"
+         *           }
+         *         ]
+         *       },
          *       "rescheduling_policy": {
          *         "advance_notice": {
          *           "enabled": true,
@@ -8699,6 +8995,36 @@ export interface components {
             duration?: string;
             /** @description The service name. */
             name?: string;
+            /**
+             * ProviderNotificationConfig
+             * @description Configuration for staff notification emails on a service, including which
+             *     notification types are enabled and who receives them.
+             * @example {
+             *       "additional_recipients": [
+             *         "admin@example.com"
+             *       ],
+             *       "notify_provider": true,
+             *       "types": [
+             *         {
+             *           "type": "new_appointment"
+             *         }
+             *       ]
+             *     }
+             */
+            provider_notifications?: {
+                /** @description Additional email addresses that receive staff notification emails for this service. */
+                additional_recipients: string[];
+                /** @description Whether the assigned provider receives notification emails for this service. */
+                notify_provider: boolean;
+                /** @description Array of enabled staff notification types for the service. */
+                types: {
+                    /**
+                     * @description The notification type.
+                     * @enum {string}
+                     */
+                    type: "new_appointment" | "rescheduled" | "canceled";
+                }[];
+            };
             /**
              * ReschedulingPolicy
              * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -8845,6 +9171,20 @@ export interface components {
             url: string;
             /** @description The ID of the user associated with the dashboard session. */
             user_id: string;
+        };
+        /**
+         * ProviderNotificationType
+         * @description An enabled staff notification type on a service.
+         * @example {
+         *       "type": "new_appointment"
+         *     }
+         */
+        ProviderNotificationType: {
+            /**
+             * @description The notification type.
+             * @enum {string}
+             */
+            type: "new_appointment" | "rescheduled" | "canceled";
         };
         /**
          * CreateBlockRequest
@@ -9103,6 +9443,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -9601,6 +9952,17 @@ export interface components {
          *       "id": "srv_d025a96ac0c6",
          *       "name": "Initial Consult",
          *       "object": "service",
+         *       "provider_notifications": {
+         *         "additional_recipients": [
+         *           "admin@example.com"
+         *         ],
+         *         "notify_provider": true,
+         *         "types": [
+         *           {
+         *             "type": "new_appointment"
+         *           }
+         *         ]
+         *       },
          *       "rescheduling_policy": {
          *         "advance_notice": {
          *           "enabled": true,
@@ -9754,6 +10116,36 @@ export interface components {
              * @enum {string}
              */
             object: "service";
+            /**
+             * ProviderNotificationConfig
+             * @description Configuration for staff notification emails on a service, including which
+             *     notification types are enabled and who receives them.
+             * @example {
+             *       "additional_recipients": [
+             *         "admin@example.com"
+             *       ],
+             *       "notify_provider": true,
+             *       "types": [
+             *         {
+             *           "type": "new_appointment"
+             *         }
+             *       ]
+             *     }
+             */
+            provider_notifications: {
+                /** @description Additional email addresses that receive staff notification emails for this service. */
+                additional_recipients: string[];
+                /** @description Whether the assigned provider receives notification emails for this service. */
+                notify_provider: boolean;
+                /** @description Array of enabled staff notification types for the service. */
+                types: {
+                    /**
+                     * @description The notification type.
+                     * @enum {string}
+                     */
+                    type: "new_appointment" | "rescheduled" | "canceled";
+                }[];
+            };
             /**
              * ReschedulingPolicy
              * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -10216,6 +10608,17 @@ export interface components {
          *         "id": "srv_d025a96ac0c6",
          *         "name": "Initial Consult",
          *         "object": "service",
+         *         "provider_notifications": {
+         *           "additional_recipients": [
+         *             "admin@example.com"
+         *           ],
+         *           "notify_provider": true,
+         *           "types": [
+         *             {
+         *               "type": "new_appointment"
+         *             }
+         *           ]
+         *         },
          *         "rescheduling_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -10280,6 +10683,17 @@ export interface components {
              *       "id": "srv_d025a96ac0c6",
              *       "name": "Initial Consult",
              *       "object": "service",
+             *       "provider_notifications": {
+             *         "additional_recipients": [
+             *           "admin@example.com"
+             *         ],
+             *         "notify_provider": true,
+             *         "types": [
+             *           {
+             *             "type": "new_appointment"
+             *           }
+             *         ]
+             *       },
              *       "rescheduling_policy": {
              *         "advance_notice": {
              *           "enabled": true,
@@ -10433,6 +10847,36 @@ export interface components {
                  * @enum {string}
                  */
                 object: "service";
+                /**
+                 * ProviderNotificationConfig
+                 * @description Configuration for staff notification emails on a service, including which
+                 *     notification types are enabled and who receives them.
+                 * @example {
+                 *       "additional_recipients": [
+                 *         "admin@example.com"
+                 *       ],
+                 *       "notify_provider": true,
+                 *       "types": [
+                 *         {
+                 *           "type": "new_appointment"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                provider_notifications: {
+                    /** @description Additional email addresses that receive staff notification emails for this service. */
+                    additional_recipients: string[];
+                    /** @description Whether the assigned provider receives notification emails for this service. */
+                    notify_provider: boolean;
+                    /** @description Array of enabled staff notification types for the service. */
+                    types: {
+                        /**
+                         * @description The notification type.
+                         * @enum {string}
+                         */
+                        type: "new_appointment" | "rescheduled" | "canceled";
+                    }[];
+                };
                 /**
                  * ReschedulingPolicy
                  * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -11012,6 +11456,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -11070,6 +11525,36 @@ export interface components {
                 /** @description Total number of pages */
                 total_pages: number;
             };
+        };
+        /**
+         * ProviderNotificationConfig
+         * @description Configuration for staff notification emails on a service, including which
+         *     notification types are enabled and who receives them.
+         * @example {
+         *       "additional_recipients": [
+         *         "admin@example.com"
+         *       ],
+         *       "notify_provider": true,
+         *       "types": [
+         *         {
+         *           "type": "new_appointment"
+         *         }
+         *       ]
+         *     }
+         */
+        ProviderNotificationConfig: {
+            /** @description Additional email addresses that receive staff notification emails for this service. */
+            additional_recipients: string[];
+            /** @description Whether the assigned provider receives notification emails for this service. */
+            notify_provider: boolean;
+            /** @description Array of enabled staff notification types for the service. */
+            types: {
+                /**
+                 * @description The notification type.
+                 * @enum {string}
+                 */
+                type: "new_appointment" | "rescheduled" | "canceled";
+            }[];
         };
         /**
          * ReschedulingPolicy
@@ -11396,6 +11881,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -12420,6 +12916,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -12654,6 +13161,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -13145,6 +13663,17 @@ export interface components {
          *         "id": "srv_d025a96ac0c6",
          *         "name": "Initial Consult",
          *         "object": "service",
+         *         "provider_notifications": {
+         *           "additional_recipients": [
+         *             "admin@example.com"
+         *           ],
+         *           "notify_provider": true,
+         *           "types": [
+         *             {
+         *               "type": "new_appointment"
+         *             }
+         *           ]
+         *         },
          *         "rescheduling_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -13466,6 +13995,17 @@ export interface components {
              *       "id": "srv_d025a96ac0c6",
              *       "name": "Initial Consult",
              *       "object": "service",
+             *       "provider_notifications": {
+             *         "additional_recipients": [
+             *           "admin@example.com"
+             *         ],
+             *         "notify_provider": true,
+             *         "types": [
+             *           {
+             *             "type": "new_appointment"
+             *           }
+             *         ]
+             *       },
              *       "rescheduling_policy": {
              *         "advance_notice": {
              *           "enabled": true,
@@ -13619,6 +14159,36 @@ export interface components {
                  * @enum {string}
                  */
                 object: "service";
+                /**
+                 * ProviderNotificationConfig
+                 * @description Configuration for staff notification emails on a service, including which
+                 *     notification types are enabled and who receives them.
+                 * @example {
+                 *       "additional_recipients": [
+                 *         "admin@example.com"
+                 *       ],
+                 *       "notify_provider": true,
+                 *       "types": [
+                 *         {
+                 *           "type": "new_appointment"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                provider_notifications: {
+                    /** @description Additional email addresses that receive staff notification emails for this service. */
+                    additional_recipients: string[];
+                    /** @description Whether the assigned provider receives notification emails for this service. */
+                    notify_provider: boolean;
+                    /** @description Array of enabled staff notification types for the service. */
+                    types: {
+                        /**
+                         * @description The notification type.
+                         * @enum {string}
+                         */
+                        type: "new_appointment" | "rescheduled" | "canceled";
+                    }[];
+                };
                 /**
                  * ReschedulingPolicy
                  * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -14074,6 +14644,17 @@ export interface components {
          *         "id": "srv_d025a96ac0c6",
          *         "name": "Initial Consult",
          *         "object": "service",
+         *         "provider_notifications": {
+         *           "additional_recipients": [
+         *             "admin@example.com"
+         *           ],
+         *           "notify_provider": true,
+         *           "types": [
+         *             {
+         *               "type": "new_appointment"
+         *             }
+         *           ]
+         *         },
          *         "rescheduling_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -14138,6 +14719,17 @@ export interface components {
              *       "id": "srv_d025a96ac0c6",
              *       "name": "Initial Consult",
              *       "object": "service",
+             *       "provider_notifications": {
+             *         "additional_recipients": [
+             *           "admin@example.com"
+             *         ],
+             *         "notify_provider": true,
+             *         "types": [
+             *           {
+             *             "type": "new_appointment"
+             *           }
+             *         ]
+             *       },
              *       "rescheduling_policy": {
              *         "advance_notice": {
              *           "enabled": true,
@@ -14291,6 +14883,36 @@ export interface components {
                  * @enum {string}
                  */
                 object: "service";
+                /**
+                 * ProviderNotificationConfig
+                 * @description Configuration for staff notification emails on a service, including which
+                 *     notification types are enabled and who receives them.
+                 * @example {
+                 *       "additional_recipients": [
+                 *         "admin@example.com"
+                 *       ],
+                 *       "notify_provider": true,
+                 *       "types": [
+                 *         {
+                 *           "type": "new_appointment"
+                 *         }
+                 *       ]
+                 *     }
+                 */
+                provider_notifications: {
+                    /** @description Additional email addresses that receive staff notification emails for this service. */
+                    additional_recipients: string[];
+                    /** @description Whether the assigned provider receives notification emails for this service. */
+                    notify_provider: boolean;
+                    /** @description Array of enabled staff notification types for the service. */
+                    types: {
+                        /**
+                         * @description The notification type.
+                         * @enum {string}
+                         */
+                        type: "new_appointment" | "rescheduled" | "canceled";
+                    }[];
+                };
                 /**
                  * ReschedulingPolicy
                  * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -14526,6 +15148,17 @@ export interface components {
          *         "id": "srv_d025a96ac0c6",
          *         "name": "Initial Consult",
          *         "object": "service",
+         *         "provider_notifications": {
+         *           "additional_recipients": [
+         *             "admin@example.com"
+         *           ],
+         *           "notify_provider": true,
+         *           "types": [
+         *             {
+         *               "type": "new_appointment"
+         *             }
+         *           ]
+         *         },
          *         "rescheduling_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -14667,6 +15300,17 @@ export interface components {
          *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *       "duration": "PT1H30M",
          *       "name": "Initial Consult",
+         *       "provider_notifications": {
+         *         "additional_recipients": [
+         *           "admin@example.com"
+         *         ],
+         *         "notify_provider": true,
+         *         "types": [
+         *           {
+         *             "type": "new_appointment"
+         *           }
+         *         ]
+         *       },
          *       "rescheduling_policy": {
          *         "advance_notice": {
          *           "enabled": true,
@@ -14807,6 +15451,36 @@ export interface components {
             duration?: string;
             /** @description The service name. */
             name: string;
+            /**
+             * ProviderNotificationConfig
+             * @description Configuration for staff notification emails on a service, including which
+             *     notification types are enabled and who receives them.
+             * @example {
+             *       "additional_recipients": [
+             *         "admin@example.com"
+             *       ],
+             *       "notify_provider": true,
+             *       "types": [
+             *         {
+             *           "type": "new_appointment"
+             *         }
+             *       ]
+             *     }
+             */
+            provider_notifications?: {
+                /** @description Additional email addresses that receive staff notification emails for this service. */
+                additional_recipients: string[];
+                /** @description Whether the assigned provider receives notification emails for this service. */
+                notify_provider: boolean;
+                /** @description Array of enabled staff notification types for the service. */
+                types: {
+                    /**
+                     * @description The notification type.
+                     * @enum {string}
+                     */
+                    type: "new_appointment" | "rescheduled" | "canceled";
+                }[];
+            };
             /**
              * ReschedulingPolicy
              * @description A rescheduling policy defines the rules for rescheduling a service from public booking interfaces.
@@ -15054,6 +15728,17 @@ export interface components {
          *           "id": "srv_d025a96ac0c6",
          *           "name": "Initial Consult",
          *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
          *           "rescheduling_policy": {
          *             "advance_notice": {
          *               "enabled": true,

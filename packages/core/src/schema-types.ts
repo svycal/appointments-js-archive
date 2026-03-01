@@ -118,6 +118,8 @@ export type Provider = Schemas["Provider"];
 export type ProviderCreatedEventData = Schemas["ProviderCreatedEventData"];
 export type ProviderDeactivatedEventData =
   Schemas["ProviderDeactivatedEventData"];
+export type ProviderNotificationConfig = Schemas["ProviderNotificationConfig"];
+export type ProviderNotificationType = Schemas["ProviderNotificationType"];
 export type ProviderReactivatedEventData =
   Schemas["ProviderReactivatedEventData"];
 export type ProviderResponse = Schemas["ProviderResponse"];

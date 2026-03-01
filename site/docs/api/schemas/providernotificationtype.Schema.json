@@ -1,0 +1,1 @@
+{"schema":{"description":"An enabled staff notification type on a service.\n","example":{"type":"new_appointment"},"properties":{"type":{"description":"The notification type.","enum":["new_appointment","rescheduled","canceled"],"type":"string"}},"required":["type"],"title":"ProviderNotificationType","type":"object"},"schemaType":"response"}

@@ -1072,6 +1072,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/providernotificationtype",
+          label: "ProviderNotificationType",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/createblockrequest",
           label: "CreateBlockRequest",
           className: "schema",
@@ -1224,6 +1230,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/servicesresponse",
           label: "ServicesResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/providernotificationconfig",
+          label: "ProviderNotificationConfig",
           className: "schema",
         },
         {

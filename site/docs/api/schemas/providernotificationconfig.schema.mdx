@@ -1,0 +1,34 @@
+---
+id: providernotificationconfig
+title: "ProviderNotificationConfig"
+description: "Configuration for staff notification emails on a service, including which"
+sidebar_label: "ProviderNotificationConfig"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"additional_recipients":["admin@example.com"],"notify_provider":true,"types":[{"type":"new_appointment"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ProviderNotificationConfig"}
+>
+</Heading>
+
+
+
+Configuration for staff notification emails on a service, including which
+notification types are enabled and who receives them.
+
+
+<Schema
+  {...require("./providernotificationconfig.Schema.json")}
+>
+  
+</Schema>
+            
