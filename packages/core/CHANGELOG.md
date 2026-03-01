@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 0.12.0
+
+### Minor Changes
+
+- [`00e1891`](https://github.com/svycal/appointments/commit/00e18913091a8109d9604b985b11df1d5219ba4c) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Services now include a `provider_notifications` field for configuring staff email notification settings, including which notification types are enabled and additional recipients. See [ProviderNotificationConfig](https://developers.savvycal.app/api/schemas/providernotificationconfig) and [ProviderNotificationType](https://developers.savvycal.app/api/schemas/providernotificationtype).
+
 ## 0.11.0
 
 ### Minor Changes
