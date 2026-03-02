@@ -90,6 +90,8 @@ When calculating available time slots for a service provider, the system uses th
 1. Generate all time slots defined by the slot rules for the service.
 2. Remove any time slots that are already booked, are marked as unavailable with a block, or fall outside the provider's configured working hours.
 
+See the [Slot Availability](/slot-availability) guide for a detailed explanation of how availability is calculated and how to query available time slots.
+
 ## Blocks
 
 A [`Block`](/api/schemas/block) represents a range of blocked time that prevents bookings. Blocks can be attached to a `provider`, `service`, `service_provider`, or `location`.

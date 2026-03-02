@@ -23,11 +23,19 @@ const sidebars: SidebarsConfig = {
   docSidebar: [
     "index",
     "authentication",
-    "users-and-accounts",
-    "data-model",
-    "booking-intents",
-    "metadata-filtering",
-    "dates",
+    {
+      collapsed: false,
+      items: [
+        "data-model",
+        "users-and-accounts",
+        "booking-intents",
+        "slot-availability",
+        "dates",
+        "metadata-filtering",
+      ],
+      label: "Concepts",
+      type: "category",
+    },
     {
       collapsed: false,
       items: ["components/public-booking-form"],
