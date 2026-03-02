@@ -38,6 +38,8 @@ Configure slot holding with these fields:
 | `hold_duration` | string  | The hold duration as an ISO 8601 duration string (e.g., `PT10M` for 10 minutes). Falls back to the service's hold policy.  |
 | `hold_until`    | string  | Read-only. The UTC datetime when the current hold expires. Set automatically when a slot is selected with holding enabled. |
 
+When a service is set on the booking intent, the service's default hold policy (the "Hold selected slots" setting under Booking Policy) is automatically applied unless `hold_enabled` or `hold_duration` is explicitly provided when creating or updating the booking intent.
+
 When a hold expires, the slot becomes available to other callers again. The booking intent itself remains in `slot_selected` status — an expired hold does not abandon the intent.
 
 ## Progressive client data
@@ -120,7 +122,7 @@ When updating via the authenticated API, `locked_fields` replaces the existing s
 
 Set `auto_assign_provider` to `true` when you want the system to automatically select an available provider for the chosen time slot. This is useful when your flow lets the user pick a time without choosing a specific provider.
 
-Auto-assignment is evaluated when the booking intent is completed. If a `provider_id` is also specified, the explicit provider takes precedence.
+Auto-assignment is evaluated when a time slot is selected, so the held slot is reserved for a specific provider's schedule and remains bookable at completion. If a `provider_id` is also specified, the explicit provider takes precedence.
 
 ## Webhook events
 
