@@ -6,6 +6,10 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## March 2, 2026
+
+- **New:** -- Services now include an optional `internal_name` field for setting an internal admin label. When set, this name is displayed in the admin UI instead of the public name. See [Service](/api/schemas/service).
+
 ## March 1, 2026
 
 - **New:** -- Services now include a `provider_notifications` field for configuring staff email notification settings, including which notification types are enabled and additional recipients. See [ProviderNotificationConfig](/api/schemas/providernotificationconfig) and [ProviderNotificationType](/api/schemas/providernotificationtype).
