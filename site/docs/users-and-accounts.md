@@ -62,4 +62,4 @@ When creating resources via the API, you can link these together:
 
 Connecting external calendar accounts (Google Calendar, Microsoft 365) to a provider enables appointment syncing and availability conflict checking. This requires the provider to be affiliated with a user, because the user logs in and authenticates their calendar accounts via OAuth.
 
-See the [ConnectedAccount](/api/schemas/connectedaccount) schema for complete details.
+See the [ConnectedAccount](/api/schemas/connectedaccount) schema for complete details. See the [Connected Accounts](/connected-accounts) guide for a detailed walkthrough of providers, connection statuses, and monitoring connection health.

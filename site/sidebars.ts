@@ -28,6 +28,7 @@ const sidebars: SidebarsConfig = {
       items: [
         "data-model",
         "users-and-accounts",
+        "connected-accounts",
         "booking-intents",
         "slot-availability",
         "dates",

@@ -23,7 +23,9 @@ Each stage of the pipeline works as follows:
 
 4. **Blocks** — Any [`Block`](/data-model#blocks) that overlaps a candidate slot removes it, regardless of the block's `attachment_type` (provider, service, service\_provider, or location).
 
-5. **Booking intent slot holds** — Active holds from [`BookingIntents`](/booking-intents#slot-holding) temporarily remove held slots until the hold expires or the intent is completed or abandoned.
+5. **Connected calendar conflicts** — When a provider has a [connected calendar account](/connected-accounts) (Google Calendar, Microsoft 365), busy times from the external calendar are removed from availability.
+
+6. **Booking intent slot holds** — Active holds from [`BookingIntents`](/booking-intents#slot-holding) temporarily remove held slots until the hold expires or the intent is completed or abandoned.
 
 ## Querying available slots
 
@@ -210,4 +212,5 @@ This table summarizes the resources that influence slot availability:
 | `ProviderSchedule` `public_bookings` | Controls public endpoint visibility | [ProviderSchedule schema](/api/schemas/providerschedule) |
 | `Appointment` | Removes booked slots | [Data Model — Appointments](/data-model#appointments) |
 | `Block` | Removes blocked time ranges | [Data Model — Blocks](/data-model#blocks) |
+| `ConnectedAccount` (calendar) | Removes externally busy times | [Connected Accounts](/connected-accounts) |
 | `BookingIntent` hold | Temporarily removes held slots | [Booking Intents — Slot holding](/booking-intents#slot-holding) |
