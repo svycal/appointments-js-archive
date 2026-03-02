@@ -25,6 +25,7 @@ const sidebars: SidebarsConfig = {
     "authentication",
     "users-and-accounts",
     "data-model",
+    "booking-intents",
     "metadata-filtering",
     "dates",
     {
