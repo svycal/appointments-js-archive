@@ -28,7 +28,10 @@ See the [Provider](/api/schemas/provider) schema for complete details.
 
 A [`Service`](/api/schemas/service) represents a service offered by one or more [`Providers`](/api/schemas/provider).
 
-![Service relationships](/img/service-relationships.png)
+```
+Service ─┬─ has many ──▶ Providers
+         └─ has many ──▶ Slot Rules
+```
 
 You can add one or more providers to a service (via the SavvyCal Dashboard or the [Add provider to service API](/api/create-service-provider)).
 
@@ -70,7 +73,11 @@ See the [Client](/api/schemas/client) schema for complete details.
 
 An [`Appointment`](/api/schemas/appointment) represents a booking that a [`Client`](/api/schemas/client) has made with a [`Provider`](/api/schemas/provider) for a particular [`Service`](/api/schemas/service).
 
-![Appointment relationships](/img/appointment-relationships.png)
+```
+Appointment ─┬─ has one ──▶ Service
+             ├─ has one ──▶ Provider
+             └─ has one ──▶ Client
+```
 
 Key properties of an appointment include:
 
