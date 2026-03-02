@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 0.13.0
+
+### Minor Changes
+
+- [`c6d6e59`](https://github.com/svycal/appointments/commit/c6d6e598c93688cef5a436d95af9f536c8cc5b8e) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Services now include an optional `internal_name` field for setting an internal admin label. When set, this name is displayed in the admin UI instead of the public name. See [Service](https://developers.savvycal.app/api/schemas/service).
+
 ## 0.12.0
 
 ### Minor Changes
