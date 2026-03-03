@@ -26,6 +26,7 @@ const sidebars: SidebarsConfig = {
     {
       collapsed: false,
       items: [
+        "platforms",
         "data-model",
         "users-and-accounts",
         "connected-accounts",

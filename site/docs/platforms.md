@@ -1,0 +1,124 @@
+---
+---
+
+# Platforms
+
+This guide explains the platform model in SavvyCal Appointments: how platforms manage multiple accounts, authenticate with the API, and operate on behalf of individual accounts.
+
+## What a platform is
+
+A [`Platform`](/api/schemas/platform) represents a multi-tenant application — such as a practice management system or a marketplace — that provisions and manages multiple SavvyCal accounts. Each managed account is a full tenancy boundary with its own providers, services, appointments, and other resources.
+
+```
+Platform
+  ├── Account A (Clinic Alpha)
+  │     ├── Providers
+  │     ├── Services
+  │     └── Appointments
+  ├── Account B (Clinic Beta)
+  │     ├── Providers
+  │     ├── Services
+  │     └── Appointments
+  └── ...
+```
+
+:::note
+Not all accounts are platform-managed. If you are a single-account customer using an [account API token](/authentication#account-api-tokens), the platform model does not apply to you.
+:::
+
+See [Users and Accounts](/users-and-accounts) for how users and accounts relate, and [Data Model](/data-model) for a detailed overview of account-level resources.
+
+## Authentication
+
+Platform tokens are long-lived, created in the Dashboard, and authenticate server-side requests across multiple accounts. See [Authentication](/authentication) for full details on token types.
+
+### Platform-level requests
+
+Some endpoints operate at the platform level and don't require an account context. Examples include `GET /v1/platform`, `GET /v1/accounts`, and `POST /v1/accounts`.
+
+```bash
+curl "https://api.savvycal.app/v1/platform" \
+  -H "Authorization: Bearer sk_..."
+```
+
+### Account-scoped requests
+
+Most endpoints require an account context. When using a platform token, include the `X-SavvyCal-Account` header to specify which account you're operating on behalf of.
+
+```bash
+curl "https://api.savvycal.app/v1/services" \
+  -H "Authorization: Bearer sk_..." \
+  -H "X-SavvyCal-Account: acct_d025a96ac0c6"
+```
+
+## Managing accounts
+
+### Creating an account
+
+Use `POST /v1/accounts` with a platform token to provision a new account. This endpoint is only available to platform tokens.
+
+```bash
+curl -X POST "https://api.savvycal.app/v1/accounts" \
+  -H "Authorization: Bearer sk_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Clinic Alpha",
+    "time_zone": "America/Chicago"
+  }'
+```
+
+### Listing accounts
+
+Use `GET /v1/accounts` to retrieve all accounts managed by the platform. Supports `page` and `page_size` query parameters for pagination.
+
+```bash
+curl -G "https://api.savvycal.app/v1/accounts" \
+  -H "Authorization: Bearer sk_..."
+```
+
+### Retrieving an account
+
+```bash
+curl "https://api.savvycal.app/v1/accounts/acct_d025a96ac0c6" \
+  -H "Authorization: Bearer sk_..."
+```
+
+### Updating an account
+
+```bash
+curl -X PATCH "https://api.savvycal.app/v1/accounts/acct_d025a96ac0c6" \
+  -H "Authorization: Bearer sk_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Clinic Alpha (Renamed)"
+  }'
+```
+
+## Operating on behalf of an account
+
+Once an account exists, you can use the platform token with the `X-SavvyCal-Account` header to call any account-scoped endpoint. A typical setup sequence looks like this:
+
+1. Create an account (`POST /v1/accounts`).
+2. Add a user to the account ([Create account user](/api/create-account-user) with `X-SavvyCal-Account`).
+3. Create a provider ([Create provider](/api/create-provider) with `X-SavvyCal-Account`).
+4. Set up services, schedules, and other resources.
+5. Generate a [dashboard session](/api/create-dashboard-session) to let users manage their own settings.
+
+See [Connected Accounts](/connected-accounts) for how users connect external calendars, and [Dashboard Sessions](/api/create-dashboard-session) for signing users into the Dashboard.
+
+## Webhooks
+
+Platforms can register webhooks at the platform level from the platform settings page in the Dashboard. Platform webhooks receive events from **all** managed accounts, so a single webhook endpoint can handle events across your entire fleet.
+
+Each webhook payload includes the account context, so you can route events to the correct account in your system.
+
+See the [Webhooks](/webhooks) guide for details on registering webhooks and handling events.
+
+## Key properties
+
+| Property | Type   | Description                                    |
+| -------- | ------ | ---------------------------------------------- |
+| `id`     | string | Unique identifier (e.g., `plat_d025a96ac0c6`). |
+| `name`   | string | The platform's name.                           |
+
+See the [Platform](/api/schemas/platform) schema for complete details.

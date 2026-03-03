@@ -30,6 +30,8 @@ Authorization: Bearer <your-platform-token>
 X-SavvyCal-Account: <account-id>
 ```
 
+See the [Platforms](/platforms) guide for a detailed walkthrough of managing accounts and operating on behalf of them with a platform token.
+
 ## JSON Web Tokens
 
 JSON Web Tokens (JWTs) are short-lived tokens used for client-side requests to the SavvyCal API on behalf of a specific user.
