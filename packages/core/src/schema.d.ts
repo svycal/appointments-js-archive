@@ -1432,6 +1432,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -1569,6 +1572,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -1668,6 +1674,28 @@ export interface components {
              * @enum {string}
              */
             type: "appointment.rescheduled";
+        };
+        /**
+         * ForbiddenResponse
+         * @description Response schema for forbidden requests
+         * @example {
+         *       "errors": [
+         *         {
+         *           "detail": "Forbidden",
+         *           "status": "403"
+         *         }
+         *       ]
+         *     }
+         */
+        ForbiddenResponse: {
+            errors: {
+                /** @description Error message */
+                detail: string;
+                /** @description HTTP status code */
+                status?: string;
+                /** @description Error title */
+                title?: string;
+            }[];
         };
         /**
          * ServiceSlotResponse
@@ -1944,6 +1972,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -2186,6 +2217,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -2475,6 +2509,9 @@ export interface components {
          *         "duration": "PT1H30M",
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "name": "Initial Consult",
          *         "object": "service",
          *         "provider_notifications": {
@@ -2601,6 +2638,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -2941,6 +2981,9 @@ export interface components {
          *             "duration": "PT1H30M",
          *             "id": "srv_d025a96ac0c6",
          *             "internal_name": null,
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "name": "Initial Consult",
          *             "object": "service",
          *             "provider_notifications": {
@@ -3099,6 +3142,9 @@ export interface components {
          *         "id": "clnt_a1b2c3d4e5f6",
          *         "last_name": "Smith",
          *         "locale": "en-US",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "client",
          *         "phone": "+15551234567",
          *         "reference_id": "ext_12345",
@@ -3231,6 +3277,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -3549,6 +3598,9 @@ export interface components {
          *       "id": "clnt_a1b2c3d4e5f6",
          *       "last_name": "Smith",
          *       "locale": "en-US",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "object": "client",
          *       "phone": "+15551234567",
          *       "reference_id": "ext_12345",
@@ -3578,6 +3630,10 @@ export interface components {
              * @example en-US
              */
             locale: string;
+            /** @description Set of key-value pairs attached to this client. Maximum size is 16 KB. */
+            metadata?: {
+                [key: string]: unknown;
+            };
             /**
              * @description String representing the object's type.
              * @enum {string}
@@ -3687,6 +3743,9 @@ export interface components {
          *         "duration": "PT1H30M",
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "name": "Initial Consult",
          *         "object": "service",
          *         "provider_notifications": {
@@ -3846,6 +3905,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -3983,6 +4045,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -4091,6 +4156,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -4200,6 +4268,9 @@ export interface components {
          *             "id": "clnt_a1b2c3d4e5f6",
          *             "last_name": "Smith",
          *             "locale": "en-US",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "object": "client",
          *             "phone": "+15551234567",
          *             "reference_id": "ext_12345",
@@ -4337,6 +4408,9 @@ export interface components {
          *             "duration": "PT1H30M",
          *             "id": "srv_d025a96ac0c6",
          *             "internal_name": null,
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "name": "Initial Consult",
          *             "object": "service",
          *             "provider_notifications": {
@@ -4582,6 +4656,9 @@ export interface components {
          *             "id": "clnt_a1b2c3d4e5f6",
          *             "last_name": "Smith",
          *             "locale": "en-US",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "object": "client",
          *             "phone": "+15551234567",
          *             "reference_id": "ext_12345",
@@ -4719,6 +4796,9 @@ export interface components {
          *             "duration": "PT1H30M",
          *             "id": "srv_d025a96ac0c6",
          *             "internal_name": null,
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
          *             "name": "Initial Consult",
          *             "object": "service",
          *             "provider_notifications": {
@@ -4833,6 +4913,9 @@ export interface components {
          *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *       "duration": "PT1H30M",
          *       "internal_name": "IC - New Patient",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "name": "Initial Consultation",
          *       "provider_notifications": {
          *         "additional_recipients": [
@@ -4891,6 +4974,10 @@ export interface components {
             duration?: string;
             /** @description An optional internal label for admin use. When set, this is displayed in the admin UI instead of the public name. */
             internal_name?: string | null;
+            /** @description Set of key-value pairs to attach to this service. Maximum size is 16 KB. */
+            metadata?: {
+                [key: string]: unknown;
+            };
             /** @description The service name. */
             name?: string;
             provider_notifications?: components["schemas"]["ProviderNotificationConfig"];
@@ -4906,6 +4993,9 @@ export interface components {
          *       "first_name": "John",
          *       "last_name": "Smith",
          *       "locale": "en",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "phone": "+15551234567",
          *       "reference_id": "your-reference-id",
          *       "time_zone": "America/New_York"
@@ -4920,6 +5010,10 @@ export interface components {
             last_name?: string;
             /** @description The client's locale. */
             locale?: string;
+            /** @description Set of key-value pairs to attach to this client. Maximum size is 16 KB. */
+            metadata?: {
+                [key: string]: unknown;
+            };
             /** @description The client's phone number (E.164 format). */
             phone?: string;
             /** @description The client's external reference identifier. */
@@ -5071,6 +5165,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -5208,6 +5305,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -5293,6 +5393,9 @@ export interface components {
          *         "id": "clnt_a1b2c3d4e5f6",
          *         "last_name": "Smith",
          *         "locale": "en-US",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "client",
          *         "phone": "+15551234567",
          *         "reference_id": "ext_12345",
@@ -5360,6 +5463,9 @@ export interface components {
          *         "id": "clnt_a1b2c3d4e5f6",
          *         "last_name": "Smith",
          *         "locale": "en-US",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "client",
          *         "phone": "+15551234567",
          *         "reference_id": "ext_12345",
@@ -5513,6 +5619,9 @@ export interface components {
          *       "duration": "PT1H30M",
          *       "id": "srv_d025a96ac0c6",
          *       "internal_name": null,
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "name": "Initial Consult",
          *       "object": "service",
          *       "provider_notifications": {
@@ -5580,6 +5689,10 @@ export interface components {
             id: string;
             /** @description An optional internal label for admin use. When set, this is displayed in the admin UI instead of the public name. */
             internal_name?: string | null;
+            /** @description Set of key-value pairs attached to this service. Maximum size is 16 KB. */
+            metadata: {
+                [key: string]: unknown;
+            };
             /** @description The name of the service. */
             name: string;
             /**
@@ -5862,6 +5975,9 @@ export interface components {
          *         "duration": "PT1H30M",
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "name": "Initial Consult",
          *         "object": "service",
          *         "provider_notifications": {
@@ -6155,6 +6271,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -6406,6 +6525,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -6543,6 +6665,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -7377,6 +7502,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -7486,6 +7614,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -7623,6 +7754,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -7714,6 +7848,9 @@ export interface components {
          *         "id": "clnt_a1b2c3d4e5f6",
          *         "last_name": "Smith",
          *         "locale": "en-US",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "client",
          *         "phone": "+15551234567",
          *         "reference_id": "ext_12345",
@@ -7931,6 +8068,9 @@ export interface components {
          *         "id": "clnt_a1b2c3d4e5f6",
          *         "last_name": "Smith",
          *         "locale": "en-US",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "object": "client",
          *         "phone": "+15551234567",
          *         "reference_id": "ext_12345",
@@ -8068,6 +8208,9 @@ export interface components {
          *         "duration": "PT1H30M",
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "name": "Initial Consult",
          *         "object": "service",
          *         "provider_notifications": {
@@ -8470,6 +8613,9 @@ export interface components {
          *         "duration": "PT1H30M",
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "name": "Initial Consult",
          *         "object": "service",
          *         "provider_notifications": {
@@ -8663,6 +8809,9 @@ export interface components {
          *         "duration": "PT1H30M",
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
          *         "name": "Initial Consult",
          *         "object": "service",
          *         "provider_notifications": {
@@ -8817,6 +8966,9 @@ export interface components {
          *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *       "duration": "PT1H30M",
          *       "internal_name": "IC - New Patient",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "name": "Initial Consult",
          *       "provider_notifications": {
          *         "additional_recipients": [
@@ -8875,6 +9027,10 @@ export interface components {
             duration?: string;
             /** @description An optional internal label for admin use. When set, this is displayed in the admin UI instead of the public name. */
             internal_name?: string | null;
+            /** @description Set of key-value pairs to attach to this service. Maximum size is 16 KB. */
+            metadata?: {
+                [key: string]: unknown;
+            };
             /** @description The service name. */
             name: string;
             provider_notifications?: components["schemas"]["ProviderNotificationConfig"];
@@ -8911,6 +9067,9 @@ export interface components {
          *           "id": "clnt_a1b2c3d4e5f6",
          *           "last_name": "Smith",
          *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "object": "client",
          *           "phone": "+15551234567",
          *           "reference_id": "ext_12345",
@@ -9048,6 +9207,9 @@ export interface components {
          *           "duration": "PT1H30M",
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
          *           "name": "Initial Consult",
          *           "object": "service",
          *           "provider_notifications": {
@@ -9174,6 +9336,9 @@ export interface components {
          *       "first_name": "John",
          *       "last_name": "Smith",
          *       "locale": "en",
+         *       "metadata": {
+         *         "external_id": "123"
+         *       },
          *       "phone": "+15551234567",
          *       "reference_id": "your-reference-id",
          *       "time_zone": "America/New_York"
@@ -9188,6 +9353,10 @@ export interface components {
             last_name: string;
             /** @description The client's locale. */
             locale?: string;
+            /** @description Set of key-value pairs to attach to this client. Maximum size is 16 KB. */
+            metadata?: {
+                [key: string]: unknown;
+            };
             /** @description The client's phone number (E.164 format). */
             phone?: string;
             /** @description The client's external reference identifier. */
@@ -10599,6 +10768,10 @@ export interface operations {
                 page?: number;
                 /** @description Number of items per page */
                 page_size?: number;
+                /** @description Filter services by metadata using bracket notation. See [Metadata Filtering](https://developers.savvycal.app/metadata-filtering) for more details. */
+                metadata?: {
+                    [key: string]: unknown;
+                };
             };
             header?: {
                 /**
@@ -11416,6 +11589,10 @@ export interface operations {
                 page_size?: number;
                 /** @description Only return clients that match the search query (name or email). */
                 search?: string;
+                /** @description Filter clients by metadata using bracket notation. See [Metadata Filtering](https://developers.savvycal.app/metadata-filtering) for more details. */
+                metadata?: {
+                    [key: string]: unknown;
+                };
             };
             header?: {
                 /**
@@ -12357,6 +12534,15 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ForbiddenResponse"];
                 };
             };
             /** @description Unprocessable Entity */

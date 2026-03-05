@@ -742,6 +742,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/forbiddenresponse",
+          label: "ForbiddenResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/serviceslotresponse",
           label: "ServiceSlotResponse",
           className: "schema",

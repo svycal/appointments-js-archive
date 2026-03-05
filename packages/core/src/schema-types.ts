@@ -106,6 +106,7 @@ export type CreateServiceProviderRequest =
 export type CreateServiceRequest = Schemas["CreateServiceRequest"];
 export type DashboardSession = Schemas["DashboardSession"];
 export type DashboardSessionResponse = Schemas["DashboardSessionResponse"];
+export type ForbiddenResponse = Schemas["ForbiddenResponse"];
 export type GenericErrorResponse = Schemas["GenericErrorResponse"];
 export type HoldPolicy = Schemas["HoldPolicy"];
 export type JsonErrorResponse = Schemas["JsonErrorResponse"];

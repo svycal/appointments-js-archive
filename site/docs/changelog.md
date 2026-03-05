@@ -6,6 +6,12 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## March 5, 2026
+
+- **New:** -- Clients and services now support a `metadata` field for storing custom key-value pairs (maximum 16 KB). See [Client](/api/schemas/client) and [Service](/api/schemas/service).
+- **New:** -- The [List Clients](/api/list-clients) and [List Services](/api/list-services) endpoints now support filtering by `metadata` using bracket notation.
+- **New:** -- Added a [ForbiddenResponse](/api/schemas/forbiddenresponse) schema and 403 status code to the [List Appointments](/api/list-appointments) endpoint.
+
 ## March 2, 2026
 
 - **New:** -- Services now include an optional `internal_name` field for setting an internal admin label. When set, this name is displayed in the admin UI instead of the public name. See [Service](/api/schemas/service).
