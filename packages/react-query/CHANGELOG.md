@@ -1,5 +1,20 @@
 # @savvycal/appointments-react-query
 
+## 0.4.0
+
+### Minor Changes
+
+- [`6f2d384`](https://github.com/svycal/appointments/commit/6f2d38429915945123e213702cbc85b28823e081) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Metadata** -- Clients and services now support a `metadata` field for storing custom key-value pairs (maximum 16 KB). See [Client](https://developers.savvycal.app/api/schemas/client) and [Service](https://developers.savvycal.app/api/schemas/service).
+
+- [`6f2d384`](https://github.com/svycal/appointments/commit/6f2d38429915945123e213702cbc85b28823e081) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: ForbiddenResponse** -- Added a [ForbiddenResponse](https://developers.savvycal.app/api/schemas/forbiddenresponse) schema and 403 status code to the [List Appointments](https://developers.savvycal.app/api/list-appointments) endpoint.
+
+- [`6f2d384`](https://github.com/svycal/appointments/commit/6f2d38429915945123e213702cbc85b28823e081) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Metadata Filtering** -- The [List Clients](https://developers.savvycal.app/api/list-clients) and [List Services](https://developers.savvycal.app/api/list-services) endpoints now support filtering by `metadata` using bracket notation.
+
+### Patch Changes
+
+- Updated dependencies [[`6f2d384`](https://github.com/svycal/appointments/commit/6f2d38429915945123e213702cbc85b28823e081), [`6f2d384`](https://github.com/svycal/appointments/commit/6f2d38429915945123e213702cbc85b28823e081), [`6f2d384`](https://github.com/svycal/appointments/commit/6f2d38429915945123e213702cbc85b28823e081)]:
+  - @savvycal/appointments-core@0.14.0
+
 ## 0.3.5
 
 ### Patch Changes
