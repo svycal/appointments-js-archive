@@ -6,6 +6,10 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## March 10, 2026
+
+- **Removed:** -- The deprecated `client_locale`, `client_reference_id`, `client_time_zone`, and `fields` properties have been removed from the [Appointment](/api/schemas/appointment) schema. Use `client_data` instead.
+
 ## March 5, 2026
 
 - **New:** -- Clients and services now support a `metadata` field for storing custom key-value pairs (maximum 16 KB). See [Client](/api/schemas/client) and [Service](/api/schemas/service).

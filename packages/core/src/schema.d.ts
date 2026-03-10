@@ -1450,9 +1450,6 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
-         *         "client_locale": "en-US",
-         *         "client_reference_id": "ext_12345",
-         *         "client_time_zone": "America/Chicago",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -1484,12 +1481,6 @@ export interface components {
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
-         *         },
-         *         "fields": {
-         *           "email": "jane.smith@example.com",
-         *           "first_name": "Jane",
-         *           "last_name": "Smith",
-         *           "phone": "+15551234567"
          *         },
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "appointment",
@@ -3923,9 +3914,6 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
-         *         "client_locale": "en-US",
-         *         "client_reference_id": "ext_12345",
-         *         "client_time_zone": "America/Chicago",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -3957,12 +3945,6 @@ export interface components {
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
-         *         },
-         *         "fields": {
-         *           "email": "jane.smith@example.com",
-         *           "first_name": "Jane",
-         *           "last_name": "Smith",
-         *           "phone": "+15551234567"
          *         },
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "appointment",
@@ -4286,9 +4268,6 @@ export interface components {
          *             "reference_id": "ext_12345",
          *             "time_zone": "America/Chicago"
          *           },
-         *           "client_locale": "en-US",
-         *           "client_reference_id": "ext_12345",
-         *           "client_time_zone": "America/Chicago",
          *           "confirmation_events": [
          *             {
          *               "actor": null,
@@ -4320,12 +4299,6 @@ export interface components {
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
          *             "utc": "2025-03-01T04:00:00Z"
-         *           },
-         *           "fields": {
-         *             "email": "jane.smith@example.com",
-         *             "first_name": "Jane",
-         *             "last_name": "Smith",
-         *             "phone": "+15551234567"
          *           },
          *           "id": "appt_a1b2c3d4e5f6",
          *           "object": "appointment",
@@ -4674,9 +4647,6 @@ export interface components {
          *             "reference_id": "ext_12345",
          *             "time_zone": "America/Chicago"
          *           },
-         *           "client_locale": "en-US",
-         *           "client_reference_id": "ext_12345",
-         *           "client_time_zone": "America/Chicago",
          *           "confirmation_events": [
          *             {
          *               "actor": null,
@@ -4708,12 +4678,6 @@ export interface components {
          *             "time_zone": "America/New_York",
          *             "unix_ts": 1736464800,
          *             "utc": "2025-03-01T04:00:00Z"
-         *           },
-         *           "fields": {
-         *             "email": "jane.smith@example.com",
-         *             "first_name": "Jane",
-         *             "last_name": "Smith",
-         *             "phone": "+15551234567"
          *           },
          *           "id": "appt_a1b2c3d4e5f6",
          *           "object": "appointment",
@@ -5183,9 +5147,6 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
-         *         "client_locale": "en-US",
-         *         "client_reference_id": "ext_12345",
-         *         "client_time_zone": "America/Chicago",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -5217,12 +5178,6 @@ export interface components {
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
-         *         },
-         *         "fields": {
-         *           "email": "jane.smith@example.com",
-         *           "first_name": "Jane",
-         *           "last_name": "Smith",
-         *           "phone": "+15551234567"
          *         },
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "appointment",
@@ -6543,9 +6498,6 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
-         *         "client_locale": "en-US",
-         *         "client_reference_id": "ext_12345",
-         *         "client_time_zone": "America/Chicago",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -6577,12 +6529,6 @@ export interface components {
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
-         *         },
-         *         "fields": {
-         *           "email": "jane.smith@example.com",
-         *           "first_name": "Jane",
-         *           "last_name": "Smith",
-         *           "phone": "+15551234567"
          *         },
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "appointment",
@@ -7632,9 +7578,6 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
-         *         "client_locale": "en-US",
-         *         "client_reference_id": "ext_12345",
-         *         "client_time_zone": "America/Chicago",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -7666,12 +7609,6 @@ export interface components {
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
-         *         },
-         *         "fields": {
-         *           "email": "jane.smith@example.com",
-         *           "first_name": "Jane",
-         *           "last_name": "Smith",
-         *           "phone": "+15551234567"
          *         },
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "appointment",
@@ -8086,9 +8023,6 @@ export interface components {
          *         "reference_id": "ext_12345",
          *         "time_zone": "America/Chicago"
          *       },
-         *       "client_locale": "en-US",
-         *       "client_reference_id": "ext_12345",
-         *       "client_time_zone": "America/Chicago",
          *       "confirmation_events": [
          *         {
          *           "actor": null,
@@ -8120,12 +8054,6 @@ export interface components {
          *         "time_zone": "America/New_York",
          *         "unix_ts": 1736464800,
          *         "utc": "2025-03-01T04:00:00Z"
-         *       },
-         *       "fields": {
-         *         "email": "jane.smith@example.com",
-         *         "first_name": "Jane",
-         *         "last_name": "Smith",
-         *         "phone": "+15551234567"
          *       },
          *       "id": "appt_a1b2c3d4e5f6",
          *       "object": "appointment",
@@ -8315,23 +8243,6 @@ export interface components {
                  */
                 time_zone: string;
             };
-            /**
-             * @deprecated
-             * @description Use `client_data.locale` instead.
-             * @example en-US
-             */
-            client_locale?: string | null;
-            /**
-             * @deprecated
-             * @description Use `client_data.reference_id` instead.
-             */
-            client_reference_id?: string | null;
-            /**
-             * @deprecated
-             * @description Use `client_data.time_zone` instead.
-             * @example America/Chicago
-             */
-            client_time_zone?: string;
             confirmation_events: components["schemas"]["ConfirmationEvent"][];
             /**
              * Format: date-time
@@ -8344,23 +8255,6 @@ export interface components {
              */
             created_at: string;
             end_at: components["schemas"]["ZonedDateTime"];
-            /**
-             * @deprecated
-             * @description Use `client_data` instead.
-             */
-            fields: {
-                /**
-                 * Format: email
-                 * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
-                 */
-                email?: string | null;
-                /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
-                first_name?: string | null;
-                /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
-                last_name?: string | null;
-                /** @description The client's phone number (E.164 format). This field will be `null` unless `include_sensitive` is `true`. */
-                phone?: string | null;
-            };
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -9085,9 +8979,6 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
-         *         "client_locale": "en-US",
-         *         "client_reference_id": "ext_12345",
-         *         "client_time_zone": "America/Chicago",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -9119,12 +9010,6 @@ export interface components {
          *           "time_zone": "America/New_York",
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
-         *         },
-         *         "fields": {
-         *           "email": "jane.smith@example.com",
-         *           "first_name": "Jane",
-         *           "last_name": "Smith",
-         *           "phone": "+15551234567"
          *         },
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "appointment",
