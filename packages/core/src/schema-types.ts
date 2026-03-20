@@ -34,6 +34,7 @@ export type AppointmentRescheduledEventData =
   Schemas["AppointmentRescheduledEventData"];
 export type AppointmentResponse = Schemas["AppointmentResponse"];
 export type AppointmentsResponse = Schemas["AppointmentsResponse"];
+export type AttachServiceFormRequest = Schemas["AttachServiceFormRequest"];
 export type Block = Schemas["Block"];
 export type BlockCreatedEventData = Schemas["BlockCreatedEventData"];
 export type BlockDeletedEventData = Schemas["BlockDeletedEventData"];
@@ -64,6 +65,11 @@ export type CancelPublicAppointmentRequest =
 export type Client = Schemas["Client"];
 export type ClientCreatedEventData = Schemas["ClientCreatedEventData"];
 export type ClientDeletedEventData = Schemas["ClientDeletedEventData"];
+export type ClientField = Schemas["ClientField"];
+export type ClientFieldChoice = Schemas["ClientFieldChoice"];
+export type ClientFieldOptions = Schemas["ClientFieldOptions"];
+export type ClientFieldResponse = Schemas["ClientFieldResponse"];
+export type ClientFieldsResponse = Schemas["ClientFieldsResponse"];
 export type ClientResponse = Schemas["ClientResponse"];
 export type ClientsResponse = Schemas["ClientsResponse"];
 export type ClientUpdatedEventData = Schemas["ClientUpdatedEventData"];
@@ -91,9 +97,11 @@ export type CreateBlockRequest = Schemas["CreateBlockRequest"];
 export type CreateBookingIntentRequest = Schemas["CreateBookingIntentRequest"];
 export type CreateCancellationReasonRequest =
   Schemas["CreateCancellationReasonRequest"];
+export type CreateClientFieldRequest = Schemas["CreateClientFieldRequest"];
 export type CreateClientRequest = Schemas["CreateClientRequest"];
 export type CreateDashboardSessionRequest =
   Schemas["CreateDashboardSessionRequest"];
+export type CreateFormRequest = Schemas["CreateFormRequest"];
 export type CreateProviderRequest = Schemas["CreateProviderRequest"];
 export type CreateProviderScheduleRequest =
   Schemas["CreateProviderScheduleRequest"];
@@ -106,7 +114,17 @@ export type CreateServiceProviderRequest =
 export type CreateServiceRequest = Schemas["CreateServiceRequest"];
 export type DashboardSession = Schemas["DashboardSession"];
 export type DashboardSessionResponse = Schemas["DashboardSessionResponse"];
+export type FieldChoice = Schemas["FieldChoice"];
+export type FieldChoiceInput = Schemas["FieldChoiceInput"];
+export type FieldOptions = Schemas["FieldOptions"];
+export type FieldOptionsInput = Schemas["FieldOptionsInput"];
 export type ForbiddenResponse = Schemas["ForbiddenResponse"];
+export type Form = Schemas["Form"];
+export type FormDetail = Schemas["FormDetail"];
+export type FormField = Schemas["FormField"];
+export type FormFieldInput = Schemas["FormFieldInput"];
+export type FormResponse = Schemas["FormResponse"];
+export type FormsResponse = Schemas["FormsResponse"];
 export type GenericErrorResponse = Schemas["GenericErrorResponse"];
 export type HoldPolicy = Schemas["HoldPolicy"];
 export type JsonErrorResponse = Schemas["JsonErrorResponse"];
@@ -158,6 +176,9 @@ export type RolesResponse = Schemas["RolesResponse"];
 export type Service = Schemas["Service"];
 export type ServiceCreatedEventData = Schemas["ServiceCreatedEventData"];
 export type ServiceDeletedEventData = Schemas["ServiceDeletedEventData"];
+export type ServiceForm = Schemas["ServiceForm"];
+export type ServiceFormResponse = Schemas["ServiceFormResponse"];
+export type ServiceFormsResponse = Schemas["ServiceFormsResponse"];
 export type ServiceProvider = Schemas["ServiceProvider"];
 export type ServiceProviderCreatedEventData =
   Schemas["ServiceProviderCreatedEventData"];
@@ -171,6 +192,7 @@ export type ServicesResponse = Schemas["ServicesResponse"];
 export type ServiceUpdatedEventData = Schemas["ServiceUpdatedEventData"];
 export type Slot = Schemas["Slot"];
 export type SlotRule = Schemas["SlotRule"];
+export type SortServiceFormsRequest = Schemas["SortServiceFormsRequest"];
 export type UnauthorizedResponse = Schemas["UnauthorizedResponse"];
 export type UpdateAccountRequest = Schemas["UpdateAccountRequest"];
 export type UpdateAccountUserRequest = Schemas["UpdateAccountUserRequest"];
@@ -178,9 +200,11 @@ export type UpdateBlockRequest = Schemas["UpdateBlockRequest"];
 export type UpdateBookingIntentRequest = Schemas["UpdateBookingIntentRequest"];
 export type UpdateCancellationReasonRequest =
   Schemas["UpdateCancellationReasonRequest"];
+export type UpdateClientFieldRequest = Schemas["UpdateClientFieldRequest"];
 export type UpdateClientRequest = Schemas["UpdateClientRequest"];
 export type UpdateConnectedAccountRequest =
   Schemas["UpdateConnectedAccountRequest"];
+export type UpdateFormRequest = Schemas["UpdateFormRequest"];
 export type UpdateProviderRequest = Schemas["UpdateProviderRequest"];
 export type UpdateProviderScheduleRequest =
   Schemas["UpdateProviderScheduleRequest"];

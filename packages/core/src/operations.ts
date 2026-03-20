@@ -31,6 +31,17 @@ export function abandonPublicBookingIntent(
   });
 }
 
+export function attachServiceForm(
+  client: FetchClient,
+  path: PathParams<"/v1/services/{service_id}/forms", "post">,
+  body: RequestBody<"/v1/services/{service_id}/forms", "post">,
+) {
+  return client.POST("/v1/services/{service_id}/forms", {
+    body,
+    params: { path },
+  });
+}
+
 export function cancelAppointment(
   client: FetchClient,
   path: PathParams<"/v1/appointments/{appointment_id}/cancel", "post">,
@@ -158,11 +169,29 @@ export function createClient(
   });
 }
 
+export function createClientField(
+  client: FetchClient,
+  body: RequestBody<"/v1/client_fields", "post">,
+) {
+  return client.POST("/v1/client_fields", {
+    body,
+  });
+}
+
 export function createDashboardSession(
   client: FetchClient,
   body: RequestBody<"/v1/dashboard_sessions", "post">,
 ) {
   return client.POST("/v1/dashboard_sessions", {
+    body,
+  });
+}
+
+export function createForm(
+  client: FetchClient,
+  body: RequestBody<"/v1/forms", "post">,
+) {
+  return client.POST("/v1/forms", {
     body,
   });
 }
@@ -264,11 +293,29 @@ export function deleteClient(
   });
 }
 
+export function deleteClientField(
+  client: FetchClient,
+  path: PathParams<"/v1/client_fields/{client_field_id}", "delete">,
+) {
+  return client.DELETE("/v1/client_fields/{client_field_id}", {
+    params: { path },
+  });
+}
+
 export function deleteConnectedAccount(
   client: FetchClient,
   path: PathParams<"/v1/connected_accounts/{connected_account_id}", "delete">,
 ) {
   return client.DELETE("/v1/connected_accounts/{connected_account_id}", {
+    params: { path },
+  });
+}
+
+export function deleteForm(
+  client: FetchClient,
+  path: PathParams<"/v1/forms/{form_id}", "delete">,
+) {
+  return client.DELETE("/v1/forms/{form_id}", {
     params: { path },
   });
 }
@@ -296,6 +343,15 @@ export function deleteServiceProvider(
   path: PathParams<"/v1/service_providers/{service_provider_id}", "delete">,
 ) {
   return client.DELETE("/v1/service_providers/{service_provider_id}", {
+    params: { path },
+  });
+}
+
+export function detachServiceForm(
+  client: FetchClient,
+  path: PathParams<"/v1/service_forms/{service_form_id}", "delete">,
+) {
+  return client.DELETE("/v1/service_forms/{service_form_id}", {
     params: { path },
   });
 }
@@ -356,6 +412,15 @@ export function getClient(
   });
 }
 
+export function getClientField(
+  client: FetchClient,
+  path: PathParams<"/v1/client_fields/{client_field_id}", "get">,
+) {
+  return client.GET("/v1/client_fields/{client_field_id}", {
+    params: { path },
+  });
+}
+
 export function getConnectedAccount(
   client: FetchClient,
   path: PathParams<"/v1/connected_accounts/{connected_account_id}", "get">,
@@ -384,6 +449,15 @@ export function getEarliestPublicServiceSlot(
 ) {
   return client.GET("/v1/public/services/{service_id}/earliest_slot", {
     params: { path, query },
+  });
+}
+
+export function getForm(
+  client: FetchClient,
+  path: PathParams<"/v1/forms/{form_id}", "get">,
+) {
+  return client.GET("/v1/forms/{form_id}", {
+    params: { path },
   });
 }
 
@@ -476,6 +550,10 @@ export function listCancellationReasons(client: FetchClient) {
   return client.GET("/v1/cancellation_reasons");
 }
 
+export function listClientFields(client: FetchClient) {
+  return client.GET("/v1/client_fields");
+}
+
 export function listClients(
   client: FetchClient,
   query?: QueryParams<"/v1/clients", "get">,
@@ -490,6 +568,15 @@ export function listConnectedAccounts(
   query?: QueryParams<"/v1/connected_accounts", "get">,
 ) {
   return client.GET("/v1/connected_accounts", {
+    params: { query },
+  });
+}
+
+export function listForms(
+  client: FetchClient,
+  query?: QueryParams<"/v1/forms", "get">,
+) {
+  return client.GET("/v1/forms", {
     params: { query },
   });
 }
@@ -539,6 +626,15 @@ export function listPublicServiceSlots(
 
 export function listRoles(client: FetchClient) {
   return client.GET("/v1/roles");
+}
+
+export function listServiceForms(
+  client: FetchClient,
+  path: PathParams<"/v1/services/{service_id}/forms", "get">,
+) {
+  return client.GET("/v1/services/{service_id}/forms", {
+    params: { path },
+  });
 }
 
 export function listServiceProviders(
@@ -592,6 +688,17 @@ export function reschedulePublicAppointment(
   >,
 ) {
   return client.POST("/v1/public/appointments/{appointment_id}/reschedule", {
+    body,
+    params: { path },
+  });
+}
+
+export function sortServiceForms(
+  client: FetchClient,
+  path: PathParams<"/v1/services/{service_id}/forms/sort", "post">,
+  body: RequestBody<"/v1/services/{service_id}/forms/sort", "post">,
+) {
+  return client.POST("/v1/services/{service_id}/forms/sort", {
     body,
     params: { path },
   });
@@ -669,12 +776,34 @@ export function updateClient(
   });
 }
 
+export function updateClientField(
+  client: FetchClient,
+  path: PathParams<"/v1/client_fields/{client_field_id}", "patch">,
+  body: RequestBody<"/v1/client_fields/{client_field_id}", "patch">,
+) {
+  return client.PATCH("/v1/client_fields/{client_field_id}", {
+    body,
+    params: { path },
+  });
+}
+
 export function updateConnectedAccount(
   client: FetchClient,
   path: PathParams<"/v1/connected_accounts/{connected_account_id}", "patch">,
   body: RequestBody<"/v1/connected_accounts/{connected_account_id}", "patch">,
 ) {
   return client.PATCH("/v1/connected_accounts/{connected_account_id}", {
+    body,
+    params: { path },
+  });
+}
+
+export function updateForm(
+  client: FetchClient,
+  path: PathParams<"/v1/forms/{form_id}", "patch">,
+  body: RequestBody<"/v1/forms/{form_id}", "patch">,
+) {
+  return client.PATCH("/v1/forms/{form_id}", {
     body,
     params: { path },
   });

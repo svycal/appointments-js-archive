@@ -8,6 +8,52 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Client Fields",
+      link: {
+        type: "doc",
+        id: "api/client-fields",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/clientfield",
+          label: "ClientField",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/list-client-fields",
+          label: "List client fields",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-client-field",
+          label: "Create client field",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/delete-client-field",
+          label: "Delete client field",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-client-field",
+          label: "Get client field",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-client-field",
+          label: "Update client field",
+          className: "api-method patch",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Appointments",
       link: {
         type: "doc",
@@ -175,6 +221,100 @@ const sidebar: SidebarsConfig = {
           id: "api/get-current-account",
           label: "Get current account",
           className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Services",
+      link: {
+        type: "doc",
+        id: "api/services",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/service",
+          label: "Service",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/serviceform",
+          label: "ServiceForm",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/list-service-forms",
+          label: "List service forms",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/attach-service-form",
+          label: "Attach form to service",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/delete-service",
+          label: "Delete service",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-service",
+          label: "Get service",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-service",
+          label: "Update service",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/detach-service-form",
+          label: "Detach form from service",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/list-service-providers",
+          label: "List service providers",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-service-provider",
+          label: "Add provider to service",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/list-services",
+          label: "List services",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-service",
+          label: "Create service",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/delete-service-provider",
+          label: "Remove service provider",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/sort-service-forms",
+          label: "Sort service forms",
+          className: "api-method post",
         },
       ],
     },
@@ -406,65 +546,47 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Services",
+      label: "Forms",
       link: {
         type: "doc",
-        id: "api/services",
+        id: "api/forms",
       },
       items: [
         {
           type: "doc",
-          id: "api/schemas/service",
-          label: "Service",
+          id: "api/schemas/form",
+          label: "Form",
           className: "schema",
         },
         {
           type: "doc",
-          id: "api/delete-service",
-          label: "Delete service",
+          id: "api/delete-form",
+          label: "Delete form",
           className: "api-method delete",
         },
         {
           type: "doc",
-          id: "api/get-service",
-          label: "Get service",
+          id: "api/get-form",
+          label: "Get form",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "api/update-service",
-          label: "Update service",
+          id: "api/update-form",
+          label: "Update form",
           className: "api-method patch",
         },
         {
           type: "doc",
-          id: "api/list-service-providers",
-          label: "List service providers",
+          id: "api/list-forms",
+          label: "List forms",
           className: "api-method get",
         },
         {
           type: "doc",
-          id: "api/create-service-provider",
-          label: "Add provider to service",
+          id: "api/create-form",
+          label: "Create form",
           className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "api/list-services",
-          label: "List services",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/create-service",
-          label: "Create service",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "api/delete-service-provider",
-          label: "Remove service provider",
-          className: "api-method delete",
         },
       ],
     },
@@ -718,6 +840,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/formresponse",
+          label: "FormResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/confirmationevent",
           label: "ConfirmationEvent",
           className: "schema",
@@ -742,6 +870,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/formfield",
+          label: "FormField",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/forbiddenresponse",
           label: "ForbiddenResponse",
           className: "schema",
@@ -760,6 +894,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/clientfieldchoice",
+          label: "ClientFieldChoice",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/updateblockrequest",
           label: "UpdateBlockRequest",
           className: "schema",
@@ -772,8 +912,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/updateclientfieldrequest",
+          label: "UpdateClientFieldRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/accountresponse",
           label: "AccountResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/updateformrequest",
+          label: "UpdateFormRequest",
           className: "schema",
         },
         {
@@ -832,6 +984,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/formfieldinput",
+          label: "FormFieldInput",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/serviceprovider",
           label: "ServiceProvider",
           className: "schema",
@@ -844,8 +1002,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/attachserviceformrequest",
+          label: "AttachServiceFormRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/serviceresponse",
           label: "ServiceResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/fieldchoiceinput",
+          label: "FieldChoiceInput",
           className: "schema",
         },
         {
@@ -864,6 +1034,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/rescheduleevent",
           label: "RescheduleEvent",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/clientfieldoptions",
+          label: "ClientFieldOptions",
           className: "schema",
         },
         {
@@ -888,6 +1064,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/bookingintentsresponse",
           label: "BookingIntentsResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/formsresponse",
+          label: "FormsResponse",
           className: "schema",
         },
         {
@@ -976,6 +1158,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/sortserviceformsrequest",
+          label: "SortServiceFormsRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/connectedaccountresponse",
           label: "ConnectedAccountResponse",
           className: "schema",
@@ -984,6 +1172,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/servicedeletedeventdata",
           label: "ServiceDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/serviceformsresponse",
+          label: "ServiceFormsResponse",
           className: "schema",
         },
         {
@@ -1008,6 +1202,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentconfirmedeventdata",
           label: "AppointmentConfirmedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/formdetail",
+          label: "FormDetail",
           className: "schema",
         },
         {
@@ -1144,6 +1344,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/fieldchoice",
+          label: "FieldChoice",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/fieldoptions",
+          label: "FieldOptions",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/providerreactivatedeventdata",
           label: "ProviderReactivatedEventData",
           className: "schema",
@@ -1276,6 +1488,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/fieldoptionsinput",
+          label: "FieldOptionsInput",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/updatepublicbookingintentrequest",
           label: "UpdatePublicBookingIntentRequest",
           className: "schema",
@@ -1290,6 +1508,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providerscheduleupdatedeventdata",
           label: "ProviderScheduleUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/createclientfieldrequest",
+          label: "CreateClientFieldRequest",
           className: "schema",
         },
         {
@@ -1396,6 +1620,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/serviceformresponse",
+          label: "ServiceFormResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/clientfieldsresponse",
+          label: "ClientFieldsResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/blockresponse",
           label: "BlockResponse",
           className: "schema",
@@ -1410,6 +1646,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providerdeactivatedeventdata",
           label: "ProviderDeactivatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/createformrequest",
+          label: "CreateFormRequest",
           className: "schema",
         },
         {
@@ -1440,6 +1682,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/servicecreatedeventdata",
           label: "ServiceCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/clientfieldresponse",
+          label: "ClientFieldResponse",
           className: "schema",
         },
         {

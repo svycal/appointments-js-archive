@@ -1,0 +1,1 @@
+{"schema":{"description":"A single choice option within a client field.","example":{"id":"opt_a1b2c3d4e5f6","label":"Option A"},"properties":{"id":{"description":"Unique identifier for the choice.","type":"string"},"label":{"description":"The display label for the choice.","type":"string"}},"required":["label"],"title":"ClientFieldChoice","type":"object"},"schemaType":"response"}

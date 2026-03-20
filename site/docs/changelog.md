@@ -6,6 +6,13 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## March 20, 2026
+
+- **New: Forms** -- Added endpoints for managing intake forms with typed fields: [Create Form](/api/create-form), [Get Form](/api/get-form), [List Forms](/api/list-forms), [Update Form](/api/update-form), and [Delete Form](/api/delete-form). See [Form](/api/schemas/form).
+- **New: Client Fields** -- Added endpoints for managing custom client fields: [Create Client Field](/api/create-client-field), [Get Client Field](/api/get-client-field), [List Client Fields](/api/list-client-fields), [Update Client Field](/api/update-client-field), and [Delete Client Field](/api/delete-client-field). See [ClientField](/api/schemas/clientfield).
+- **New: Service Forms** -- Added endpoints for attaching forms to services: [Attach Service Form](/api/attach-service-form), [List Service Forms](/api/list-service-forms), [Sort Service Forms](/api/sort-service-forms), and [Detach Service Form](/api/detach-service-form). See [ServiceForm](/api/schemas/serviceform).
+- **New:** -- Services now include a `forms` field containing attached intake forms. See [Service](/api/schemas/service).
+
 ## March 10, 2026
 
 - **Removed:** -- The deprecated `client_locale`, `client_reference_id`, `client_time_zone`, and `fields` properties have been removed from the [Appointment](/api/schemas/appointment) schema. Use `client_data` instead.

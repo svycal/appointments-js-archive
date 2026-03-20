@@ -1,0 +1,1 @@
+{"schema":{"description":"Request schema for reordering service forms.","example":{"ids":["sf_aaa111222333","sf_bbb444555666"]},"properties":{"ids":{"description":"Ordered list of service form IDs.","items":{"type":"string"},"type":"array"}},"required":["ids"],"title":"SortServiceFormsRequest","type":"object"},"schemaType":"response"}

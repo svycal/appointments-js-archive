@@ -1,0 +1,1 @@
+{"schema":{"description":"Request schema for attaching a form to a service.","example":{"form_id":"frm_d025a96ac0c6"},"properties":{"form_id":{"description":"The ID of the form to attach.","pattern":"^frm_\\w{12}$","type":"string"}},"required":["form_id"],"title":"AttachServiceFormRequest","type":"object"},"schemaType":"response"}

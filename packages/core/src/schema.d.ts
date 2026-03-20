@@ -4,6 +4,30 @@
  */
 
 export interface paths {
+    "/v1/client_fields": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List client fields
+         * @description List all client fields for an account
+         */
+        get: operations["listClientFields"];
+        put?: never;
+        /**
+         * Create client field
+         * @description Create a new client field in the account.
+         */
+        post: operations["createClientField"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/appointments/{appointment_id}": {
         parameters: {
             query?: never;
@@ -111,6 +135,30 @@ export interface paths {
          * @description Create a new account (requires a platform token).
          */
         post: operations["createAccount"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/services/{service_id}/forms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List service forms
+         * @description List all forms attached to a service.
+         */
+        get: operations["listServiceForms"];
+        put?: never;
+        /**
+         * Attach form to service
+         * @description Attach an existing form to a service.
+         */
+        post: operations["attachServiceForm"];
         delete?: never;
         options?: never;
         head?: never;
@@ -379,6 +427,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/service_forms/{service_form_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Detach form from service
+         * @description Detach a form from a service.
+         */
+        delete: operations["detachServiceForm"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/accounts/{account_id}": {
         parameters: {
             query?: never;
@@ -451,6 +519,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/forms/{form_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get form
+         * @description Get a single form by ID.
+         */
+        get: operations["getForm"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete form
+         * @description Delete an existing form.
+         */
+        delete: operations["deleteForm"];
+        options?: never;
+        head?: never;
+        /**
+         * Update form
+         * @description Update an existing form.
+         */
+        patch: operations["updateForm"];
+        trace?: never;
+    };
     "/v1/service_providers/{service_provider_id}": {
         parameters: {
             query?: never;
@@ -517,6 +613,30 @@ export interface paths {
          * @description Update an existing cancellation reason.
          */
         patch: operations["updateCancellationReason"];
+        trace?: never;
+    };
+    "/v1/forms": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List forms
+         * @description List all forms for an account.
+         */
+        get: operations["listForms"];
+        put?: never;
+        /**
+         * Create form
+         * @description Create a new form in the account.
+         */
+        post: operations["createForm"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/v1/appointments/{appointment_id}/confirm": {
@@ -847,6 +967,26 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/services/{service_id}/forms/sort": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sort service forms
+         * @description Reorder forms attached to a service.
+         */
+        post: operations["sortServiceForms"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/account": {
         parameters: {
             query?: never;
@@ -1022,6 +1162,34 @@ export interface paths {
         patch: operations["updateBlock"];
         trace?: never;
     };
+    "/v1/client_fields/{client_field_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get client field
+         * @description Get a single client field by ID.
+         */
+        get: operations["getClientField"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete client field
+         * @description Delete an existing client field.
+         */
+        delete: operations["deleteClientField"];
+        options?: never;
+        head?: never;
+        /**
+         * Update client field
+         * @description Update an existing client field.
+         */
+        patch: operations["updateClientField"];
+        trace?: never;
+    };
     "/v1/services/{service_id}/slots": {
         parameters: {
             query?: never;
@@ -1182,6 +1350,37 @@ export interface components {
             };
             /** @description Weekly rules for the schedule. */
             weekly_rules?: components["schemas"]["WeeklyRule"][];
+        };
+        /**
+         * FormResponse
+         * @description Response schema for a single form
+         * @example {
+         *       "data": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "field_count": 1,
+         *         "fields": [
+         *           {
+         *             "description": null,
+         *             "id": "ff_abc123",
+         *             "key": "full_name",
+         *             "label": "Full Name",
+         *             "must_be_true": false,
+         *             "options": null,
+         *             "position": 0,
+         *             "required": true,
+         *             "sensitive": false,
+         *             "type": "short_text"
+         *           }
+         *         ],
+         *         "id": "frm_d025a96ac0c6",
+         *         "internal_name": "Intake Form",
+         *         "object": "form",
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       }
+         *     }
+         */
+        FormResponse: {
+            data: components["schemas"]["FormDetail"];
         };
         /**
          * ConfirmationEvent
@@ -1561,6 +1760,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -1665,6 +1875,47 @@ export interface components {
              * @enum {string}
              */
             type: "appointment.rescheduled";
+        };
+        /**
+         * FormField
+         * @description A field within a form.
+         * @example {
+         *       "description": null,
+         *       "id": "ff_abc123",
+         *       "key": "full_name",
+         *       "label": "Full Name",
+         *       "must_be_true": false,
+         *       "options": null,
+         *       "position": 0,
+         *       "required": true,
+         *       "sensitive": false,
+         *       "type": "short_text"
+         *     }
+         */
+        FormField: {
+            /** @description Optional help text displayed below the field. */
+            description?: string | null;
+            /** @description Unique identifier for the field. */
+            id?: string;
+            /** @description Machine-readable key for the field. Must start with a lowercase letter and contain only lowercase letters, numbers, and underscores. */
+            key: string;
+            /** @description Display label for the field. */
+            label: string;
+            /** @description For boolean fields, whether the value must be true (e.g., consent checkboxes). */
+            must_be_true?: boolean;
+            /** @description Options configuration for choice-type fields. */
+            options?: (components["schemas"]["FieldOptions"] | (string | null)) | null;
+            /** @description Display position of the field within the form. */
+            position: number;
+            /** @description Whether the field is required. */
+            required?: boolean;
+            /** @description Whether the field contains sensitive data. */
+            sensitive?: boolean;
+            /**
+             * @description The field type.
+             * @enum {string}
+             */
+            type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
         };
         /**
          * ForbiddenResponse
@@ -1819,6 +2070,20 @@ export interface components {
             user: components["schemas"]["User"];
         };
         /**
+         * ClientFieldChoice
+         * @description A single choice option within a client field.
+         * @example {
+         *       "id": "opt_a1b2c3d4e5f6",
+         *       "label": "Option A"
+         *     }
+         */
+        ClientFieldChoice: {
+            /** @description Unique identifier for the choice. */
+            id?: string;
+            /** @description The display label for the choice. */
+            label: string;
+        };
+        /**
          * UpdateBlockRequest
          * @description Request schema for updating a block.
          * @example {
@@ -1961,6 +2226,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -2027,6 +2303,22 @@ export interface components {
             type: "booking_intent.completed";
         };
         /**
+         * UpdateClientFieldRequest
+         * @description Request schema for updating a client field
+         * @example {
+         *       "label": "Updated Label"
+         *     }
+         */
+        UpdateClientFieldRequest: {
+            /** @description An optional description of the field. */
+            description?: string | null;
+            /** @description The human-readable label for the field. */
+            label?: string;
+            options?: components["schemas"]["ClientFieldOptions"];
+            /** @description Whether the field contains sensitive data. */
+            sensitive?: boolean;
+        };
+        /**
          * AccountResponse
          * @description Response schema for a single account
          * @example {
@@ -2041,6 +2333,19 @@ export interface components {
          */
         AccountResponse: {
             data?: components["schemas"]["Account"];
+        };
+        /**
+         * UpdateFormRequest
+         * @description Request schema for updating a form.
+         * @example {
+         *       "internal_name": "Updated Intake Form"
+         *     }
+         */
+        UpdateFormRequest: {
+            /** @description The fields in the form. */
+            fields?: components["schemas"]["FormFieldInput"][];
+            /** @description The name of the form. */
+            internal_name?: string;
         };
         /**
          * UpdateConnectedAccountRequest
@@ -2085,6 +2390,10 @@ export interface components {
             /** @description Progressive client data to collect during the booking flow. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -2206,6 +2515,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -2402,6 +2722,46 @@ export interface components {
             role_ids?: string[];
         };
         /**
+         * FormFieldInput
+         * @description A field within a form.
+         * @example {
+         *       "description": null,
+         *       "key": "full_name",
+         *       "label": "Full Name",
+         *       "must_be_true": false,
+         *       "options": null,
+         *       "position": 0,
+         *       "required": true,
+         *       "sensitive": false,
+         *       "type": "short_text"
+         *     }
+         */
+        FormFieldInput: {
+            /** @description Optional help text displayed below the field. */
+            description?: string | null;
+            /** @description Unique identifier for the field. Optional on create; include to reference an existing field on update. */
+            id?: string;
+            /** @description Machine-readable key for the field. Must start with a lowercase letter and contain only lowercase letters, numbers, and underscores. */
+            key: string;
+            /** @description Display label for the field. */
+            label: string;
+            /** @description For boolean fields, whether the value must be true (e.g., consent checkboxes). */
+            must_be_true?: boolean;
+            /** @description Options configuration for choice-type fields. */
+            options?: (components["schemas"]["FieldOptionsInput"] | (string | null)) | null;
+            /** @description Display position of the field within the form. */
+            position: number;
+            /** @description Whether the field is required. */
+            required?: boolean;
+            /** @description Whether the field contains sensitive data. */
+            sensitive?: boolean;
+            /**
+             * @description The field type.
+             * @enum {string}
+             */
+            type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
+        };
+        /**
          * ServiceProvider
          * @description A service provider
          * @example {
@@ -2467,6 +2827,17 @@ export interface components {
             total_pages: number;
         };
         /**
+         * AttachServiceFormRequest
+         * @description Request schema for attaching a form to a service.
+         * @example {
+         *       "form_id": "frm_d025a96ac0c6"
+         *     }
+         */
+        AttachServiceFormRequest: {
+            /** @description The ID of the form to attach. */
+            form_id: string;
+        };
+        /**
          * ServiceResponse
          * @description Response schema for a service
          * @example {
@@ -2498,6 +2869,17 @@ export interface components {
          *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *         "created_at": "2025-02-17T17:49:19Z",
          *         "duration": "PT1H30M",
+         *         "forms": [
+         *           {
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "form_id": "frm_d025a96ac0c6",
+         *             "form_name": "Intake Form",
+         *             "id": "sf_d025a96ac0c6",
+         *             "object": "service_form",
+         *             "sort_order": 1,
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           }
+         *         ],
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
          *         "metadata": {
@@ -2546,6 +2928,19 @@ export interface components {
          */
         ServiceResponse: {
             data: components["schemas"]["Service"];
+        };
+        /**
+         * FieldChoiceInput
+         * @description A choice option for a select, radio, or checkbox field. The id is optional on input; the server generates one if omitted.
+         * @example {
+         *       "label": "Option A"
+         *     }
+         */
+        FieldChoiceInput: {
+            /** @description Unique identifier for the choice. Optional on create; include to reference an existing choice on update. */
+            id?: string;
+            /** @description Display label for the choice. */
+            label: string;
         };
         /**
          * BookingIntentUpdatedEventData
@@ -2627,6 +3022,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -2761,6 +3167,25 @@ export interface components {
             source: "client_ui" | "dashboard" | "api";
         };
         /**
+         * ClientFieldOptions
+         * @description Options for choice-type client fields.
+         * @example {
+         *       "allow_other": false,
+         *       "choices": [
+         *         {
+         *           "id": "opt_a1b2c3d4e5f6",
+         *           "label": "Option A"
+         *         }
+         *       ]
+         *     }
+         */
+        ClientFieldOptions: {
+            /** @description Whether to allow a free-text "other" option. */
+            allow_other?: boolean;
+            /** @description The list of choices. */
+            choices?: components["schemas"]["ClientFieldChoice"][];
+        };
+        /**
          * CreateAccountUserRequest
          * @description Request schema for creating a user in an account
          * @example {
@@ -2859,6 +3284,10 @@ export interface components {
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -2888,6 +3317,44 @@ export interface components {
             start_at?: string | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
+        };
+        /**
+         * Form
+         * @description A form represents an intake form with typed fields.
+         * @example {
+         *       "created_at": "2025-02-17T17:49:19Z",
+         *       "field_count": 3,
+         *       "fields": null,
+         *       "id": "frm_d025a96ac0c6",
+         *       "internal_name": "Intake Form",
+         *       "object": "form",
+         *       "updated_at": "2025-02-17T17:49:19Z"
+         *     }
+         */
+        Form: {
+            /**
+             * Format: datetime
+             * @description When the form was created.
+             */
+            created_at: string;
+            /** @description The number of fields in the form. */
+            field_count: number;
+            /** @description The fields in the form when expanded. */
+            fields?: components["schemas"]["FormField"][] | null;
+            /** @description Unique identifier for the form. */
+            id: string;
+            /** @description The name of the form. */
+            internal_name: string;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "form";
+            /**
+             * Format: datetime
+             * @description When the form was last updated.
+             */
+            updated_at: string;
         };
         /**
          * BookingIntentsResponse
@@ -2970,6 +3437,17 @@ export interface components {
          *             "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *             "created_at": "2025-02-17T17:49:19Z",
          *             "duration": "PT1H30M",
+         *             "forms": [
+         *               {
+         *                 "created_at": "2025-02-17T17:49:19Z",
+         *                 "form_id": "frm_d025a96ac0c6",
+         *                 "form_name": "Intake Form",
+         *                 "id": "sf_d025a96ac0c6",
+         *                 "object": "service_form",
+         *                 "sort_order": 1,
+         *                 "updated_at": "2025-02-17T17:49:19Z"
+         *               }
+         *             ],
          *             "id": "srv_d025a96ac0c6",
          *             "internal_name": null,
          *             "metadata": {
@@ -3036,6 +3514,33 @@ export interface components {
         BookingIntentsResponse: {
             /** @description The booking intent details */
             data: components["schemas"]["BookingIntent"][];
+            meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
+         * FormsResponse
+         * @description Response schema for a list of forms
+         * @example {
+         *       "data": [
+         *         {
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "field_count": 3,
+         *           "fields": null,
+         *           "id": "frm_d025a96ac0c6",
+         *           "internal_name": "Intake Form",
+         *           "object": "form",
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        FormsResponse: {
+            data: components["schemas"]["Form"][];
             meta: components["schemas"]["PaginationMeta"];
         };
         /**
@@ -3266,6 +3771,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -3610,6 +4126,10 @@ export interface components {
              * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
              */
             email?: string | null;
+            /** @description Custom field values for this client as a map of field key to value. Sensitive field values will be `null` unless `include_sensitive` is `true`. */
+            fields?: {
+                [key: string]: unknown;
+            } | null;
             /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
             first_name?: string | null;
             /** @description Unique identifier for the object. */
@@ -3678,6 +4198,20 @@ export interface components {
             updated_at: string;
         };
         /**
+         * SortServiceFormsRequest
+         * @description Request schema for reordering service forms.
+         * @example {
+         *       "ids": [
+         *         "sf_aaa111222333",
+         *         "sf_bbb444555666"
+         *       ]
+         *     }
+         */
+        SortServiceFormsRequest: {
+            /** @description Ordered list of service form IDs. */
+            ids: string[];
+        };
+        /**
          * ConnectedAccountResponse
          * @description Response schema for a single connected account
          * @example {
@@ -3732,6 +4266,17 @@ export interface components {
          *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *         "created_at": "2025-02-17T17:49:19Z",
          *         "duration": "PT1H30M",
+         *         "forms": [
+         *           {
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "form_id": "frm_d025a96ac0c6",
+         *             "form_name": "Intake Form",
+         *             "id": "sf_d025a96ac0c6",
+         *             "object": "service_form",
+         *             "sort_order": 1,
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           }
+         *         ],
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
          *         "metadata": {
@@ -3786,6 +4331,26 @@ export interface components {
              * @enum {string}
              */
             type: "service.deleted";
+        };
+        /**
+         * ServiceFormsResponse
+         * @description Response schema for a list of service forms
+         * @example {
+         *       "data": [
+         *         {
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "form_id": "frm_d025a96ac0c6",
+         *           "form_name": "Intake Form",
+         *           "id": "sf_d025a96ac0c6",
+         *           "object": "service_form",
+         *           "sort_order": 1,
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         }
+         *       ]
+         *     }
+         */
+        ServiceFormsResponse: {
+            data: components["schemas"]["ServiceForm"][];
         };
         /**
          * PublicServiceSlotsResponse
@@ -4025,6 +4590,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -4109,6 +4685,57 @@ export interface components {
              * @enum {string}
              */
             type: "appointment.confirmed";
+        };
+        /**
+         * FormDetail
+         * @description A form with full field details.
+         * @example {
+         *       "created_at": "2025-02-17T17:49:19Z",
+         *       "field_count": 1,
+         *       "fields": [
+         *         {
+         *           "description": null,
+         *           "id": "ff_abc123",
+         *           "key": "full_name",
+         *           "label": "Full Name",
+         *           "must_be_true": false,
+         *           "options": null,
+         *           "position": 0,
+         *           "required": true,
+         *           "sensitive": false,
+         *           "type": "short_text"
+         *         }
+         *       ],
+         *       "id": "frm_d025a96ac0c6",
+         *       "internal_name": "Intake Form",
+         *       "object": "form",
+         *       "updated_at": "2025-02-17T17:49:19Z"
+         *     }
+         */
+        FormDetail: {
+            /**
+             * Format: datetime
+             * @description When the form was created.
+             */
+            created_at: string;
+            /** @description The number of fields in the form. */
+            field_count: number;
+            /** @description The fields in the form. */
+            fields: components["schemas"]["FormField"][];
+            /** @description Unique identifier for the form. */
+            id: string;
+            /** @description The name of the form. */
+            internal_name: string;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "form";
+            /**
+             * Format: datetime
+             * @description When the form was last updated.
+             */
+            updated_at: string;
         };
         /**
          * CancellationReasonResponse
@@ -4379,6 +5006,17 @@ export interface components {
          *             "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *             "created_at": "2025-02-17T17:49:19Z",
          *             "duration": "PT1H30M",
+         *             "forms": [
+         *               {
+         *                 "created_at": "2025-02-17T17:49:19Z",
+         *                 "form_id": "frm_d025a96ac0c6",
+         *                 "form_name": "Intake Form",
+         *                 "id": "sf_d025a96ac0c6",
+         *                 "object": "service_form",
+         *                 "sort_order": 1,
+         *                 "updated_at": "2025-02-17T17:49:19Z"
+         *               }
+         *             ],
          *             "id": "srv_d025a96ac0c6",
          *             "internal_name": null,
          *             "metadata": {
@@ -4525,6 +5163,10 @@ export interface components {
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -4758,6 +5400,17 @@ export interface components {
          *             "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *             "created_at": "2025-02-17T17:49:19Z",
          *             "duration": "PT1H30M",
+         *             "forms": [
+         *               {
+         *                 "created_at": "2025-02-17T17:49:19Z",
+         *                 "form_id": "frm_d025a96ac0c6",
+         *                 "form_name": "Intake Form",
+         *                 "id": "sf_d025a96ac0c6",
+         *                 "object": "service_form",
+         *                 "sort_order": 1,
+         *                 "updated_at": "2025-02-17T17:49:19Z"
+         *               }
+         *             ],
          *             "id": "srv_d025a96ac0c6",
          *             "internal_name": null,
          *             "metadata": {
@@ -4968,6 +5621,10 @@ export interface components {
         UpdateClientRequest: {
             /** @description The client's email address. */
             email?: string;
+            /** @description A map of custom field key-value pairs to set on this client. */
+            fields?: {
+                [key: string]: unknown;
+            };
             /** @description The client's first name. */
             first_name?: string;
             /** @description The client's last name. */
@@ -5258,6 +5915,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -5542,6 +6210,20 @@ export interface components {
             maximize_utilization: components["schemas"]["MaximizeUtilizationPolicy"];
         };
         /**
+         * FieldChoice
+         * @description A choice option for a select, radio, or checkbox field.
+         * @example {
+         *       "id": "opt_abc123",
+         *       "label": "Option A"
+         *     }
+         */
+        FieldChoice: {
+            /** @description Unique identifier for the choice. */
+            id: string;
+            /** @description Display label for the choice. */
+            label: string;
+        };
+        /**
          * Service
          * @description A service represents a type of appointment.
          * @example {
@@ -5572,6 +6254,17 @@ export interface components {
          *       "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *       "created_at": "2025-02-17T17:49:19Z",
          *       "duration": "PT1H30M",
+         *       "forms": [
+         *         {
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "form_id": "frm_d025a96ac0c6",
+         *           "form_name": "Intake Form",
+         *           "id": "sf_d025a96ac0c6",
+         *           "object": "service_form",
+         *           "sort_order": 1,
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         }
+         *       ],
          *       "id": "srv_d025a96ac0c6",
          *       "internal_name": null,
          *       "metadata": {
@@ -5640,6 +6333,8 @@ export interface components {
              * @example `PT30M`
              */
             duration: string;
+            /** @description Forms attached to this service. */
+            forms?: components["schemas"]["ServiceForm"][] | null;
             /** @description Unique identifier for the object. */
             id: string;
             /** @description An optional internal label for admin use. When set, this is displayed in the admin UI instead of the public name. */
@@ -5664,6 +6359,25 @@ export interface components {
              * @description When the service was last updated.
              */
             updated_at: string;
+        };
+        /**
+         * FieldOptions
+         * @description Options for choice-type fields (select, radio, checkbox).
+         * @example {
+         *       "allow_other": false,
+         *       "choices": [
+         *         {
+         *           "id": "opt_abc123",
+         *           "label": "Option A"
+         *         }
+         *       ]
+         *     }
+         */
+        FieldOptions: {
+            /** @description Whether to allow a free-text 'other' option. */
+            allow_other: boolean;
+            /** @description List of available choices. */
+            choices: components["schemas"]["FieldChoice"][];
         };
         /**
          * ProviderReactivatedEventData
@@ -5745,6 +6459,10 @@ export interface components {
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -5928,6 +6646,17 @@ export interface components {
          *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *         "created_at": "2025-02-17T17:49:19Z",
          *         "duration": "PT1H30M",
+         *         "forms": [
+         *           {
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "form_id": "frm_d025a96ac0c6",
+         *             "form_name": "Intake Form",
+         *             "id": "sf_d025a96ac0c6",
+         *             "object": "service_form",
+         *             "sort_order": 1,
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           }
+         *         ],
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
          *         "metadata": {
@@ -6224,6 +6953,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -6405,6 +7145,44 @@ export interface components {
              * @enum {string}
              */
             status: "pending" | "slot_selected" | "completed" | "abandoned";
+        };
+        /**
+         * ServiceForm
+         * @description A service form represents the attachment of a form to a service.
+         * @example {
+         *       "created_at": "2025-02-17T17:49:19Z",
+         *       "form_id": "frm_d025a96ac0c6",
+         *       "form_name": "Intake Form",
+         *       "id": "sf_d025a96ac0c6",
+         *       "object": "service_form",
+         *       "sort_order": 1,
+         *       "updated_at": "2025-02-17T17:49:19Z"
+         *     }
+         */
+        ServiceForm: {
+            /**
+             * Format: datetime
+             * @description When the service form was created.
+             */
+            created_at: string;
+            /** @description The ID of the attached form. */
+            form_id: string;
+            /** @description The name of the attached form. */
+            form_name: string;
+            /** @description Unique identifier for the service form. */
+            id: string;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "service_form";
+            /** @description Display order of the form within the service. */
+            sort_order: number;
+            /**
+             * Format: datetime
+             * @description When the service form was last updated.
+             */
+            updated_at: string;
         };
         /**
          * UpdateAccountUserRequest
@@ -6609,6 +7387,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -6695,6 +7484,24 @@ export interface components {
             type: "appointment.canceled";
         };
         /**
+         * FieldOptionsInput
+         * @description Options for choice-type fields (select, radio, checkbox).
+         * @example {
+         *       "allow_other": false,
+         *       "choices": [
+         *         {
+         *           "label": "Option A"
+         *         }
+         *       ]
+         *     }
+         */
+        FieldOptionsInput: {
+            /** @description Whether to allow a free-text 'other' option. */
+            allow_other: boolean;
+            /** @description List of available choices. */
+            choices: components["schemas"]["FieldChoiceInput"][];
+        };
+        /**
          * UpdatePublicBookingIntentRequest
          * @description Request schema for updating a booking intent via a public interface.
          * @example {
@@ -6714,6 +7521,10 @@ export interface components {
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -6787,6 +7598,31 @@ export interface components {
              * @enum {string}
              */
             type: "provider_schedule.updated";
+        };
+        /**
+         * CreateClientFieldRequest
+         * @description Request schema for creating a client field
+         * @example {
+         *       "key": "company_name",
+         *       "label": "Company Name",
+         *       "type": "short_text"
+         *     }
+         */
+        CreateClientFieldRequest: {
+            /** @description An optional description of the field. */
+            description?: string | null;
+            /** @description The machine-readable key for the field. */
+            key: string;
+            /** @description The human-readable label for the field. */
+            label: string;
+            options?: components["schemas"]["ClientFieldOptions"];
+            /** @description Whether the field contains sensitive data. */
+            sensitive?: boolean;
+            /**
+             * @description The field type.
+             * @enum {string}
+             */
+            type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
         };
         /**
          * PublicBookingIntentResponse
@@ -7205,6 +8041,10 @@ export interface components {
                  * @description The client's email address. Required if no existing client is provided.
                  */
                 email?: string | null;
+                /** @description A map of custom field key-value pairs to set on the client. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 /** @description The client's first name. Required if no existing client is provided. */
                 first_name?: string | null;
                 /**
@@ -7342,6 +8182,10 @@ export interface components {
             /** @description Progressive client data to collect during the booking flow. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -7446,6 +8290,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -7689,6 +8544,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -7908,6 +8774,59 @@ export interface components {
             time_zone: string;
         };
         /**
+         * ClientField
+         * @description This is an object representing a client field.
+         * @example {
+         *       "created_at": "2024-01-01T00:00:00Z",
+         *       "description": null,
+         *       "id": "cf_a1b2c3d4e5f6",
+         *       "key": "company_name",
+         *       "label": "Company Name",
+         *       "object": "client_field",
+         *       "options": null,
+         *       "sensitive": false,
+         *       "sort_order": 1,
+         *       "type": "short_text",
+         *       "updated_at": "2024-01-01T00:00:00Z"
+         *     }
+         */
+        ClientField: {
+            /**
+             * Format: date-time
+             * @description When the field was created.
+             */
+            created_at: string;
+            /** @description An optional description of the field. */
+            description?: string | null;
+            /** @description Unique identifier for the object. */
+            id: string;
+            /** @description The machine-readable key for the field. */
+            key: string;
+            /** @description The human-readable label for the field. */
+            label: string;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "client_field";
+            /** @description Options for choice-type fields. */
+            options?: (components["schemas"]["ClientFieldOptions"] | (Record<string, never> | null)) | null;
+            /** @description Whether the field contains sensitive data. */
+            sensitive: boolean;
+            /** @description The sort order of the field. */
+            sort_order: number;
+            /**
+             * @description The field type.
+             * @enum {string}
+             */
+            type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
+            /**
+             * Format: date-time
+             * @description When the field was last updated.
+             */
+            updated_at: string;
+        };
+        /**
          * UpdateCancellationReasonRequest
          * @description Request schema for updating a cancellation reason
          * @example {
@@ -7917,6 +8836,49 @@ export interface components {
         UpdateCancellationReasonRequest: {
             /** @description The cancellation reason's name. */
             name?: string;
+        };
+        /**
+         * ServiceFormResponse
+         * @description Response schema for a single service form
+         * @example {
+         *       "data": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "form_id": "frm_d025a96ac0c6",
+         *         "form_name": "Intake Form",
+         *         "id": "sf_d025a96ac0c6",
+         *         "object": "service_form",
+         *         "sort_order": 1,
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       }
+         *     }
+         */
+        ServiceFormResponse: {
+            data: components["schemas"]["ServiceForm"];
+        };
+        /**
+         * ClientFieldsResponse
+         * @description Response schema for multiple client fields
+         * @example {
+         *       "data": [
+         *         {
+         *           "created_at": "2024-01-01T00:00:00Z",
+         *           "description": null,
+         *           "id": "cf_a1b2c3d4e5f6",
+         *           "key": "company_name",
+         *           "label": "Company Name",
+         *           "object": "client_field",
+         *           "options": null,
+         *           "sensitive": false,
+         *           "sort_order": 1,
+         *           "type": "short_text",
+         *           "updated_at": "2024-01-01T00:00:00Z"
+         *         }
+         *       ]
+         *     }
+         */
+        ClientFieldsResponse: {
+            /** @description The client fields details */
+            data: components["schemas"]["ClientField"][];
         };
         /**
          * BlockResponse
@@ -8134,6 +9096,17 @@ export interface components {
          *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *         "created_at": "2025-02-17T17:49:19Z",
          *         "duration": "PT1H30M",
+         *         "forms": [
+         *           {
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "form_id": "frm_d025a96ac0c6",
+         *             "form_name": "Intake Form",
+         *             "id": "sf_d025a96ac0c6",
+         *             "object": "service_form",
+         *             "sort_order": 1,
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           }
+         *         ],
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
          *         "metadata": {
@@ -8322,6 +9295,28 @@ export interface components {
             type: "provider.deactivated";
         };
         /**
+         * CreateFormRequest
+         * @description Request schema for creating a form.
+         * @example {
+         *       "fields": [
+         *         {
+         *           "key": "full_name",
+         *           "label": "Full Name",
+         *           "position": 0,
+         *           "required": true,
+         *           "type": "short_text"
+         *         }
+         *       ],
+         *       "internal_name": "Intake Form"
+         *     }
+         */
+        CreateFormRequest: {
+            /** @description The fields in the form. */
+            fields?: components["schemas"]["FormFieldInput"][];
+            /** @description The name of the form. */
+            internal_name: string;
+        };
+        /**
          * PublicAppointmentResponse
          * @description Response schema for a single appointment created via a public interface.
          * @example {
@@ -8505,6 +9500,17 @@ export interface components {
          *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *         "created_at": "2025-02-17T17:49:19Z",
          *         "duration": "PT1H30M",
+         *         "forms": [
+         *           {
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "form_id": "frm_d025a96ac0c6",
+         *             "form_name": "Intake Form",
+         *             "id": "sf_d025a96ac0c6",
+         *             "object": "service_form",
+         *             "sort_order": 1,
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           }
+         *         ],
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
          *         "metadata": {
@@ -8623,6 +9629,29 @@ export interface components {
             user_id: string | null;
         };
         /**
+         * ClientFieldResponse
+         * @description Response schema for a single client field
+         * @example {
+         *       "data": {
+         *         "created_at": "2024-01-01T00:00:00Z",
+         *         "description": null,
+         *         "id": "cf_a1b2c3d4e5f6",
+         *         "key": "company_name",
+         *         "label": "Company Name",
+         *         "object": "client_field",
+         *         "options": null,
+         *         "sensitive": false,
+         *         "sort_order": 1,
+         *         "type": "short_text",
+         *         "updated_at": "2024-01-01T00:00:00Z"
+         *       }
+         *     }
+         */
+        ClientFieldResponse: {
+            /** @description The client field details */
+            data: Record<string, never>;
+        };
+        /**
          * BookingIntent
          * @description A booking intent that tracks the lifecycle of a booking attempt.
          * @example {
@@ -8701,6 +9730,17 @@ export interface components {
          *         "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *         "created_at": "2025-02-17T17:49:19Z",
          *         "duration": "PT1H30M",
+         *         "forms": [
+         *           {
+         *             "created_at": "2025-02-17T17:49:19Z",
+         *             "form_id": "frm_d025a96ac0c6",
+         *             "form_name": "Intake Form",
+         *             "id": "sf_d025a96ac0c6",
+         *             "object": "service_form",
+         *             "sort_order": 1,
+         *             "updated_at": "2025-02-17T17:49:19Z"
+         *           }
+         *         ],
          *         "id": "srv_d025a96ac0c6",
          *         "internal_name": null,
          *         "metadata": {
@@ -8919,6 +9959,8 @@ export interface components {
              * @example PT1H30M
              */
             duration?: string;
+            /** @description Optional list of form IDs to attach to the service. Each form is attached as required, with sort order matching the array order. */
+            form_ids?: string[];
             /** @description An optional internal label for admin use. When set, this is displayed in the admin UI instead of the public name. */
             internal_name?: string | null;
             /** @description Set of key-value pairs to attach to this service. Maximum size is 16 KB. */
@@ -9090,6 +10132,17 @@ export interface components {
          *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
          *           "created_at": "2025-02-17T17:49:19Z",
          *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
          *           "id": "srv_d025a96ac0c6",
          *           "internal_name": null,
          *           "metadata": {
@@ -9232,6 +10285,10 @@ export interface components {
         CreateClientRequest: {
             /** @description The client's email address. */
             email: string;
+            /** @description A map of custom field key-value pairs to set on this client. */
+            fields?: {
+                [key: string]: unknown;
+            };
             /** @description The client's first name. */
             first_name: string;
             /** @description The client's last name. */
@@ -9298,6 +10355,99 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    listClientFields: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientFieldsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    createClientField: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Client field params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateClientFieldRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientFieldResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     getAppointment: {
         parameters: {
             query?: {
@@ -9599,6 +10749,114 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    listServiceForms: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Service ID */
+                service_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceFormsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    attachServiceForm: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Service ID */
+                service_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Service form params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["AttachServiceFormRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceFormResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
                 };
             };
             /** @description Unprocessable Entity */
@@ -10442,6 +11700,53 @@ export interface operations {
             };
         };
     };
+    detachServiceForm: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Service Form ID */
+                service_form_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
     getAccountById: {
         parameters: {
             query?: never;
@@ -10748,6 +12053,161 @@ export interface operations {
             };
         };
     };
+    getForm: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Form ID */
+                form_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    deleteForm: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Form ID */
+                form_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateForm: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Form ID */
+                form_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Form params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateFormRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     deleteServiceProvider: {
         parameters: {
             query?: never;
@@ -11013,6 +12473,106 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    listForms: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+                /** @description Filter forms by name. */
+                search?: string;
+            };
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    createForm: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Form params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateFormRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["FormResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
                 };
             };
             /** @description Unprocessable Entity */
@@ -12112,6 +13672,67 @@ export interface operations {
             };
         };
     };
+    sortServiceForms: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Service ID */
+                service_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Sort params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["SortServiceFormsRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceFormsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     getCurrentAccount: {
         parameters: {
             query?: never;
@@ -12745,6 +14366,161 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    getClientField: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Client field ID */
+                client_field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientFieldResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    deleteClientField: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Client field ID */
+                client_field_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateClientField: {
+        parameters: {
+            query?: never;
+            header?: {
+                /**
+                 * @description When authenticating with a platform token, specifies the account ID for the request
+                 * @example acct_1234567890
+                 */
+                "X-SavvyCal-Account"?: string;
+            };
+            path: {
+                /** @description Client field ID */
+                client_field_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Client field params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateClientFieldRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ClientFieldResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
                 };
             };
             /** @description Unprocessable Entity */
