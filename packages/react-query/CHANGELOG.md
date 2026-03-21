@@ -1,5 +1,22 @@
 # @savvycal/appointments-react-query
 
+## 1.0.0
+
+### Major Changes
+
+- [`1f5086d`](https://github.com/svycal/appointments/commit/1f5086ddb4fbd3bc12761a2af2a4bd2d1d432e61) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Removed:** -- The deprecated `client_locale`, `client_reference_id`, `client_time_zone`, and `fields` properties have been removed from the [Appointment](https://developers.savvycal.app/api/schemas/appointment) schema. Use `client_data` instead.
+
+### Minor Changes
+
+- [`25cc645`](https://github.com/svycal/appointments/commit/25cc64504aa421ee2165cc7a1d5b611739c1a2d8) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Booking intents now include a `submissions` field for attaching form responses during the booking flow. See [BookingIntent](https://developers.savvycal.app/api/schemas/bookingintent) and [IntentSubmissionInput](https://developers.savvycal.app/api/schemas/intentsubmissioninput).
+
+- [`25cc645`](https://github.com/svycal/appointments/commit/25cc64504aa421ee2165cc7a1d5b611739c1a2d8) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Added React Query hooks for Forms, Client Fields, and Service Forms operations.
+
+### Patch Changes
+
+- Updated dependencies [[`1f5086d`](https://github.com/svycal/appointments/commit/1f5086ddb4fbd3bc12761a2af2a4bd2d1d432e61), [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116), [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116), [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116), [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116), [`25cc645`](https://github.com/svycal/appointments/commit/25cc64504aa421ee2165cc7a1d5b611739c1a2d8), [`25cc645`](https://github.com/svycal/appointments/commit/25cc64504aa421ee2165cc7a1d5b611739c1a2d8)]:
+  - @savvycal/appointments-core@1.0.0
+
 ## 0.4.0
 
 ### Minor Changes

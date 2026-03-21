@@ -1,5 +1,25 @@
 # @savvycal/appointments-core
 
+## 1.0.0
+
+### Major Changes
+
+- [`1f5086d`](https://github.com/svycal/appointments/commit/1f5086ddb4fbd3bc12761a2af2a4bd2d1d432e61) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Removed:** -- The deprecated `client_locale`, `client_reference_id`, `client_time_zone`, and `fields` properties have been removed from the [Appointment](https://developers.savvycal.app/api/schemas/appointment) schema. Use `client_data` instead.
+
+### Minor Changes
+
+- [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Services now include a `forms` field containing attached intake forms. See [Service](https://developers.savvycal.app/api/schemas/service).
+
+- [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Client Fields** -- Added endpoints for managing custom client fields. See [ClientField](https://developers.savvycal.app/api/schemas/clientfield).
+
+- [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Service Forms** -- Added endpoints for attaching forms to services. See [ServiceForm](https://developers.savvycal.app/api/schemas/serviceform).
+
+- [`bcce16e`](https://github.com/svycal/appointments/commit/bcce16e6ce85e3ccf6702a0d4f4005f9f0b28116) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Forms** -- Added endpoints for managing intake forms with typed fields. See [Form](https://developers.savvycal.app/api/schemas/form).
+
+- [`25cc645`](https://github.com/svycal/appointments/commit/25cc64504aa421ee2165cc7a1d5b611739c1a2d8) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Booking intents now include a `submissions` field for attaching form responses during the booking flow. See [BookingIntent](https://developers.savvycal.app/api/schemas/bookingintent) and [IntentSubmissionInput](https://developers.savvycal.app/api/schemas/intentsubmissioninput).
+
+- [`25cc645`](https://github.com/svycal/appointments/commit/25cc64504aa421ee2165cc7a1d5b611739c1a2d8) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- The [Get Client](https://developers.savvycal.app/api/get-client) and [List Clients](https://developers.savvycal.app/api/list-clients) endpoints now support an `include_sensitive` query parameter for controlling whether sensitive fields (name, email, phone) are included in the response.
+
 ## 0.14.0
 
 ### Minor Changes
