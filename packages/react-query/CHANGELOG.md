@@ -1,5 +1,16 @@
 # @savvycal/appointments-react-query
 
+## 1.1.0
+
+### Minor Changes
+
+- [`c97027d`](https://github.com/svycal/appointments/commit/c97027dfbc89af12f95b5a8cfcd61c903c4f7ac4) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Booking intents now include an `errors` field containing validation errors in JSON:API format. See [BookingIntent](https://developers.savvycal.app/api/schemas/bookingintent) and [JsonError](https://developers.savvycal.app/api/schemas/jsonerror).
+
+### Patch Changes
+
+- Updated dependencies [[`c97027d`](https://github.com/svycal/appointments/commit/c97027dfbc89af12f95b5a8cfcd61c903c4f7ac4), [`c97027d`](https://github.com/svycal/appointments/commit/c97027dfbc89af12f95b5a8cfcd61c903c4f7ac4)]:
+  - @savvycal/appointments-core@1.1.0
+
 ## 1.0.0
 
 ### Major Changes
