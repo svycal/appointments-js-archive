@@ -6,6 +6,11 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## March 21, 2026
+
+- **New:** -- Booking intents now include a `submissions` field for attaching form responses during the booking flow. See [BookingIntent](/api/schemas/bookingintent) and [IntentSubmissionInput](/api/schemas/intentsubmissioninput).
+- **New:** -- The [Get Client](/api/get-client) and [List Clients](/api/list-clients) endpoints now support an `include_sensitive` query parameter for controlling whether sensitive fields (name, email, phone) are included in the response.
+
 ## March 20, 2026
 
 - **New: Forms** -- Added endpoints for managing intake forms with typed fields: [Create Form](/api/create-form), [Get Form](/api/get-form), [List Forms](/api/list-forms), [Update Form](/api/update-form), and [Delete Form](/api/delete-form). See [Form](/api/schemas/form).

@@ -2289,6 +2289,7 @@ export interface components {
          *           "utc": "2026-02-23T15:00:00Z"
          *         },
          *         "status": "slot_selected",
+         *         "submissions": [],
          *         "updated_at": "2026-02-22T10:00:00Z"
          *       },
          *       "type": "booking_intent.completed"
@@ -2412,7 +2413,7 @@ export interface components {
             hold_duration?: string | null;
             /** @description Whether to enable slot holding. When omitted, falls back to the service's hold policy. */
             hold_enabled?: boolean | null;
-            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. */
+            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
             locked_fields?: string[] | null;
             /** @description Custom metadata key-value pairs. */
             metadata?: {
@@ -2432,6 +2433,8 @@ export interface components {
              * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             start_at?: string | null;
+            /** @description Form submissions to attach to this booking intent. Each entry contains a form_id and responses map. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
         };
@@ -2578,6 +2581,7 @@ export interface components {
          *           "utc": "2026-02-23T15:00:00Z"
          *         },
          *         "status": "slot_selected",
+         *         "submissions": [],
          *         "updated_at": "2026-02-22T10:00:00Z"
          *       },
          *       "type": "booking_intent.abandoned"
@@ -3085,6 +3089,7 @@ export interface components {
          *           "utc": "2026-02-23T15:00:00Z"
          *         },
          *         "status": "slot_selected",
+         *         "submissions": [],
          *         "updated_at": "2026-02-22T10:00:00Z"
          *       },
          *       "type": "booking_intent.updated"
@@ -3315,6 +3320,8 @@ export interface components {
              * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             start_at?: string | null;
+            /** @description Form submissions to upsert by form_id. Provided entries are merged with existing submissions; omitted form_ids are left unchanged. Send an empty array to clear all. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
         };
@@ -3500,6 +3507,7 @@ export interface components {
          *             "utc": "2026-02-23T15:00:00Z"
          *           },
          *           "status": "slot_selected",
+         *           "submissions": [],
          *           "updated_at": "2026-02-22T10:00:00Z"
          *         }
          *       ],
@@ -3834,6 +3842,7 @@ export interface components {
          *           "utc": "2026-02-23T15:00:00Z"
          *         },
          *         "status": "slot_selected",
+         *         "submissions": [],
          *         "updated_at": "2026-02-22T10:00:00Z"
          *       },
          *       "type": "booking_intent.created"
@@ -3878,6 +3887,30 @@ export interface components {
              * @description Time at which the object was last updated.
              */
             updated_at: string;
+        };
+        /**
+         * IntentSubmissionInput
+         * @description A form submission entry containing a form ID and response data.
+         * @example {
+         *       "form_id": "frm_abc123def456abc123def456",
+         *       "responses": {
+         *         "color": [
+         *           "opt_abc"
+         *         ],
+         *         "name": "Jane Doe"
+         *       }
+         *     }
+         */
+        IntentSubmissionInput: {
+            /** @description The ID of the form to submit responses for. */
+            form_id: string;
+            /**
+             * @description A map of response data keyed by field key. Values depend on field type.
+             * @default {}
+             */
+            responses: {
+                [key: string]: unknown;
+            };
         };
         /**
          * PublicServiceEarliestSlotResponse
@@ -5185,7 +5218,7 @@ export interface components {
             hold_duration?: string | null;
             /** @description Whether to enable slot holding. When omitted, falls back to the service's hold policy if service is changing. */
             hold_enabled?: boolean | null;
-            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. Replaces existing locked_fields entirely. */
+            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. Replaces existing locked_fields entirely. */
             locked_fields?: string[] | null;
             /** @description Custom metadata key-value pairs. Replaces existing metadata entirely. */
             metadata?: {
@@ -5202,6 +5235,8 @@ export interface components {
              * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             start_at?: string | null;
+            /** @description Form submissions to upsert by form_id. Provided entries are merged with existing submissions; omitted form_ids are left unchanged. Send an empty array to clear all. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
         };
@@ -6484,6 +6519,8 @@ export interface components {
              * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             start_at?: string | null;
+            /** @description Form submissions to upsert by form_id. Provided entries are merged with existing submissions; omitted form_ids are left unchanged. Send an empty array to clear all. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
         };
@@ -7546,6 +7583,8 @@ export interface components {
              * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             start_at?: string | null;
+            /** @description Form submissions to upsert by form_id. Provided entries are merged with existing submissions; omitted form_ids are left unchanged. Send an empty array to clear all. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
         };
@@ -8207,6 +8246,8 @@ export interface components {
              * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             start_at?: string | null;
+            /** @description Form submissions to attach to this booking intent. Each entry contains a form_id and responses map. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
         };
@@ -8353,6 +8394,7 @@ export interface components {
          *           "utc": "2026-02-23T15:00:00Z"
          *         },
          *         "status": "slot_selected",
+         *         "submissions": [],
          *         "updated_at": "2026-02-22T10:00:00Z"
          *       }
          *     }
@@ -9793,6 +9835,7 @@ export interface components {
          *         "utc": "2026-02-23T15:00:00Z"
          *       },
          *       "status": "slot_selected",
+         *       "submissions": [],
          *       "updated_at": "2026-02-22T10:00:00Z"
          *     }
          */
@@ -9839,7 +9882,7 @@ export interface components {
             hold_until?: string | null;
             /** @description The booking intent ID */
             id: string;
-            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. */
+            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
             locked_fields?: string[];
             /** @description Custom metadata key-value pairs */
             metadata?: {
@@ -9863,6 +9906,8 @@ export interface components {
              * @enum {string}
              */
             status: "pending" | "slot_selected" | "completed" | "abandoned";
+            /** @description Form submissions accumulated during the booking flow. Each entry contains a form_id and responses map. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][];
             /**
              * Format: date-time
              * @description When the intent was last updated
@@ -11174,7 +11219,10 @@ export interface operations {
     };
     getClient: {
         parameters: {
-            query?: never;
+            query?: {
+                /** @description Whether to include sensitive fields (such as client name, email, and phone) */
+                include_sensitive?: boolean;
+            };
             header?: {
                 /**
                  * @description When authenticating with a platform token, specifies the account ID for the request
@@ -13038,6 +13086,8 @@ export interface operations {
                 metadata?: {
                     [key: string]: unknown;
                 };
+                /** @description Whether to include sensitive fields (such as client name, email, and phone) */
+                include_sensitive?: boolean;
             };
             header?: {
                 /**

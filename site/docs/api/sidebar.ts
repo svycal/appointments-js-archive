@@ -1116,6 +1116,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/intentsubmissioninput",
+          label: "IntentSubmissionInput",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/publicserviceearliestslotresponse",
           label: "PublicServiceEarliestSlotResponse",
           className: "schema",

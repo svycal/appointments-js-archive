@@ -406,9 +406,10 @@ export function getCancellationReason(
 export function getClient(
   client: FetchClient,
   path: PathParams<"/v1/clients/{client_id}", "get">,
+  query?: QueryParams<"/v1/clients/{client_id}", "get">,
 ) {
   return client.GET("/v1/clients/{client_id}", {
-    params: { path },
+    params: { path, query },
   });
 }
 
