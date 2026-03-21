@@ -2172,6 +2172,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
+         *         "errors": [],
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -2464,6 +2465,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
+         *         "errors": [],
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -2972,6 +2974,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
+         *         "errors": [],
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -3390,6 +3393,7 @@ export interface components {
          *             "unix_ts": 1771947000,
          *             "utc": "2026-02-23T15:30:00Z"
          *           },
+         *           "errors": [],
          *           "hold_duration": "PT10M",
          *           "hold_enabled": true,
          *           "hold_until": "2026-02-22T10:10:00Z",
@@ -3725,6 +3729,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
+         *         "errors": [],
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -7142,6 +7147,7 @@ export interface components {
          *         "unix_ts": 1771947000,
          *         "utc": "2026-02-23T15:30:00Z"
          *       },
+         *       "errors": [],
          *       "hold_until": "2026-02-22T10:10:00Z",
          *       "id": "bi_abc123def456abc123def456",
          *       "locked_fields": [],
@@ -7161,6 +7167,8 @@ export interface components {
             appointment?: components["schemas"]["PublicAppointment"] | null;
             /** @description The end time of the selected slot */
             end_at?: components["schemas"]["ZonedDateTime"] | null;
+            /** @description Validation errors for submitted data in JSON:API format. Empty when no errors exist. */
+            errors?: components["schemas"]["JsonError"][];
             /**
              * Format: date-time
              * @description When the hold expires (UTC)
@@ -7676,6 +7684,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
+         *         "errors": [],
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [],
@@ -8050,6 +8059,33 @@ export interface components {
             time_zone: string;
         };
         /**
+         * JsonError
+         * @description A single validation error in JSON:API format.
+         * @example {
+         *       "code": "email_format",
+         *       "detail": "must be a valid email address",
+         *       "source": {
+         *         "pointer": "/email"
+         *       },
+         *       "title": "Invalid value"
+         *     }
+         */
+        JsonError: {
+            /**
+             * @description Machine-readable error code (e.g. slot_unavailable, no_available_provider, time_range_conflict)
+             * @example slot_unavailable
+             */
+            code?: string | null;
+            /** @example is not available */
+            detail: string;
+            source: {
+                /** @example /start_at */
+                pointer: string;
+            };
+            /** @example Invalid value */
+            title: string;
+        };
+        /**
          * CreateAppointmentRequest
          * @description Request schema for creating an appointment
          * @example {
@@ -8277,6 +8313,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
+         *         "errors": [],
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -8965,21 +9002,7 @@ export interface components {
          * @description Response schema for validation errors
          */
         JsonErrorResponse: {
-            errors: {
-                /**
-                 * @description Machine-readable error code (e.g. slot_unavailable, no_available_provider, time_range_conflict)
-                 * @example slot_unavailable
-                 */
-                code?: string | null;
-                /** @example is not available */
-                detail: string;
-                source: {
-                    /** @example /start_at */
-                    pointer: string;
-                };
-                /** @example Invalid value */
-                title: string;
-            }[];
+            errors: components["schemas"]["JsonError"][];
         };
         /**
          * Appointment
@@ -9718,6 +9741,7 @@ export interface components {
          *         "unix_ts": 1771947000,
          *         "utc": "2026-02-23T15:30:00Z"
          *       },
+         *       "errors": [],
          *       "hold_duration": "PT10M",
          *       "hold_enabled": true,
          *       "hold_until": "2026-02-22T10:10:00Z",
@@ -9871,6 +9895,8 @@ export interface components {
             created_at: string;
             /** @description The end time of the selected slot */
             end_at?: components["schemas"]["ZonedDateTime"] | null;
+            /** @description Validation errors for submitted data in JSON:API format. Empty when no errors exist. Only present on single-resource endpoints (not index). */
+            errors?: components["schemas"]["JsonError"][];
             /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M) */
             hold_duration?: string | null;
             /** @description Whether slot holding is enabled */

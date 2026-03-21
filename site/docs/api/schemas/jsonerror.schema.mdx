@@ -1,0 +1,32 @@
+---
+id: jsonerror
+title: "JsonError"
+description: "A single validation error in JSON:API format."
+sidebar_label: "JsonError"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"code":"email_format","detail":"must be a valid email address","source":{"pointer":"/email"},"title":"Invalid value"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"JsonError"}
+>
+</Heading>
+
+
+
+A single validation error in JSON:API format.
+
+<Schema
+  {...require("./jsonerror.Schema.json")}
+>
+  
+</Schema>
+            

@@ -18,6 +18,7 @@ interface Options extends QueryOptionsFor<"get", "/v1/clients/{client_id}"> {
 
 export const useClient = (
   client_id: ClientParams["path"]["client_id"],
+  queryParams?: ClientParams["query"],
   options?: Options,
 ) => {
   const { client: overrideClient, ...queryOptions } = options ?? {};
@@ -29,6 +30,7 @@ export const useClient = (
     {
       params: {
         path: { client_id },
+        query: queryParams,
       },
     },
     queryOptions,

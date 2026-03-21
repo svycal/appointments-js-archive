@@ -1578,6 +1578,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/jsonerror",
+          label: "JsonError",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/createappointmentrequest",
           label: "CreateAppointmentRequest",
           className: "schema",

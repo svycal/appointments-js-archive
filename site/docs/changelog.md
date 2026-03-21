@@ -10,6 +10,8 @@ A log of notable changes to the SavvyCal Appointments API.
 
 - **New:** -- Booking intents now include a `submissions` field for attaching form responses during the booking flow. See [BookingIntent](/api/schemas/bookingintent) and [IntentSubmissionInput](/api/schemas/intentsubmissioninput).
 - **New:** -- The [Get Client](/api/get-client) and [List Clients](/api/list-clients) endpoints now support an `include_sensitive` query parameter for controlling whether sensitive fields (name, email, phone) are included in the response.
+- **New:** -- Booking intents now include an `errors` field containing validation errors in JSON:API format. See [BookingIntent](/api/schemas/bookingintent) and [JsonError](/api/schemas/jsonerror).
+- **New:** -- Added a [JsonError](/api/schemas/jsonerror) schema representing a single validation error object.
 
 ## March 20, 2026
 

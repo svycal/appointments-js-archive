@@ -128,6 +128,7 @@ export type FormsResponse = Schemas["FormsResponse"];
 export type GenericErrorResponse = Schemas["GenericErrorResponse"];
 export type HoldPolicy = Schemas["HoldPolicy"];
 export type IntentSubmissionInput = Schemas["IntentSubmissionInput"];
+export type JsonError = Schemas["JsonError"];
 export type JsonErrorResponse = Schemas["JsonErrorResponse"];
 export type MaximizeUtilizationPolicy = Schemas["MaximizeUtilizationPolicy"];
 export type NotFoundResponse = Schemas["NotFoundResponse"];
