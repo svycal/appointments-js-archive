@@ -2172,7 +2172,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
-         *         "errors": [],
+         *         "errors": null,
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -2465,7 +2465,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
-         *         "errors": [],
+         *         "errors": null,
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -2974,7 +2974,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
-         *         "errors": [],
+         *         "errors": null,
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -3393,7 +3393,7 @@ export interface components {
          *             "unix_ts": 1771947000,
          *             "utc": "2026-02-23T15:30:00Z"
          *           },
-         *           "errors": [],
+         *           "errors": null,
          *           "hold_duration": "PT10M",
          *           "hold_enabled": true,
          *           "hold_until": "2026-02-22T10:10:00Z",
@@ -3729,7 +3729,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
-         *         "errors": [],
+         *         "errors": null,
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -7147,7 +7147,7 @@ export interface components {
          *         "unix_ts": 1771947000,
          *         "utc": "2026-02-23T15:30:00Z"
          *       },
-         *       "errors": [],
+         *       "errors": null,
          *       "hold_until": "2026-02-22T10:10:00Z",
          *       "id": "bi_abc123def456abc123def456",
          *       "locked_fields": [],
@@ -7163,12 +7163,12 @@ export interface components {
          *     }
          */
         PublicBookingIntent: {
-            /** @description The linked appointment (set when completed) */
+            /** @description The created appointment. Present when status is completed. */
             appointment?: components["schemas"]["PublicAppointment"] | null;
             /** @description The end time of the selected slot */
             end_at?: components["schemas"]["ZonedDateTime"] | null;
-            /** @description Validation errors for submitted data in JSON:API format. Empty when no errors exist. */
-            errors?: components["schemas"]["JsonError"][];
+            /** @description Validation errors for data provided so far. Fields not yet submitted are not flagged. Null when not computed. */
+            errors?: components["schemas"]["JsonError"][] | null;
             /**
              * Format: date-time
              * @description When the hold expires (UTC)
@@ -7176,10 +7176,10 @@ export interface components {
             hold_until?: string | null;
             /** @description The booking intent ID */
             id: string;
-            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data. */
+            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
             locked_fields?: string[];
             /**
-             * @description String representing the object's type.
+             * @description The object type
              * @enum {string}
              */
             object: "public_booking_intent";
@@ -7684,7 +7684,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
-         *         "errors": [],
+         *         "errors": null,
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [],
@@ -8313,7 +8313,7 @@ export interface components {
          *           "unix_ts": 1771947000,
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
-         *         "errors": [],
+         *         "errors": null,
          *         "hold_duration": "PT10M",
          *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
@@ -9741,7 +9741,7 @@ export interface components {
          *         "unix_ts": 1771947000,
          *         "utc": "2026-02-23T15:30:00Z"
          *       },
-         *       "errors": [],
+         *       "errors": null,
          *       "hold_duration": "PT10M",
          *       "hold_enabled": true,
          *       "hold_until": "2026-02-22T10:10:00Z",
@@ -9869,11 +9869,11 @@ export interface components {
              * @description When the intent was abandoned
              */
             abandoned_at?: string | null;
-            /** @description The linked appointment (set when completed) */
+            /** @description The created appointment. Present when status is completed. */
             appointment?: components["schemas"]["Appointment"] | null;
             /** @description The linked client */
             client?: components["schemas"]["Client"] | null;
-            /** @description Progressive client data collected during the booking flow. Sensitive fields (first_name, last_name, email, phone) are redacted unless include_sensitive is true. */
+            /** @description Client data accumulated during the booking flow. Sensitive fields (first_name, last_name, email, phone) are redacted unless include_sensitive is true. */
             client_data?: {
                 email?: string | null;
                 first_name?: string | null;
@@ -9895,8 +9895,8 @@ export interface components {
             created_at: string;
             /** @description The end time of the selected slot */
             end_at?: components["schemas"]["ZonedDateTime"] | null;
-            /** @description Validation errors for submitted data in JSON:API format. Empty when no errors exist. Only present on single-resource endpoints (not index). */
-            errors?: components["schemas"]["JsonError"][];
+            /** @description Validation errors for data provided so far. Fields not yet submitted are not flagged. Null when not computed. */
+            errors?: components["schemas"]["JsonError"][] | null;
             /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M) */
             hold_duration?: string | null;
             /** @description Whether slot holding is enabled */
