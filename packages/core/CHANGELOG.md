@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 1.1.1
+
+### Patch Changes
+
+- [`7d3af56`](https://github.com/svycal/appointments/commit/7d3af5607b515a390ffd6d1a852a69e0a922ad94) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- Refined BookingIntent and PublicBookingIntent schemas: `errors` field is now nullable (null when not computed), `locked_fields` includes `submissions`, and minor description updates.
+
 ## 1.1.0
 
 ### Minor Changes
