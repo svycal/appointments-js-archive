@@ -2153,6 +2153,12 @@ export interface components {
          *       "object": {
          *         "abandoned_at": null,
          *         "appointment": null,
+         *         "booking_policy": {
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           }
+         *         },
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
@@ -2173,8 +2179,6 @@ export interface components {
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
          *         "errors": null,
-         *         "hold_duration": "PT10M",
-         *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
@@ -2378,8 +2382,12 @@ export interface components {
          * CreateBookingIntentRequest
          * @description Request schema for creating a booking intent
          * @example {
-         *       "hold_duration": "PT10M",
-         *       "hold_enabled": true,
+         *       "booking_policy": {
+         *         "hold": {
+         *           "duration": "PT10M",
+         *           "enabled": true
+         *         }
+         *       },
          *       "metadata": {
          *         "source": "web"
          *       },
@@ -2389,6 +2397,16 @@ export interface components {
         CreateBookingIntentRequest: {
             /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
             auto_assign_provider?: boolean | null;
+            /** @description Policy overrides for this booking intent. When omitted, falls back to the service's policies. */
+            booking_policy?: {
+                /** @description Hold policy overrides. */
+                hold?: {
+                    /** @description The duration of the hold as an ISO 8601 duration string. */
+                    duration?: string | null;
+                    /** @description Whether slot holds are enabled. */
+                    enabled?: boolean;
+                } | null;
+            } | null;
             /** @description Progressive client data to collect during the booking flow. */
             client_data?: {
                 email?: string | null;
@@ -2410,10 +2428,6 @@ export interface components {
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             end_at?: string | null;
-            /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M). When omitted, falls back to the service's hold policy duration. */
-            hold_duration?: string | null;
-            /** @description Whether to enable slot holding. When omitted, falls back to the service's hold policy. */
-            hold_enabled?: boolean | null;
             /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
             locked_fields?: string[] | null;
             /** @description Custom metadata key-value pairs. */
@@ -2446,6 +2460,12 @@ export interface components {
          *       "object": {
          *         "abandoned_at": null,
          *         "appointment": null,
+         *         "booking_policy": {
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           }
+         *         },
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
@@ -2466,8 +2486,6 @@ export interface components {
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
          *         "errors": null,
-         *         "hold_duration": "PT10M",
-         *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
@@ -2955,6 +2973,12 @@ export interface components {
          *       "object": {
          *         "abandoned_at": null,
          *         "appointment": null,
+         *         "booking_policy": {
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           }
+         *         },
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
@@ -2975,8 +2999,6 @@ export interface components {
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
          *         "errors": null,
-         *         "hold_duration": "PT10M",
-         *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
@@ -3374,6 +3396,12 @@ export interface components {
          *         {
          *           "abandoned_at": null,
          *           "appointment": null,
+         *           "booking_policy": {
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             }
+         *           },
          *           "client": null,
          *           "client_data": {
          *             "email": "jane@example.com",
@@ -3394,8 +3422,6 @@ export interface components {
          *             "utc": "2026-02-23T15:30:00Z"
          *           },
          *           "errors": null,
-         *           "hold_duration": "PT10M",
-         *           "hold_enabled": true,
          *           "hold_until": "2026-02-22T10:10:00Z",
          *           "id": "bi_abc123def456abc123def456",
          *           "locked_fields": [
@@ -3710,6 +3736,12 @@ export interface components {
          *       "object": {
          *         "abandoned_at": null,
          *         "appointment": null,
+         *         "booking_policy": {
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           }
+         *         },
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
@@ -3730,8 +3762,6 @@ export interface components {
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
          *         "errors": null,
-         *         "hold_duration": "PT10M",
-         *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
@@ -4132,6 +4162,19 @@ export interface components {
              * @enum {string}
              */
             type: "connected_account.reconnected";
+        };
+        /**
+         * BookingIntentBookingPolicy
+         * @description Policy overrides applied to this booking intent.
+         * @example {
+         *       "hold": {
+         *         "duration": "PT10M",
+         *         "enabled": true
+         *       }
+         *     }
+         */
+        BookingIntentBookingPolicy: {
+            hold: components["schemas"]["HoldPolicy"];
         };
         /**
          * Client
@@ -5198,6 +5241,16 @@ export interface components {
         UpdateBookingIntentRequest: {
             /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
             auto_assign_provider?: boolean | null;
+            /** @description Policy overrides for this booking intent. When omitted, falls back to the service's policies if service is changing. */
+            booking_policy?: {
+                /** @description Hold policy overrides. */
+                hold?: {
+                    /** @description The duration of the hold as an ISO 8601 duration string. */
+                    duration?: string | null;
+                    /** @description Whether slot holds are enabled. */
+                    enabled?: boolean;
+                } | null;
+            } | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
             client_data?: {
                 email?: string | null;
@@ -5219,10 +5272,6 @@ export interface components {
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             end_at?: string | null;
-            /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M). When omitted, falls back to the service's hold policy duration. */
-            hold_duration?: string | null;
-            /** @description Whether to enable slot holding. When omitted, falls back to the service's hold policy if service is changing. */
-            hold_enabled?: boolean | null;
             /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. Replaces existing locked_fields entirely. */
             locked_fields?: string[] | null;
             /** @description Custom metadata key-value pairs. Replaces existing metadata entirely. */
@@ -8294,6 +8343,12 @@ export interface components {
          *       "data": {
          *         "abandoned_at": null,
          *         "appointment": null,
+         *         "booking_policy": {
+         *           "hold": {
+         *             "duration": "PT10M",
+         *             "enabled": true
+         *           }
+         *         },
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
@@ -8314,8 +8369,6 @@ export interface components {
          *           "utc": "2026-02-23T15:30:00Z"
          *         },
          *         "errors": null,
-         *         "hold_duration": "PT10M",
-         *         "hold_enabled": true,
          *         "hold_until": "2026-02-22T10:10:00Z",
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
@@ -9722,6 +9775,12 @@ export interface components {
          * @example {
          *       "abandoned_at": null,
          *       "appointment": null,
+         *       "booking_policy": {
+         *         "hold": {
+         *           "duration": "PT10M",
+         *           "enabled": true
+         *         }
+         *       },
          *       "client": null,
          *       "client_data": {
          *         "email": "jane@example.com",
@@ -9742,8 +9801,6 @@ export interface components {
          *         "utc": "2026-02-23T15:30:00Z"
          *       },
          *       "errors": null,
-         *       "hold_duration": "PT10M",
-         *       "hold_enabled": true,
          *       "hold_until": "2026-02-22T10:10:00Z",
          *       "id": "bi_abc123def456abc123def456",
          *       "locked_fields": [
@@ -9871,6 +9928,7 @@ export interface components {
             abandoned_at?: string | null;
             /** @description The created appointment. Present when status is completed. */
             appointment?: components["schemas"]["Appointment"] | null;
+            booking_policy: components["schemas"]["BookingIntentBookingPolicy"];
             /** @description The linked client */
             client?: components["schemas"]["Client"] | null;
             /** @description Client data accumulated during the booking flow. Sensitive fields (first_name, last_name, email, phone) are redacted unless include_sensitive is true. */
@@ -9897,10 +9955,6 @@ export interface components {
             end_at?: components["schemas"]["ZonedDateTime"] | null;
             /** @description Validation errors for data provided so far. Fields not yet submitted are not flagged. Null when not computed. */
             errors?: components["schemas"]["JsonError"][] | null;
-            /** @description The hold duration as an ISO 8601 duration string (e.g., PT10M) */
-            hold_duration?: string | null;
-            /** @description Whether slot holding is enabled */
-            hold_enabled: boolean;
             /**
              * Format: date-time
              * @description When the hold expires (UTC)

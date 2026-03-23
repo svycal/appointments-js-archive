@@ -44,6 +44,7 @@ export type BlockUpdatedEventData = Schemas["BlockUpdatedEventData"];
 export type BookingIntent = Schemas["BookingIntent"];
 export type BookingIntentAbandonedEventData =
   Schemas["BookingIntentAbandonedEventData"];
+export type BookingIntentBookingPolicy = Schemas["BookingIntentBookingPolicy"];
 export type BookingIntentCompletedEventData =
   Schemas["BookingIntentCompletedEventData"];
 export type BookingIntentCreatedEventData =

@@ -1164,6 +1164,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/bookingintentbookingpolicy",
+          label: "BookingIntentBookingPolicy",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/sortserviceformsrequest",
           label: "SortServiceFormsRequest",
           className: "schema",

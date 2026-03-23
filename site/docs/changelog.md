@@ -6,6 +6,11 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## March 23, 2026
+
+- **New:** -- Added a [BookingIntentBookingPolicy](/api/schemas/bookingintentbookingpolicy) schema representing hold policy overrides applied to a booking intent.
+- **Changed:** -- The `hold_duration` and `hold_enabled` fields on [BookingIntent](/api/schemas/bookingintent), [CreateBookingIntentRequest](/api/schemas/createbookingintentrequest), and [UpdateBookingIntentRequest](/api/schemas/updatebookingintentrequest) have been replaced with a nested `booking_policy` object. Hold settings are now at `booking_policy.hold.duration` and `booking_policy.hold.enabled`.
+
 ## March 21, 2026
 
 - **New:** -- Booking intents now include a `submissions` field for attaching form responses during the booking flow. See [BookingIntent](/api/schemas/bookingintent) and [IntentSubmissionInput](/api/schemas/intentsubmissioninput).
