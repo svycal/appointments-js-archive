@@ -30,15 +30,15 @@ Status transitions happen automatically. When you update a booking intent to inc
 
 Slot holding prevents double-booking by temporarily blocking a time slot while the user completes the booking flow. When enabled, the selected slot is blocked from availability for other callers until the hold expires or the intent is completed or abandoned.
 
-Configure slot holding with these fields:
+Hold settings are configured via the `booking_policy.hold` object (see [BookingIntentBookingPolicy](/api/schemas/bookingintentbookingpolicy)):
 
-| Field           | Type    | Description                                                                                                                |
-| --------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| `hold_enabled`  | boolean | Whether slot holding is enabled. When omitted at creation, falls back to the service's hold policy.                        |
-| `hold_duration` | string  | The hold duration as an ISO 8601 duration string (e.g., `PT10M` for 10 minutes). Falls back to the service's hold policy.  |
-| `hold_until`    | string  | Read-only. The UTC datetime when the current hold expires. Set automatically when a slot is selected with holding enabled. |
+| Field                          | Type    | Description                                                                                                                |
+| ------------------------------ | ------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `booking_policy.hold.enabled`  | boolean | Whether slot holding is enabled. When omitted at creation, falls back to the service's hold policy.                        |
+| `booking_policy.hold.duration` | string  | The hold duration as an ISO 8601 duration string (e.g., `PT10M` for 10 minutes). Falls back to the service's hold policy.  |
+| `hold_until`                   | string  | Read-only. The UTC datetime when the current hold expires. Set automatically when a slot is selected with holding enabled. |
 
-When a service is set on the booking intent, the service's default hold policy (the "Hold selected slots" setting under Booking Policy) is automatically applied unless `hold_enabled` or `hold_duration` is explicitly provided when creating or updating the booking intent.
+When a service is set on the booking intent, the service's default hold policy (the "Hold selected slots" setting under Booking Policy) is automatically applied unless `booking_policy.hold` is explicitly provided when creating or updating the booking intent.
 
 When a hold expires, the slot becomes available to other callers again. The booking intent itself remains in `slot_selected` status — an expired hold does not abandon the intent.
 
@@ -93,7 +93,7 @@ A common pattern is to use the authenticated API on your server to create a book
 | Create / update / complete           |        Yes        |    Yes     |
 | Abandon                              |        Yes        |    Yes     |
 | List / get                           |        Yes        |  Get only  |
-| Set `hold_enabled` / `hold_duration` |        Yes        |     No     |
+| Set `booking_policy`                 |        Yes        |     No     |
 | Set `locked_fields`                  |        Yes        |     No     |
 | Set `metadata`                       |        Yes        |     No     |
 | Set `slot_prevalidated`              |        Yes        |     No     |
