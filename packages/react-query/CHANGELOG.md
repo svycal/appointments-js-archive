@@ -1,5 +1,16 @@
 # @savvycal/appointments-react-query
 
+## 1.2.0
+
+### Minor Changes
+
+- [`475a48e`](https://github.com/svycal/appointments/commit/475a48eca93f51f6b99f6a247ab1710cf17be547) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed: BookingIntent hold fields restructured** -- The `hold_duration` and `hold_enabled` fields on BookingIntent, CreateBookingIntentRequest, and UpdateBookingIntentRequest have been replaced with a nested `booking_policy` object. Hold settings are now at `booking_policy.hold.duration` and `booking_policy.hold.enabled`. See [BookingIntent](https://developers.savvycal.app/api/schemas/bookingintent).
+
+### Patch Changes
+
+- Updated dependencies [[`475a48e`](https://github.com/svycal/appointments/commit/475a48eca93f51f6b99f6a247ab1710cf17be547), [`475a48e`](https://github.com/svycal/appointments/commit/475a48eca93f51f6b99f6a247ab1710cf17be547)]:
+  - @savvycal/appointments-core@1.2.0
+
 ## 1.1.1
 
 ### Patch Changes
