@@ -1,6 +1,6 @@
 {
   "name": "@savvycal/appointments-react-query",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "type": "module",
   "description": "A tiny wrapper around @tanstack/react-query for the SavvyCal Appointments API",
   "main": "./dist/index.cjs",
