@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 1.4.0
+
+### Minor Changes
+
+- [`2c26bf1`](https://github.com/svycal/appointments/commit/2c26bf10bfb0805ca1cb27260c4b2e73288e0c20) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- The `locked_fields` enum values `start_at`, `end_at`, and `time_zone` have been consolidated into a single `slot` value on [BookingIntent](https://developers.savvycal.app/api/schemas/bookingintent), [PublicBookingIntent](https://developers.savvycal.app/api/schemas/publicbookingintent), and related request schemas.
+
 ## 1.3.0
 
 ### Minor Changes
