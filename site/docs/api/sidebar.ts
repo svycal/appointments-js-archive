@@ -990,6 +990,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/bookingintentrequirements",
+          label: "BookingIntentRequirements",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/serviceprovider",
           label: "ServiceProvider",
           className: "schema",
@@ -1530,6 +1536,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/submissionrequirement",
+          label: "SubmissionRequirement",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/publicbookingintentresponse",
           label: "PublicBookingIntentResponse",
           className: "schema",
@@ -1658,6 +1670,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/jsonerrorresponse",
           label: "JsonErrorResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookingintentworkflow",
+          label: "BookingIntentWorkflow",
           className: "schema",
         },
         {

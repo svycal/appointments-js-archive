@@ -2203,6 +2203,20 @@ export interface components {
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
+         *         "requirements": {
+         *           "booking": {
+         *             "complete": true
+         *           },
+         *           "info": {
+         *             "complete": false
+         *           },
+         *           "submissions": [
+         *             {
+         *               "complete": false,
+         *               "form_id": "frm_abc123def456"
+         *             }
+         *           ]
+         *         },
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -2295,7 +2309,19 @@ export interface components {
          *         },
          *         "status": "slot_selected",
          *         "submissions": [],
-         *         "updated_at": "2026-02-22T10:00:00Z"
+         *         "updated_at": "2026-02-22T10:00:00Z",
+         *         "workflow": {
+         *           "available_steps": [
+         *             "booking",
+         *             "info",
+         *             "form:frm_abc123def456"
+         *           ],
+         *           "can_change_slot": true,
+         *           "can_complete": false,
+         *           "defunct_reason": null,
+         *           "is_defunct": false,
+         *           "resume_step": "info"
+         *         }
          *       },
          *       "type": "booking_intent.completed"
          *     }
@@ -2428,8 +2454,8 @@ export interface components {
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             end_at?: string | null;
-            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
-            locked_fields?: string[] | null;
+            /** @description Fields to lock from public API updates. */
+            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[] | null;
             /** @description Custom metadata key-value pairs. */
             metadata?: {
                 [key: string]: unknown;
@@ -2509,6 +2535,20 @@ export interface components {
          *           },
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "requirements": {
+         *           "booking": {
+         *             "complete": true
+         *           },
+         *           "info": {
+         *             "complete": false
+         *           },
+         *           "submissions": [
+         *             {
+         *               "complete": false,
+         *               "form_id": "frm_abc123def456"
+         *             }
+         *           ]
          *         },
          *         "service": {
          *           "appointment_type": "in_person",
@@ -2602,7 +2642,19 @@ export interface components {
          *         },
          *         "status": "slot_selected",
          *         "submissions": [],
-         *         "updated_at": "2026-02-22T10:00:00Z"
+         *         "updated_at": "2026-02-22T10:00:00Z",
+         *         "workflow": {
+         *           "available_steps": [
+         *             "booking",
+         *             "info",
+         *             "form:frm_abc123def456"
+         *           ],
+         *           "can_change_slot": true,
+         *           "can_complete": false,
+         *           "defunct_reason": null,
+         *           "is_defunct": false,
+         *           "resume_step": "info"
+         *         }
          *       },
          *       "type": "booking_intent.abandoned"
          *     }
@@ -2784,6 +2836,41 @@ export interface components {
              * @enum {string}
              */
             type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
+        };
+        /**
+         * BookingIntentRequirements
+         * @description Per-section completeness status for a booking intent. Provides boolean
+         *     signals for whether each section of the booking flow has enough data
+         *     to proceed, enabling the frontend to make navigation decisions without
+         *     parsing error pointers.
+         * @example {
+         *       "booking": {
+         *         "complete": true
+         *       },
+         *       "info": {
+         *         "complete": false
+         *       },
+         *       "submissions": [
+         *         {
+         *           "complete": false,
+         *           "form_id": "frm_abc123def456"
+         *         }
+         *       ]
+         *     }
+         */
+        BookingIntentRequirements: {
+            /** @description Booking step completeness status. */
+            booking: {
+                /** @description Whether the booking step is complete (provider and slot fields are present). */
+                complete: boolean;
+            };
+            /** @description Info step completeness status. */
+            info: {
+                /** @description Whether the info step is complete (required client fields are present). */
+                complete: boolean;
+            };
+            /** @description Per-form completeness status, in the same order as the service's forms. */
+            submissions: components["schemas"]["SubmissionRequirement"][];
         };
         /**
          * ServiceProvider
@@ -3023,6 +3110,20 @@ export interface components {
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
+         *         "requirements": {
+         *           "booking": {
+         *             "complete": true
+         *           },
+         *           "info": {
+         *             "complete": false
+         *           },
+         *           "submissions": [
+         *             {
+         *               "complete": false,
+         *               "form_id": "frm_abc123def456"
+         *             }
+         *           ]
+         *         },
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -3115,7 +3216,19 @@ export interface components {
          *         },
          *         "status": "slot_selected",
          *         "submissions": [],
-         *         "updated_at": "2026-02-22T10:00:00Z"
+         *         "updated_at": "2026-02-22T10:00:00Z",
+         *         "workflow": {
+         *           "available_steps": [
+         *             "booking",
+         *             "info",
+         *             "form:frm_abc123def456"
+         *           ],
+         *           "can_change_slot": true,
+         *           "can_complete": false,
+         *           "defunct_reason": null,
+         *           "is_defunct": false,
+         *           "resume_step": "info"
+         *         }
          *       },
          *       "type": "booking_intent.updated"
          *     }
@@ -3446,6 +3559,20 @@ export interface components {
          *             "object": "provider",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
+         *           "requirements": {
+         *             "booking": {
+         *               "complete": true
+         *             },
+         *             "info": {
+         *               "complete": false
+         *             },
+         *             "submissions": [
+         *               {
+         *                 "complete": false,
+         *                 "form_id": "frm_abc123def456"
+         *               }
+         *             ]
+         *           },
          *           "service": {
          *             "appointment_type": "in_person",
          *             "booking_policy": {
@@ -3538,7 +3665,19 @@ export interface components {
          *           },
          *           "status": "slot_selected",
          *           "submissions": [],
-         *           "updated_at": "2026-02-22T10:00:00Z"
+         *           "updated_at": "2026-02-22T10:00:00Z",
+         *           "workflow": {
+         *             "available_steps": [
+         *               "booking",
+         *               "info",
+         *               "form:frm_abc123def456"
+         *             ],
+         *             "can_change_slot": true,
+         *             "can_complete": false,
+         *             "defunct_reason": null,
+         *             "is_defunct": false,
+         *             "resume_step": "info"
+         *           }
          *         }
          *       ],
          *       "meta": {
@@ -3786,6 +3925,20 @@ export interface components {
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
+         *         "requirements": {
+         *           "booking": {
+         *             "complete": true
+         *           },
+         *           "info": {
+         *             "complete": false
+         *           },
+         *           "submissions": [
+         *             {
+         *               "complete": false,
+         *               "form_id": "frm_abc123def456"
+         *             }
+         *           ]
+         *         },
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -3878,7 +4031,19 @@ export interface components {
          *         },
          *         "status": "slot_selected",
          *         "submissions": [],
-         *         "updated_at": "2026-02-22T10:00:00Z"
+         *         "updated_at": "2026-02-22T10:00:00Z",
+         *         "workflow": {
+         *           "available_steps": [
+         *             "booking",
+         *             "info",
+         *             "form:frm_abc123def456"
+         *           ],
+         *           "can_change_slot": true,
+         *           "can_complete": false,
+         *           "defunct_reason": null,
+         *           "is_defunct": false,
+         *           "resume_step": "info"
+         *         }
          *       },
          *       "type": "booking_intent.created"
          *     }
@@ -3927,7 +4092,7 @@ export interface components {
          * IntentSubmissionInput
          * @description A form submission entry containing a form ID and response data.
          * @example {
-         *       "form_id": "frm_abc123def456abc123def456",
+         *       "form_id": "frm_abc123def456",
          *       "responses": {
          *         "color": [
          *           "opt_abc"
@@ -5272,8 +5437,8 @@ export interface components {
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
              */
             end_at?: string | null;
-            /** @description Fields to lock from public API updates. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. Replaces existing locked_fields entirely. */
-            locked_fields?: string[] | null;
+            /** @description Fields to lock from public API updates. Replaces existing locked_fields entirely. */
+            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[] | null;
             /** @description Custom metadata key-value pairs. Replaces existing metadata entirely. */
             metadata?: {
                 [key: string]: unknown;
@@ -7201,6 +7366,20 @@ export interface components {
          *       "id": "bi_abc123def456abc123def456",
          *       "locked_fields": [],
          *       "object": "public_booking_intent",
+         *       "requirements": {
+         *         "booking": {
+         *           "complete": true
+         *         },
+         *         "info": {
+         *           "complete": false
+         *         },
+         *         "submissions": [
+         *           {
+         *             "complete": false,
+         *             "form_id": "frm_abc123def456"
+         *           }
+         *         ]
+         *       },
          *       "start_at": {
          *         "local": "2026-02-23T10:00:00-05:00",
          *         "object": "zoned_date_time",
@@ -7208,7 +7387,19 @@ export interface components {
          *         "unix_ts": 1771945200,
          *         "utc": "2026-02-23T15:00:00Z"
          *       },
-         *       "status": "slot_selected"
+         *       "status": "slot_selected",
+         *       "workflow": {
+         *         "available_steps": [
+         *           "booking",
+         *           "info",
+         *           "form:frm_abc123def456"
+         *         ],
+         *         "can_change_slot": true,
+         *         "can_complete": false,
+         *         "defunct_reason": null,
+         *         "is_defunct": false,
+         *         "resume_step": "info"
+         *       }
          *     }
          */
         PublicBookingIntent: {
@@ -7225,20 +7416,22 @@ export interface components {
             hold_until?: string | null;
             /** @description The booking intent ID */
             id: string;
-            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
-            locked_fields?: string[];
+            /** @description Fields that are locked and cannot be updated via the public API. */
+            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[];
             /**
              * @description The object type
              * @enum {string}
              */
             object: "public_booking_intent";
+            requirements?: components["schemas"]["BookingIntentRequirements"];
             /** @description The start time of the selected slot */
             start_at?: components["schemas"]["ZonedDateTime"] | null;
             /**
-             * @description The current status of the booking intent
+             * @description The current status of the booking intent. Automatically transitions from pending to slot_selected when provider_id, start_at, end_at, and time_zone are all present (on create or update).
              * @enum {string}
              */
             status: "pending" | "slot_selected" | "completed" | "abandoned";
+            workflow?: components["schemas"]["BookingIntentWorkflow"];
         };
         /**
          * ServiceForm
@@ -7721,6 +7914,20 @@ export interface components {
             type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
         };
         /**
+         * SubmissionRequirement
+         * @description Completeness status for a single form submission.
+         * @example {
+         *       "complete": false,
+         *       "form_id": "frm_abc123def456"
+         *     }
+         */
+        SubmissionRequirement: {
+            /** @description Whether the submission exists and all required fields have been answered. */
+            complete: boolean;
+            /** @description The form's object ID. */
+            form_id: string;
+        };
+        /**
          * PublicBookingIntentResponse
          * @description Response schema for a single booking intent via a public interface.
          * @example {
@@ -7738,6 +7945,20 @@ export interface components {
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [],
          *         "object": "public_booking_intent",
+         *         "requirements": {
+         *           "booking": {
+         *             "complete": true
+         *           },
+         *           "info": {
+         *             "complete": false
+         *           },
+         *           "submissions": [
+         *             {
+         *               "complete": false,
+         *               "form_id": "frm_abc123def456"
+         *             }
+         *           ]
+         *         },
          *         "start_at": {
          *           "local": "2026-02-23T10:00:00-05:00",
          *           "object": "zoned_date_time",
@@ -7745,7 +7966,19 @@ export interface components {
          *           "unix_ts": 1771945200,
          *           "utc": "2026-02-23T15:00:00Z"
          *         },
-         *         "status": "slot_selected"
+         *         "status": "slot_selected",
+         *         "workflow": {
+         *           "available_steps": [
+         *             "booking",
+         *             "info",
+         *             "form:frm_abc123def456"
+         *           ],
+         *           "can_change_slot": true,
+         *           "can_complete": false,
+         *           "defunct_reason": null,
+         *           "is_defunct": false,
+         *           "resume_step": "info"
+         *         }
          *       }
          *     }
          */
@@ -8393,6 +8626,20 @@ export interface components {
          *           "object": "provider",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
+         *         "requirements": {
+         *           "booking": {
+         *             "complete": true
+         *           },
+         *           "info": {
+         *             "complete": false
+         *           },
+         *           "submissions": [
+         *             {
+         *               "complete": false,
+         *               "form_id": "frm_abc123def456"
+         *             }
+         *           ]
+         *         },
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -8485,7 +8732,19 @@ export interface components {
          *         },
          *         "status": "slot_selected",
          *         "submissions": [],
-         *         "updated_at": "2026-02-22T10:00:00Z"
+         *         "updated_at": "2026-02-22T10:00:00Z",
+         *         "workflow": {
+         *           "available_steps": [
+         *             "booking",
+         *             "info",
+         *             "form:frm_abc123def456"
+         *           ],
+         *           "can_change_slot": true,
+         *           "can_complete": false,
+         *           "defunct_reason": null,
+         *           "is_defunct": false,
+         *           "resume_step": "info"
+         *         }
          *       }
          *     }
          */
@@ -9386,6 +9645,41 @@ export interface components {
             };
         };
         /**
+         * BookingIntentWorkflow
+         * @description Server-computed workflow state for a booking intent. Provides step routing,
+         *     completability, and defunct state so the frontend can render the correct
+         *     booking flow without inferring these from raw fields.
+         * @example {
+         *       "available_steps": [
+         *         "booking",
+         *         "info",
+         *         "form:frm_abc123def456"
+         *       ],
+         *       "can_change_slot": true,
+         *       "can_complete": false,
+         *       "defunct_reason": null,
+         *       "is_defunct": false,
+         *       "resume_step": "info"
+         *     }
+         */
+        BookingIntentWorkflow: {
+            /** @description Ordered list of steps the user can visit. Computed from service forms and locked_fields. */
+            available_steps: string[];
+            /** @description Whether slot fields (start_at, end_at, time_zone) are unlocked and can be modified. */
+            can_change_slot: boolean;
+            /** @description Whether the intent has enough valid data to submit right now. When true, calling the complete endpoint will succeed regardless of whether the current status is pending or slot_selected. */
+            can_complete: boolean;
+            /**
+             * @description Why the intent is defunct. Null when not defunct.
+             * @enum {string|null}
+             */
+            defunct_reason?: "abandoned" | "no_available_steps" | "status_invalid" | null;
+            /** @description Whether the intent is in an unrecoverable state and should render a terminal UI. */
+            is_defunct: boolean;
+            /** @description The step the UI should show on load or resume. One of: booking, info, form:<form_id>, confirmed, defunct. */
+            resume_step: string;
+        };
+        /**
          * ProviderDeactivatedEventData
          * @description This is an object representing data for the provider deactivated event.
          * @example {
@@ -9825,6 +10119,20 @@ export interface components {
          *         "object": "provider",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
+         *       "requirements": {
+         *         "booking": {
+         *           "complete": true
+         *         },
+         *         "info": {
+         *           "complete": false
+         *         },
+         *         "submissions": [
+         *           {
+         *             "complete": false,
+         *             "form_id": "frm_abc123def456"
+         *           }
+         *         ]
+         *       },
          *       "service": {
          *         "appointment_type": "in_person",
          *         "booking_policy": {
@@ -9917,7 +10225,19 @@ export interface components {
          *       },
          *       "status": "slot_selected",
          *       "submissions": [],
-         *       "updated_at": "2026-02-22T10:00:00Z"
+         *       "updated_at": "2026-02-22T10:00:00Z",
+         *       "workflow": {
+         *         "available_steps": [
+         *           "booking",
+         *           "info",
+         *           "form:frm_abc123def456"
+         *         ],
+         *         "can_change_slot": true,
+         *         "can_complete": false,
+         *         "defunct_reason": null,
+         *         "is_defunct": false,
+         *         "resume_step": "info"
+         *       }
          *     }
          */
         BookingIntent: {
@@ -9962,8 +10282,8 @@ export interface components {
             hold_until?: string | null;
             /** @description The booking intent ID */
             id: string;
-            /** @description Fields that are locked and cannot be updated via the public API. Possible values: service_id, provider_id, start_at, end_at, time_zone, client_data, submissions. */
-            locked_fields?: string[];
+            /** @description Fields that are locked and cannot be updated via the public API. */
+            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[];
             /** @description Custom metadata key-value pairs */
             metadata?: {
                 [key: string]: unknown;
@@ -9975,6 +10295,8 @@ export interface components {
             object: "booking_intent";
             /** @description The assigned provider */
             provider?: components["schemas"]["Provider"] | null;
+            /** @description Per-section completeness status. Present on single-intent responses, null on list responses. */
+            requirements?: components["schemas"]["BookingIntentRequirements"] | null;
             /** @description The selected service */
             service?: components["schemas"]["Service"] | null;
             /** @description Whether the slot has been prevalidated. When true, public completion skips slot validation. */
@@ -9982,7 +10304,7 @@ export interface components {
             /** @description The start time of the selected slot */
             start_at?: components["schemas"]["ZonedDateTime"] | null;
             /**
-             * @description The current status of the booking intent
+             * @description The current status of the booking intent. Automatically transitions from pending to slot_selected when provider_id, start_at, end_at, and time_zone are all present (on create or update).
              * @enum {string}
              */
             status: "pending" | "slot_selected" | "completed" | "abandoned";
@@ -9993,6 +10315,8 @@ export interface components {
              * @description When the intent was last updated
              */
             updated_at: string;
+            /** @description Server-computed workflow state. Present on single-intent responses, null on list responses. */
+            workflow?: components["schemas"]["BookingIntentWorkflow"] | null;
         };
         /**
          * CreateServiceRequest

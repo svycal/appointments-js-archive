@@ -49,10 +49,12 @@ export type BookingIntentCompletedEventData =
   Schemas["BookingIntentCompletedEventData"];
 export type BookingIntentCreatedEventData =
   Schemas["BookingIntentCreatedEventData"];
+export type BookingIntentRequirements = Schemas["BookingIntentRequirements"];
 export type BookingIntentResponse = Schemas["BookingIntentResponse"];
 export type BookingIntentsResponse = Schemas["BookingIntentsResponse"];
 export type BookingIntentUpdatedEventData =
   Schemas["BookingIntentUpdatedEventData"];
+export type BookingIntentWorkflow = Schemas["BookingIntentWorkflow"];
 export type BookingPolicy = Schemas["BookingPolicy"];
 export type CancelAppointmentRequest = Schemas["CancelAppointmentRequest"];
 export type CancellationEvent = Schemas["CancellationEvent"];
@@ -196,6 +198,7 @@ export type ServiceUpdatedEventData = Schemas["ServiceUpdatedEventData"];
 export type Slot = Schemas["Slot"];
 export type SlotRule = Schemas["SlotRule"];
 export type SortServiceFormsRequest = Schemas["SortServiceFormsRequest"];
+export type SubmissionRequirement = Schemas["SubmissionRequirement"];
 export type UnauthorizedResponse = Schemas["UnauthorizedResponse"];
 export type UpdateAccountRequest = Schemas["UpdateAccountRequest"];
 export type UpdateAccountUserRequest = Schemas["UpdateAccountUserRequest"];

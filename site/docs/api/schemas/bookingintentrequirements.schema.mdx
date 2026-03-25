@@ -1,0 +1,36 @@
+---
+id: bookingintentrequirements
+title: "BookingIntentRequirements"
+description: "Per-section completeness status for a booking intent. Provides boolean"
+sidebar_label: "BookingIntentRequirements"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"booking":{"complete":true},"info":{"complete":false},"submissions":[{"complete":false,"form_id":"frm_abc123def456"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"BookingIntentRequirements"}
+>
+</Heading>
+
+
+
+Per-section completeness status for a booking intent. Provides boolean
+signals for whether each section of the booking flow has enough data
+to proceed, enabling the frontend to make navigation decisions without
+parsing error pointers.
+
+
+<Schema
+  {...require("./bookingintentrequirements.Schema.json")}
+>
+  
+</Schema>
+            

@@ -1,0 +1,35 @@
+---
+id: bookingintentworkflow
+title: "BookingIntentWorkflow"
+description: "Server-computed workflow state for a booking intent. Provides step routing,"
+sidebar_label: "BookingIntentWorkflow"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"available_steps":["booking","info","form:frm_abc123def456"],"can_change_slot":true,"can_complete":false,"defunct_reason":null,"is_defunct":false,"resume_step":"info"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"BookingIntentWorkflow"}
+>
+</Heading>
+
+
+
+Server-computed workflow state for a booking intent. Provides step routing,
+completability, and defunct state so the frontend can render the correct
+booking flow without inferring these from raw fields.
+
+
+<Schema
+  {...require("./bookingintentworkflow.Schema.json")}
+>
+  
+</Schema>
+            
