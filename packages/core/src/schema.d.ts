@@ -2183,9 +2183,7 @@ export interface components {
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
          *           "provider_id",
-         *           "start_at",
-         *           "end_at",
-         *           "time_zone"
+         *           "slot"
          *         ],
          *         "metadata": {
          *           "source": "web"
@@ -2455,7 +2453,7 @@ export interface components {
              */
             end_at?: string | null;
             /** @description Fields to lock from public API updates. */
-            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[] | null;
+            locked_fields?: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[] | null;
             /** @description Custom metadata key-value pairs. */
             metadata?: {
                 [key: string]: unknown;
@@ -2516,9 +2514,7 @@ export interface components {
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
          *           "provider_id",
-         *           "start_at",
-         *           "end_at",
-         *           "time_zone"
+         *           "slot"
          *         ],
          *         "metadata": {
          *           "source": "web"
@@ -3090,9 +3086,7 @@ export interface components {
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
          *           "provider_id",
-         *           "start_at",
-         *           "end_at",
-         *           "time_zone"
+         *           "slot"
          *         ],
          *         "metadata": {
          *           "source": "web"
@@ -3539,9 +3533,7 @@ export interface components {
          *           "id": "bi_abc123def456abc123def456",
          *           "locked_fields": [
          *             "provider_id",
-         *             "start_at",
-         *             "end_at",
-         *             "time_zone"
+         *             "slot"
          *           ],
          *           "metadata": {
          *             "source": "web"
@@ -3905,9 +3897,7 @@ export interface components {
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
          *           "provider_id",
-         *           "start_at",
-         *           "end_at",
-         *           "time_zone"
+         *           "slot"
          *         ],
          *         "metadata": {
          *           "source": "web"
@@ -5438,7 +5428,7 @@ export interface components {
              */
             end_at?: string | null;
             /** @description Fields to lock from public API updates. Replaces existing locked_fields entirely. */
-            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[] | null;
+            locked_fields?: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[] | null;
             /** @description Custom metadata key-value pairs. Replaces existing metadata entirely. */
             metadata?: {
                 [key: string]: unknown;
@@ -7417,7 +7407,7 @@ export interface components {
             /** @description The booking intent ID */
             id: string;
             /** @description Fields that are locked and cannot be updated via the public API. */
-            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[];
+            locked_fields?: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[];
             /**
              * @description The object type
              * @enum {string}
@@ -8606,9 +8596,7 @@ export interface components {
          *         "id": "bi_abc123def456abc123def456",
          *         "locked_fields": [
          *           "provider_id",
-         *           "start_at",
-         *           "end_at",
-         *           "time_zone"
+         *           "slot"
          *         ],
          *         "metadata": {
          *           "source": "web"
@@ -10099,9 +10087,7 @@ export interface components {
          *       "id": "bi_abc123def456abc123def456",
          *       "locked_fields": [
          *         "provider_id",
-         *         "start_at",
-         *         "end_at",
-         *         "time_zone"
+         *         "slot"
          *       ],
          *       "metadata": {
          *         "source": "web"
@@ -10283,7 +10269,7 @@ export interface components {
             /** @description The booking intent ID */
             id: string;
             /** @description Fields that are locked and cannot be updated via the public API. */
-            locked_fields?: ("service_id" | "provider_id" | "start_at" | "end_at" | "time_zone" | "client_data" | "submissions")[];
+            locked_fields?: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[];
             /** @description Custom metadata key-value pairs */
             metadata?: {
                 [key: string]: unknown;

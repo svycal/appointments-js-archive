@@ -10,6 +10,7 @@ A log of notable changes to the SavvyCal Appointments API.
 
 - **New:** -- Booking intents now include `requirements` and `workflow` fields. Requirements provides per-section completeness status for booking, info, and form submission steps. Workflow provides server-computed step routing, completability, and defunct state. See [BookingIntentRequirements](/api/schemas/bookingintentrequirements), [BookingIntentWorkflow](/api/schemas/bookingintentworkflow), and [SubmissionRequirement](/api/schemas/submissionrequirement).
 - **Changed:** -- The `locked_fields` field on [BookingIntent](/api/schemas/bookingintent), [PublicBookingIntent](/api/schemas/publicbookingintent), and related request schemas is now a typed enum array instead of a freeform string array.
+- **Changed:** -- The `locked_fields` enum values `start_at`, `end_at`, and `time_zone` have been consolidated into a single `slot` value on [BookingIntent](/api/schemas/bookingintent), [PublicBookingIntent](/api/schemas/publicbookingintent), and related request schemas.
 
 ## March 23, 2026
 
