@@ -62,14 +62,79 @@ After both updates, `client_data` contains all three fields. When the booking in
 
 The available `client_data` fields are: `first_name`, `last_name`, `email`, `phone`, `locale`, `time_zone`, and `reference_id`.
 
+## Form submissions
+
+The `submissions` field lets you accumulate form responses during the booking flow. Each entry contains a `form_id` (the form's object ID) and a `responses` map of field answers. When a service has forms attached, these submissions are collected progressively and validated at completion time.
+
+Each update **merges** by `form_id` — providing a submission for an existing form replaces that entry, while new form IDs are appended:
+
+```bash
+# Step 1: Submit responses for the first form
+curl -X PATCH /v1/booking_intents/:id \
+  -d '{
+    "submissions": [
+      {"form_id": "frm_abc123def456", "responses": {"field_1": "Answer A"}}
+    ]
+  }'
+
+# Step 2: Submit responses for a second form
+curl -X PATCH /v1/booking_intents/:id \
+  -d '{
+    "submissions": [
+      {"form_id": "frm_def456abc123", "responses": {"field_2": "Answer B"}}
+    ]
+  }'
+```
+
+After both updates, the intent's `submissions` array contains entries for both forms.
+
+## Workflow
+
+The `workflow` property is a server-computed object that provides step routing and completability signals for the booking flow. It appears on single-intent responses (get, create, update, complete) but is `null` on list responses.
+
+Rather than inferring flow state from raw fields like `status`, `locked_fields`, and `client_data`, the frontend can use `workflow` to determine which step to show, which steps are available, and whether the intent can be completed.
+
+| Field             | Type           | Description                                                                                                                    |
+| ----------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| `resume_step`     | string         | The step the UI should show on load or resume. One of: `booking`, `info`, `form:<form_id>`, `confirmed`, `defunct`.            |
+| `available_steps` | string[]       | Ordered list of steps the user can visit. Derived from the service's forms and `locked_fields`.                                |
+| `can_complete`    | boolean        | Whether the intent has enough valid data to complete right now.                                                                |
+| `can_change_slot` | boolean        | Whether slot fields (`start_at`, `end_at`, `time_zone`) are unlocked and can be modified.                                      |
+| `is_defunct`      | boolean        | Whether the intent is in an unrecoverable state and should render a terminal UI.                                               |
+| `defunct_reason`  | string \| null | Why the intent is defunct. One of: `abandoned`, `no_available_steps`, `slot_expired`, `status_invalid`. Null when not defunct. |
+
+When `is_defunct` is `true`, `available_steps` is cleared to an empty array and `resume_step` is set to `defunct`.
+
+Locked fields affect which steps appear in `available_steps`:
+
+- Locking `slot` removes the `booking` step.
+- Locking `client_data` removes the `info` step.
+- Locking `submissions` removes all `form:<form_id>` steps.
+
+## Requirements
+
+The `requirements` property provides per-section completeness status, enabling the frontend to show progress indicators or prevent navigation to the complete step without parsing error details. Like `workflow`, it appears on single-intent responses but is `null` on list responses.
+
+| Field         | Type   | Description                                                                                                              |
+| ------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| `booking`     | object | `{ complete: boolean }` — whether the booking step is complete (provider and slot are set).                              |
+| `info`        | object | `{ complete: boolean }` — whether the info step is complete (required client fields are present, or a client is linked). |
+| `submissions` | array  | Per-form completeness: `[{ form_id: string, complete: boolean }]`, in the same order as the service's forms.             |
+
+A booking intent is ready to complete when all applicable requirements are satisfied, which is also reflected by `workflow.can_complete`.
+
 ## Completing a booking intent
 
 To complete a booking intent, call the [Complete booking intent](/api/complete-booking-intent) endpoint. Completion requires:
 
-- The status must be `slot_selected` (a time slot must be set).
+- A time slot must be set (`start_at` and `end_at`).
 - A service must be assigned.
+- All required client data must be provided (or a client must be linked).
+- All required form submissions must be present (if the service has forms).
 
-The complete endpoint accepts the same update fields as the update endpoint (`service_id`, `provider_id`, `start_at`, `end_at`, `client_data`, etc.). These fields are applied atomically before the intent is completed, so you can finalize data and complete in a single request.
+You can check `workflow.can_complete` to determine whether the intent is ready to complete, and inspect `requirements` to see which sections still need data.
+
+The complete endpoint accepts the same update fields as the update endpoint (`service_id`, `provider_id`, `start_at`, `end_at`, `client_data`, `submissions`, etc.). These fields are applied atomically before the intent is completed, so you can finalize data and complete in a single request.
 
 On success, the booking intent transitions to `completed` status and the resulting [`Appointment`](/api/schemas/appointment) is available in the `appointment` field of the response.
 
@@ -88,17 +153,18 @@ Booking intents are available through two API surfaces:
 
 A common pattern is to use the authenticated API on your server to create a booking intent with pre-configured settings and locked fields, then hand the intent ID to the client to complete the flow via the public API.
 
-| Capability                           | Authenticated API | Public API |
-| ------------------------------------ | :---------------: | :--------: |
-| Create / update / complete           |        Yes        |    Yes     |
-| Abandon                              |        Yes        |    Yes     |
-| List / get                           |        Yes        |  Get only  |
-| Set `booking_policy`                 |        Yes        |     No     |
-| Set `locked_fields`                  |        Yes        |     No     |
-| Set `metadata`                       |        Yes        |     No     |
-| Set `slot_prevalidated`              |        Yes        |     No     |
-| Link `client_id`                     |        Yes        |     No     |
-| Returns full object                  |        Yes        |     No     |
+| Capability                 | Authenticated API | Public API |
+| -------------------------- | :---------------: | :--------: |
+| Create / update / complete |        Yes        |    Yes     |
+| Abandon                    |        Yes        |    Yes     |
+| List / get                 |        Yes        |  Get only  |
+| Set `submissions`          |        Yes        |    Yes     |
+| Set `booking_policy`       |        Yes        |     No     |
+| Set `locked_fields`        |        Yes        |     No     |
+| Set `metadata`             |        Yes        |     No     |
+| Set `slot_prevalidated`    |        Yes        |     No     |
+| Link `client_id`           |        Yes        |     No     |
+| Returns full object        |        Yes        |     No     |
 
 ## Locked fields
 
@@ -114,7 +180,7 @@ curl -X POST /v1/booking_intents \
   }'
 ```
 
-The lockable fields are: `service_id`, `provider_id`, `start_at`, `end_at`, `time_zone`, and `client_data`.
+The lockable fields are: `service_id`, `provider_id`, `slot`, `client_data`, and `submissions`. The `slot` value locks all time-related fields (`start_at`, `end_at`, `time_zone`) as a group.
 
 When updating via the authenticated API, `locked_fields` replaces the existing set entirely.
 
@@ -139,15 +205,18 @@ See the [Webhooks](/webhooks) guide for details on registering webhooks and hand
 
 ## Key properties
 
-| Property        | Type                                        | Description                                                                  |
-| --------------- | ------------------------------------------- | ---------------------------------------------------------------------------- |
-| `id`            | string                                      | The unique identifier (e.g., `bi_d025a96ac0c6`).                             |
-| `status`        | enum                                        | The current status: `pending`, `slot_selected`, `completed`, or `abandoned`. |
-| `start_at`      | [ZonedDateTime](/api/schemas/zoneddatetime) | The start time of the selected slot.                                         |
-| `end_at`        | [ZonedDateTime](/api/schemas/zoneddatetime) | The end time of the selected slot.                                           |
-| `hold_until`    | string                                      | When the current slot hold expires (UTC).                                    |
-| `client_data`   | object                                      | Progressive client data collected during the booking flow.                   |
-| `locked_fields` | array                                       | Fields locked from update via the public API.                                |
-| `appointment`   | [Appointment](/api/schemas/appointment)     | The resulting appointment (set when completed).                              |
+| Property        | Type                                                                | Description                                                                                     |
+| --------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `id`            | string                                                              | The unique identifier (e.g., `bi_d025a96ac0c6`).                                                |
+| `status`        | enum                                                                | The current status: `pending`, `slot_selected`, `completed`, or `abandoned`.                    |
+| `start_at`      | [ZonedDateTime](/api/schemas/zoneddatetime)                         | The start time of the selected slot.                                                            |
+| `end_at`        | [ZonedDateTime](/api/schemas/zoneddatetime)                         | The end time of the selected slot.                                                              |
+| `hold_until`    | string                                                              | When the current slot hold expires (UTC).                                                       |
+| `client_data`   | object                                                              | Progressive client data collected during the booking flow.                                      |
+| `submissions`   | array                                                               | Form responses accumulated during the booking flow.                                             |
+| `workflow`      | [BookingIntentWorkflow](/api/schemas/bookingintentworkflow)         | Server-computed step routing and completability state. Present on single-intent responses only. |
+| `requirements`  | [BookingIntentRequirements](/api/schemas/bookingintentrequirements) | Per-section completeness status. Present on single-intent responses only.                       |
+| `locked_fields` | array                                                               | Fields locked from update via the public API.                                                   |
+| `appointment`   | [Appointment](/api/schemas/appointment)                             | The resulting appointment (set when completed).                                                 |
 
 See the [BookingIntent](/api/schemas/bookingintent) schema for complete details.
