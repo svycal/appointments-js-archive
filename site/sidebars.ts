@@ -23,6 +23,7 @@ const sidebars: SidebarsConfig = {
   docSidebar: [
     "index",
     "authentication",
+    "rate-limiting",
     {
       collapsed: false,
       items: [

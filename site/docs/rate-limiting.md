@@ -1,0 +1,38 @@
+---
+---
+
+# Rate Limiting
+
+The SavvyCal API enforces rate limits to protect against abuse and ensure fair usage across all consumers.
+
+## Limits
+
+| API                         | Limit                   | Key                      |
+| --------------------------- | ----------------------- | ------------------------ |
+| Authenticated API (`/v1/*`) | 300 requests per minute | Per bearer token or user |
+| Public API (`/v1/public/*`) | 120 requests per minute | Per IP address           |
+
+## Rate limit responses
+
+When you exceed the rate limit, the API returns a `429 Too Many Requests` response with a `retry-after` header indicating how many seconds to wait before retrying.
+
+```http
+HTTP/1.1 429 Too Many Requests
+retry-after: 30
+content-type: application/json
+
+{
+  "errors": [
+    {
+      "detail": "Rate limit exceeded. Please try again later.",
+      "status": "429"
+    }
+  ]
+}
+```
+
+## Best practices
+
+- **Check the `retry-after` header** when you receive a 429 response and wait the specified number of seconds before retrying.
+- **Use exponential backoff** for retry logic to avoid immediately hitting the limit again.
+- **Cache responses** where possible to reduce the number of requests you need to make.
