@@ -34,6 +34,53 @@ content-type: application/json
 }
 ```
 
+## Verifying signatures
+
+Each webhook delivery includes an `x-savvycal-signature` header containing an HMAC-SHA256 signature of the raw request body. You can use this to verify that the payload was sent by SavvyCal and has not been tampered with.
+
+To find your webhook's signing secret, open the webhook in the [Webhooks](https://savvycal.app/webhooks) page in the SavvyCal Dashboard. The signing secret is displayed in the edit panel.
+
+To verify a signature:
+
+1. Read the raw request body (before any JSON parsing).
+2. Compute the HMAC-SHA256 digest of the body using your webhook's signing secret as the key.
+3. Hex-encode the digest in uppercase and prepend `sha256=`.
+4. Compare the result to the `x-savvycal-signature` header value using a constant-time comparison function.
+
+### JavaScript
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhookSignature(rawBody, secret, signatureHeader) {
+  const digest = crypto
+    .createHmac('sha256', secret)
+    .update(rawBody)
+    .digest('hex')
+    .toUpperCase();
+
+  const expected = `sha256=${digest}`;
+
+  return (
+    expected.length === signatureHeader.length &&
+    crypto.timingSafeEqual(Buffer.from(expected), Buffer.from(signatureHeader))
+  );
+}
+```
+
+### Ruby
+
+```ruby
+require 'openssl'
+
+def verify_webhook_signature(raw_body, secret, signature_header)
+  digest = OpenSSL::HMAC.hexdigest('SHA256', secret, raw_body).upcase
+  expected = "sha256=#{digest}"
+
+  Rack::Utils.secure_compare(expected, signature_header)
+end
+```
+
 ## Event types
 
 The following event types are available. The Schema definitions referenced in the table below represent the shape of the `data` field in the webhook payload.
