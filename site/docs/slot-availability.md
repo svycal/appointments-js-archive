@@ -144,7 +144,7 @@ The authenticated endpoint returns a [`ServiceSlotResponse`](/api/schemas/servic
 
 ### Public response
 
-The public list endpoint returns a [`PublicServiceSlotsResponse`](/api/schemas/publicserviceslotsresponse) with a flat `data` array of [`Slot`](/api/schemas/slot) objects.
+The public list endpoint returns a [`SlotListResponse`](/api/schemas/slotlistresponse) with a flat `data` array of [`Slot`](/api/schemas/slot) objects.
 
 ```json
 {
