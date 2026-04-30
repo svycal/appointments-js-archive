@@ -547,6 +547,16 @@ export function listBookingIntents(
   });
 }
 
+export function listBookingIntentSlots(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_intents/{booking_intent_id}/slots", "get">,
+  query?: QueryParams<"/v1/booking_intents/{booking_intent_id}/slots", "get">,
+) {
+  return client.GET("/v1/booking_intents/{booking_intent_id}/slots", {
+    params: { path, query },
+  });
+}
+
 export function listCancellationReasons(client: FetchClient) {
   return client.GET("/v1/cancellation_reasons");
 }
@@ -597,6 +607,22 @@ export function listProviderSchedules(
 ) {
   return client.GET("/v1/provider_schedules", {
     params: { query },
+  });
+}
+
+export function listPublicBookingIntentSlots(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/public/booking_intents/{booking_intent_id}/slots",
+    "get"
+  >,
+  query?: QueryParams<
+    "/v1/public/booking_intents/{booking_intent_id}/slots",
+    "get"
+  >,
+) {
+  return client.GET("/v1/public/booking_intents/{booking_intent_id}/slots", {
+    params: { path, query },
   });
 }
 

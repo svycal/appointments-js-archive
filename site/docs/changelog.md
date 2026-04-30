@@ -6,6 +6,17 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## April 30, 2026
+
+- **New:** -- Added two endpoints for listing time slots based on a booking intent's configuration: [List available slots for a booking intent](/api/list-booking-intent-slots) (authenticated) and [List available slots for a booking intent](/api/list-public-booking-intent-slots) (public). Both return the new [SlotListResponse](/api/schemas/slotlistresponse) schema.
+- **New:** -- [Appointment](/api/schemas/appointment) responses now include a `meeting` field with conferencing details (provider, join URL, password, etc.) and an asynchronous lifecycle status. See [AppointmentMeeting](/api/schemas/appointmentmeeting).
+- **New:** -- Added webhook events for the appointment meeting lifecycle: `appointment.meeting.created`, `appointment.meeting.updated`, `appointment.meeting.canceled`, and `appointment.meeting.failed`. See [AppointmentMeetingCreatedEventData](/api/schemas/appointmentmeetingcreatedeventdata), [AppointmentMeetingUpdatedEventData](/api/schemas/appointmentmeetingupdatedeventdata), [AppointmentMeetingCanceledEventData](/api/schemas/appointmentmeetingcanceledeventdata), and [AppointmentMeetingFailedEventData](/api/schemas/appointmentmeetingfailedeventdata).
+- **New:** -- Booking intents now support secondary providers via a `secondary_providers` field on [CreateBookingIntentRequest](/api/schemas/createbookingintentrequest), [UpdateBookingIntentRequest](/api/schemas/updatebookingintentrequest), and [BookingIntent](/api/schemas/bookingintent).
+- **New:** -- [Appointment](/api/schemas/appointment) responses now include a `providers` array containing each assigned provider with their role (`primary` or `secondary`). See [AppointmentProvider](/api/schemas/appointmentprovider).
+- **New:** -- [Dashboard sessions](/api/schemas/dashboardsession) now support an `idle_timeout_minutes` field for configuring the inactivity period before re-authentication is required. See [Create Dashboard Session](/api/create-dashboard-session).
+- **Changed:** -- The `source` field on [ConfirmationEvent](/api/schemas/confirmationevent) and [RescheduleEvent](/api/schemas/rescheduleevent) now includes a `public_api` value to distinguish events initiated through the public API.
+- **Changed:** -- The `PublicServiceSlotsResponse` schema has been renamed to [SlotListResponse](/api/schemas/slotlistresponse) and is now used by both authenticated and public slot listing endpoints. The response shape is unchanged.
+
 ## March 25, 2026
 
 - **New:** -- Booking intents now include `requirements` and `workflow` fields. Requirements provides per-section completeness status for booking, info, and form submission steps. Workflow provides server-computed step routing, completability, and defunct state. See [BookingIntentRequirements](/api/schemas/bookingintentrequirements), [BookingIntentWorkflow](/api/schemas/bookingintentworkflow), and [SubmissionRequirement](/api/schemas/submissionrequirement).

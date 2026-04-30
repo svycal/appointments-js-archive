@@ -30,6 +30,16 @@ export type AppointmentCreatedEventData =
   Schemas["AppointmentCreatedEventData"];
 export type AppointmentDeletedEventData =
   Schemas["AppointmentDeletedEventData"];
+export type AppointmentMeeting = Schemas["AppointmentMeeting"];
+export type AppointmentMeetingCanceledEventData =
+  Schemas["AppointmentMeetingCanceledEventData"];
+export type AppointmentMeetingCreatedEventData =
+  Schemas["AppointmentMeetingCreatedEventData"];
+export type AppointmentMeetingFailedEventData =
+  Schemas["AppointmentMeetingFailedEventData"];
+export type AppointmentMeetingUpdatedEventData =
+  Schemas["AppointmentMeetingUpdatedEventData"];
+export type AppointmentProvider = Schemas["AppointmentProvider"];
 export type AppointmentRescheduledEventData =
   Schemas["AppointmentRescheduledEventData"];
 export type AppointmentResponse = Schemas["AppointmentResponse"];
@@ -168,7 +178,6 @@ export type PublicCancellationReasonsResponse =
   Schemas["PublicCancellationReasonsResponse"];
 export type PublicServiceEarliestSlotResponse =
   Schemas["PublicServiceEarliestSlotResponse"];
-export type PublicServiceSlotsResponse = Schemas["PublicServiceSlotsResponse"];
 export type RecurrenceRule = Schemas["RecurrenceRule"];
 export type RescheduleAppointmentRequest =
   Schemas["RescheduleAppointmentRequest"];
@@ -196,6 +205,7 @@ export type ServiceSlotResponse = Schemas["ServiceSlotResponse"];
 export type ServicesResponse = Schemas["ServicesResponse"];
 export type ServiceUpdatedEventData = Schemas["ServiceUpdatedEventData"];
 export type Slot = Schemas["Slot"];
+export type SlotListResponse = Schemas["SlotListResponse"];
 export type SlotRule = Schemas["SlotRule"];
 export type SortServiceFormsRequest = Schemas["SortServiceFormsRequest"];
 export type SubmissionRequirement = Schemas["SubmissionRequirement"];

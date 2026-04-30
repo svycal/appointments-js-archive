@@ -1,0 +1,32 @@
+---
+id: appointmentmeetingupdatedeventdata
+title: "AppointmentMeetingUpdatedEventData"
+description: "Emitted asynchronously after a meeting was successfully updated with the conferencing provider, typically following an appointment reschedule."
+sidebar_label: "AppointmentMeetingUpdatedEventData"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"object":{"appointment_type":"in_person","cancellation_events":[{"actor":null,"cancellation_reason":{"id":"cr_a1b2c3d4e5f6","name":"Distance too far","object":"cancellation_reason","sort_order":1},"custom_reason_text":"I'm sick","initiated_by":"client","object":"cancellation_event","occurred_at":"2023-01-01T03:00:00Z","source":"client_ui"}],"client":{"created_at":"2025-01-15T14:30:00Z","email":"jane.smith@example.com","first_name":"Jane","id":"clnt_a1b2c3d4e5f6","last_name":"Smith","locale":"en-US","metadata":{"external_id":"123"},"object":"client","phone":"+15551234567","reference_id":"ext_12345","time_zone":"America/Chicago","updated_at":"2025-03-10T09:45:00Z"},"client_data":{"email":"jane.smith@example.com","first_name":"Jane","last_name":"Smith","locale":"en-US","phone":"+15551234567","reference_id":"ext_12345","time_zone":"America/Chicago"},"confirmation_events":[{"actor":null,"end_at":{"local":"2023-01-01T01:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736464800,"utc":"2023-01-01T04:00:00Z"},"initiated_by":"client","object":"confirmation_event","occurred_at":"2023-01-01T03:00:00Z","source":"client_ui","start_at":{"local":"2023-01-01T00:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736461200,"utc":"2023-01-01T03:00:00Z"}}],"confirmed_at":"2025-03-10T15:30:00Z","created_at":"2025-03-10T14:30:00Z","end_at":{"local":"2025-03-01T11:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736464800,"utc":"2025-03-01T04:00:00Z"},"id":"appt_a1b2c3d4e5f6","meeting":{"conferencing_provider":"zoom_admin","error_message":null,"external_meeting_id":"82912345678","host_url":"https://zoom.us/s/82912345678","id":"amtg_a1b2c3d4e5f6","join_url":"https://zoom.us/j/82912345678","object":"appointment_meeting","password":"abc123","status":"created"},"object":"appointment","provider":{"created_at":"2017-09-12T12:34:55Z","display_name":"John Smith","first_name":"John","id":"prov_d025a96ac0c6","last_name":"Smith","metadata":{"external_id":"123"},"object":"provider","updated_at":"2017-09-13T10:11:12Z"},"providers":[{"created_at":"2017-09-12T12:34:55Z","display_name":"John Smith","first_name":"John","id":"prov_d025a96ac0c6","last_name":"Smith","metadata":{"external_id":"123"},"object":"provider","role":"primary","updated_at":"2017-09-13T10:11:12Z"}],"reschedule_events":[{"actor":null,"initiated_by":"client","new_end_at":{"local":"2023-01-01T01:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736464800,"utc":"2023-01-01T04:00:00Z"},"new_start_at":{"local":"2023-01-01T00:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736461200,"utc":"2023-01-01T03:00:00Z"},"object":"reschedule_event","occurred_at":"2023-01-01T03:00:00Z","previous_end_at":{"local":"2023-01-01T01:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736464800,"utc":"2023-01-01T04:00:00Z"},"previous_start_at":{"local":"2023-01-01T00:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736461200,"utc":"2023-01-01T03:00:00Z"},"source":"client_ui"}],"service":{"appointment_type":"in_person","booking_policy":{"advance_notice":{"enabled":true,"minimum_duration":"PT1H"},"allow_booking":true,"disabled_message":"Booking is disabled for this service.","hold":{"duration":"PT10M","enabled":true},"maximize_utilization":{"enabled":true}},"cancellation_policy":{"advance_notice":{"enabled":true,"minimum_duration":"PT1H"},"allow_cancellation":true,"disabled_message":"Cancellation is disabled for this service."},"change_policy_text":"Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.","created_at":"2025-02-17T17:49:19Z","duration":"PT1H30M","forms":[{"created_at":"2025-02-17T17:49:19Z","form_id":"frm_d025a96ac0c6","form_name":"Intake Form","id":"sf_d025a96ac0c6","object":"service_form","sort_order":1,"updated_at":"2025-02-17T17:49:19Z"}],"id":"srv_d025a96ac0c6","internal_name":null,"metadata":{"external_id":"123"},"name":"Initial Consult","object":"service","provider_notifications":{"additional_recipients":["admin@example.com"],"notify_provider":true,"types":[{"type":"new_appointment"}]},"rescheduling_policy":{"advance_notice":{"enabled":true,"minimum_duration":"PT1H"},"allow_rescheduling":true,"disabled_message":"Rescheduling is disabled for this service."},"slot_rules":[{"recurrence_rule":{"byday":["mo","we","fr"],"freq":"weekly"},"start_times":["09:00","10:00"]}],"updated_at":"2025-02-17T17:49:19Z"},"start_at":{"local":"2025-03-01T10:00:00-05:00","object":"zoned_date_time","time_zone":"America/New_York","unix_ts":1736461200,"utc":"2025-03-01T03:00:00Z"},"status":"scheduled","updated_at":"2025-03-10T14:30:00Z","urls":{"add_to_google_calendar":["https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"],"cancel":["https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"],"confirm":["https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"],"ics":["https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"],"join":["https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"],"reschedule":["https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"]}},"type":"appointment.meeting.updated"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"AppointmentMeetingUpdatedEventData"}
+>
+</Heading>
+
+
+
+Emitted asynchronously after a meeting was successfully updated with the conferencing provider, typically following an appointment reschedule.
+
+<Schema
+  {...require("./appointmentmeetingupdatedeventdata.Schema.json")}
+>
+  
+</Schema>
+            

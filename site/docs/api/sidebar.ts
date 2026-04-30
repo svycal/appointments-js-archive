@@ -456,6 +456,12 @@ const sidebar: SidebarsConfig = {
           label: "List available time slots",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "api/list-public-booking-intent-slots",
+          label: "List available slots for a booking intent",
+          className: "api-method get",
+        },
       ],
     },
     {
@@ -638,6 +644,28 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Time Slots",
+      link: {
+        type: "doc",
+        id: "api/time-slots",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/list-booking-intent-slots",
+          label: "List available slots for a booking intent",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/list-service-slots",
+          label: "List available time slots",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Connected Accounts",
       link: {
         type: "doc",
@@ -809,22 +837,6 @@ const sidebar: SidebarsConfig = {
           id: "api/create-block",
           label: "Create block",
           className: "api-method post",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Time Slots",
-      link: {
-        type: "doc",
-        id: "api/time-slots",
-      },
-      items: [
-        {
-          type: "doc",
-          id: "api/list-service-slots",
-          label: "List available time slots",
-          className: "api-method get",
         },
       ],
     },
@@ -1020,6 +1032,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/slotlistresponse",
+          label: "SlotListResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/fieldchoiceinput",
           label: "FieldChoiceInput",
           className: "schema",
@@ -1196,12 +1214,6 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/serviceformsresponse",
           label: "ServiceFormsResponse",
-          className: "schema",
-        },
-        {
-          type: "doc",
-          id: "api/schemas/publicserviceslotsresponse",
-          label: "PublicServiceSlotsResponse",
           className: "schema",
         },
         {
@@ -1404,6 +1416,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/appointmentmeetingfailedeventdata",
+          label: "AppointmentMeetingFailedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/notfoundresponse",
           label: "NotFoundResponse",
           className: "schema",
@@ -1428,6 +1446,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/appointmentmeetingcreatedeventdata",
+          label: "AppointmentMeetingCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/cancellationevent",
           label: "CancellationEvent",
           className: "schema",
@@ -1446,6 +1470,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/appointmentmeetingcanceledeventdata",
+          label: "AppointmentMeetingCanceledEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/providerschedulecreatedeventdata",
           label: "ProviderScheduleCreatedEventData",
           className: "schema",
@@ -1460,6 +1490,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/blockcreatedeventdata",
           label: "BlockCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/appointmentmeeting",
+          label: "AppointmentMeeting",
           className: "schema",
         },
         {
@@ -1544,6 +1580,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/publicbookingintentresponse",
           label: "PublicBookingIntentResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/appointmentprovider",
+          label: "AppointmentProvider",
           className: "schema",
         },
         {
@@ -1670,6 +1712,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/jsonerrorresponse",
           label: "JsonErrorResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/appointmentmeetingupdatedeventdata",
+          label: "AppointmentMeetingUpdatedEventData",
           className: "schema",
         },
         {

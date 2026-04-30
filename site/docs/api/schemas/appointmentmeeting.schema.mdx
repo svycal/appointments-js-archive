@@ -1,0 +1,36 @@
+---
+id: appointmentmeeting
+title: "AppointmentMeeting"
+description: "An appointment meeting represents the conferencing details for an appointment."
+sidebar_label: "AppointmentMeeting"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"conferencing_provider":"zoom_admin","error_message":null,"external_meeting_id":"82912345678","host_url":"https://zoom.us/s/82912345678","id":"amtg_a1b2c3d4e5f6","join_url":"https://zoom.us/j/82912345678","object":"appointment_meeting","password":"abc123","status":"created"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"AppointmentMeeting"}
+>
+</Heading>
+
+
+
+An appointment meeting represents the conferencing details for an appointment.
+Meetings are created asynchronously after an appointment is scheduled, so the
+`status` field reflects where the meeting is in its lifecycle. Meeting details
+such as `join_url` are populated only once the status is `created`.
+
+
+<Schema
+  {...require("./appointmentmeeting.Schema.json")}
+>
+  
+</Schema>
+            
