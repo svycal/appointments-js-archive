@@ -14,7 +14,7 @@ const config: Config = {
 
   // Enable faster builds
   future: {
-    experimental_faster: true,
+    faster: true,
     v4: true,
   },
 
