@@ -95,10 +95,14 @@ The following event types are available. The Schema definitions referenced in th
 | `appointment.canceled`             | Emitted when an existing appointment is canceled. ([Schema](/api/schemas/appointmentcanceledeventdata))                    |
 | `appointment.confirmed`            | Emitted when an existing appointment is confirmed. ([Schema](/api/schemas/appointmentconfirmedeventdata))                  |
 | `appointment.deleted`              | Emitted when an existing appointment is deleted. ([Schema](/api/schemas/appointmentdeletedeventdata))                      |
-| `appointment.meeting.canceled`     | Emitted after a meeting is canceled with the conferencing provider. ([Schema](/api/schemas/appointmentmeetingcanceledeventdata)) |
-| `appointment.meeting.created`      | Emitted after a meeting is created with the conferencing provider. ([Schema](/api/schemas/appointmentmeetingcreatedeventdata)) |
-| `appointment.meeting.failed`       | Emitted when a meeting creation or update terminally fails. ([Schema](/api/schemas/appointmentmeetingfailedeventdata))     |
-| `appointment.meeting.updated`      | Emitted after a meeting is updated with the conferencing provider. ([Schema](/api/schemas/appointmentmeetingupdatedeventdata)) |
+| `appointment.meeting.canceled`        | Emitted after a meeting is canceled with the conferencing provider. ([Schema](/api/schemas/appointmentmeetingcanceledeventdata)) |
+| `appointment.meeting.cancel_failed`   | Emitted when meeting cancellation with the conferencing provider terminally fails. ([Schema](/api/schemas/appointmentmeetingcancelfailedeventdata)) |
+| `appointment.meeting.created`         | Emitted after a meeting is created with the conferencing provider. ([Schema](/api/schemas/appointmentmeetingcreatedeventdata)) |
+| `appointment.meeting.create_failed`   | Emitted when initial meeting creation with the conferencing provider terminally fails. ([Schema](/api/schemas/appointmentmeetingcreatefailedeventdata)) |
+| `appointment.meeting.replaced`        | Emitted after a meeting is replaced with a brand-new meeting at the conferencing provider, typically after a reschedule changes the primary provider. ([Schema](/api/schemas/appointmentmeetingreplacedeventdata)) |
+| `appointment.meeting.replace_failed`  | Emitted when a meeting replacement with the conferencing provider terminally fails. ([Schema](/api/schemas/appointmentmeetingreplacefailedeventdata)) |
+| `appointment.meeting.updated`         | Emitted after a meeting is updated with the conferencing provider. ([Schema](/api/schemas/appointmentmeetingupdatedeventdata)) |
+| `appointment.meeting.update_failed`   | Emitted when a meeting update with the conferencing provider terminally fails. ([Schema](/api/schemas/appointmentmeetingupdatefailedeventdata)) |
 | `booking_intent.abandoned`         | Emitted when a booking intent is abandoned. ([Schema](/api/schemas/bookingintentabandonedeventdata))                       |
 | `booking_intent.completed`         | Emitted when a booking intent is completed. ([Schema](/api/schemas/bookingintentcompletedeventdata))                       |
 | `booking_intent.created`           | Emitted when a new booking intent is created. ([Schema](/api/schemas/bookingintentcreatedeventdata))                       |
