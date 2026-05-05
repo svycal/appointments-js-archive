@@ -1,5 +1,12 @@
 # @savvycal/appointments-react-query
 
+## 1.2.3
+
+### Patch Changes
+
+- Updated dependencies [[`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b), [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b)]:
+  - @savvycal/appointments-core@1.5.0
+
 ## 1.2.2
 
 ### Patch Changes

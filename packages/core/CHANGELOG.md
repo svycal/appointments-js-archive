@@ -1,5 +1,25 @@
 # @savvycal/appointments-core
 
+## 1.5.0
+
+### Minor Changes
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- The `PublicServiceSlotsResponse` schema has been renamed to [SlotListResponse](https://developers.savvycal.app/api/schemas/slotlistresponse) and is now used by both authenticated and public slot listing endpoints. The response shape is unchanged.
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Booking intents now support secondary providers via a `secondary_providers` field on [CreateBookingIntentRequest](https://developers.savvycal.app/api/schemas/createbookingintentrequest), [UpdateBookingIntentRequest](https://developers.savvycal.app/api/schemas/updatebookingintentrequest), and [BookingIntent](https://developers.savvycal.app/api/schemas/bookingintent).
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- [Dashboard sessions](https://developers.savvycal.app/api/schemas/dashboardsession) now support an `idle_timeout_minutes` field for configuring the inactivity period before re-authentication is required. See [Create Dashboard Session](https://developers.savvycal.app/api/create-dashboard-session).
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- [Appointment](https://developers.savvycal.app/api/schemas/appointment) responses now include a `meeting` field with conferencing details (provider, join URL, password, etc.) and an asynchronous lifecycle status. See [AppointmentMeeting](https://developers.savvycal.app/api/schemas/appointmentmeeting).
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- The `source` field on [ConfirmationEvent](https://developers.savvycal.app/api/schemas/confirmationevent) and [RescheduleEvent](https://developers.savvycal.app/api/schemas/rescheduleevent) now includes a `public_api` value to distinguish events initiated through the public API.
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Added webhook events for the appointment meeting lifecycle: `appointment.meeting.created`, `appointment.meeting.updated`, `appointment.meeting.canceled`, and `appointment.meeting.replaced`, plus terminal-failure events `appointment.meeting.create_failed`, `appointment.meeting.update_failed`, `appointment.meeting.cancel_failed`, and `appointment.meeting.replace_failed`. See [AppointmentMeetingCreatedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingcreatedeventdata), [AppointmentMeetingUpdatedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingupdatedeventdata), [AppointmentMeetingCanceledEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingcanceledeventdata), [AppointmentMeetingReplacedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingreplacedeventdata), [AppointmentMeetingCreateFailedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingcreatefailedeventdata), [AppointmentMeetingUpdateFailedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingupdatefailedeventdata), [AppointmentMeetingCancelFailedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingcancelfailedeventdata), and [AppointmentMeetingReplaceFailedEventData](https://developers.savvycal.app/api/schemas/appointmentmeetingreplacefailedeventdata).
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Added two endpoints for listing time slots based on a booking intent's configuration: [List available slots for a booking intent](https://developers.savvycal.app/api/list-booking-intent-slots) (authenticated) and [List available slots for a booking intent](https://developers.savvycal.app/api/list-public-booking-intent-slots) (public). Both return the new [SlotListResponse](https://developers.savvycal.app/api/schemas/slotlistresponse) schema.
+
+- [`eecabad`](https://github.com/svycal/appointments/commit/eecabade9171cb544138bb323a46182c63c49a9b) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- [Appointment](https://developers.savvycal.app/api/schemas/appointment) responses now include a `providers` array containing each assigned provider with their role (`primary` or `secondary`). See [AppointmentProvider](https://developers.savvycal.app/api/schemas/appointmentprovider).
+
 ## 1.4.0
 
 ### Minor Changes
