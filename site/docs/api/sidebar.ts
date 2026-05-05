@@ -936,6 +936,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/appointmentmeetingcancelfailedeventdata",
+          label: "AppointmentMeetingCancelFailedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/updateformrequest",
           label: "UpdateFormRequest",
           className: "schema",
@@ -1398,6 +1404,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/appointmentmeetingcreatefailedeventdata",
+          label: "AppointmentMeetingCreateFailedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/completepublicbookingintentrequest",
           label: "CompletePublicBookingIntentRequest",
           className: "schema",
@@ -1416,14 +1428,14 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
-          id: "api/schemas/appointmentmeetingfailedeventdata",
-          label: "AppointmentMeetingFailedEventData",
+          id: "api/schemas/notfoundresponse",
+          label: "NotFoundResponse",
           className: "schema",
         },
         {
           type: "doc",
-          id: "api/schemas/notfoundresponse",
-          label: "NotFoundResponse",
+          id: "api/schemas/appointmentmeetingreplacefailedeventdata",
+          label: "AppointmentMeetingReplaceFailedEventData",
           className: "schema",
         },
         {
@@ -1502,6 +1514,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/servicesresponse",
           label: "ServicesResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/appointmentmeetingupdatefailedeventdata",
+          label: "AppointmentMeetingUpdateFailedEventData",
           className: "schema",
         },
         {
@@ -1646,6 +1664,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/createappointmentrequest",
           label: "CreateAppointmentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/appointmentmeetingreplacedeventdata",
+          label: "AppointmentMeetingReplacedEventData",
           className: "schema",
         },
         {

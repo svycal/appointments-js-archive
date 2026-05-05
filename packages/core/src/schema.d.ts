@@ -1728,7 +1728,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -2431,6 +2430,285 @@ export interface components {
          */
         AccountResponse: {
             data?: components["schemas"]["Account"];
+        };
+        /**
+         * AppointmentMeetingCancelFailedEventData
+         * @description Emitted when meeting cancellation with the conferencing provider terminally fails. The `object.meeting.error_message` field carries the failure reason.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "cancellation_events": [
+         *           {
+         *             "actor": null,
+         *             "cancellation_reason": {
+         *               "id": "cr_a1b2c3d4e5f6",
+         *               "name": "Distance too far",
+         *               "object": "cancellation_reason",
+         *               "sort_order": 1
+         *             },
+         *             "custom_reason_text": "I'm sick",
+         *             "initiated_by": "client",
+         *             "object": "cancellation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "client": {
+         *           "created_at": "2025-01-15T14:30:00Z",
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "clnt_a1b2c3d4e5f6",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "client",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago",
+         *           "updated_at": "2025-03-10T09:45:00Z"
+         *         },
+         *         "client_data": {
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago"
+         *         },
+         *         "confirmation_events": [
+         *           {
+         *             "actor": null,
+         *             "end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "initiated_by": "client",
+         *             "object": "confirmation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui",
+         *             "start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             }
+         *           }
+         *         ],
+         *         "confirmed_at": "2025-03-10T15:30:00Z",
+         *         "created_at": "2025-03-10T14:30:00Z",
+         *         "end_at": {
+         *           "local": "2025-03-01T11:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736464800,
+         *           "utc": "2025-03-01T04:00:00Z"
+         *         },
+         *         "id": "appt_a1b2c3d4e5f6",
+         *         "meeting": {
+         *           "conferencing_provider": "zoom_admin",
+         *           "error_message": null,
+         *           "external_meeting_id": "82912345678",
+         *           "id": "amtg_a1b2c3d4e5f6",
+         *           "join_url": "https://zoom.us/j/82912345678",
+         *           "object": "appointment_meeting",
+         *           "password": "abc123",
+         *           "status": "created"
+         *         },
+         *         "object": "appointment",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "role": "primary",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "reschedule_events": [
+         *           {
+         *             "actor": null,
+         *             "initiated_by": "client",
+         *             "new_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "new_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "object": "reschedule_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "previous_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "previous_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
+         *           "id": "srv_d025a96ac0c6",
+         *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2025-03-01T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736461200,
+         *           "utc": "2025-03-01T03:00:00Z"
+         *         },
+         *         "status": "scheduled",
+         *         "updated_at": "2025-03-10T14:30:00Z",
+         *         "urls": {
+         *           "add_to_google_calendar": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           ],
+         *           "cancel": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           ],
+         *           "confirm": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *           ],
+         *           "ics": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
+         *           "reschedule": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           ]
+         *         }
+         *       },
+         *       "type": "appointment.meeting.cancel_failed"
+         *     }
+         */
+        AppointmentMeetingCancelFailedEventData: {
+            object: components["schemas"]["Appointment"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "appointment.meeting.cancel_failed";
         };
         /**
          * UpdateFormRequest
@@ -4818,7 +5096,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -5260,7 +5537,6 @@ export interface components {
          *             "conferencing_provider": "zoom_admin",
          *             "error_message": null,
          *             "external_meeting_id": "82912345678",
-         *             "host_url": "https://zoom.us/s/82912345678",
          *             "id": "amtg_a1b2c3d4e5f6",
          *             "join_url": "https://zoom.us/j/82912345678",
          *             "object": "appointment_meeting",
@@ -5459,7 +5735,7 @@ export interface components {
              */
             created_at: string;
             /** @description The event data. */
-            data: components["schemas"]["AccountUserCreatedEventData"] | components["schemas"]["AccountUserDeletedEventData"] | components["schemas"]["AccountUserUpdatedEventData"] | components["schemas"]["AppointmentCreatedEventData"] | components["schemas"]["AppointmentRescheduledEventData"] | components["schemas"]["AppointmentCanceledEventData"] | components["schemas"]["AppointmentConfirmedEventData"] | components["schemas"]["AppointmentDeletedEventData"] | components["schemas"]["AppointmentMeetingCreatedEventData"] | components["schemas"]["AppointmentMeetingFailedEventData"] | components["schemas"]["AppointmentMeetingUpdatedEventData"] | components["schemas"]["AppointmentMeetingCanceledEventData"] | components["schemas"]["BlockCreatedEventData"] | components["schemas"]["BlockUpdatedEventData"] | components["schemas"]["BlockDeletedEventData"] | components["schemas"]["BookingIntentAbandonedEventData"] | components["schemas"]["BookingIntentCompletedEventData"] | components["schemas"]["BookingIntentCreatedEventData"] | components["schemas"]["BookingIntentUpdatedEventData"] | components["schemas"]["ClientCreatedEventData"] | components["schemas"]["ClientDeletedEventData"] | components["schemas"]["ClientUpdatedEventData"] | components["schemas"]["ConnectedAccountCreatedEventData"] | components["schemas"]["ConnectedAccountDeletedEventData"] | components["schemas"]["ConnectedAccountRefreshFailedEventData"] | components["schemas"]["ConnectedAccountReconnectedEventData"] | components["schemas"]["ProviderCreatedEventData"] | components["schemas"]["ProviderUpdatedEventData"] | components["schemas"]["ProviderDeactivatedEventData"] | components["schemas"]["ProviderReactivatedEventData"] | components["schemas"]["ProviderScheduleCreatedEventData"] | components["schemas"]["ProviderScheduleDeletedEventData"] | components["schemas"]["ProviderScheduleUpdatedEventData"] | components["schemas"]["ServiceCreatedEventData"] | components["schemas"]["ServiceDeletedEventData"] | components["schemas"]["ServiceUpdatedEventData"] | components["schemas"]["ServiceProviderCreatedEventData"] | components["schemas"]["ServiceProviderDeletedEventData"];
+            data: components["schemas"]["AccountUserCreatedEventData"] | components["schemas"]["AccountUserDeletedEventData"] | components["schemas"]["AccountUserUpdatedEventData"] | components["schemas"]["AppointmentCreatedEventData"] | components["schemas"]["AppointmentRescheduledEventData"] | components["schemas"]["AppointmentCanceledEventData"] | components["schemas"]["AppointmentConfirmedEventData"] | components["schemas"]["AppointmentDeletedEventData"] | components["schemas"]["AppointmentMeetingCreatedEventData"] | components["schemas"]["AppointmentMeetingCreateFailedEventData"] | components["schemas"]["AppointmentMeetingUpdatedEventData"] | components["schemas"]["AppointmentMeetingUpdateFailedEventData"] | components["schemas"]["AppointmentMeetingReplacedEventData"] | components["schemas"]["AppointmentMeetingReplaceFailedEventData"] | components["schemas"]["AppointmentMeetingCanceledEventData"] | components["schemas"]["AppointmentMeetingCancelFailedEventData"] | components["schemas"]["BlockCreatedEventData"] | components["schemas"]["BlockUpdatedEventData"] | components["schemas"]["BlockDeletedEventData"] | components["schemas"]["BookingIntentAbandonedEventData"] | components["schemas"]["BookingIntentCompletedEventData"] | components["schemas"]["BookingIntentCreatedEventData"] | components["schemas"]["BookingIntentUpdatedEventData"] | components["schemas"]["ClientCreatedEventData"] | components["schemas"]["ClientDeletedEventData"] | components["schemas"]["ClientUpdatedEventData"] | components["schemas"]["ConnectedAccountCreatedEventData"] | components["schemas"]["ConnectedAccountDeletedEventData"] | components["schemas"]["ConnectedAccountRefreshFailedEventData"] | components["schemas"]["ConnectedAccountReconnectedEventData"] | components["schemas"]["ProviderCreatedEventData"] | components["schemas"]["ProviderUpdatedEventData"] | components["schemas"]["ProviderDeactivatedEventData"] | components["schemas"]["ProviderReactivatedEventData"] | components["schemas"]["ProviderScheduleCreatedEventData"] | components["schemas"]["ProviderScheduleDeletedEventData"] | components["schemas"]["ProviderScheduleUpdatedEventData"] | components["schemas"]["ServiceCreatedEventData"] | components["schemas"]["ServiceDeletedEventData"] | components["schemas"]["ServiceUpdatedEventData"] | components["schemas"]["ServiceProviderCreatedEventData"] | components["schemas"]["ServiceProviderDeletedEventData"];
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -5693,7 +5969,6 @@ export interface components {
          *             "conferencing_provider": "zoom_admin",
          *             "error_message": null,
          *             "external_meeting_id": "82912345678",
-         *             "host_url": "https://zoom.us/s/82912345678",
          *             "id": "amtg_a1b2c3d4e5f6",
          *             "join_url": "https://zoom.us/j/82912345678",
          *             "object": "appointment_meeting",
@@ -6237,7 +6512,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -6865,113 +7139,8 @@ export interface components {
             type: "account_user.deleted";
         };
         /**
-         * CompletePublicBookingIntentRequest
-         * @description Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion.
-         * @example {
-         *       "client_data": {
-         *         "email": "jane@example.com",
-         *         "first_name": "Jane"
-         *       },
-         *       "service_id": "srv_1234567890"
-         *     }
-         */
-        CompletePublicBookingIntentRequest: {
-            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
-            auto_assign_provider?: boolean | null;
-            /** @description Progressive client data. Provided fields are merged with existing values. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
-            /**
-             * Format: date-time
-             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
-             */
-            end_at?: string | null;
-            /** @description The ID of the provider to assign. */
-            provider_id?: string | null;
-            /** @description The ID of the service. */
-            service_id?: string | null;
-            /**
-             * Format: date-time
-             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
-             */
-            start_at?: string | null;
-            /** @description Form submissions to upsert by form_id. Provided entries are merged with existing submissions; omitted form_ids are left unchanged. Send an empty array to clear all. */
-            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
-            /** @description The local time zone for the slot (IANA format). */
-            time_zone?: string | null;
-        };
-        /**
-         * ProviderResponse
-         * @description Response schema for a single provider
-         * @example {
-         *       "data": {
-         *         "created_at": "2017-09-12T12:34:55Z",
-         *         "display_name": "John Smith",
-         *         "first_name": "John",
-         *         "id": "prov_d025a96ac0c6",
-         *         "last_name": "Smith",
-         *         "metadata": {
-         *           "external_id": "123"
-         *         },
-         *         "object": "provider",
-         *         "updated_at": "2017-09-13T10:11:12Z"
-         *       }
-         *     }
-         */
-        ProviderResponse: {
-            data: components["schemas"]["Provider"];
-        };
-        /**
-         * ProviderSchedulesResponse
-         * @description Response schema for a list of provider schedules
-         * @example {
-         *       "data": [
-         *         {
-         *           "created_at": "2025-02-17T17:49:19Z",
-         *           "effective_from": "2025-01-01",
-         *           "effective_to": "2025-12-31",
-         *           "id": "psch_d025a96ac0c6",
-         *           "object": "provider_schedule",
-         *           "public_bookings": {
-         *             "enabled": true
-         *           },
-         *           "updated_at": "2025-02-17T17:49:19Z",
-         *           "weekly_rules": [
-         *             {
-         *               "day": "mo",
-         *               "end_time": "17:00",
-         *               "start_time": "09:00"
-         *             }
-         *           ]
-         *         }
-         *       ],
-         *       "meta": {
-         *         "current_page": 1,
-         *         "page_size": 10,
-         *         "total_count": 50,
-         *         "total_pages": 5
-         *       }
-         *     }
-         */
-        ProviderSchedulesResponse: {
-            /** @description List of provider schedules */
-            data: components["schemas"]["ProviderSchedule"][];
-            meta: components["schemas"]["PaginationMeta"];
-        };
-        /**
-         * AppointmentMeetingFailedEventData
-         * @description Emitted when a meeting transition (creation or update) terminally fails with the conferencing provider. The `object.meeting.error_message` field carries the failure reason.
+         * AppointmentMeetingCreateFailedEventData
+         * @description Emitted when *initial* meeting creation with the conferencing provider terminally fails. The `object.meeting.error_message` field carries the failure reason.
          * @example {
          *       "object": {
          *         "appointment_type": "in_person",
@@ -7053,7 +7222,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -7238,16 +7406,121 @@ export interface components {
          *           ]
          *         }
          *       },
-         *       "type": "appointment.meeting.failed"
+         *       "type": "appointment.meeting.create_failed"
          *     }
          */
-        AppointmentMeetingFailedEventData: {
+        AppointmentMeetingCreateFailedEventData: {
             object: components["schemas"]["Appointment"];
             /**
              * @description The event type. (enum property replaced by openapi-typescript)
              * @enum {string}
              */
-            type: "appointment.meeting.failed";
+            type: "appointment.meeting.create_failed";
+        };
+        /**
+         * CompletePublicBookingIntentRequest
+         * @description Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion.
+         * @example {
+         *       "client_data": {
+         *         "email": "jane@example.com",
+         *         "first_name": "Jane"
+         *       },
+         *       "service_id": "srv_1234567890"
+         *     }
+         */
+        CompletePublicBookingIntentRequest: {
+            /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
+            auto_assign_provider?: boolean | null;
+            /** @description Progressive client data. Provided fields are merged with existing values. */
+            client_data?: {
+                email?: string | null;
+                /** @description A map of custom field key-value pairs. */
+                fields?: {
+                    [key: string]: unknown;
+                } | null;
+                first_name?: string | null;
+                last_name?: string | null;
+                locale?: string | null;
+                phone?: string | null;
+                reference_id?: string | null;
+                time_zone?: string | null;
+            } | null;
+            /**
+             * Format: date-time
+             * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            end_at?: string | null;
+            /** @description The ID of the provider to assign. */
+            provider_id?: string | null;
+            /** @description The ID of the service. */
+            service_id?: string | null;
+            /**
+             * Format: date-time
+             * @description The start time of the slot as an ISO-8601 datetime string with a timezone offset.
+             */
+            start_at?: string | null;
+            /** @description Form submissions to upsert by form_id. Provided entries are merged with existing submissions; omitted form_ids are left unchanged. Send an empty array to clear all. */
+            submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
+            /** @description The local time zone for the slot (IANA format). */
+            time_zone?: string | null;
+        };
+        /**
+         * ProviderResponse
+         * @description Response schema for a single provider
+         * @example {
+         *       "data": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       }
+         *     }
+         */
+        ProviderResponse: {
+            data: components["schemas"]["Provider"];
+        };
+        /**
+         * ProviderSchedulesResponse
+         * @description Response schema for a list of provider schedules
+         * @example {
+         *       "data": [
+         *         {
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "effective_from": "2025-01-01",
+         *           "effective_to": "2025-12-31",
+         *           "id": "psch_d025a96ac0c6",
+         *           "object": "provider_schedule",
+         *           "public_bookings": {
+         *             "enabled": true
+         *           },
+         *           "updated_at": "2025-02-17T17:49:19Z",
+         *           "weekly_rules": [
+         *             {
+         *               "day": "mo",
+         *               "end_time": "17:00",
+         *               "start_time": "09:00"
+         *             }
+         *           ]
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        ProviderSchedulesResponse: {
+            /** @description List of provider schedules */
+            data: components["schemas"]["ProviderSchedule"][];
+            meta: components["schemas"]["PaginationMeta"];
         };
         /**
          * NotFoundResponse
@@ -7274,6 +7547,285 @@ export interface components {
                  */
                 status: "404";
             }[];
+        };
+        /**
+         * AppointmentMeetingReplaceFailedEventData
+         * @description Emitted when the *replacement* meeting created during a meeting replace (typically following a reschedule that changed the primary provider) terminally fails at the conferencing provider. Distinct from `appointment.meeting.create_failed` (initial-creation failure): the appointment previously had a working meeting (now superseded), and the replacement attempt failed. The `object.meeting.error_message` field carries the failure reason.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "cancellation_events": [
+         *           {
+         *             "actor": null,
+         *             "cancellation_reason": {
+         *               "id": "cr_a1b2c3d4e5f6",
+         *               "name": "Distance too far",
+         *               "object": "cancellation_reason",
+         *               "sort_order": 1
+         *             },
+         *             "custom_reason_text": "I'm sick",
+         *             "initiated_by": "client",
+         *             "object": "cancellation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "client": {
+         *           "created_at": "2025-01-15T14:30:00Z",
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "clnt_a1b2c3d4e5f6",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "client",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago",
+         *           "updated_at": "2025-03-10T09:45:00Z"
+         *         },
+         *         "client_data": {
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago"
+         *         },
+         *         "confirmation_events": [
+         *           {
+         *             "actor": null,
+         *             "end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "initiated_by": "client",
+         *             "object": "confirmation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui",
+         *             "start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             }
+         *           }
+         *         ],
+         *         "confirmed_at": "2025-03-10T15:30:00Z",
+         *         "created_at": "2025-03-10T14:30:00Z",
+         *         "end_at": {
+         *           "local": "2025-03-01T11:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736464800,
+         *           "utc": "2025-03-01T04:00:00Z"
+         *         },
+         *         "id": "appt_a1b2c3d4e5f6",
+         *         "meeting": {
+         *           "conferencing_provider": "zoom_admin",
+         *           "error_message": null,
+         *           "external_meeting_id": "82912345678",
+         *           "id": "amtg_a1b2c3d4e5f6",
+         *           "join_url": "https://zoom.us/j/82912345678",
+         *           "object": "appointment_meeting",
+         *           "password": "abc123",
+         *           "status": "created"
+         *         },
+         *         "object": "appointment",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "role": "primary",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "reschedule_events": [
+         *           {
+         *             "actor": null,
+         *             "initiated_by": "client",
+         *             "new_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "new_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "object": "reschedule_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "previous_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "previous_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
+         *           "id": "srv_d025a96ac0c6",
+         *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2025-03-01T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736461200,
+         *           "utc": "2025-03-01T03:00:00Z"
+         *         },
+         *         "status": "scheduled",
+         *         "updated_at": "2025-03-10T14:30:00Z",
+         *         "urls": {
+         *           "add_to_google_calendar": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           ],
+         *           "cancel": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           ],
+         *           "confirm": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *           ],
+         *           "ics": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
+         *           "reschedule": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           ]
+         *         }
+         *       },
+         *       "type": "appointment.meeting.replace_failed"
+         *     }
+         */
+        AppointmentMeetingReplaceFailedEventData: {
+            object: components["schemas"]["Appointment"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "appointment.meeting.replace_failed";
         };
         /**
          * PublicCancellationReasonsResponse
@@ -7500,7 +8052,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -7893,7 +8444,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -8194,7 +8744,6 @@ export interface components {
          *       "conferencing_provider": "zoom_admin",
          *       "error_message": null,
          *       "external_meeting_id": "82912345678",
-         *       "host_url": "https://zoom.us/s/82912345678",
          *       "id": "amtg_a1b2c3d4e5f6",
          *       "join_url": "https://zoom.us/j/82912345678",
          *       "object": "appointment_meeting",
@@ -8215,11 +8764,6 @@ export interface components {
              * @example 82912345678
              */
             external_meeting_id: string | null;
-            /**
-             * Format: uri
-             * @description The URL the host uses to start the meeting.
-             */
-            host_url: string | null;
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -8349,6 +8893,285 @@ export interface components {
             /** @description List of services */
             data: components["schemas"]["Service"][];
             meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
+         * AppointmentMeetingUpdateFailedEventData
+         * @description Emitted when an update to an existing meeting with the conferencing provider terminally fails — including when the provider reports the meeting was deleted out-of-band. The `object.meeting.error_message` field carries the failure reason.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "cancellation_events": [
+         *           {
+         *             "actor": null,
+         *             "cancellation_reason": {
+         *               "id": "cr_a1b2c3d4e5f6",
+         *               "name": "Distance too far",
+         *               "object": "cancellation_reason",
+         *               "sort_order": 1
+         *             },
+         *             "custom_reason_text": "I'm sick",
+         *             "initiated_by": "client",
+         *             "object": "cancellation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "client": {
+         *           "created_at": "2025-01-15T14:30:00Z",
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "clnt_a1b2c3d4e5f6",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "client",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago",
+         *           "updated_at": "2025-03-10T09:45:00Z"
+         *         },
+         *         "client_data": {
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago"
+         *         },
+         *         "confirmation_events": [
+         *           {
+         *             "actor": null,
+         *             "end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "initiated_by": "client",
+         *             "object": "confirmation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui",
+         *             "start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             }
+         *           }
+         *         ],
+         *         "confirmed_at": "2025-03-10T15:30:00Z",
+         *         "created_at": "2025-03-10T14:30:00Z",
+         *         "end_at": {
+         *           "local": "2025-03-01T11:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736464800,
+         *           "utc": "2025-03-01T04:00:00Z"
+         *         },
+         *         "id": "appt_a1b2c3d4e5f6",
+         *         "meeting": {
+         *           "conferencing_provider": "zoom_admin",
+         *           "error_message": null,
+         *           "external_meeting_id": "82912345678",
+         *           "id": "amtg_a1b2c3d4e5f6",
+         *           "join_url": "https://zoom.us/j/82912345678",
+         *           "object": "appointment_meeting",
+         *           "password": "abc123",
+         *           "status": "created"
+         *         },
+         *         "object": "appointment",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "role": "primary",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "reschedule_events": [
+         *           {
+         *             "actor": null,
+         *             "initiated_by": "client",
+         *             "new_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "new_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "object": "reschedule_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "previous_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "previous_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
+         *           "id": "srv_d025a96ac0c6",
+         *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2025-03-01T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736461200,
+         *           "utc": "2025-03-01T03:00:00Z"
+         *         },
+         *         "status": "scheduled",
+         *         "updated_at": "2025-03-10T14:30:00Z",
+         *         "urls": {
+         *           "add_to_google_calendar": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           ],
+         *           "cancel": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           ],
+         *           "confirm": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *           ],
+         *           "ics": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
+         *           "reschedule": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           ]
+         *         }
+         *       },
+         *       "type": "appointment.meeting.update_failed"
+         *     }
+         */
+        AppointmentMeetingUpdateFailedEventData: {
+            object: components["schemas"]["Appointment"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "appointment.meeting.update_failed";
         };
         /**
          * ProviderNotificationConfig
@@ -8672,7 +9495,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -9676,6 +10498,285 @@ export interface components {
             weekly_rules: components["schemas"]["WeeklyRule"][];
         };
         /**
+         * AppointmentMeetingReplacedEventData
+         * @description Emitted when the meeting attached to an appointment is replaced by a brand-new meeting at the conferencing provider — typically because a reschedule changed the primary provider and the new provider's conferencing maps to a different connected user/account. Distinct from `appointment.meeting.updated` (attribute-level change to the *same* provider meeting): consumers caching `external_meeting_id`, `join_url`, `password`, or dial-in numbers should treat this event as an invalidation signal.
+         * @example {
+         *       "object": {
+         *         "appointment_type": "in_person",
+         *         "cancellation_events": [
+         *           {
+         *             "actor": null,
+         *             "cancellation_reason": {
+         *               "id": "cr_a1b2c3d4e5f6",
+         *               "name": "Distance too far",
+         *               "object": "cancellation_reason",
+         *               "sort_order": 1
+         *             },
+         *             "custom_reason_text": "I'm sick",
+         *             "initiated_by": "client",
+         *             "object": "cancellation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "client": {
+         *           "created_at": "2025-01-15T14:30:00Z",
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "clnt_a1b2c3d4e5f6",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "client",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago",
+         *           "updated_at": "2025-03-10T09:45:00Z"
+         *         },
+         *         "client_data": {
+         *           "email": "jane.smith@example.com",
+         *           "first_name": "Jane",
+         *           "last_name": "Smith",
+         *           "locale": "en-US",
+         *           "phone": "+15551234567",
+         *           "reference_id": "ext_12345",
+         *           "time_zone": "America/Chicago"
+         *         },
+         *         "confirmation_events": [
+         *           {
+         *             "actor": null,
+         *             "end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "initiated_by": "client",
+         *             "object": "confirmation_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "source": "client_ui",
+         *             "start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             }
+         *           }
+         *         ],
+         *         "confirmed_at": "2025-03-10T15:30:00Z",
+         *         "created_at": "2025-03-10T14:30:00Z",
+         *         "end_at": {
+         *           "local": "2025-03-01T11:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736464800,
+         *           "utc": "2025-03-01T04:00:00Z"
+         *         },
+         *         "id": "appt_a1b2c3d4e5f6",
+         *         "meeting": {
+         *           "conferencing_provider": "zoom_admin",
+         *           "error_message": null,
+         *           "external_meeting_id": "82912345678",
+         *           "id": "amtg_a1b2c3d4e5f6",
+         *           "join_url": "https://zoom.us/j/82912345678",
+         *           "object": "appointment_meeting",
+         *           "password": "abc123",
+         *           "status": "created"
+         *         },
+         *         "object": "appointment",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "role": "primary",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "reschedule_events": [
+         *           {
+         *             "actor": null,
+         *             "initiated_by": "client",
+         *             "new_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "new_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "object": "reschedule_event",
+         *             "occurred_at": "2023-01-01T03:00:00Z",
+         *             "previous_end_at": {
+         *               "local": "2023-01-01T01:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736464800,
+         *               "utc": "2023-01-01T04:00:00Z"
+         *             },
+         *             "previous_start_at": {
+         *               "local": "2023-01-01T00:00:00-05:00",
+         *               "object": "zoned_date_time",
+         *               "time_zone": "America/New_York",
+         *               "unix_ts": 1736461200,
+         *               "utc": "2023-01-01T03:00:00Z"
+         *             },
+         *             "source": "client_ui"
+         *           }
+         *         ],
+         *         "service": {
+         *           "appointment_type": "in_person",
+         *           "booking_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_booking": true,
+         *             "disabled_message": "Booking is disabled for this service.",
+         *             "hold": {
+         *               "duration": "PT10M",
+         *               "enabled": true
+         *             },
+         *             "maximize_utilization": {
+         *               "enabled": true
+         *             }
+         *           },
+         *           "cancellation_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_cancellation": true,
+         *             "disabled_message": "Cancellation is disabled for this service."
+         *           },
+         *           "change_policy_text": "Appointments within 48 hours cannot be canceled or rescheduled online. Please call our office.",
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "duration": "PT1H30M",
+         *           "forms": [
+         *             {
+         *               "created_at": "2025-02-17T17:49:19Z",
+         *               "form_id": "frm_d025a96ac0c6",
+         *               "form_name": "Intake Form",
+         *               "id": "sf_d025a96ac0c6",
+         *               "object": "service_form",
+         *               "sort_order": 1,
+         *               "updated_at": "2025-02-17T17:49:19Z"
+         *             }
+         *           ],
+         *           "id": "srv_d025a96ac0c6",
+         *           "internal_name": null,
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "name": "Initial Consult",
+         *           "object": "service",
+         *           "provider_notifications": {
+         *             "additional_recipients": [
+         *               "admin@example.com"
+         *             ],
+         *             "notify_provider": true,
+         *             "types": [
+         *               {
+         *                 "type": "new_appointment"
+         *               }
+         *             ]
+         *           },
+         *           "rescheduling_policy": {
+         *             "advance_notice": {
+         *               "enabled": true,
+         *               "minimum_duration": "PT1H"
+         *             },
+         *             "allow_rescheduling": true,
+         *             "disabled_message": "Rescheduling is disabled for this service."
+         *           },
+         *           "slot_rules": [
+         *             {
+         *               "recurrence_rule": {
+         *                 "byday": [
+         *                   "mo",
+         *                   "we",
+         *                   "fr"
+         *                 ],
+         *                 "freq": "weekly"
+         *               },
+         *               "start_times": [
+         *                 "09:00",
+         *                 "10:00"
+         *               ]
+         *             }
+         *           ],
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         },
+         *         "start_at": {
+         *           "local": "2025-03-01T10:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736461200,
+         *           "utc": "2025-03-01T03:00:00Z"
+         *         },
+         *         "status": "scheduled",
+         *         "updated_at": "2025-03-10T14:30:00Z",
+         *         "urls": {
+         *           "add_to_google_calendar": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           ],
+         *           "cancel": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           ],
+         *           "confirm": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *           ],
+         *           "ics": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           ],
+         *           "join": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           ],
+         *           "reschedule": [
+         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           ]
+         *         }
+         *       },
+         *       "type": "appointment.meeting.replaced"
+         *     }
+         */
+        AppointmentMeetingReplacedEventData: {
+            object: components["schemas"]["Appointment"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "appointment.meeting.replaced";
+        };
+        /**
          * CreatePublicBookingIntentRequest
          * @description Request schema for creating a booking intent via a public interface.
          * @example {
@@ -10014,7 +11115,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -10579,7 +11679,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -10858,7 +11957,6 @@ export interface components {
          *         "conferencing_provider": "zoom_admin",
          *         "error_message": null,
          *         "external_meeting_id": "82912345678",
-         *         "host_url": "https://zoom.us/s/82912345678",
          *         "id": "amtg_a1b2c3d4e5f6",
          *         "join_url": "https://zoom.us/j/82912345678",
          *         "object": "appointment_meeting",
@@ -11996,7 +13094,6 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
-         *           "host_url": "https://zoom.us/s/82912345678",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",

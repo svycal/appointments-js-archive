@@ -33,12 +33,20 @@ export type AppointmentDeletedEventData =
 export type AppointmentMeeting = Schemas["AppointmentMeeting"];
 export type AppointmentMeetingCanceledEventData =
   Schemas["AppointmentMeetingCanceledEventData"];
+export type AppointmentMeetingCancelFailedEventData =
+  Schemas["AppointmentMeetingCancelFailedEventData"];
 export type AppointmentMeetingCreatedEventData =
   Schemas["AppointmentMeetingCreatedEventData"];
-export type AppointmentMeetingFailedEventData =
-  Schemas["AppointmentMeetingFailedEventData"];
+export type AppointmentMeetingCreateFailedEventData =
+  Schemas["AppointmentMeetingCreateFailedEventData"];
+export type AppointmentMeetingReplacedEventData =
+  Schemas["AppointmentMeetingReplacedEventData"];
+export type AppointmentMeetingReplaceFailedEventData =
+  Schemas["AppointmentMeetingReplaceFailedEventData"];
 export type AppointmentMeetingUpdatedEventData =
   Schemas["AppointmentMeetingUpdatedEventData"];
+export type AppointmentMeetingUpdateFailedEventData =
+  Schemas["AppointmentMeetingUpdateFailedEventData"];
 export type AppointmentProvider = Schemas["AppointmentProvider"];
 export type AppointmentRescheduledEventData =
   Schemas["AppointmentRescheduledEventData"];
