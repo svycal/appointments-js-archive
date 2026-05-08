@@ -1476,6 +1476,8 @@ export interface components {
          * PublicAppointment
          * @description A public appointment represents a booking that a client has made with a provider for a service.
          * @example {
+         *       "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
+         *       "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *       "cancellation": {
          *         "allowed": true,
          *         "disabled_message": null
@@ -1488,8 +1490,10 @@ export interface components {
          *         "unix_ts": 1736464800,
          *         "utc": "2025-03-01T04:00:00Z"
          *       },
+         *       "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *       "id": "appt_a1b2c3d4e5f6",
          *       "object": "public_appointment",
+         *       "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *       "rescheduling": {
          *         "allowed": false,
          *         "disabled_message": "Rescheduling is not available within 24 hours of your appointment"
@@ -1504,24 +1508,34 @@ export interface components {
          *       "status": "scheduled",
          *       "urls": {
          *         "add_to_calendar": [
-         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
          *         ],
          *         "add_to_google_calendar": [
-         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *         ],
          *         "cancel": [
-         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *         ],
          *         "ics": [
-         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *         ],
          *         "reschedule": [
-         *           "https://example.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *         ]
          *       }
          *     }
          */
         PublicAppointment: {
+            /**
+             * Format: uri
+             * @description Canonical URL for adding the appointment to a calendar. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            add_to_calendar_url: string;
+            /**
+             * Format: uri
+             * @description Canonical URL for canceling the appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            cancel_url: string;
             /** @description Information about whether the appointment can be canceled by the client. */
             cancellation: {
                 /** @description Whether the appointment can be canceled by the client. */
@@ -1535,6 +1549,11 @@ export interface components {
              */
             confirmed_at: string | null;
             end_at: components["schemas"]["ZonedDateTime"];
+            /**
+             * Format: uri
+             * @description Canonical URL for downloading an ICS file for the appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            ics_url: string;
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -1542,6 +1561,11 @@ export interface components {
              * @enum {string}
              */
             object: "public_appointment";
+            /**
+             * Format: uri
+             * @description Canonical URL for rescheduling the appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            reschedule_url: string;
             /** @description Information about whether the appointment can be rescheduled by the client. */
             rescheduling: {
                 /** @description Whether the appointment can be rescheduled by the client. */
@@ -1555,17 +1579,15 @@ export interface components {
              * @enum {string}
              */
             status: "scheduled" | "canceled";
-            /** @description URLs related to the appointment for client-facing actions. */
+            /**
+             * @deprecated
+             * @description Deprecated nested URL collections for this public appointment. Use the flat *_url fields instead.
+             */
             urls: {
-                /** @description URLs for adding the appointment to a calendar. */
                 add_to_calendar: string[];
-                /** @description URLs for adding the appointment to Google Calendar. */
                 add_to_google_calendar: string[];
-                /** @description URLs for canceling the appointment. */
                 cancel: string[];
-                /** @description URLs for downloading an ICS file for the appointment. */
                 ics: string[];
-                /** @description URLs for rescheduling the appointment. */
                 reschedule: string[];
             };
         };
@@ -1649,7 +1671,9 @@ export interface components {
          * @description This is an object representing data for the appointment rescheduled event.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -1691,6 +1715,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -1723,7 +1748,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -1799,6 +1826,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -1892,23 +1920,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -2436,7 +2467,9 @@ export interface components {
          * @description Emitted when meeting cancellation with the conferencing provider terminally fails. The `object.meeting.error_message` field carries the failure reason.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -2478,6 +2511,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -2510,7 +2544,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -2586,6 +2622,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -2679,23 +2716,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -5017,7 +5057,9 @@ export interface components {
          * @description This is an object representing data for the appointment confirmed event.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -5059,6 +5101,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -5091,7 +5134,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -5167,6 +5212,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -5260,23 +5306,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -5458,7 +5507,9 @@ export interface components {
          *       "created_at": "2025-03-12T12:34:55Z",
          *       "data": {
          *         "object": {
+         *           "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *           "appointment_type": "in_person",
+         *           "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *           "cancellation_events": [
          *             {
          *               "actor": null,
@@ -5500,6 +5551,7 @@ export interface components {
          *             "reference_id": "ext_12345",
          *             "time_zone": "America/Chicago"
          *           },
+         *           "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *           "confirmation_events": [
          *             {
          *               "actor": null,
@@ -5532,7 +5584,9 @@ export interface components {
          *             "unix_ts": 1736464800,
          *             "utc": "2025-03-01T04:00:00Z"
          *           },
+         *           "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *           "id": "appt_a1b2c3d4e5f6",
+         *           "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *           "meeting": {
          *             "conferencing_provider": "zoom_admin",
          *             "error_message": null,
@@ -5608,6 +5662,7 @@ export interface components {
          *               "source": "client_ui"
          *             }
          *           ],
+         *           "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *           "service": {
          *             "appointment_type": "in_person",
          *             "booking_policy": {
@@ -5701,23 +5756,26 @@ export interface components {
          *           "status": "scheduled",
          *           "updated_at": "2025-03-10T14:30:00Z",
          *           "urls": {
+         *             "add_to_calendar": [
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *             ],
          *             "add_to_google_calendar": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *             ],
          *             "cancel": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *             ],
          *             "confirm": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *             ],
          *             "ics": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *             ],
          *             "join": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *             ],
          *             "reschedule": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *             ]
          *           }
          *         },
@@ -5890,7 +5948,9 @@ export interface components {
          * @example {
          *       "data": [
          *         {
+         *           "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *           "appointment_type": "in_person",
+         *           "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *           "cancellation_events": [
          *             {
          *               "actor": null,
@@ -5932,6 +5992,7 @@ export interface components {
          *             "reference_id": "ext_12345",
          *             "time_zone": "America/Chicago"
          *           },
+         *           "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *           "confirmation_events": [
          *             {
          *               "actor": null,
@@ -5964,7 +6025,9 @@ export interface components {
          *             "unix_ts": 1736464800,
          *             "utc": "2025-03-01T04:00:00Z"
          *           },
+         *           "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *           "id": "appt_a1b2c3d4e5f6",
+         *           "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *           "meeting": {
          *             "conferencing_provider": "zoom_admin",
          *             "error_message": null,
@@ -6040,6 +6103,7 @@ export interface components {
          *               "source": "client_ui"
          *             }
          *           ],
+         *           "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *           "service": {
          *             "appointment_type": "in_person",
          *             "booking_policy": {
@@ -6133,23 +6197,26 @@ export interface components {
          *           "status": "scheduled",
          *           "updated_at": "2025-03-10T14:30:00Z",
          *           "urls": {
+         *             "add_to_calendar": [
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *             ],
          *             "add_to_google_calendar": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *             ],
          *             "cancel": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *             ],
          *             "confirm": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *             ],
          *             "ics": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *             ],
          *             "join": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *             ],
          *             "reschedule": [
-         *               "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *               "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *             ]
          *           }
          *         }
@@ -6433,7 +6500,9 @@ export interface components {
          * @description Response schema for a single appointment
          * @example {
          *       "data": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -6475,6 +6544,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -6507,7 +6577,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -6583,6 +6655,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -6676,23 +6749,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       }
@@ -7143,7 +7219,9 @@ export interface components {
          * @description Emitted when *initial* meeting creation with the conferencing provider terminally fails. The `object.meeting.error_message` field carries the failure reason.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -7185,6 +7263,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -7217,7 +7296,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -7293,6 +7374,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -7386,23 +7468,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -7553,7 +7638,9 @@ export interface components {
          * @description Emitted when the *replacement* meeting created during a meeting replace (typically following a reschedule that changed the primary provider) terminally fails at the conferencing provider. Distinct from `appointment.meeting.create_failed` (initial-creation failure): the appointment previously had a working meeting (now superseded), and the replacement attempt failed. The `object.meeting.error_message` field carries the failure reason.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -7595,6 +7682,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -7627,7 +7715,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -7703,6 +7793,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -7796,23 +7887,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -7973,7 +8067,9 @@ export interface components {
          * @description Emitted asynchronously after a meeting was successfully created with the conferencing provider. The `object.meeting` field carries the populated meeting details.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -8015,6 +8111,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -8047,7 +8144,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -8123,6 +8222,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -8216,23 +8316,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -8365,7 +8468,9 @@ export interface components {
          * @description Emitted asynchronously after a meeting was successfully canceled with the conferencing provider, following an appointment cancellation.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -8407,6 +8512,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -8439,7 +8545,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -8515,6 +8623,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -8608,23 +8717,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -8899,7 +9011,9 @@ export interface components {
          * @description Emitted when an update to an existing meeting with the conferencing provider terminally fails — including when the provider reports the meeting was deleted out-of-band. The `object.meeting.error_message` field carries the failure reason.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -8941,6 +9055,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -8973,7 +9088,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -9049,6 +9166,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -9142,23 +9260,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -9416,7 +9537,9 @@ export interface components {
          * @description This is an object representing data for the appointment canceled event.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -9458,6 +9581,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -9490,7 +9614,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -9566,6 +9692,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -9659,23 +9786,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -10502,7 +10632,9 @@ export interface components {
          * @description Emitted when the meeting attached to an appointment is replaced by a brand-new meeting at the conferencing provider — typically because a reschedule changed the primary provider and the new provider's conferencing maps to a different connected user/account. Distinct from `appointment.meeting.updated` (attribute-level change to the *same* provider meeting): consumers caching `external_meeting_id`, `join_url`, `password`, or dial-in numbers should treat this event as an invalidation signal.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -10544,6 +10676,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -10576,7 +10709,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -10652,6 +10787,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -10745,23 +10881,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -11036,7 +11175,9 @@ export interface components {
          * @description This is an object representing data for the appointment deleted event.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -11078,6 +11219,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -11110,7 +11252,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -11186,6 +11330,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -11279,23 +11424,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -11600,7 +11748,9 @@ export interface components {
          * @description Emitted asynchronously after a meeting was successfully updated with the conferencing provider, typically following an appointment reschedule.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -11642,6 +11792,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -11674,7 +11825,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -11750,6 +11903,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -11843,23 +11997,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },
@@ -11878,7 +12035,9 @@ export interface components {
          * Appointment
          * @description An appointment represents a booking that a client has made with a provider for a service.
          * @example {
+         *       "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *       "appointment_type": "in_person",
+         *       "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *       "cancellation_events": [
          *         {
          *           "actor": null,
@@ -11920,6 +12079,7 @@ export interface components {
          *         "reference_id": "ext_12345",
          *         "time_zone": "America/Chicago"
          *       },
+         *       "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *       "confirmation_events": [
          *         {
          *           "actor": null,
@@ -11952,7 +12112,9 @@ export interface components {
          *         "unix_ts": 1736464800,
          *         "utc": "2025-03-01T04:00:00Z"
          *       },
+         *       "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *       "id": "appt_a1b2c3d4e5f6",
+         *       "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *       "meeting": {
          *         "conferencing_provider": "zoom_admin",
          *         "error_message": null,
@@ -12028,6 +12190,7 @@ export interface components {
          *           "source": "client_ui"
          *         }
          *       ],
+         *       "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *       "service": {
          *         "appointment_type": "in_person",
          *         "booking_policy": {
@@ -12121,33 +12284,46 @@ export interface components {
          *       "status": "scheduled",
          *       "updated_at": "2025-03-10T14:30:00Z",
          *       "urls": {
+         *         "add_to_calendar": [
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *         ],
          *         "add_to_google_calendar": [
-         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *         ],
          *         "cancel": [
-         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *         ],
          *         "confirm": [
-         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *         ],
          *         "ics": [
-         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *         ],
          *         "join": [
-         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *         ],
          *         "reschedule": [
-         *           "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *           "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *         ]
          *       }
          *     }
          */
         Appointment: {
             /**
+             * Format: uri
+             * @description Canonical URL for the client to add this appointment to their calendar. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            add_to_calendar_url: string;
+            /**
              * @description The type of appointment.
              * @enum {string}
              */
             appointment_type: "in_person" | "virtual";
+            /**
+             * Format: uri
+             * @description Canonical URL for the client to cancel this appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            cancel_url: string;
             cancellation_events: components["schemas"]["CancellationEvent"][];
             client: components["schemas"]["Client"];
             /** @description Client data provided while creating the appointment. Some fields will be `null` unless `include_sensitive` is `true`. */
@@ -12176,6 +12352,11 @@ export interface components {
                  */
                 time_zone: string;
             };
+            /**
+             * Format: uri
+             * @description Canonical URL for the client to confirm this appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            confirm_url: string;
             confirmation_events: components["schemas"]["ConfirmationEvent"][];
             /**
              * Format: date-time
@@ -12188,8 +12369,18 @@ export interface components {
              */
             created_at: string;
             end_at: components["schemas"]["ZonedDateTime"];
+            /**
+             * Format: uri
+             * @description Canonical URL for the client to download an iCal file for this appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            ics_url: string;
             /** @description Unique identifier for the object. */
             id: string;
+            /**
+             * Format: uri
+             * @description Canonical URL for the client to join this appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            join_url: string;
             /** @description Conferencing meeting details. Null when no conferencing was configured for this appointment. */
             meeting: components["schemas"]["AppointmentMeeting"] | null;
             /**
@@ -12201,6 +12392,11 @@ export interface components {
             /** @description All providers on this appointment. The primary provider is always listed first. */
             providers: components["schemas"]["AppointmentProvider"][];
             reschedule_events: components["schemas"]["RescheduleEvent"][];
+            /**
+             * Format: uri
+             * @description Canonical URL for the client to reschedule this appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
+             */
+            reschedule_url: string;
             service: components["schemas"]["Service"];
             start_at: components["schemas"]["ZonedDateTime"];
             /**
@@ -12213,21 +12409,17 @@ export interface components {
              * @description Time at which the object was last updated.
              */
             updated_at?: string;
-            /** @description URLs for this appointment. */
-            urls?: {
-                /** @description URLs for the client to use to add this appointment to their calendar. */
-                add_to_calendar?: string[];
-                /** @description URLs for the client to use to add this appointment to Google Calendar. */
+            /**
+             * @deprecated
+             * @description Deprecated nested URL collections for this appointment. Use the flat *_url fields instead.
+             */
+            urls: {
+                add_to_calendar: string[];
                 add_to_google_calendar: string[];
-                /** @description URLs for the client to use to cancel this appointment. */
                 cancel: string[];
-                /** @description URLs for the client to use to confirm this appointment. */
                 confirm: string[];
-                /** @description URLs for the client to use to download an iCal file for this appointment. */
                 ics: string[];
-                /** @description URLs for the client to use to join this appointment. */
                 join: string[];
-                /** @description URLs for the client to use to reschedule this appointment. */
                 reschedule: string[];
             };
         };
@@ -12320,6 +12512,8 @@ export interface components {
          * @description Response schema for a single appointment created via a public interface.
          * @example {
          *       "data": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation": {
          *           "allowed": true,
          *           "disabled_message": null
@@ -12332,8 +12526,10 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
          *         "object": "public_appointment",
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "rescheduling": {
          *           "allowed": false,
          *           "disabled_message": "Rescheduling is not available within 24 hours of your appointment"
@@ -12348,19 +12544,19 @@ export interface components {
          *         "status": "scheduled",
          *         "urls": {
          *           "add_to_calendar": [
-         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
          *           ],
          *           "add_to_google_calendar": [
-         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "ics": [
-         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "reschedule": [
-         *             "https://example.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       }
@@ -13015,7 +13211,9 @@ export interface components {
          * @description This is an object representing data for the appointment created event.
          * @example {
          *       "object": {
+         *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
          *             "actor": null,
@@ -13057,6 +13255,7 @@ export interface components {
          *           "reference_id": "ext_12345",
          *           "time_zone": "America/Chicago"
          *         },
+         *         "confirm_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm",
          *         "confirmation_events": [
          *           {
          *             "actor": null,
@@ -13089,7 +13288,9 @@ export interface components {
          *           "unix_ts": 1736464800,
          *           "utc": "2025-03-01T04:00:00Z"
          *         },
+         *         "ics_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics",
          *         "id": "appt_a1b2c3d4e5f6",
+         *         "join_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join",
          *         "meeting": {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
@@ -13165,6 +13366,7 @@ export interface components {
          *             "source": "client_ui"
          *           }
          *         ],
+         *         "reschedule_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule",
          *         "service": {
          *           "appointment_type": "in_person",
          *           "booking_policy": {
@@ -13258,23 +13460,26 @@ export interface components {
          *         "status": "scheduled",
          *         "updated_at": "2025-03-10T14:30:00Z",
          *         "urls": {
+         *           "add_to_calendar": [
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar"
+         *           ],
          *           "add_to_google_calendar": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_google_calendar"
          *           ],
          *           "cancel": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/cancel"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel"
          *           ],
          *           "confirm": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/confirm"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/confirm"
          *           ],
          *           "ics": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/ics"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/ics"
          *           ],
          *           "join": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/join"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/join"
          *           ],
          *           "reschedule": [
-         *             "https://savvycal.app/c/appointments/appt_a1b2c3d4e5f6/reschedule"
+         *             "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/reschedule"
          *           ]
          *         }
          *       },

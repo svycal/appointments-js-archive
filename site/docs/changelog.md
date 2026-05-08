@@ -6,6 +6,11 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## May 7, 2026
+
+- **New:** -- [Appointment](/api/schemas/appointment) and [PublicAppointment](/api/schemas/publicappointment) now expose individual top-level URL fields. [Appointment](/api/schemas/appointment) exposes `add_to_calendar_url`, `cancel_url`, `confirm_url`, `ics_url`, `join_url`, and `reschedule_url`. [PublicAppointment](/api/schemas/publicappointment) exposes `add_to_calendar_url`, `cancel_url`, `ics_url`, and `reschedule_url`. Each is a single canonical URL string that resolves to the account's active custom domain when configured. There is no top-level replacement for `urls.add_to_google_calendar`; use `add_to_calendar_url` instead.
+- **Deprecated:** -- The `urls` object on [Appointment](/api/schemas/appointment) and [PublicAppointment](/api/schemas/publicappointment) is deprecated in favor of the new top-level URL fields and will be removed in a future release.
+
 ## April 30, 2026
 
 - **New:** -- Added two endpoints for listing time slots based on a booking intent's configuration: [List available slots for a booking intent](/api/list-booking-intent-slots) (authenticated) and [List available slots for a booking intent](/api/list-public-booking-intent-slots) (public). Both return the new [SlotListResponse](/api/schemas/slotlistresponse) schema.
