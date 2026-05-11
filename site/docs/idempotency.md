@@ -33,11 +33,11 @@ A good key is opaque, unique, and reused only for retries of the **same** logica
 Replayed responses include two extra headers:
 
 ```http
-Idempotent-Replayed: true
-Idempotent-Replayed-At: 2026-05-11T18:42:09Z
+Idempotency-Replayed: true
+Idempotency-Replayed-At: 2026-05-11T18:42:09Z
 ```
 
-The absence of `Idempotent-Replayed` on a response means the request executed for the first time under that key.
+The absence of `Idempotency-Replayed` on a response means the request executed for the first time under that key.
 
 ## Scope
 
@@ -69,7 +69,7 @@ The header value must be:
 - 1 to 255 characters long after trimming whitespace
 - Printable ASCII (no spaces, no control characters)
 
-A malformed header returns `400 Bad Request`.
+A malformed header — or more than one `Idempotency-Key` header on the same request — returns `400 Bad Request`.
 
 ## Best practices
 
