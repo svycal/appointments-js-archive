@@ -1,5 +1,15 @@
 # @savvycal/appointments-core
 
+## 1.6.0
+
+### Minor Changes
+
+- [`3318880`](https://github.com/svycal/appointments/commit/3318880f66187e12c6e17cee1f60c7d5c3da16ec) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- [Appointment](https://developers.savvycal.app/api/schemas/appointment) and [PublicAppointment](https://developers.savvycal.app/api/schemas/publicappointment) now expose individual top-level URL fields. [Appointment](https://developers.savvycal.app/api/schemas/appointment) exposes `add_to_calendar_url`, `cancel_url`, `confirm_url`, `ics_url`, `join_url`, and `reschedule_url`. [PublicAppointment](https://developers.savvycal.app/api/schemas/publicappointment) exposes `add_to_calendar_url`, `cancel_url`, `ics_url`, and `reschedule_url`. Each is a single canonical URL string that resolves to the account's active custom domain when configured. There is no top-level replacement for `urls.add_to_google_calendar`; use `add_to_calendar_url` instead.
+
+### Patch Changes
+
+- [`3318880`](https://github.com/svycal/appointments/commit/3318880f66187e12c6e17cee1f60c7d5c3da16ec) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Deprecated:** -- The `urls` object on [Appointment](https://developers.savvycal.app/api/schemas/appointment) and [PublicAppointment](https://developers.savvycal.app/api/schemas/publicappointment) is deprecated in favor of the new top-level URL fields and will be removed in a future release.
+
 ## 1.5.0
 
 ### Minor Changes
