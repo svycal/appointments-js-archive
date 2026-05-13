@@ -24,6 +24,7 @@ export type AggregatedSlot = Schemas["AggregatedSlot"];
 export type Appointment = Schemas["Appointment"];
 export type AppointmentCanceledEventData =
   Schemas["AppointmentCanceledEventData"];
+export type AppointmentClientDataInput = Schemas["AppointmentClientDataInput"];
 export type AppointmentConfirmedEventData =
   Schemas["AppointmentConfirmedEventData"];
 export type AppointmentCreatedEventData =
@@ -85,6 +86,7 @@ export type CancelPublicAppointmentRequest =
   Schemas["CancelPublicAppointmentRequest"];
 export type Client = Schemas["Client"];
 export type ClientCreatedEventData = Schemas["ClientCreatedEventData"];
+export type ClientDataInput = Schemas["ClientDataInput"];
 export type ClientDeletedEventData = Schemas["ClientDeletedEventData"];
 export type ClientField = Schemas["ClientField"];
 export type ClientFieldChoice = Schemas["ClientFieldChoice"];

@@ -1,0 +1,34 @@
+---
+id: appointmentclientdatainput
+title: "AppointmentClientDataInput"
+description: "Information about the client booking the appointment. You can either provide an `id` or `reference_id` for an existing client,"
+sidebar_label: "AppointmentClientDataInput"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"email":"john.doe@example.com","fields":{"age":30},"first_name":"John","last_name":"Doe","locale":"en-US","phone":"+15551234567","reference_id":"1234567890","time_zone":"America/New_York"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"AppointmentClientDataInput"}
+>
+</Heading>
+
+
+
+Information about the client booking the appointment. You can either provide an `id` or `reference_id` for an existing client,
+or provide a new client's details.
+
+
+<Schema
+  {...require("./appointmentclientdatainput.Schema.json")}
+>
+  
+</Schema>
+            

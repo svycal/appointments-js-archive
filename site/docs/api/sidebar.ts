@@ -1428,6 +1428,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/appointmentclientdatainput",
+          label: "AppointmentClientDataInput",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/notfoundresponse",
           label: "NotFoundResponse",
           className: "schema",
@@ -1724,6 +1730,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/clientfieldsresponse",
           label: "ClientFieldsResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/clientdatainput",
+          label: "ClientDataInput",
           className: "schema",
         },
         {

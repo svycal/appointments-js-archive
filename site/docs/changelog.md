@@ -6,6 +6,12 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## May 12, 2026
+
+- **New:** -- [AppointmentMeeting](/api/schemas/appointmentmeeting) now includes a `host_url` field — a stable proxy URL the meeting host follows to start the meeting. The URL resolves on the account's booking domain and remains stable across `appointment.updated` events; SavvyCal handles refresh of the underlying conferencing-provider URL transparently. **Treat as a credential** — anyone with this URL can start the meeting as host. Valid through the appointment's end time + a 24h grace window, after which it returns 410 Gone. `null` when the meeting is not yet `created` or when the conferencing provider has no distinct host start URL (e.g., Google Meet).
+- **New:** -- `client_data` on [Appointment](/api/schemas/appointment) and [BookingIntent](/api/schemas/bookingintent) now includes a `fields` map containing custom client field values, keyed by field slug. Values for fields flagged as sensitive are redacted unless `include_sensitive` is `true`.
+- **Changed:** -- The `client_data` input on appointment and booking intent endpoints is now exposed as named, reusable schemas: [AppointmentClientDataInput](/api/schemas/appointmentclientdatainput) (used by [CreateAppointmentRequest](/api/schemas/createappointmentrequest) and [CreatePublicAppointmentRequest](/api/schemas/createpublicappointmentrequest)) and [ClientDataInput](/api/schemas/clientdatainput) (used by booking intent create/update requests). Shapes are unchanged; the `fields` description has been tightened to clarify that each key must correspond to a Client Field defined in the account — arbitrary key-value pairs are not accepted.
+
 ## May 7, 2026
 
 - **New:** -- [Appointment](/api/schemas/appointment) and [PublicAppointment](/api/schemas/publicappointment) now expose individual top-level URL fields. [Appointment](/api/schemas/appointment) exposes `add_to_calendar_url`, `cancel_url`, `confirm_url`, `ics_url`, `join_url`, and `reschedule_url`. [PublicAppointment](/api/schemas/publicappointment) exposes `add_to_calendar_url`, `cancel_url`, `ics_url`, and `reschedule_url`. Each is a single canonical URL string that resolves to the account's active custom domain when configured. There is no top-level replacement for `urls.add_to_google_calendar`; use `add_to_calendar_url` instead.

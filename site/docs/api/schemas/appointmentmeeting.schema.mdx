@@ -6,7 +6,7 @@ sidebar_label: "AppointmentMeeting"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"conferencing_provider":"zoom_admin","error_message":null,"external_meeting_id":"82912345678","id":"amtg_a1b2c3d4e5f6","join_url":"https://zoom.us/j/82912345678","object":"appointment_meeting","password":"abc123","status":"created"}
+sample: {"conferencing_provider":"zoom_admin","error_message":null,"external_meeting_id":"82912345678","host_url":"https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw","id":"amtg_a1b2c3d4e5f6","join_url":"https://zoom.us/j/82912345678","object":"appointment_meeting","password":"abc123","status":"created"}
 custom_edit_url: null
 ---
 
@@ -26,6 +26,18 @@ An appointment meeting represents the conferencing details for an appointment.
 Meetings are created asynchronously after an appointment is scheduled, so the
 `status` field reflects where the meeting is in its lifecycle. Meeting details
 such as `join_url` are populated only once the status is `created`.
+
+The `host_url` field is a stable proxy URL on the account's booking domain
+(the canonical SavvyCal host, or an active custom domain when one is
+configured) that the meeting host follows to start the meeting. **Treat
+this URL as a credential — anyone with it can start the meeting as the
+host.** It is valid through the appointment's end time + a 24h grace
+window, after which it returns 410 Gone. SavvyCal handles refresh of the
+underlying conferencing-provider URL transparently behind the proxy, so
+the proxy URL itself remains stable across `appointment.updated` webhook
+events. `host_url` is null when the meeting is not yet `created` or when
+the conferencing provider has no distinct host start URL (e.g., Google
+Meet uses a single shared URL).
 
 
 <Schema

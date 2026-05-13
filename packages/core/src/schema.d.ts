@@ -1708,6 +1708,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -1755,6 +1758,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -2260,6 +2264,9 @@ export interface components {
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Doe",
          *           "locale": "en",
@@ -2504,6 +2511,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -2551,6 +2561,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -2818,19 +2829,7 @@ export interface components {
                 } | null;
             } | null;
             /** @description Progressive client data to collect during the booking flow. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
+            client_data?: components["schemas"]["ClientDataInput"] | null;
             /** @description The ID of an existing client to link. */
             client_id?: string | null;
             /**
@@ -2884,6 +2883,9 @@ export interface components {
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Doe",
          *           "locale": "en",
@@ -3476,6 +3478,9 @@ export interface components {
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Doe",
          *           "locale": "en",
@@ -3830,19 +3835,7 @@ export interface components {
             /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
             auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
+            client_data?: components["schemas"]["ClientDataInput"] | null;
             /** @description The ID of an existing client to link. */
             client_id?: string | null;
             /**
@@ -3923,6 +3916,9 @@ export interface components {
          *           "client": null,
          *           "client_data": {
          *             "email": "jane@example.com",
+         *             "fields": {
+         *               "age": 30
+         *             },
          *             "first_name": "Jane",
          *             "last_name": "Doe",
          *             "locale": "en",
@@ -4287,6 +4283,9 @@ export interface components {
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Doe",
          *           "locale": "en",
@@ -5094,6 +5093,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -5141,6 +5143,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -5544,6 +5547,9 @@ export interface components {
          *           },
          *           "client_data": {
          *             "email": "jane.smith@example.com",
+         *             "fields": {
+         *               "age": 30
+         *             },
          *             "first_name": "Jane",
          *             "last_name": "Smith",
          *             "locale": "en-US",
@@ -5591,6 +5597,7 @@ export interface components {
          *             "conferencing_provider": "zoom_admin",
          *             "error_message": null,
          *             "external_meeting_id": "82912345678",
+         *             "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *             "id": "amtg_a1b2c3d4e5f6",
          *             "join_url": "https://zoom.us/j/82912345678",
          *             "object": "appointment_meeting",
@@ -5859,19 +5866,7 @@ export interface components {
                 } | null;
             } | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
+            client_data?: components["schemas"]["ClientDataInput"] | null;
             /** @description The ID of an existing client to link. */
             client_id?: string | null;
             /**
@@ -5985,6 +5980,9 @@ export interface components {
          *           },
          *           "client_data": {
          *             "email": "jane.smith@example.com",
+         *             "fields": {
+         *               "age": 30
+         *             },
          *             "first_name": "Jane",
          *             "last_name": "Smith",
          *             "locale": "en-US",
@@ -6032,6 +6030,7 @@ export interface components {
          *             "conferencing_provider": "zoom_admin",
          *             "error_message": null,
          *             "external_meeting_id": "82912345678",
+         *             "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *             "id": "amtg_a1b2c3d4e5f6",
          *             "join_url": "https://zoom.us/j/82912345678",
          *             "object": "appointment_meeting",
@@ -6537,6 +6536,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -6584,6 +6586,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -7256,6 +7259,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -7303,6 +7309,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -7517,19 +7524,7 @@ export interface components {
             /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
             auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
+            client_data?: components["schemas"]["ClientDataInput"] | null;
             /**
              * Format: date-time
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
@@ -7608,6 +7603,61 @@ export interface components {
             meta: components["schemas"]["PaginationMeta"];
         };
         /**
+         * AppointmentClientDataInput
+         * @description Information about the client booking the appointment. You can either provide an `id` or `reference_id` for an existing client,
+         *     or provide a new client's details.
+         * @example {
+         *       "email": "john.doe@example.com",
+         *       "fields": {
+         *         "age": 30
+         *       },
+         *       "first_name": "John",
+         *       "last_name": "Doe",
+         *       "locale": "en-US",
+         *       "phone": "+15551234567",
+         *       "reference_id": "1234567890",
+         *       "time_zone": "America/New_York"
+         *     }
+         */
+        AppointmentClientDataInput: {
+            /**
+             * Format: email
+             * @description The client's email address. Required if no existing client is provided.
+             */
+            email?: string | null;
+            /** @description A map of custom field values to set on the client, keyed by field slug. Each key must correspond to a Client Field that has been defined in the account; arbitrary key-value pairs are not accepted. */
+            fields?: {
+                [key: string]: unknown;
+            } | null;
+            /** @description The client's first name. Required if no existing client is provided. */
+            first_name?: string | null;
+            /**
+             * @description The ID of an existing client to attach to the appointment. If not provided, a new client will be created
+             *     if the `reference_id` does not correspond to an existing client. If there does exist a client with
+             *     the `reference_id` provided, the existing client will be attached to the appointment.
+             */
+            id?: string | null;
+            /** @description The client's last name. Required if no existing client is provided. */
+            last_name?: string | null;
+            /**
+             * @description The locale of the client booking the appointment.
+             * @example en-US
+             */
+            locale?: string | null;
+            /**
+             * @description The client's phone number (E.164 format).
+             * @example +1234567890
+             */
+            phone?: string | null;
+            /** @description External reference identifier for the client. */
+            reference_id?: string | null;
+            /**
+             * @description The client's time zone (IANA format). This field will be used to represent the appointment time slot in the client's local time zone (in the event that it differs from the appointment's local time zone).
+             * @example America/New_York
+             */
+            time_zone: string;
+        };
+        /**
          * NotFoundResponse
          * @description Response schema for not found requests
          * @example {
@@ -7675,6 +7725,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -7722,6 +7775,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -8104,6 +8158,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -8151,6 +8208,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -8505,6 +8563,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -8552,6 +8613,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -8852,10 +8914,23 @@ export interface components {
          *     Meetings are created asynchronously after an appointment is scheduled, so the
          *     `status` field reflects where the meeting is in its lifecycle. Meeting details
          *     such as `join_url` are populated only once the status is `created`.
+         *
+         *     The `host_url` field is a stable proxy URL on the account's booking domain
+         *     (the canonical SavvyCal host, or an active custom domain when one is
+         *     configured) that the meeting host follows to start the meeting. **Treat
+         *     this URL as a credential — anyone with it can start the meeting as the
+         *     host.** It is valid through the appointment's end time + a 24h grace
+         *     window, after which it returns 410 Gone. SavvyCal handles refresh of the
+         *     underlying conferencing-provider URL transparently behind the proxy, so
+         *     the proxy URL itself remains stable across `appointment.updated` webhook
+         *     events. `host_url` is null when the meeting is not yet `created` or when
+         *     the conferencing provider has no distinct host start URL (e.g., Google
+         *     Meet uses a single shared URL).
          * @example {
          *       "conferencing_provider": "zoom_admin",
          *       "error_message": null,
          *       "external_meeting_id": "82912345678",
+         *       "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *       "id": "amtg_a1b2c3d4e5f6",
          *       "join_url": "https://zoom.us/j/82912345678",
          *       "object": "appointment_meeting",
@@ -8876,6 +8951,15 @@ export interface components {
              * @example 82912345678
              */
             external_meeting_id: string | null;
+            /**
+             * Format: uri
+             * @description Stable proxy URL the host follows to start the meeting. Treat as a
+             *     credential — anyone with this URL can start the meeting as host.
+             *     Valid through the appointment's end time + 24h grace window, then
+             *     returns 410 Gone. Null when the meeting is not `created` or when
+             *     the conferencing provider has no distinct host start URL.
+             */
+            host_url: string | null;
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -9048,6 +9132,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -9095,6 +9182,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -9574,6 +9662,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -9621,6 +9712,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -9856,19 +9948,7 @@ export interface components {
             /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
             auto_assign_provider?: boolean | null;
             /** @description Progressive client data. Provided fields are merged with existing values. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
+            client_data?: components["schemas"]["ClientDataInput"] | null;
             /**
              * Format: date-time
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
@@ -10495,48 +10575,7 @@ export interface components {
          *     }
          */
         CreateAppointmentRequest: {
-            /**
-             * @description Information about the client booking the appointment. You can either provide an `id` or `reference_id` for an existing client,
-             *     or provide a new client's details.
-             */
-            client_data: {
-                /**
-                 * Format: email
-                 * @description The client's email address. Required if no existing client is provided.
-                 */
-                email?: string | null;
-                /** @description A map of custom field key-value pairs to set on the client. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                /** @description The client's first name. Required if no existing client is provided. */
-                first_name?: string | null;
-                /**
-                 * @description The ID of an existing client to attach to the appointment. If not provided, a new client will be created
-                 *     if the `reference_id` does not correspond to an existing client. If there does exist a client with
-                 *     the `reference_id` provided, the existing client will be attached to the appointment.
-                 */
-                id?: string | null;
-                /** @description The client's last name. Required if no existing client is provided. */
-                last_name?: string | null;
-                /**
-                 * @description The locale of the client booking the appointment.
-                 * @example en-US
-                 */
-                locale?: string | null;
-                /**
-                 * @description The client's phone number (E.164 format).
-                 * @example +1234567890
-                 */
-                phone?: string | null;
-                /** @description External reference identifier for the client. */
-                reference_id?: string | null;
-                /**
-                 * @description The client's time zone (IANA format). This field will be used to represent the appointment time slot in the client's local time zone (in the event that it differs from the appointment's local time zone).
-                 * @example America/New_York
-                 */
-                time_zone: string;
-            };
+            client_data: components["schemas"]["AppointmentClientDataInput"];
             /**
              * Format: date-time
              * @description The end time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T11:00:00-05:00` or `2025-03-01T16:00:00Z`). The `time_zone` field determines the canonical timezone.
@@ -10669,6 +10708,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -10716,6 +10758,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -10932,19 +10975,7 @@ export interface components {
             /** @description When true, automatically assigns an available provider for the selected time slot if no provider_id is specified. */
             auto_assign_provider?: boolean | null;
             /** @description Progressive client data to collect during the booking flow. */
-            client_data?: {
-                email?: string | null;
-                /** @description A map of custom field key-value pairs. */
-                fields?: {
-                    [key: string]: unknown;
-                } | null;
-                first_name?: string | null;
-                last_name?: string | null;
-                locale?: string | null;
-                phone?: string | null;
-                reference_id?: string | null;
-                time_zone?: string | null;
-            } | null;
+            client_data?: components["schemas"]["ClientDataInput"] | null;
             /**
              * Format: date-time
              * @description The end time of the slot as an ISO-8601 datetime string with a timezone offset.
@@ -10980,6 +11011,9 @@ export interface components {
          *         "client": null,
          *         "client_data": {
          *           "email": "jane@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Doe",
          *           "locale": "en",
@@ -11212,6 +11246,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -11259,6 +11296,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -11517,6 +11555,9 @@ export interface components {
          * @example {
          *       "client_data": {
          *         "email": "john.doe@example.com",
+         *         "fields": {
+         *           "age": 30
+         *         },
          *         "first_name": "John",
          *         "last_name": "Doe",
          *         "locale": "en-US",
@@ -11531,44 +11572,7 @@ export interface components {
          *     }
          */
         CreatePublicAppointmentRequest: {
-            /**
-             * @description Information about the client booking the appointment. You can either provide an `id` or `reference_id` for an existing client,
-             *     or provide a new client's details.
-             */
-            client_data: {
-                /**
-                 * Format: email
-                 * @description The client's email address. Required if no existing client is provided.
-                 */
-                email?: string | null;
-                /** @description The client's first name. Required if no existing client is provided. */
-                first_name?: string | null;
-                /**
-                 * @description The ID of an existing client to attach to the appointment. If not provided, a new client will be created
-                 *     if the `reference_id` does not correspond to an existing client. If there does exist a client with
-                 *     the `reference_id` provided, the existing client will be attached to the appointment.
-                 */
-                id?: string | null;
-                /** @description The client's last name. Required if no existing client is provided. */
-                last_name?: string | null;
-                /**
-                 * @description The locale of the client booking the appointment.
-                 * @example en-US
-                 */
-                locale?: string | null;
-                /**
-                 * @description The client's phone number (E.164 format).
-                 * @example +1234567890
-                 */
-                phone?: string | null;
-                /** @description External reference identifier for the client. */
-                reference_id?: string | null;
-                /**
-                 * @description The client's time zone (IANA format). This field will be used to represent the appointment time slot in the client's local time zone (in the event that it differs from the appointment's local time zone).
-                 * @example America/New_York
-                 */
-                time_zone: string;
-            };
+            client_data: components["schemas"]["AppointmentClientDataInput"];
             /**
              * Format: date-time
              * @description The end time of the appointment as an ISO-8601 datetime string with a timezone offset (e.g., `2025-03-01T11:00:00-05:00` or `2025-03-01T16:00:00Z`). The `time_zone` field determines the canonical timezone.
@@ -11699,6 +11703,54 @@ export interface components {
             data: components["schemas"]["ClientField"][];
         };
         /**
+         * ClientDataInput
+         * @description Progressive client data for a booking intent. All fields are optional; provided fields are merged with existing values.
+         * @example {
+         *       "email": "jane@example.com",
+         *       "fields": {
+         *         "age": 30
+         *       },
+         *       "first_name": "Jane",
+         *       "last_name": "Doe",
+         *       "locale": "en-US",
+         *       "phone": "+15551234567",
+         *       "reference_id": "ext_123",
+         *       "time_zone": "America/New_York"
+         *     }
+         */
+        ClientDataInput: {
+            /**
+             * Format: email
+             * @description The client's email address.
+             */
+            email?: string | null;
+            /** @description A map of custom field values to set on the client, keyed by field slug. Each key must correspond to a Client Field that has been defined in the account; arbitrary key-value pairs are not accepted. */
+            fields?: {
+                [key: string]: unknown;
+            } | null;
+            /** @description The client's first name. */
+            first_name?: string | null;
+            /** @description The client's last name. */
+            last_name?: string | null;
+            /**
+             * @description The locale of the client booking the appointment.
+             * @example en-US
+             */
+            locale?: string | null;
+            /**
+             * @description The client's phone number (E.164 format).
+             * @example +1234567890
+             */
+            phone?: string | null;
+            /** @description External reference identifier for the client. */
+            reference_id?: string | null;
+            /**
+             * @description The client's time zone (IANA format).
+             * @example America/New_York
+             */
+            time_zone?: string | null;
+        };
+        /**
          * BlockResponse
          * @description Response schema for a block
          * @example {
@@ -11785,6 +11837,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -11832,6 +11887,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
@@ -12072,6 +12128,9 @@ export interface components {
          *       },
          *       "client_data": {
          *         "email": "jane.smith@example.com",
+         *         "fields": {
+         *           "age": 30
+         *         },
          *         "first_name": "Jane",
          *         "last_name": "Smith",
          *         "locale": "en-US",
@@ -12119,6 +12178,7 @@ export interface components {
          *         "conferencing_provider": "zoom_admin",
          *         "error_message": null,
          *         "external_meeting_id": "82912345678",
+         *         "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *         "id": "amtg_a1b2c3d4e5f6",
          *         "join_url": "https://zoom.us/j/82912345678",
          *         "object": "appointment_meeting",
@@ -12333,6 +12393,10 @@ export interface components {
                  * @description The client's email address. This field will be `null` unless `include_sensitive` is `true`.
                  */
                 email?: string | null;
+                /** @description A map of custom field values set on the client, keyed by field slug. Values for fields marked as sensitive will be `null` unless `include_sensitive` is `true`. */
+                fields: {
+                    [key: string]: unknown;
+                };
                 /** @description The client's first name. This field will be `null` unless `include_sensitive` is `true`. */
                 first_name?: string | null;
                 /** @description The client's last name. This field will be `null` unless `include_sensitive` is `true`. */
@@ -12861,6 +12925,9 @@ export interface components {
          *       "client": null,
          *       "client_data": {
          *         "email": "jane@example.com",
+         *         "fields": {
+         *           "age": 30
+         *         },
          *         "first_name": "Jane",
          *         "last_name": "Doe",
          *         "locale": "en",
@@ -13032,9 +13099,13 @@ export interface components {
             booking_policy: components["schemas"]["BookingIntentBookingPolicy"];
             /** @description The linked client */
             client?: components["schemas"]["Client"] | null;
-            /** @description Client data accumulated during the booking flow. Sensitive fields (first_name, last_name, email, phone) are redacted unless include_sensitive is true. */
+            /** @description Client data accumulated during the booking flow. Sensitive fields (first_name, last_name, email, phone) are redacted unless include_sensitive is true. Values for `fields` entries flagged as sensitive are also redacted unless include_sensitive is true. */
             client_data?: {
                 email?: string | null;
+                /** @description A map of custom field values set on the client, keyed by field slug. Values for fields marked as sensitive will be `null` unless `include_sensitive` is `true`. */
+                fields?: {
+                    [key: string]: unknown;
+                };
                 first_name?: string | null;
                 last_name?: string | null;
                 locale?: string | null;
@@ -13248,6 +13319,9 @@ export interface components {
          *         },
          *         "client_data": {
          *           "email": "jane.smith@example.com",
+         *           "fields": {
+         *             "age": 30
+         *           },
          *           "first_name": "Jane",
          *           "last_name": "Smith",
          *           "locale": "en-US",
@@ -13295,6 +13369,7 @@ export interface components {
          *           "conferencing_provider": "zoom_admin",
          *           "error_message": null,
          *           "external_meeting_id": "82912345678",
+         *           "host_url": "https://book.acme.com/p/appointments/appt_a1b2c3d4e5f6/host?token=An5thqO6Li9Dy9WXe3IsJQYDEXGjS70GjQIdNntKZgw",
          *           "id": "amtg_a1b2c3d4e5f6",
          *           "join_url": "https://zoom.us/j/82912345678",
          *           "object": "appointment_meeting",
