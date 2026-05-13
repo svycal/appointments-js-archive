@@ -1,5 +1,11 @@
 # @savvycal/appointments-core
 
+## 1.7.1
+
+### Patch Changes
+
+- [`dd2fdd6`](https://github.com/svycal/appointments/commit/dd2fdd6876ed23cf29918adeca68ac6f6af39660) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- Corrected the documented stability guarantees for `host_url` on [AppointmentMeeting](https://developers.savvycal.app/api/schemas/appointmentmeeting). The proxy URL is _generally_ stable across `appointment.meeting.updated` events but may change if SavvyCal rotates the underlying token, and always changes when the meeting is replaced. Consumers caching `host_url` should listen for both `appointment.meeting.updated` and `appointment.meeting.replaced` to keep stored copies fresh. Types and runtime behavior are unchanged; only the schema description was updated.
+
 ## 1.7.0
 
 ### Minor Changes
