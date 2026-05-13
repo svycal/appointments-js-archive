@@ -8915,17 +8915,25 @@ export interface components {
          *     `status` field reflects where the meeting is in its lifecycle. Meeting details
          *     such as `join_url` are populated only once the status is `created`.
          *
-         *     The `host_url` field is a stable proxy URL on the account's booking domain
-         *     (the canonical SavvyCal host, or an active custom domain when one is
+         *     The `host_url` field is a proxy URL on the account's booking domain (the
+         *     canonical SavvyCal host, or an active custom domain when one is
          *     configured) that the meeting host follows to start the meeting. **Treat
          *     this URL as a credential — anyone with it can start the meeting as the
          *     host.** It is valid through the appointment's end time + a 24h grace
-         *     window, after which it returns 410 Gone. SavvyCal handles refresh of the
-         *     underlying conferencing-provider URL transparently behind the proxy, so
-         *     the proxy URL itself remains stable across `appointment.updated` webhook
-         *     events. `host_url` is null when the meeting is not yet `created` or when
-         *     the conferencing provider has no distinct host start URL (e.g., Google
-         *     Meet uses a single shared URL).
+         *     window, after which it returns 410 Gone.
+         *
+         *     SavvyCal refreshes the underlying conferencing-provider URL transparently
+         *     behind the proxy, so the proxy URL generally remains stable across
+         *     `appointment.meeting.updated` events. It may change if SavvyCal rotates
+         *     the underlying token (e.g., for security reasons) or when the meeting is
+         *     replaced — a brand-new meeting with a new `id`, which happens when a
+         *     reschedule routes the appointment to a different host on the account.
+         *     Listen for `appointment.meeting.updated` and `appointment.meeting.replaced`
+         *     to keep stored copies fresh.
+         *
+         *     `host_url` is null when the meeting is not yet `created` or when the
+         *     conferencing provider has no distinct host start URL (e.g., Google Meet
+         *     uses a single shared URL).
          * @example {
          *       "conferencing_provider": "zoom_admin",
          *       "error_message": null,
@@ -8953,11 +8961,15 @@ export interface components {
             external_meeting_id: string | null;
             /**
              * Format: uri
-             * @description Stable proxy URL the host follows to start the meeting. Treat as a
+             * @description Proxy URL the host follows to start the meeting. Treat as a
              *     credential — anyone with this URL can start the meeting as host.
              *     Valid through the appointment's end time + 24h grace window, then
-             *     returns 410 Gone. Null when the meeting is not `created` or when
-             *     the conferencing provider has no distinct host start URL.
+             *     returns 410 Gone. Generally stable, but may change across
+             *     `appointment.meeting.updated` events (e.g., if SavvyCal rotates the
+             *     token) and always changes when the meeting is replaced
+             *     (`appointment.meeting.replaced`). Null when the meeting is not
+             *     `created` or when the conferencing provider has no distinct host
+             *     start URL.
              */
             host_url: string | null;
             /** @description Unique identifier for the object. */
