@@ -13,8 +13,12 @@ permissions:
   id-token: write
 
 jobs:
+  lint:
+    uses: ./.github/workflows/ci.yml
+
   release:
     name: Release
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repo

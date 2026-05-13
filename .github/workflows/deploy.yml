@@ -8,8 +8,12 @@ on:
     # https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#on
 
 jobs:
+  lint:
+    uses: ./.github/workflows/ci.yml
+
   build:
     name: Build Docusaurus
+    needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
