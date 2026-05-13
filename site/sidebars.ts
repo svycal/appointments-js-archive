@@ -24,6 +24,7 @@ const sidebars: SidebarsConfig = {
     "index",
     "authentication",
     "rate-limiting",
+    "idempotency",
     {
       collapsed: false,
       items: [
