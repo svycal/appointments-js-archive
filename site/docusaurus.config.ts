@@ -40,19 +40,22 @@ const config: Config = {
     [
       "@signalwire/docusaurus-plugin-llms-txt",
       {
-        markdown: {
-          excludeRoutes: ["/api/**", "/category/rest-api"]
-        },
         llmsTxt: {
-          optionalLinks: [{
-            title: "API Specification",
-            url: "https://api.savvycal.app/v1/spec",
-            description: "Complete OpenAPI spec for the SavvyCal Appointments REST API",
-          }]
+          optionalLinks: [
+            {
+              description:
+                "Complete OpenAPI spec for the SavvyCal Appointments REST API",
+              title: "API Specification",
+              url: "https://api.savvycal.app/v1/spec",
+            },
+          ],
+        },
+        markdown: {
+          excludeRoutes: ["/api/**", "/category/rest-api"],
         },
         ui: {
           copyPageContent: {
-            buttonLabel: 'Copy Page',
+            buttonLabel: "Copy Page",
             display: {
               docs: true,
               excludeRoutes: ["/api/**", "/category/rest-api"],
@@ -105,9 +108,6 @@ const config: Config = {
   tagline: "Developer documentation for the SavvyCal Appointments API",
 
   themeConfig: {
-    metadata: [
-      { name: "llms", content: "https://developers.savvycal.app/llms.txt" },
-    ],
     footer: {
       copyright: `Copyright © ${new Date().getFullYear()} SavvyCal, Inc.`,
       links: [
@@ -146,6 +146,9 @@ const config: Config = {
     },
     // Replace with your project's social card
     image: "img/default-og-image.png",
+    metadata: [
+      { content: "https://developers.savvycal.app/llms.txt", name: "llms" },
+    ],
     navbar: {
       items: [
         {
@@ -179,13 +182,13 @@ const config: Config = {
     [
       "@easyops-cn/docusaurus-search-local",
       {
-        indexDocs: true,
-        indexBlog: false,
-        indexPages: false,
-        hashed: true,
-        language: ["en"],
-        highlightSearchTermsOnTargetPage: true,
         docsRouteBasePath: "/",
+        hashed: true,
+        highlightSearchTermsOnTargetPage: true,
+        indexBlog: false,
+        indexDocs: true,
+        indexPages: false,
+        language: ["en"],
         searchBarShortcutHint: true,
       },
     ],

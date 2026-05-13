@@ -9,7 +9,7 @@ const outDir = "js";
 // Find all .tsx files in src/components
 // Use readdirSync with recursive option (Node.js 18.17+)
 function findTsxFiles(dir: string): string[] {
-  const entries = fs.readdirSync(dir, { withFileTypes: true, recursive: true });
+  const entries = fs.readdirSync(dir, { recursive: true, withFileTypes: true });
   return entries
     .filter((entry) => entry.isFile() && entry.name.endsWith(".tsx"))
     .map((entry) => path.join(entry.parentPath || entry.path, entry.name));
