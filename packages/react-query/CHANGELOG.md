@@ -1,5 +1,14 @@
 # @savvycal/appointments-react-query
 
+## 1.2.5
+
+### Patch Changes
+
+- [#26](https://github.com/svycal/appointments/pull/26) [`02aeff4`](https://github.com/svycal/appointments/commit/02aeff4b6ba75d51a1fd96ef15ad2061a2abbe6e) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Internal:** -- Bumped dev dependencies and added pnpm overrides to resolve Dependabot security advisories across the monorepo. No public API changes.
+
+- Updated dependencies [[`84292f6`](https://github.com/svycal/appointments/commit/84292f643038f8f590430d338602d66167e9d0c4), [`02aeff4`](https://github.com/svycal/appointments/commit/02aeff4b6ba75d51a1fd96ef15ad2061a2abbe6e), [`84292f6`](https://github.com/svycal/appointments/commit/84292f643038f8f590430d338602d66167e9d0c4), [`84292f6`](https://github.com/svycal/appointments/commit/84292f643038f8f590430d338602d66167e9d0c4)]:
+  - @savvycal/appointments-core@1.7.0
+
 ## 1.2.4
 
 ### Patch Changes

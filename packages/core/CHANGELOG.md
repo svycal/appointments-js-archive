@@ -1,5 +1,19 @@
 # @savvycal/appointments-core
 
+## 1.7.0
+
+### Minor Changes
+
+- [`84292f6`](https://github.com/svycal/appointments/commit/84292f643038f8f590430d338602d66167e9d0c4) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: AppointmentMeeting host_url** -- AppointmentMeeting now includes a stable `host_url` proxy URL the meeting host follows to start the meeting. Treat as a credential — anyone with this URL can start the meeting as host. Valid through the appointment's end time + 24h grace window. See https://developers.savvycal.app/api/schemas/appointmentmeeting.
+
+- [`84292f6`](https://github.com/svycal/appointments/commit/84292f643038f8f590430d338602d66167e9d0c4) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: client_data fields** -- The `client_data` object on Appointment and BookingIntent responses now includes a `fields` map containing custom client field values, keyed by field slug. Values for fields flagged as sensitive are redacted unless `include_sensitive` is `true`. See https://developers.savvycal.app/api/schemas/appointment and https://developers.savvycal.app/api/schemas/bookingintent.
+
+### Patch Changes
+
+- [#26](https://github.com/svycal/appointments/pull/26) [`02aeff4`](https://github.com/svycal/appointments/commit/02aeff4b6ba75d51a1fd96ef15ad2061a2abbe6e) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Internal:** -- Bumped dev dependencies and added pnpm overrides to resolve Dependabot security advisories across the monorepo. No public API changes.
+
+- [`84292f6`](https://github.com/svycal/appointments/commit/84292f643038f8f590430d338602d66167e9d0c4) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed: client_data input schemas** -- The `client_data` input on appointment and booking intent endpoints is now exposed as named, reusable schemas: AppointmentClientDataInput (appointment creates) and ClientDataInput (booking intent create/update). Shapes are unchanged; the `fields` description has been tightened to clarify that each key must correspond to a Client Field defined in the account. See https://developers.savvycal.app/api/schemas/appointmentclientdatainput and https://developers.savvycal.app/api/schemas/clientdatainput.
+
 ## 1.6.0
 
 ### Minor Changes
