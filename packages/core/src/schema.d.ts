@@ -1357,6 +1357,7 @@ export interface components {
          *       "public_bookings": {
          *         "enabled": true
          *       },
+         *       "time_zone": "America/New_York",
          *       "weekly_rules": [
          *         {
          *           "day": "mo",
@@ -1390,6 +1391,8 @@ export interface components {
                  */
                 enabled: boolean;
             };
+            /** @description The IANA time zone the weekly rules are authored in. Defaults to the provider's location time zone when omitted. */
+            time_zone?: string;
             /** @description Weekly rules for the schedule. */
             weekly_rules?: components["schemas"]["WeeklyRule"][];
         };
@@ -1653,6 +1656,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "type": "provider.updated"
@@ -1776,6 +1780,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -1790,6 +1795,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -2100,6 +2106,7 @@ export interface components {
          *                   "external_id": "123"
          *                 },
          *                 "object": "provider",
+         *                 "time_zone": "America/New_York",
          *                 "updated_at": "2017-09-13T10:11:12Z"
          *               },
          *               "service_id": "srv_d025a96ac0c6",
@@ -2304,6 +2311,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "requirements": {
@@ -2579,6 +2587,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -2593,6 +2602,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -2923,6 +2933,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "requirements": {
@@ -3132,6 +3143,7 @@ export interface components {
          *               "external_id": "123"
          *             },
          *             "object": "provider",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
          *           "service_id": "srv_d025a96ac0c6",
@@ -3279,6 +3291,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "service_id": "srv_d025a96ac0c6",
@@ -3518,6 +3531,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "requirements": {
@@ -3956,6 +3970,7 @@ export interface components {
          *               "external_id": "123"
          *             },
          *             "object": "provider",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
          *           "requirements": {
@@ -4247,6 +4262,7 @@ export interface components {
          *         "public_bookings": {
          *           "enabled": true
          *         },
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2025-02-17T17:49:19Z",
          *         "weekly_rules": [
          *           {
@@ -4323,6 +4339,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "requirements": {
@@ -5161,6 +5178,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -5175,6 +5193,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -5615,6 +5634,7 @@ export interface components {
          *               "external_id": "123"
          *             },
          *             "object": "provider",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
          *           "providers": [
@@ -5629,6 +5649,7 @@ export interface components {
          *               },
          *               "object": "provider",
          *               "role": "primary",
+         *               "time_zone": "America/New_York",
          *               "updated_at": "2017-09-13T10:11:12Z"
          *             }
          *           ],
@@ -5825,6 +5846,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "type": "provider.created"
@@ -6048,6 +6070,7 @@ export interface components {
          *               "external_id": "123"
          *             },
          *             "object": "provider",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           },
          *           "providers": [
@@ -6062,6 +6085,7 @@ export interface components {
          *               },
          *               "object": "provider",
          *               "role": "primary",
+         *               "time_zone": "America/New_York",
          *               "updated_at": "2017-09-13T10:11:12Z"
          *             }
          *           ],
@@ -6604,6 +6628,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -6618,6 +6643,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -6823,6 +6849,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "service_id": "srv_d025a96ac0c6",
@@ -6896,6 +6923,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         }
          *       ],
@@ -7168,6 +7196,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "type": "provider.reactivated"
@@ -7327,6 +7356,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -7341,6 +7371,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -7558,6 +7589,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       }
          *     }
@@ -7579,6 +7611,7 @@ export interface components {
          *           "public_bookings": {
          *             "enabled": true
          *           },
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2025-02-17T17:49:19Z",
          *           "weekly_rules": [
          *             {
@@ -7793,6 +7826,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -7807,6 +7841,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -8226,6 +8261,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -8240,6 +8276,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -8631,6 +8668,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -8645,6 +8683,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -8826,6 +8865,7 @@ export interface components {
          *         "public_bookings": {
          *           "enabled": true
          *         },
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2025-02-17T17:49:19Z",
          *         "weekly_rules": [
          *           {
@@ -9212,6 +9252,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -9226,6 +9267,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -9450,6 +9492,7 @@ export interface components {
          *         "public_bookings": {
          *           "enabled": true
          *         },
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2025-02-17T17:49:19Z",
          *         "weekly_rules": [
          *           {
@@ -9742,6 +9785,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -9756,6 +9800,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -10016,6 +10061,7 @@ export interface components {
          *         "public_bookings": {
          *           "enabled": true
          *         },
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2025-02-17T17:49:19Z",
          *         "weekly_rules": [
          *           {
@@ -10147,6 +10193,7 @@ export interface components {
          *       },
          *       "object": "provider",
          *       "role": "primary",
+         *       "time_zone": "America/New_York",
          *       "updated_at": "2017-09-13T10:11:12Z"
          *     }
          */
@@ -10178,6 +10225,8 @@ export interface components {
              * @enum {string}
              */
             role: "primary" | "secondary";
+            /** @description The provider's preferred IANA time zone, used as the default when authoring schedules. */
+            time_zone: string;
             /**
              * Format: date-time
              * @description Time at which the object was last updated.
@@ -10197,6 +10246,7 @@ export interface components {
          *         "external_id": "123"
          *       },
          *       "object": "provider",
+         *       "time_zone": "America/New_York",
          *       "updated_at": "2017-09-13T10:11:12Z"
          *     }
          */
@@ -10223,6 +10273,8 @@ export interface components {
              * @enum {string}
              */
             object: "provider";
+            /** @description The provider's preferred IANA time zone, used as the default when authoring schedules. */
+            time_zone: string;
             /**
              * Format: date-time
              * @description Time at which the object was last updated.
@@ -10238,6 +10290,7 @@ export interface components {
          *       "public_bookings": {
          *         "enabled": true
          *       },
+         *       "time_zone": "America/New_York",
          *       "weekly_rules": [
          *         {
          *           "day": "mo",
@@ -10271,6 +10324,8 @@ export interface components {
                  */
                 enabled: boolean;
             };
+            /** @description The IANA time zone the weekly rules are authored in. Defaults to the provider's location time zone when omitted. */
+            time_zone?: string;
             /** @description Weekly rules for the schedule. */
             weekly_rules?: components["schemas"]["WeeklyRule"][];
         };
@@ -10419,6 +10474,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "service_id": "srv_d025a96ac0c6",
@@ -10627,6 +10683,7 @@ export interface components {
          *       "public_bookings": {
          *         "enabled": true
          *       },
+         *       "time_zone": "America/New_York",
          *       "updated_at": "2025-02-17T17:49:19Z",
          *       "weekly_rules": [
          *         {
@@ -10670,6 +10727,8 @@ export interface components {
                 /** @description Whether public bookings are enabled for the schedule. */
                 enabled: boolean;
             };
+            /** @description The IANA time zone the schedule's weekly rules are authored in. */
+            time_zone: string;
             /**
              * Format: datetime
              * @description When the schedule was last updated.
@@ -10788,6 +10847,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -10802,6 +10862,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -11063,6 +11124,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "requirements": {
@@ -11326,6 +11388,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -11340,6 +11403,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -11917,6 +11981,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -11931,6 +11996,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
@@ -12208,6 +12274,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "providers": [
@@ -12222,6 +12289,7 @@ export interface components {
          *           },
          *           "object": "provider",
          *           "role": "primary",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         }
          *       ],
@@ -12548,6 +12616,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "type": "provider.deactivated"
@@ -12659,6 +12728,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "service_id": "srv_d025a96ac0c6",
@@ -12977,6 +13047,7 @@ export interface components {
          *           "external_id": "123"
          *         },
          *         "object": "provider",
+         *         "time_zone": "America/New_York",
          *         "updated_at": "2017-09-13T10:11:12Z"
          *       },
          *       "requirements": {
@@ -13399,6 +13470,7 @@ export interface components {
          *             "external_id": "123"
          *           },
          *           "object": "provider",
+         *           "time_zone": "America/New_York",
          *           "updated_at": "2017-09-13T10:11:12Z"
          *         },
          *         "providers": [
@@ -13413,6 +13485,7 @@ export interface components {
          *             },
          *             "object": "provider",
          *             "role": "primary",
+         *             "time_zone": "America/New_York",
          *             "updated_at": "2017-09-13T10:11:12Z"
          *           }
          *         ],
