@@ -6,6 +6,11 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## May 15, 2026
+
+- **New:** -- [Provider](/api/schemas/provider) and [AppointmentProvider](/api/schemas/appointmentprovider) responses now include a `time_zone` field — the provider's preferred IANA time zone, used as the default when authoring schedules.
+- **New:** -- Provider schedules now have a `time_zone` field. [ProviderSchedule](/api/schemas/providerschedule) responses include the IANA time zone the schedule's weekly rules are authored in, and the [Create Provider Schedule](/api/create-provider-schedule) and [Update Provider Schedule](/api/update-provider-schedule) endpoints accept an optional `time_zone` to declare it; when omitted, it defaults to the provider's time zone.
+
 ## May 12, 2026
 
 - **New:** -- [AppointmentMeeting](/api/schemas/appointmentmeeting) now includes a `host_url` field — a proxy URL on the account's booking domain that the meeting host follows to start the meeting. SavvyCal refreshes the underlying conferencing-provider URL behind the proxy transparently, so the proxy URL is generally stable across `appointment.meeting.updated` events, though it may change if SavvyCal rotates the underlying token. It always changes when the meeting is replaced (e.g. a reschedule routes the appointment to a different host on the account, producing a brand-new meeting with a new `id`). **Treat as a credential** — anyone with this URL can start the meeting as host. Valid through the appointment's end time + a 24h grace window, then returns 410 Gone. Listen for `appointment.meeting.updated` and `appointment.meeting.replaced` to keep stored copies fresh. `null` when the meeting is not yet `created` or when the conferencing provider has no distinct host start URL (e.g., Google Meet).
