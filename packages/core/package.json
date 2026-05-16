@@ -1,6 +1,6 @@
 {
   "name": "@savvycal/appointments-core",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "type": "module",
   "description": "JavaScript/TypeScript client library for the SavvyCal Appointments API",
   "main": "./dist/index.cjs",
