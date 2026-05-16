@@ -6,6 +6,10 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## May 16, 2026
+
+- **Changed:** -- The `start_date` and `end_date` fields on [Block](/api/schemas/block), [CreateBlockRequest](/api/schemas/createblockrequest), and [UpdateBlockRequest](/api/schemas/updateblockrequest) have been consolidated into a single `date` field. The [List Blocks](/api/list-blocks) endpoint's `start_date`, `end_date`, `start_date_min`, `start_date_max`, `end_date_min`, and `end_date_max` query parameters have likewise been replaced with `date`, `date_min`, and `date_max`, and results are now sorted by `date`.
+
 ## May 15, 2026
 
 - **New:** -- [Provider](/api/schemas/provider) and [AppointmentProvider](/api/schemas/appointmentprovider) responses now include a `time_zone` field — the provider's preferred IANA time zone, used as the default when authoring schedules.

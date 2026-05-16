@@ -1305,7 +1305,7 @@ export interface paths {
          * List blocks
          * @description List all blocks account-wide or attached to a specific resource type.
          *
-         *     Blocks are sorted by `start_date` in ascending order (oldest first).
+         *     Blocks are sorted by `date` in ascending order (oldest first).
          */
         get: operations["listBlocks"];
         put?: never;
@@ -1606,7 +1606,7 @@ export interface components {
          *             "prov_d025a96ac0c6"
          *           ],
          *           "created_at": "2017-09-12T12:34:55Z",
-         *           "end_date": "2025-10-27",
+         *           "date": "2025-10-27",
          *           "end_time": "17:00",
          *           "exception_dates": [
          *             "2025-10-27T09:00:00"
@@ -1622,7 +1622,6 @@ export interface components {
          *             "freq": "weekly"
          *           },
          *           "service_id": null,
-         *           "start_date": "2025-10-27",
          *           "start_time": "09:00",
          *           "time_zone": "America/New_York",
          *           "title": "Team Meeting",
@@ -2201,7 +2200,7 @@ export interface components {
          *       "attachments": [
          *         "prov_d025a96ac0c6"
          *       ],
-         *       "end_date": "2025-10-27",
+         *       "date": "2025-10-27",
          *       "end_time": "17:00",
          *       "exception_dates": [
          *         "2025-10-27T09:00:00"
@@ -2214,7 +2213,6 @@ export interface components {
          *         ],
          *         "freq": "weekly"
          *       },
-         *       "start_date": "2025-10-27",
          *       "start_time": "09:00",
          *       "time_zone": "America/New_York",
          *       "title": "Initial Consult"
@@ -2232,9 +2230,9 @@ export interface components {
             attachments?: string[];
             /**
              * Format: date
-             * @description The end date of the block.
+             * @description The date of the block.
              */
-            end_date?: string;
+            date?: string;
             /** @description The end time of the block. */
             end_time?: string | null;
             /** @description The exception dates for the block. */
@@ -2243,11 +2241,6 @@ export interface components {
             recurrence_rule?: components["schemas"]["RecurrenceRule"] | null;
             /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
             service_id?: string | null;
-            /**
-             * Format: date
-             * @description The start date of the block.
-             */
-            start_date?: string;
             /** @description The start time of the block. */
             start_time?: string | null;
             /** @description The time zone of the block. */
@@ -4605,7 +4598,7 @@ export interface components {
          *           "prov_d025a96ac0c6"
          *         ],
          *         "created_at": "2017-09-12T12:34:55Z",
-         *         "end_date": "2025-10-27",
+         *         "date": "2025-10-27",
          *         "end_time": "17:00",
          *         "exception_dates": [
          *           "2025-10-27T09:00:00"
@@ -4621,7 +4614,6 @@ export interface components {
          *           "freq": "weekly"
          *         },
          *         "service_id": null,
-         *         "start_date": "2025-10-27",
          *         "start_time": "09:00",
          *         "time_zone": "America/New_York",
          *         "title": "Team Meeting",
@@ -6464,7 +6456,7 @@ export interface components {
          *       "attachments": [
          *         "prov_d025a96ac0c6"
          *       ],
-         *       "end_date": "2025-10-27",
+         *       "date": "2025-10-27",
          *       "end_time": "17:00",
          *       "exception_dates": [
          *         "2025-10-27T09:00:00"
@@ -6477,7 +6469,6 @@ export interface components {
          *         ],
          *         "freq": "weekly"
          *       },
-         *       "start_date": "2025-10-27",
          *       "start_time": "09:00",
          *       "time_zone": "America/New_York",
          *       "title": "Initial Consult"
@@ -6495,9 +6486,9 @@ export interface components {
             attachments?: string[];
             /**
              * Format: date
-             * @description The end date of the block.
+             * @description The date of the block.
              */
-            end_date: string;
+            date: string;
             /** @description The end time of the block. */
             end_time?: string | null;
             /** @description Exceptions for recurring block instances (in naive date time format). */
@@ -6506,11 +6497,6 @@ export interface components {
             recurrence_rule?: components["schemas"]["RecurrenceRule"] | null;
             /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
             service_id?: string | null;
-            /**
-             * Format: date
-             * @description The start date of the block.
-             */
-            start_date: string;
             /** @description The start time of the block. */
             start_time?: string | null;
             /** @description The time zone of the block. */
@@ -6951,7 +6937,7 @@ export interface components {
          *           "prov_d025a96ac0c6"
          *         ],
          *         "created_at": "2017-09-12T12:34:55Z",
-         *         "end_date": "2025-10-27",
+         *         "date": "2025-10-27",
          *         "end_time": "17:00",
          *         "exception_dates": [
          *           "2025-10-27T09:00:00"
@@ -6967,7 +6953,6 @@ export interface components {
          *           "freq": "weekly"
          *         },
          *         "service_id": null,
-         *         "start_date": "2025-10-27",
          *         "start_time": "09:00",
          *         "time_zone": "America/New_York",
          *         "title": "Team Meeting",
@@ -8915,7 +8900,7 @@ export interface components {
          *           "prov_d025a96ac0c6"
          *         ],
          *         "created_at": "2017-09-12T12:34:55Z",
-         *         "end_date": "2025-10-27",
+         *         "date": "2025-10-27",
          *         "end_time": "17:00",
          *         "exception_dates": [
          *           "2025-10-27T09:00:00"
@@ -8931,7 +8916,6 @@ export interface components {
          *           "freq": "weekly"
          *         },
          *         "service_id": null,
-         *         "start_date": "2025-10-27",
          *         "start_time": "09:00",
          *         "time_zone": "America/New_York",
          *         "title": "Team Meeting",
@@ -10381,7 +10365,7 @@ export interface components {
          *         "prov_d025a96ac0c6"
          *       ],
          *       "created_at": "2017-09-12T12:34:55Z",
-         *       "end_date": "2025-10-27",
+         *       "date": "2025-10-27",
          *       "end_time": "17:00",
          *       "exception_dates": [
          *         "2025-10-27T09:00:00"
@@ -10397,7 +10381,6 @@ export interface components {
          *         "freq": "weekly"
          *       },
          *       "service_id": null,
-         *       "start_date": "2025-10-27",
          *       "start_time": "09:00",
          *       "time_zone": "America/New_York",
          *       "title": "Team Meeting",
@@ -10421,9 +10404,9 @@ export interface components {
             created_at: string;
             /**
              * Format: date
-             * @description The end date of the block.
+             * @description The date of the block.
              */
-            end_date: string;
+            date: string;
             /** @description The end time of the block. */
             end_time: string | null;
             /** @description The exception dates for the block. */
@@ -10439,11 +10422,6 @@ export interface components {
             recurrence_rule: components["schemas"]["RecurrenceRule"] | null;
             /** @description The ID of the service for the block. Required when `attachment_type` is `service_provider`. */
             service_id: string | null;
-            /**
-             * Format: date
-             * @description The start date of the block.
-             */
-            start_date: string;
             /** @description The start time of the block. */
             start_time: string | null;
             /** @description The time zone of the block. */
@@ -11837,7 +11815,7 @@ export interface components {
          *           "prov_d025a96ac0c6"
          *         ],
          *         "created_at": "2017-09-12T12:34:55Z",
-         *         "end_date": "2025-10-27",
+         *         "date": "2025-10-27",
          *         "end_time": "17:00",
          *         "exception_dates": [
          *           "2025-10-27T09:00:00"
@@ -11853,7 +11831,6 @@ export interface components {
          *           "freq": "weekly"
          *         },
          *         "service_id": null,
-         *         "start_date": "2025-10-27",
          *         "start_time": "09:00",
          *         "time_zone": "America/New_York",
          *         "title": "Team Meeting",
@@ -18286,18 +18263,12 @@ export interface operations {
                 service_provider_ids?: string;
                 /** @description Filter by location ID(s). Accepts a single ID or comma-delimited list of IDs. */
                 location_ids?: string;
-                /** @description Only return blocks that start on the specified date. */
-                start_date?: string;
-                /** @description Only return blocks that end on the specified date. */
-                end_date?: string;
-                /** @description Only return blocks that start on or after the specified date. */
-                start_date_min?: string;
-                /** @description Only return blocks that start on or before the specified date. */
-                start_date_max?: string;
-                /** @description Only return blocks that end on or after the specified date. */
-                end_date_min?: string;
-                /** @description Only return blocks that end on or before the specified date. */
-                end_date_max?: string;
+                /** @description Only return blocks on the specified date. */
+                date?: string;
+                /** @description Only return blocks on or after the specified date. */
+                date_min?: string;
+                /** @description Only return blocks on or before the specified date. */
+                date_max?: string;
                 /** @description If true, only return blocks that are recurring. */
                 recurring?: boolean;
                 /** @description If true, only return blocks that are all day. */
