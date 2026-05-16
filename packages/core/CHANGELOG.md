@@ -1,5 +1,15 @@
 # @savvycal/appointments-core
 
+## 1.8.0
+
+### Minor Changes
+
+- [#35](https://github.com/svycal/appointments/pull/35) [`ccbedce`](https://github.com/svycal/appointments/commit/ccbedce0ccefbfd74ab16329aa186598076a79b1) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- The `start_date` and `end_date` fields on [Block](https://developers.savvycal.app/api/schemas/block), [CreateBlockRequest](https://developers.savvycal.app/api/schemas/createblockrequest), and [UpdateBlockRequest](https://developers.savvycal.app/api/schemas/updateblockrequest) have been consolidated into a single `date` field. The [List Blocks](https://developers.savvycal.app/api/list-blocks) endpoint's `start_date`, `end_date`, `start_date_min`, `start_date_max`, `end_date_min`, and `end_date_max` query parameters have likewise been replaced with `date`, `date_min`, and `date_max`, and results are now sorted by `date`.
+
+- [#33](https://github.com/svycal/appointments/pull/33) [`a3a3255`](https://github.com/svycal/appointments/commit/a3a32554e8969364ca0154e0c265c6de591608fe) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- Provider schedules now have a `time_zone` field. [ProviderSchedule](https://developers.savvycal.app/api/schemas/providerschedule) responses include the IANA time zone the schedule's weekly rules are authored in, and the [Create Provider Schedule](https://developers.savvycal.app/api/create-provider-schedule) and [Update Provider Schedule](https://developers.savvycal.app/api/update-provider-schedule) endpoints accept an optional `time_zone` to declare it; when omitted, it defaults to the provider's time zone.
+
+- [#33](https://github.com/svycal/appointments/pull/33) [`a3a3255`](https://github.com/svycal/appointments/commit/a3a32554e8969364ca0154e0c265c6de591608fe) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- [Provider](https://developers.savvycal.app/api/schemas/provider) and [AppointmentProvider](https://developers.savvycal.app/api/schemas/appointmentprovider) responses now include a `time_zone` field — the provider's preferred IANA time zone, used as the default when authoring schedules.
+
 ## 1.7.1
 
 ### Patch Changes
