@@ -1,1 +1,1 @@
-{"parameters":[{"description":"When authenticating with a platform token, specifies the account ID for the request","example":"acct_1234567890","in":"header","name":"X-SavvyCal-Account","required":false,"schema":{"type":"string"}},{"description":"Client field ID","in":"path","name":"client_field_id","required":true,"schema":{"type":"string"}}]}
+{"parameters":[{"description":"Client field ID","in":"path","name":"client_field_id","required":true,"schema":{"type":"string"}}]}

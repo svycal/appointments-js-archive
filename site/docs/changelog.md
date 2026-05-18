@@ -6,6 +6,11 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## May 18, 2026
+
+- **Changed:** -- The `X-SavvyCal-Account` header is no longer listed as a parameter on individual operations in the OpenAPI spec or API reference; it's now documented once on the [Platforms](/platforms) and [Authentication](/authentication) pages. The header is unchanged at the protocol level — it is still required when authenticating with a platform token to specify the target account.
+- **New:** -- The [Create Provider](/api/create-provider) and [Update Provider](/api/update-provider) endpoints now accept an optional `time_zone` field for setting the provider's preferred IANA time zone. When omitted on create, it defaults to the account location's time zone. See [CreateProviderRequest](/api/schemas/createproviderrequest) and [UpdateProviderRequest](/api/schemas/updateproviderrequest).
+
 ## May 16, 2026
 
 - **Changed:** -- The `start_date` and `end_date` fields on [Block](/api/schemas/block), [CreateBlockRequest](/api/schemas/createblockrequest), and [UpdateBlockRequest](/api/schemas/updateblockrequest) have been consolidated into a single `date` field. The [List Blocks](/api/list-blocks) endpoint's `start_date`, `end_date`, `start_date_min`, `start_date_max`, `end_date_min`, and `end_date_max` query parameters have likewise been replaced with `date`, `date_min`, and `date_max`, and results are now sorted by `date`.
