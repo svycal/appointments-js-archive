@@ -3163,7 +3163,8 @@ export interface components {
          *       "notify": false,
          *       "role_ids": [
          *         "role_123456789012"
-         *       ]
+         *       ],
+         *       "time_zone": "America/New_York"
          *     }
          */
         CreateProviderRequest: {
@@ -3191,6 +3192,11 @@ export interface components {
             notify: boolean;
             /** @description List of role IDs to assign to the user (if `add_user` is true). */
             role_ids?: string[];
+            /**
+             * @description The provider's preferred IANA time zone, used as the default when authoring schedules. Defaults to the account location's time zone when omitted.
+             * @example America/New_York
+             */
+            time_zone?: string;
         };
         /**
          * FormFieldInput
@@ -4549,7 +4555,8 @@ export interface components {
          *       "last_name": "Smith",
          *       "metadata": {
          *         "external_id": "123"
-         *       }
+         *       },
+         *       "time_zone": "America/New_York"
          *     }
          */
         UpdateProviderRequest: {
@@ -4563,6 +4570,11 @@ export interface components {
             metadata?: {
                 [key: string]: unknown;
             };
+            /**
+             * @description The provider's preferred IANA time zone, used as the default when authoring schedules.
+             * @example America/New_York
+             */
+            time_zone?: string;
         };
         /**
          * PublicCancellationReason
@@ -13761,13 +13773,7 @@ export interface operations {
     listClientFields: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -13805,13 +13811,7 @@ export interface operations {
     createClientField: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -13857,13 +13857,7 @@ export interface operations {
                 /** @description Whether to include sensitive fields (such as client name, email, and phone) */
                 include_sensitive?: boolean;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Appointment ID */
                 appointment_id: string;
@@ -13907,13 +13901,7 @@ export interface operations {
                 /** @description Whether to include sensitive fields (such as client name, email, and phone) */
                 include_sensitive?: boolean;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Booking Intent ID */
                 booking_intent_id: string;
@@ -13954,13 +13942,7 @@ export interface operations {
     updateBookingIntent: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Booking Intent ID */
                 booking_intent_id: string;
@@ -14015,13 +13997,7 @@ export interface operations {
     createDashboardSession: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -14168,13 +14144,7 @@ export interface operations {
     listServiceForms: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -14215,13 +14185,7 @@ export interface operations {
     attachServiceForm: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -14276,13 +14240,7 @@ export interface operations {
     completeBookingIntent: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Booking Intent ID */
                 booking_intent_id: string;
@@ -14337,13 +14295,7 @@ export interface operations {
     getProviderSchedule: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Provider schedule ID */
                 provider_schedule_id: string;
@@ -14384,13 +14336,7 @@ export interface operations {
     deleteProviderSchedule: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Provider schedule ID */
                 provider_schedule_id: string;
@@ -14431,13 +14377,7 @@ export interface operations {
     updateProviderSchedule: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -14514,13 +14454,7 @@ export interface operations {
     updateAccountUser: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /**
                  * @description The user's unique identifier
@@ -14581,13 +14515,7 @@ export interface operations {
                 /** @description Whether to include sensitive fields (such as client name, email, and phone) */
                 include_sensitive?: boolean;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Client ID */
                 client_id: string;
@@ -14628,13 +14556,7 @@ export interface operations {
     deleteClient: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Client ID */
                 client_id: string;
@@ -14675,13 +14597,7 @@ export interface operations {
     updateClient: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Client ID */
                 client_id: string;
@@ -14736,13 +14652,7 @@ export interface operations {
     abandonBookingIntent: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Booking Intent ID */
                 booking_intent_id: string;
@@ -14824,13 +14734,7 @@ export interface operations {
     getService: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -14871,13 +14775,7 @@ export interface operations {
     deleteService: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -14918,13 +14816,7 @@ export interface operations {
     updateService: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -15109,13 +15001,7 @@ export interface operations {
     detachServiceForm: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service Form ID */
                 service_form_id: string;
@@ -15252,13 +15138,7 @@ export interface operations {
     listServiceProviders: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -15299,13 +15179,7 @@ export interface operations {
     createServiceProvider: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -15369,13 +15243,7 @@ export interface operations {
                     [key: string]: unknown;
                 };
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -15413,13 +15281,7 @@ export interface operations {
     createService: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -15462,13 +15324,7 @@ export interface operations {
     getForm: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Form ID */
                 form_id: string;
@@ -15509,13 +15365,7 @@ export interface operations {
     deleteForm: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Form ID */
                 form_id: string;
@@ -15556,13 +15406,7 @@ export interface operations {
     updateForm: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Form ID */
                 form_id: string;
@@ -15617,13 +15461,7 @@ export interface operations {
     deleteServiceProvider: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service Provider ID */
                 service_provider_id: string;
@@ -15681,13 +15519,7 @@ export interface operations {
                  */
                 provider_ids?: string;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /**
                  * @description Service ID
@@ -15740,13 +15572,7 @@ export interface operations {
     getCancellationReason: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Cancellation reason ID */
                 cancellation_reason_id: string;
@@ -15787,13 +15613,7 @@ export interface operations {
     deleteCancellationReason: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Cancellation reason ID */
                 cancellation_reason_id: string;
@@ -15834,13 +15654,7 @@ export interface operations {
     updateCancellationReason: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Cancellation reason ID */
                 cancellation_reason_id: string;
@@ -15902,13 +15716,7 @@ export interface operations {
                 /** @description Filter forms by name. */
                 search?: string;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -15946,13 +15754,7 @@ export interface operations {
     createForm: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16004,13 +15806,7 @@ export interface operations {
                 /** @description Time zone for the slots (IANA format) */
                 time_zone?: string;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Booking Intent ID */
                 booking_intent_id: string;
@@ -16060,13 +15856,7 @@ export interface operations {
     confirmAppointment: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Appointment ID */
                 appointment_id: string;
@@ -16112,13 +15902,7 @@ export interface operations {
     createProviderSchedule: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16207,13 +15991,7 @@ export interface operations {
     listCancellationReasons: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16251,13 +16029,7 @@ export interface operations {
     createCancellationReason: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16300,13 +16072,7 @@ export interface operations {
     getConnectedAccount: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Connected Account ID */
                 connected_account_id: string;
@@ -16347,13 +16113,7 @@ export interface operations {
     deleteConnectedAccount: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Connected Account ID */
                 connected_account_id: string;
@@ -16394,13 +16154,7 @@ export interface operations {
     updateConnectedAccount: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Connected Account ID */
                 connected_account_id: string;
@@ -16455,13 +16209,7 @@ export interface operations {
     listRoles: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16512,13 +16260,7 @@ export interface operations {
                 /** @description Whether to include sensitive fields (such as client name, email, and phone) */
                 include_sensitive?: boolean;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16556,13 +16298,7 @@ export interface operations {
     createClient: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16757,13 +16493,7 @@ export interface operations {
                     [key: string]: unknown;
                 };
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16801,13 +16531,7 @@ export interface operations {
     createBookingIntent: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16911,13 +16635,7 @@ export interface operations {
                     [key: string]: unknown;
                 };
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -16955,13 +16673,7 @@ export interface operations {
     createProvider: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17036,13 +16748,7 @@ export interface operations {
                  */
                 provider_ids?: string;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /**
                  * @description Service ID
@@ -17104,13 +16810,7 @@ export interface operations {
                 /** @description Filter by location ID(s). Accepts a single ID or comma-delimited list of IDs. */
                 location_ids?: string;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17148,13 +16848,7 @@ export interface operations {
     sortServiceForms: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Service ID */
                 service_id: string;
@@ -17209,13 +16903,7 @@ export interface operations {
     getCurrentAccount: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17253,13 +16941,7 @@ export interface operations {
     getProvider: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Provider ID */
                 provider_id: string;
@@ -17300,13 +16982,7 @@ export interface operations {
     deactivateProvider: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Provider ID */
                 provider_id: string;
@@ -17347,13 +17023,7 @@ export interface operations {
     updateProvider: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Provider ID */
                 provider_id: string;
@@ -17535,13 +17205,7 @@ export interface operations {
                  */
                 order_directions?: ("asc" | "desc")[];
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17588,13 +17252,7 @@ export interface operations {
     createAppointment: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17637,13 +17295,7 @@ export interface operations {
     listAccountUsers: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17681,13 +17333,7 @@ export interface operations {
     createAccountUser: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17809,13 +17455,7 @@ export interface operations {
     deleteBlock: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Block ID */
                 block_id: string;
@@ -17856,13 +17496,7 @@ export interface operations {
     updateBlock: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -17905,13 +17539,7 @@ export interface operations {
     getClientField: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Client field ID */
                 client_field_id: string;
@@ -17952,13 +17580,7 @@ export interface operations {
     deleteClientField: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Client field ID */
                 client_field_id: string;
@@ -17999,13 +17621,7 @@ export interface operations {
     updateClientField: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Client field ID */
                 client_field_id: string;
@@ -18086,13 +17702,7 @@ export interface operations {
                  */
                 provider_ids?: string;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /**
                  * @description Service ID
@@ -18145,13 +17755,7 @@ export interface operations {
     rescheduleAppointment: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Appointment ID */
                 appointment_id: string;
@@ -18197,13 +17801,7 @@ export interface operations {
     cancelAppointment: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path: {
                 /** @description Appointment ID */
                 appointment_id: string;
@@ -18274,13 +17872,7 @@ export interface operations {
                 /** @description If true, only return blocks that are all day. */
                 all_day?: boolean;
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -18318,13 +17910,7 @@ export interface operations {
     createBlock: {
         parameters: {
             query?: never;
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
@@ -18376,13 +17962,7 @@ export interface operations {
                 /** @description Only return connected accounts for the specified provider. */
                 provider?: "google" | "microsoft" | "zoom_admin";
             };
-            header?: {
-                /**
-                 * @description When authenticating with a platform token, specifies the account ID for the request
-                 * @example acct_1234567890
-                 */
-                "X-SavvyCal-Account"?: string;
-            };
+            header?: never;
             path?: never;
             cookie?: never;
         };
