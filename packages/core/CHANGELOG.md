@@ -1,5 +1,15 @@
 # @savvycal/appointments-core
 
+## 1.9.0
+
+### Minor Changes
+
+- [#36](https://github.com/svycal/appointments/pull/36) [`10fc79c`](https://github.com/svycal/appointments/commit/10fc79cc755420c652cb9f4dc861e24b29cdde22) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- The [Create Provider](https://developers.savvycal.app/api/create-provider) and [Update Provider](https://developers.savvycal.app/api/update-provider) endpoints now accept an optional `time_zone` field for setting the provider's preferred IANA time zone. When omitted on create, it defaults to the account location's time zone. See [CreateProviderRequest](https://developers.savvycal.app/api/schemas/createproviderrequest) and [UpdateProviderRequest](https://developers.savvycal.app/api/schemas/updateproviderrequest).
+
+### Patch Changes
+
+- [#36](https://github.com/svycal/appointments/pull/36) [`10fc79c`](https://github.com/svycal/appointments/commit/10fc79cc755420c652cb9f4dc861e24b29cdde22) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed:** -- The `X-SavvyCal-Account` header is no longer listed as a parameter on individual operations in the OpenAPI spec or API reference; it's now documented once on the [Platforms](https://developers.savvycal.app/platforms) and [Authentication](https://developers.savvycal.app/authentication) pages. The header is unchanged at the protocol level — it is still required when authenticating with a platform token to specify the target account.
+
 ## 1.8.0
 
 ### Minor Changes
