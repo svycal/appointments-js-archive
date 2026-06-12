@@ -1,5 +1,21 @@
 # @savvycal/appointments-core
 
+## 1.10.0
+
+### Minor Changes
+
+- [#39](https://github.com/svycal/appointments/pull/39) [`1e7646e`](https://github.com/svycal/appointments/commit/1e7646e3c8ca7d46d0d2e2cac58a754c646c3f9a) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Appointment buffer fields** -- [Appointment](https://developers.savvycal.app/api/schemas/appointment) responses now include `buffer_policy`, `buffered_start_at`, and `buffered_end_at` fields. The buffer policy is captured at booking time and continues to shield the surrounding time even if the service configuration changes later.
+
+- [#39](https://github.com/svycal/appointments/pull/39) [`1e7646e`](https://github.com/svycal/appointments/commit/1e7646e3c8ca7d46d0d2e2cac58a754c646c3f9a) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Opening webhook events** -- Added webhook events for openings: `opening.created`, `opening.updated`, and `opening.deleted`. See [OpeningCreatedEventData](https://developers.savvycal.app/api/schemas/openingcreatedeventdata), [OpeningUpdatedEventData](https://developers.savvycal.app/api/schemas/openingupdatedeventdata), and [OpeningDeletedEventData](https://developers.savvycal.app/api/schemas/openingdeletedeventdata).
+
+- [#39](https://github.com/svycal/appointments/pull/39) [`1e7646e`](https://github.com/svycal/appointments/commit/1e7646e3c8ca7d46d0d2e2cac58a754c646c3f9a) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Buffer Policy** -- Services now support a `buffer_policy` for shielding time before and/or after appointments from being booked (e.g. prep time before, charting time after). See [BufferPolicy](https://developers.savvycal.app/api/schemas/bufferpolicy) and [Service](https://developers.savvycal.app/api/schemas/service).
+
+- [#39](https://github.com/svycal/appointments/pull/39) [`1e7646e`](https://github.com/svycal/appointments/commit/1e7646e3c8ca7d46d0d2e2cac58a754c646c3f9a) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: List External Users** -- Added an endpoint for listing users synced from a connected external account (e.g., Zoom users). See [List External Users](https://developers.savvycal.app/api/list-connected-account-external-users) and [ExternalUser](https://developers.savvycal.app/api/schemas/externaluser).
+
+- [#39](https://github.com/svycal/appointments/pull/39) [`1e7646e`](https://github.com/svycal/appointments/commit/1e7646e3c8ca7d46d0d2e2cac58a754c646c3f9a) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: User Mappings** -- Added endpoints for managing default mappings between providers and external users on connected accounts (e.g., the Zoom user whose account hosts meetings for a provider). Mappings can be set by external user ID or by email. See [UserMapping](https://developers.savvycal.app/api/schemas/usermapping).
+
+- [#39](https://github.com/svycal/appointments/pull/39) [`1e7646e`](https://github.com/svycal/appointments/commit/1e7646e3c8ca7d46d0d2e2cac58a754c646c3f9a) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Openings** -- Added endpoints for managing openings — one-off ranges of available time for a provider that sit alongside their recurring schedules. See [Openings](https://developers.savvycal.app/api/list-openings) and [Opening](https://developers.savvycal.app/api/schemas/opening).
+
 ## 1.9.0
 
 ### Minor Changes
