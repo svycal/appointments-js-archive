@@ -1,0 +1,32 @@
+---
+id: usermappingsresponse
+title: "UserMappingsResponse"
+description: "Response schema for multiple user mappings"
+sidebar_label: "UserMappingsResponse"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"data":[{"external_user":{"email":"dr.smith@example.com","first_name":"Jane","id":"exusr_d025a96ac0c6","last_name":"Smith","object":"external_user","status":"active"},"object":"user_mapping","provider":{"created_at":"2017-09-12T12:34:55Z","display_name":"John Smith","email":"john@example.com","first_name":"John","id":"prov_d025a96ac0c6","last_name":"Smith","metadata":{"external_id":"123"},"object":"provider","time_zone":"America/New_York","updated_at":"2017-09-13T10:11:12Z"},"source":"manual"}],"meta":{"current_page":1,"page_size":10,"total_count":50,"total_pages":5}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"UserMappingsResponse"}
+>
+</Heading>
+
+
+
+Response schema for multiple user mappings
+
+<Schema
+  {...require("./usermappingsresponse.Schema.json")}
+>
+  
+</Schema>
+            

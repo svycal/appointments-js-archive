@@ -1,0 +1,1 @@
+{"parameters":[{"description":"Opening ID","in":"path","name":"opening_id","required":true,"schema":{"type":"string"}}]}

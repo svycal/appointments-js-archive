@@ -117,6 +117,28 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/openings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List openings
+         * @description List all openings account-wide or for a specific provider.
+         *
+         *     Openings are sorted by `date` in ascending order (oldest first).
+         */
+        get: operations["listOpenings"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/accounts": {
         parameters: {
             query?: never;
@@ -405,6 +427,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/connected_accounts/{connected_account_id}/external_users": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List external users
+         * @description List the external users synced from a connected account (e.g., the users
+         *     on a connected Zoom account).
+         *
+         *     Returns a 404 when the connected account does not exist, is not accessible
+         *     to the current actor, or is not a conferencing connected account.
+         */
+        get: operations["listConnectedAccountExternalUsers"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/public/booking_intents": {
         parameters: {
             query?: never;
@@ -585,6 +631,34 @@ export interface paths {
         options?: never;
         head?: never;
         patch?: never;
+        trace?: never;
+    };
+    "/v1/openings/{opening_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get opening
+         * @description Get an opening by ID.
+         */
+        get: operations["getOpening"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete opening
+         * @description Delete an existing opening.
+         */
+        delete: operations["deleteOpening"];
+        options?: never;
+        head?: never;
+        /**
+         * Update opening
+         * @description Update an existing opening.
+         */
+        patch: operations["updateOpening"];
         trace?: never;
     };
     "/v1/cancellation_reasons/{cancellation_reason_id}": {
@@ -1176,6 +1250,79 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/providers/{provider_id}/openings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Create opening
+         * @description Create a new opening.
+         */
+        post: operations["createOpening"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/connected_accounts/{connected_account_id}/user_mappings/{provider_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get user mapping
+         * @description Get the default user mapping between a provider and an external user on a
+         *     connected account.
+         *
+         *     Returns a 404 when the connected account does not exist, is not accessible
+         *     to the current actor, or is not a conferencing connected account; when the
+         *     provider does not exist or has been deactivated; or when no mapping exists
+         *     for the provider on this connected account.
+         */
+        get: operations["getUserMapping"];
+        /**
+         * Set user mapping
+         * @description Set the default user mapping between a provider and an external user on a
+         *     connected account. The external user can be identified by ID or by email
+         *     address (matched case-insensitively against the connected account's
+         *     external users) — exactly one of the two must be provided. `email` is a
+         *     convenience; matching fails with a 422 when the email matches zero or
+         *     multiple external users, so integrations that need determinism should
+         *     resolve and use `external_user_id`.
+         *
+         *     Setting a mapping replaces any existing mapping for the provider on this
+         *     connected account, so this operation is an idempotent upsert.
+         *
+         *     Returns a 404 when the connected account does not exist, is not accessible
+         *     to the current actor, or is not a conferencing connected account; or when
+         *     the provider does not exist or has been deactivated.
+         */
+        put: operations["setUserMapping"];
+        post?: never;
+        /**
+         * Delete user mapping
+         * @description Remove the default user mapping between a provider and an external user on
+         *     a connected account. Mappings on deactivated providers can also be removed.
+         *
+         *     Returns a 404 when the connected account does not exist, is not accessible
+         *     to the current actor, or is not a conferencing connected account; when the
+         *     provider does not exist; or when no mapping exists for the provider on
+         *     this connected account.
+         */
+        delete: operations["deleteUserMapping"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/blocks/{block_id}": {
         parameters: {
             query?: never;
@@ -1244,6 +1391,31 @@ export interface paths {
          * @description List all available time slots for a service in a specific time range.
          */
         get: operations["listServiceSlots"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    "/v1/connected_accounts/{connected_account_id}/user_mappings": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List user mappings
+         * @description List the default user mappings between providers and external users for a
+         *     connected account. Mappings whose provider has been deactivated are not
+         *     included.
+         *
+         *     Returns a 404 when the connected account does not exist, is not accessible
+         *     to the current actor, or is not a conferencing connected account.
+         */
+        get: operations["listUserMappings"];
         put?: never;
         post?: never;
         delete?: never;
@@ -1648,6 +1820,7 @@ export interface components {
          *       "object": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -1676,6 +1849,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -1772,6 +1964,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -1786,6 +1979,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -1852,6 +2046,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -2098,6 +2297,7 @@ export interface components {
          *               "provider": {
          *                 "created_at": "2017-09-12T12:34:55Z",
          *                 "display_name": "John Smith",
+         *                 "email": "john@example.com",
          *                 "first_name": "John",
          *                 "id": "prov_d025a96ac0c6",
          *                 "last_name": "Smith",
@@ -2139,6 +2339,27 @@ export interface components {
              * @enum {string}
              */
             initiated_by: "user" | "client";
+        };
+        /**
+         * OpeningResponse
+         * @description Response schema for a single opening
+         * @example {
+         *       "data": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "date": "2025-06-15",
+         *         "end_time": "17:00",
+         *         "id": "opn_d025a96ac0c6",
+         *         "object": "opening",
+         *         "provider_id": "prov_d025a96ac0c6",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Extra clinic hours",
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       }
+         *     }
+         */
+        OpeningResponse: {
+            data: components["schemas"]["Opening"];
         };
         /**
          * AccountUser
@@ -2297,6 +2518,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -2337,6 +2559,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -2477,6 +2704,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -2573,6 +2819,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -2587,6 +2834,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -2653,6 +2901,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -2919,6 +3172,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -2959,6 +3213,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -3129,6 +3388,7 @@ export interface components {
          *           "provider": {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -3283,6 +3543,7 @@ export interface components {
          *       "provider": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -3370,6 +3631,11 @@ export interface components {
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
+         *         },
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
          *         },
          *         "cancellation_policy": {
          *           "advance_notice": {
@@ -3475,6 +3741,20 @@ export interface components {
             label: string;
         };
         /**
+         * SetUserMappingRequest
+         * @description Request schema for setting a user mapping. Exactly one of `external_user_id` or `email` must be provided to identify the external user.
+         * @example {
+         *       "external_user_id": "exusr_d025a96ac0c6"
+         *     }
+         */
+        SetUserMappingRequest: {
+            /** @description The ID of the external user to map to the provider. */
+            external_user_id: string;
+        } | {
+            /** @description The email address of the external user to map to the provider, matched case-insensitively against the connected account's external users. */
+            email: string;
+        };
+        /**
          * BookingIntentUpdatedEventData
          * @description This is an object representing data for the booking intent updated event.
          * @example {
@@ -3523,6 +3803,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -3563,6 +3844,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -3663,6 +3949,37 @@ export interface components {
              * @enum {string}
              */
             type: "booking_intent.updated";
+        };
+        /**
+         * OpeningsResponse
+         * @description Response schema for a list of openings
+         * @example {
+         *       "data": [
+         *         {
+         *           "created_at": "2025-02-17T17:49:19Z",
+         *           "date": "2025-06-15",
+         *           "end_time": "17:00",
+         *           "id": "opn_d025a96ac0c6",
+         *           "object": "opening",
+         *           "provider_id": "prov_d025a96ac0c6",
+         *           "start_time": "09:00",
+         *           "time_zone": "America/New_York",
+         *           "title": "Extra clinic hours",
+         *           "updated_at": "2025-02-17T17:49:19Z"
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        OpeningsResponse: {
+            /** @description List of openings */
+            data: components["schemas"]["Opening"][];
+            meta: components["schemas"]["PaginationMeta"];
         };
         /**
          * CreateCancellationReasonRequest
@@ -3962,6 +4279,7 @@ export interface components {
          *           "provider": {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -4002,6 +4320,11 @@ export interface components {
          *               "maximize_utilization": {
          *                 "enabled": true
          *               }
+         *             },
+         *             "buffer_policy": {
+         *               "after_duration": "PT1H",
+         *               "before_duration": "PT15M",
+         *               "enabled": true
          *             },
          *             "cancellation_policy": {
          *               "advance_notice": {
@@ -4331,6 +4654,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -4371,6 +4695,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -4922,6 +5251,11 @@ export interface components {
          *             "enabled": true
          *           }
          *         },
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
          *         "cancellation_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -5079,6 +5413,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -5175,6 +5528,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -5189,6 +5543,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -5255,6 +5610,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -5498,6 +5858,50 @@ export interface components {
             time_zone: string;
         };
         /**
+         * UserMapping
+         * @description This is an object representing a default mapping between a provider and an external user on a connected account (e.g., the Zoom user whose account is used to host meetings for a provider).
+         * @example {
+         *       "external_user": {
+         *         "email": "dr.smith@example.com",
+         *         "first_name": "Jane",
+         *         "id": "exusr_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "object": "external_user",
+         *         "status": "active"
+         *       },
+         *       "object": "user_mapping",
+         *       "provider": {
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "display_name": "John Smith",
+         *         "email": "john@example.com",
+         *         "first_name": "John",
+         *         "id": "prov_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "metadata": {
+         *           "external_id": "123"
+         *         },
+         *         "object": "provider",
+         *         "time_zone": "America/New_York",
+         *         "updated_at": "2017-09-13T10:11:12Z"
+         *       },
+         *       "source": "manual"
+         *     }
+         */
+        UserMapping: {
+            external_user: components["schemas"]["ExternalUser"];
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "user_mapping";
+            provider: components["schemas"]["Provider"];
+            /**
+             * @description How the mapping was established. 'auto' means it was matched automatically by email, 'manual' means it was set explicitly. Additional values may be added over time.
+             * @enum {string}
+             */
+            source: "auto" | "manual";
+        };
+        /**
          * ConnectedAccountRefreshFailedEventData
          * @description This is an object representing data for the connected account refresh failed event. This event is triggered when an OAuth token refresh permanently fails, indicating the integration needs to be reauthorized.
          * @example {
@@ -5535,6 +5939,25 @@ export interface components {
          *         "object": {
          *           "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *           "appointment_type": "in_person",
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
+         *           },
+         *           "buffered_end_at": {
+         *             "local": "2025-03-01T12:00:00-05:00",
+         *             "object": "zoned_date_time",
+         *             "time_zone": "America/New_York",
+         *             "unix_ts": 1736468400,
+         *             "utc": "2025-03-01T05:00:00Z"
+         *           },
+         *           "buffered_start_at": {
+         *             "local": "2025-03-01T09:45:00-05:00",
+         *             "object": "zoned_date_time",
+         *             "time_zone": "America/New_York",
+         *             "unix_ts": 1736460300,
+         *             "utc": "2025-03-01T02:45:00Z"
+         *           },
          *           "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *           "cancellation_events": [
          *             {
@@ -5631,6 +6054,7 @@ export interface components {
          *           "provider": {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -5645,6 +6069,7 @@ export interface components {
          *             {
          *               "created_at": "2017-09-12T12:34:55Z",
          *               "display_name": "John Smith",
+         *               "email": "john@example.com",
          *               "first_name": "John",
          *               "id": "prov_d025a96ac0c6",
          *               "last_name": "Smith",
@@ -5711,6 +6136,11 @@ export interface components {
          *               "maximize_utilization": {
          *                 "enabled": true
          *               }
+         *             },
+         *             "buffer_policy": {
+         *               "after_duration": "PT1H",
+         *               "before_duration": "PT15M",
+         *               "enabled": true
          *             },
          *             "cancellation_policy": {
          *               "advance_notice": {
@@ -5825,7 +6255,7 @@ export interface components {
              */
             created_at: string;
             /** @description The event data. */
-            data: components["schemas"]["AccountUserCreatedEventData"] | components["schemas"]["AccountUserDeletedEventData"] | components["schemas"]["AccountUserUpdatedEventData"] | components["schemas"]["AppointmentCreatedEventData"] | components["schemas"]["AppointmentRescheduledEventData"] | components["schemas"]["AppointmentCanceledEventData"] | components["schemas"]["AppointmentConfirmedEventData"] | components["schemas"]["AppointmentDeletedEventData"] | components["schemas"]["AppointmentMeetingCreatedEventData"] | components["schemas"]["AppointmentMeetingCreateFailedEventData"] | components["schemas"]["AppointmentMeetingUpdatedEventData"] | components["schemas"]["AppointmentMeetingUpdateFailedEventData"] | components["schemas"]["AppointmentMeetingReplacedEventData"] | components["schemas"]["AppointmentMeetingReplaceFailedEventData"] | components["schemas"]["AppointmentMeetingCanceledEventData"] | components["schemas"]["AppointmentMeetingCancelFailedEventData"] | components["schemas"]["BlockCreatedEventData"] | components["schemas"]["BlockUpdatedEventData"] | components["schemas"]["BlockDeletedEventData"] | components["schemas"]["BookingIntentAbandonedEventData"] | components["schemas"]["BookingIntentCompletedEventData"] | components["schemas"]["BookingIntentCreatedEventData"] | components["schemas"]["BookingIntentUpdatedEventData"] | components["schemas"]["ClientCreatedEventData"] | components["schemas"]["ClientDeletedEventData"] | components["schemas"]["ClientUpdatedEventData"] | components["schemas"]["ConnectedAccountCreatedEventData"] | components["schemas"]["ConnectedAccountDeletedEventData"] | components["schemas"]["ConnectedAccountRefreshFailedEventData"] | components["schemas"]["ConnectedAccountReconnectedEventData"] | components["schemas"]["ProviderCreatedEventData"] | components["schemas"]["ProviderUpdatedEventData"] | components["schemas"]["ProviderDeactivatedEventData"] | components["schemas"]["ProviderReactivatedEventData"] | components["schemas"]["ProviderScheduleCreatedEventData"] | components["schemas"]["ProviderScheduleDeletedEventData"] | components["schemas"]["ProviderScheduleUpdatedEventData"] | components["schemas"]["ServiceCreatedEventData"] | components["schemas"]["ServiceDeletedEventData"] | components["schemas"]["ServiceUpdatedEventData"] | components["schemas"]["ServiceProviderCreatedEventData"] | components["schemas"]["ServiceProviderDeletedEventData"];
+            data: components["schemas"]["AccountUserCreatedEventData"] | components["schemas"]["AccountUserDeletedEventData"] | components["schemas"]["AccountUserUpdatedEventData"] | components["schemas"]["AppointmentCreatedEventData"] | components["schemas"]["AppointmentRescheduledEventData"] | components["schemas"]["AppointmentCanceledEventData"] | components["schemas"]["AppointmentConfirmedEventData"] | components["schemas"]["AppointmentDeletedEventData"] | components["schemas"]["AppointmentMeetingCreatedEventData"] | components["schemas"]["AppointmentMeetingCreateFailedEventData"] | components["schemas"]["AppointmentMeetingUpdatedEventData"] | components["schemas"]["AppointmentMeetingUpdateFailedEventData"] | components["schemas"]["AppointmentMeetingReplacedEventData"] | components["schemas"]["AppointmentMeetingReplaceFailedEventData"] | components["schemas"]["AppointmentMeetingCanceledEventData"] | components["schemas"]["AppointmentMeetingCancelFailedEventData"] | components["schemas"]["BlockCreatedEventData"] | components["schemas"]["BlockUpdatedEventData"] | components["schemas"]["BlockDeletedEventData"] | components["schemas"]["BookingIntentAbandonedEventData"] | components["schemas"]["BookingIntentCompletedEventData"] | components["schemas"]["BookingIntentCreatedEventData"] | components["schemas"]["BookingIntentUpdatedEventData"] | components["schemas"]["ClientCreatedEventData"] | components["schemas"]["ClientDeletedEventData"] | components["schemas"]["ClientUpdatedEventData"] | components["schemas"]["ConnectedAccountCreatedEventData"] | components["schemas"]["ConnectedAccountDeletedEventData"] | components["schemas"]["ConnectedAccountRefreshFailedEventData"] | components["schemas"]["ConnectedAccountReconnectedEventData"] | components["schemas"]["OpeningCreatedEventData"] | components["schemas"]["OpeningUpdatedEventData"] | components["schemas"]["OpeningDeletedEventData"] | components["schemas"]["ProviderCreatedEventData"] | components["schemas"]["ProviderUpdatedEventData"] | components["schemas"]["ProviderDeactivatedEventData"] | components["schemas"]["ProviderReactivatedEventData"] | components["schemas"]["ProviderScheduleCreatedEventData"] | components["schemas"]["ProviderScheduleDeletedEventData"] | components["schemas"]["ProviderScheduleUpdatedEventData"] | components["schemas"]["ServiceCreatedEventData"] | components["schemas"]["ServiceDeletedEventData"] | components["schemas"]["ServiceUpdatedEventData"] | components["schemas"]["ServiceProviderCreatedEventData"] | components["schemas"]["ServiceProviderDeletedEventData"];
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -5843,6 +6273,7 @@ export interface components {
          *       "object": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -5928,6 +6359,33 @@ export interface components {
             time_zone?: string | null;
         };
         /**
+         * ExternalUsersResponse
+         * @description Response schema for multiple external users
+         * @example {
+         *       "data": [
+         *         {
+         *           "email": "dr.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "exusr_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "object": "external_user",
+         *           "status": "active"
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        ExternalUsersResponse: {
+            /** @description A list of external users */
+            data: components["schemas"]["ExternalUser"][];
+            meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
          * AccountUserCreatedEventData
          * @description This is an object representing data for the account user created event.
          * @example {
@@ -5971,6 +6429,25 @@ export interface components {
          *         {
          *           "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *           "appointment_type": "in_person",
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
+         *           },
+         *           "buffered_end_at": {
+         *             "local": "2025-03-01T12:00:00-05:00",
+         *             "object": "zoned_date_time",
+         *             "time_zone": "America/New_York",
+         *             "unix_ts": 1736468400,
+         *             "utc": "2025-03-01T05:00:00Z"
+         *           },
+         *           "buffered_start_at": {
+         *             "local": "2025-03-01T09:45:00-05:00",
+         *             "object": "zoned_date_time",
+         *             "time_zone": "America/New_York",
+         *             "unix_ts": 1736460300,
+         *             "utc": "2025-03-01T02:45:00Z"
+         *           },
          *           "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *           "cancellation_events": [
          *             {
@@ -6067,6 +6544,7 @@ export interface components {
          *           "provider": {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -6081,6 +6559,7 @@ export interface components {
          *             {
          *               "created_at": "2017-09-12T12:34:55Z",
          *               "display_name": "John Smith",
+         *               "email": "john@example.com",
          *               "first_name": "John",
          *               "id": "prov_d025a96ac0c6",
          *               "last_name": "Smith",
@@ -6147,6 +6626,11 @@ export interface components {
          *               "maximize_utilization": {
          *                 "enabled": true
          *               }
+         *             },
+         *             "buffer_policy": {
+         *               "after_duration": "PT1H",
+         *               "before_duration": "PT15M",
+         *               "enabled": true
          *             },
          *             "cancellation_policy": {
          *               "advance_notice": {
@@ -6262,6 +6746,32 @@ export interface components {
             meta: components["schemas"]["PaginationMeta"];
         };
         /**
+         * UpdateOpeningRequest
+         * @description Request schema for updating an opening.
+         * @example {
+         *       "date": "2025-06-15",
+         *       "end_time": "16:00",
+         *       "start_time": "10:00",
+         *       "time_zone": "America/New_York",
+         *       "title": "Extra clinic hours"
+         *     }
+         */
+        UpdateOpeningRequest: {
+            /**
+             * Format: date
+             * @description The date of the opening.
+             */
+            date?: string;
+            /** @description The end time of the opening (24-hour clock, e.g. `17:00`). Must be after the start time. */
+            end_time?: string;
+            /** @description The start time of the opening (24-hour clock, e.g. `09:00`). */
+            start_time?: string;
+            /** @description The IANA time zone the opening's times are authored in. */
+            time_zone?: string;
+            /** @description An optional display title for the opening. */
+            title?: string | null;
+        };
+        /**
          * UpdateServiceRequest
          * @description Request schema for updating a service.
          * @example {
@@ -6280,6 +6790,11 @@ export interface components {
          *         "maximize_utilization": {
          *           "enabled": true
          *         }
+         *       },
+         *       "buffer_policy": {
+         *         "after_duration": "PT1H",
+         *         "before_duration": "PT15M",
+         *         "enabled": true
          *       },
          *       "cancellation_policy": {
          *         "advance_notice": {
@@ -6340,6 +6855,7 @@ export interface components {
              */
             appointment_type?: "in_person" | "virtual";
             booking_policy?: components["schemas"]["BookingPolicy"];
+            buffer_policy?: components["schemas"]["BufferPolicy"];
             cancellation_policy?: components["schemas"]["CancellationPolicy"];
             /**
              * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
@@ -6523,6 +7039,25 @@ export interface components {
          *       "data": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -6619,6 +7154,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -6633,6 +7169,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -6699,6 +7236,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -6840,6 +7382,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -6914,6 +7457,7 @@ export interface components {
          *         {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -6937,6 +7481,16 @@ export interface components {
             /** @description The providers details */
             data: components["schemas"]["Provider"][];
             meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
+         * ByEmail
+         * @example {
+         *       "email": "dr.smith@example.com"
+         *     }
+         */
+        ByEmail: {
+            /** @description The email address of the external user to map to the provider, matched case-insensitively against the connected account's external users. */
+            email: string;
         };
         /**
          * BlockDeletedEventData
@@ -7043,6 +7597,11 @@ export interface components {
          *           "enabled": true
          *         }
          *       },
+         *       "buffer_policy": {
+         *         "after_duration": "PT1H",
+         *         "before_duration": "PT15M",
+         *         "enabled": true
+         *       },
          *       "cancellation_policy": {
          *         "advance_notice": {
          *           "enabled": true,
@@ -7117,6 +7676,7 @@ export interface components {
              */
             appointment_type: "in_person" | "virtual";
             booking_policy: components["schemas"]["BookingPolicy"];
+            buffer_policy: components["schemas"]["BufferPolicy"];
             cancellation_policy: components["schemas"]["CancellationPolicy"];
             /**
              * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
@@ -7186,6 +7746,7 @@ export interface components {
          *       "object": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -7250,6 +7811,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -7346,6 +7926,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -7360,6 +7941,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -7426,6 +8008,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -7538,6 +8125,33 @@ export interface components {
             type: "appointment.meeting.create_failed";
         };
         /**
+         * OpeningUpdatedEventData
+         * @description This is an object representing data for the opening updated event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "date": "2025-06-15",
+         *         "end_time": "17:00",
+         *         "id": "opn_d025a96ac0c6",
+         *         "object": "opening",
+         *         "provider_id": "prov_d025a96ac0c6",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Extra clinic hours",
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "type": "opening.updated"
+         *     }
+         */
+        OpeningUpdatedEventData: {
+            object: components["schemas"]["Opening"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "opening.updated";
+        };
+        /**
          * CompletePublicBookingIntentRequest
          * @description Request schema for completing a booking intent via a public interface. Update fields may be provided inline and are applied atomically before completion.
          * @example {
@@ -7579,6 +8193,7 @@ export interface components {
          *       "data": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -7720,6 +8335,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -7816,6 +8450,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -7830,6 +8465,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -7896,6 +8532,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -8071,6 +8712,11 @@ export interface components {
          *             "enabled": true
          *           }
          *         },
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
          *         "cancellation_policy": {
          *           "advance_notice": {
          *             "enabled": true,
@@ -8155,6 +8801,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -8251,6 +8916,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -8265,6 +8931,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -8331,6 +8998,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -8562,6 +9234,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -8658,6 +9349,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -8672,6 +9364,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -8738,6 +9431,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -9058,6 +9756,11 @@ export interface components {
          *               "enabled": true
          *             }
          *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
+         *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
          *               "enabled": true,
@@ -9145,6 +9848,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -9241,6 +9963,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -9255,6 +9978,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -9321,6 +10045,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -9476,6 +10205,43 @@ export interface components {
             disabled_message: string | null;
         };
         /**
+         * ByExternalUserId
+         * @example {
+         *       "external_user_id": "exusr_d025a96ac0c6"
+         *     }
+         */
+        ByExternalUserId: {
+            /** @description The ID of the external user to map to the provider. */
+            external_user_id: string;
+        };
+        /**
+         * OpeningCreatedEventData
+         * @description This is an object representing data for the opening created event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "date": "2025-06-15",
+         *         "end_time": "17:00",
+         *         "id": "opn_d025a96ac0c6",
+         *         "object": "opening",
+         *         "provider_id": "prov_d025a96ac0c6",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Extra clinic hours",
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "type": "opening.created"
+         *     }
+         */
+        OpeningCreatedEventData: {
+            object: components["schemas"]["Opening"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "opening.created";
+        };
+        /**
          * ProviderScheduleResponse
          * @description Response schema for a single provider schedule
          * @example {
@@ -9589,6 +10355,33 @@ export interface components {
             workflow?: components["schemas"]["BookingIntentWorkflow"];
         };
         /**
+         * OpeningDeletedEventData
+         * @description This is an object representing data for the opening deleted event.
+         * @example {
+         *       "object": {
+         *         "created_at": "2025-02-17T17:49:19Z",
+         *         "date": "2025-06-15",
+         *         "end_time": "17:00",
+         *         "id": "opn_d025a96ac0c6",
+         *         "object": "opening",
+         *         "provider_id": "prov_d025a96ac0c6",
+         *         "start_time": "09:00",
+         *         "time_zone": "America/New_York",
+         *         "title": "Extra clinic hours",
+         *         "updated_at": "2025-02-17T17:49:19Z"
+         *       },
+         *       "type": "opening.deleted"
+         *     }
+         */
+        OpeningDeletedEventData: {
+            object: components["schemas"]["Opening"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "opening.deleted";
+        };
+        /**
          * ServiceForm
          * @description A service form represents the attachment of a form to a service.
          * @example {
@@ -9678,6 +10471,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -9774,6 +10586,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -9788,6 +10601,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -9854,6 +10668,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -9964,6 +10783,26 @@ export interface components {
              * @enum {string}
              */
             type: "appointment.canceled";
+        };
+        /**
+         * BufferPolicy
+         * @description A policy for shielding time before and/or after appointments from being
+         *     booked (e.g. prep time before, charting time after). The policy is
+         *     captured on the appointment at booking time and continues to shield the
+         *     surrounding time even if the service configuration changes later.
+         * @example {
+         *       "after_duration": "PT1H",
+         *       "before_duration": "PT15M",
+         *       "enabled": true
+         *     }
+         */
+        BufferPolicy: {
+            /** @description The buffer duration after the appointment. */
+            after_duration?: string | null;
+            /** @description The buffer duration before the appointment. */
+            before_duration?: string | null;
+            /** @description Whether buffers are enabled for the service. */
+            enabled: boolean;
         };
         /**
          * FieldOptionsInput
@@ -10181,6 +11020,7 @@ export interface components {
          * @example {
          *       "created_at": "2017-09-12T12:34:55Z",
          *       "display_name": "John Smith",
+         *       "email": "john@example.com",
          *       "first_name": "John",
          *       "id": "prov_d025a96ac0c6",
          *       "last_name": "Smith",
@@ -10201,6 +11041,8 @@ export interface components {
             created_at: string;
             /** @description The provider's display name. */
             display_name: string;
+            /** @description The provider's email address. */
+            email: string;
             /** @description The provider's first name. */
             first_name: string;
             /** @description Unique identifier for the object. */
@@ -10235,6 +11077,7 @@ export interface components {
          * @example {
          *       "created_at": "2017-09-12T12:34:55Z",
          *       "display_name": "John Smith",
+         *       "email": "john@example.com",
          *       "first_name": "John",
          *       "id": "prov_d025a96ac0c6",
          *       "last_name": "Smith",
@@ -10254,6 +11097,8 @@ export interface components {
             created_at: string;
             /** @description The provider's display name. */
             display_name: string;
+            /** @description The provider's email address. */
+            email: string;
             /** @description The provider's first name. */
             first_name: string;
             /** @description Unique identifier for the object. */
@@ -10457,6 +11302,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -10728,12 +11574,57 @@ export interface components {
             weekly_rules: components["schemas"]["WeeklyRule"][];
         };
         /**
+         * CreateOpeningRequest
+         * @description Request schema for creating an opening.
+         * @example {
+         *       "date": "2025-06-15",
+         *       "end_time": "17:00",
+         *       "start_time": "09:00",
+         *       "time_zone": "America/New_York",
+         *       "title": "Extra clinic hours"
+         *     }
+         */
+        CreateOpeningRequest: {
+            /**
+             * Format: date
+             * @description The date of the opening.
+             */
+            date: string;
+            /** @description The end time of the opening (24-hour clock, e.g. `17:00`). Must be after the start time. To open availability across midnight, create two adjacent openings. */
+            end_time: string;
+            /** @description The start time of the opening (24-hour clock, e.g. `09:00`). */
+            start_time: string;
+            /** @description The IANA time zone the opening's times are authored in. Defaults to the provider's location time zone when omitted. */
+            time_zone?: string;
+            /** @description An optional display title for the opening. */
+            title?: string | null;
+        };
+        /**
          * AppointmentMeetingReplacedEventData
          * @description Emitted when the meeting attached to an appointment is replaced by a brand-new meeting at the conferencing provider — typically because a reschedule changed the primary provider and the new provider's conferencing maps to a different connected user/account. Distinct from `appointment.meeting.updated` (attribute-level change to the *same* provider meeting): consumers caching `external_meeting_id`, `join_url`, `password`, or dial-in numbers should treat this event as an invalidation signal.
          * @example {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -10830,6 +11721,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -10844,6 +11736,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -10910,6 +11803,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -11107,6 +12005,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -11147,6 +12046,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -11243,6 +12147,57 @@ export interface components {
             data: components["schemas"]["BookingIntent"];
         };
         /**
+         * Opening
+         * @description An opening is a one-off range of available time for a provider, sitting
+         *     alongside their recurring schedules.
+         * @example {
+         *       "created_at": "2025-02-17T17:49:19Z",
+         *       "date": "2025-06-15",
+         *       "end_time": "17:00",
+         *       "id": "opn_d025a96ac0c6",
+         *       "object": "opening",
+         *       "provider_id": "prov_d025a96ac0c6",
+         *       "start_time": "09:00",
+         *       "time_zone": "America/New_York",
+         *       "title": "Extra clinic hours",
+         *       "updated_at": "2025-02-17T17:49:19Z"
+         *     }
+         */
+        Opening: {
+            /**
+             * Format: datetime
+             * @description When the opening was created.
+             */
+            created_at: string;
+            /**
+             * Format: date
+             * @description The date of the opening.
+             */
+            date: string;
+            /** @description The end time of the opening (24-hour clock, e.g. `17:00`). */
+            end_time: string;
+            /** @description Unique identifier for the object. */
+            id: string;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "opening";
+            /** @description The ID of the provider the opening belongs to. */
+            provider_id: string;
+            /** @description The start time of the opening (24-hour clock, e.g. `09:00`). */
+            start_time: string;
+            /** @description The IANA time zone the opening's times are authored in. */
+            time_zone: string;
+            /** @description An optional display title for the opening. */
+            title: string | null;
+            /**
+             * Format: datetime
+             * @description When the opening was last updated.
+             */
+            updated_at: string;
+        };
+        /**
          * Role
          * @description This is an object representing a role in the system.
          * @example {
@@ -11275,6 +12230,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -11371,6 +12345,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -11385,6 +12360,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -11451,6 +12427,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -11769,6 +12750,51 @@ export interface components {
             data: components["schemas"]["ClientField"][];
         };
         /**
+         * UserMappingsResponse
+         * @description Response schema for multiple user mappings
+         * @example {
+         *       "data": [
+         *         {
+         *           "external_user": {
+         *             "email": "dr.smith@example.com",
+         *             "first_name": "Jane",
+         *             "id": "exusr_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "object": "external_user",
+         *             "status": "active"
+         *           },
+         *           "object": "user_mapping",
+         *           "provider": {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           },
+         *           "source": "manual"
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        UserMappingsResponse: {
+            /** @description A list of user mappings */
+            data: components["schemas"]["UserMapping"][];
+            meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
          * ClientDataInput
          * @description Progressive client data for a booking intent. All fields are optional; provided fields are merged with existing values.
          * @example {
@@ -11815,6 +12841,38 @@ export interface components {
              * @example America/New_York
              */
             time_zone?: string | null;
+        };
+        /**
+         * ExternalUser
+         * @description This is an object representing a user synced from a connected external account (e.g., a Zoom user).
+         * @example {
+         *       "email": "dr.smith@example.com",
+         *       "first_name": "Jane",
+         *       "id": "exusr_d025a96ac0c6",
+         *       "last_name": "Smith",
+         *       "object": "external_user",
+         *       "status": "active"
+         *     }
+         */
+        ExternalUser: {
+            /** @description The email address of the user at the provider. */
+            email: string | null;
+            /** @description The first name of the user at the provider. */
+            first_name: string | null;
+            /** @description Unique identifier for the object. */
+            id: string;
+            /** @description The last name of the user at the provider. */
+            last_name: string | null;
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "external_user";
+            /**
+             * @description The status of the user at the provider. 'active' means the user is active, 'inactive' means the user is deactivated or suspended, 'pending' means the user has not yet activated their account. Additional values may be added over time.
+             * @enum {string|null}
+             */
+            status: "active" | "inactive" | "pending" | null;
         };
         /**
          * BlockResponse
@@ -11867,6 +12925,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -11963,6 +13040,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -11977,6 +13055,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -12043,6 +13122,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -12160,6 +13244,25 @@ export interface components {
          * @example {
          *       "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *       "appointment_type": "in_person",
+         *       "buffer_policy": {
+         *         "after_duration": "PT1H",
+         *         "before_duration": "PT15M",
+         *         "enabled": true
+         *       },
+         *       "buffered_end_at": {
+         *         "local": "2025-03-01T12:00:00-05:00",
+         *         "object": "zoned_date_time",
+         *         "time_zone": "America/New_York",
+         *         "unix_ts": 1736468400,
+         *         "utc": "2025-03-01T05:00:00Z"
+         *       },
+         *       "buffered_start_at": {
+         *         "local": "2025-03-01T09:45:00-05:00",
+         *         "object": "zoned_date_time",
+         *         "time_zone": "America/New_York",
+         *         "unix_ts": 1736460300,
+         *         "utc": "2025-03-01T02:45:00Z"
+         *       },
          *       "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *       "cancellation_events": [
          *         {
@@ -12256,6 +13359,7 @@ export interface components {
          *       "provider": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -12270,6 +13374,7 @@ export interface components {
          *         {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -12336,6 +13441,11 @@ export interface components {
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
+         *         },
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
          *         },
          *         "cancellation_policy": {
          *           "advance_notice": {
@@ -12448,6 +13558,11 @@ export interface components {
              * @enum {string}
              */
             appointment_type: "in_person" | "virtual";
+            buffer_policy: components["schemas"]["BufferPolicy"];
+            /** @description The end of the window shielded from other bookings, including the after-buffer captured at booking time. Equals `end_at` when no buffer applies. */
+            buffered_end_at: components["schemas"]["ZonedDateTime"];
+            /** @description The start of the window shielded from other bookings, including the before-buffer captured at booking time. Equals `start_at` when no buffer applies. */
+            buffered_start_at: components["schemas"]["ZonedDateTime"];
             /**
              * Format: uri
              * @description Canonical URL for the client to cancel this appointment. Resolves to the account's active custom domain when configured, otherwise the canonical app host. The host portion may change if the account changes its custom-domain configuration.
@@ -12557,6 +13672,41 @@ export interface components {
             };
         };
         /**
+         * UserMappingResponse
+         * @description Response schema for a single user mapping
+         * @example {
+         *       "data": {
+         *         "external_user": {
+         *           "email": "dr.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "exusr_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "object": "external_user",
+         *           "status": "active"
+         *         },
+         *         "object": "user_mapping",
+         *         "provider": {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "email": "john@example.com",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "time_zone": "America/New_York",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         },
+         *         "source": "manual"
+         *       }
+         *     }
+         */
+        UserMappingResponse: {
+            data: components["schemas"]["UserMapping"];
+        };
+        /**
          * BookingIntentWorkflow
          * @description Server-computed workflow state for a booking intent. Provides step routing,
          *     completability, and defunct state so the frontend can render the correct
@@ -12598,6 +13748,7 @@ export interface components {
          *       "object": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -12710,6 +13861,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -12818,6 +13970,11 @@ export interface components {
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
+         *         },
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
          *         },
          *         "cancellation_policy": {
          *           "advance_notice": {
@@ -13029,6 +14186,7 @@ export interface components {
          *       "provider": {
          *         "created_at": "2017-09-12T12:34:55Z",
          *         "display_name": "John Smith",
+         *         "email": "john@example.com",
          *         "first_name": "John",
          *         "id": "prov_d025a96ac0c6",
          *         "last_name": "Smith",
@@ -13069,6 +14227,11 @@ export interface components {
          *           "maximize_utilization": {
          *             "enabled": true
          *           }
+         *         },
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
          *         },
          *         "cancellation_policy": {
          *           "advance_notice": {
@@ -13264,6 +14427,11 @@ export interface components {
          *           "enabled": true
          *         }
          *       },
+         *       "buffer_policy": {
+         *         "after_duration": "PT1H",
+         *         "before_duration": "PT15M",
+         *         "enabled": true
+         *       },
          *       "cancellation_policy": {
          *         "advance_notice": {
          *           "enabled": true,
@@ -13323,6 +14491,7 @@ export interface components {
              */
             appointment_type?: "in_person" | "virtual";
             booking_policy?: components["schemas"]["BookingPolicy"];
+            buffer_policy?: components["schemas"]["BufferPolicy"];
             cancellation_policy?: components["schemas"]["CancellationPolicy"];
             /**
              * @description Displayed to clients in follow-up communication. Use this to explain any important rules about cancellations or rescheduling.
@@ -13356,6 +14525,25 @@ export interface components {
          *       "object": {
          *         "add_to_calendar_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/add_to_calendar",
          *         "appointment_type": "in_person",
+         *         "buffer_policy": {
+         *           "after_duration": "PT1H",
+         *           "before_duration": "PT15M",
+         *           "enabled": true
+         *         },
+         *         "buffered_end_at": {
+         *           "local": "2025-03-01T12:00:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736468400,
+         *           "utc": "2025-03-01T05:00:00Z"
+         *         },
+         *         "buffered_start_at": {
+         *           "local": "2025-03-01T09:45:00-05:00",
+         *           "object": "zoned_date_time",
+         *           "time_zone": "America/New_York",
+         *           "unix_ts": 1736460300,
+         *           "utc": "2025-03-01T02:45:00Z"
+         *         },
          *         "cancel_url": "https://book.acme.com/c/appointments/appt_a1b2c3d4e5f6/cancel",
          *         "cancellation_events": [
          *           {
@@ -13452,6 +14640,7 @@ export interface components {
          *         "provider": {
          *           "created_at": "2017-09-12T12:34:55Z",
          *           "display_name": "John Smith",
+         *           "email": "john@example.com",
          *           "first_name": "John",
          *           "id": "prov_d025a96ac0c6",
          *           "last_name": "Smith",
@@ -13466,6 +14655,7 @@ export interface components {
          *           {
          *             "created_at": "2017-09-12T12:34:55Z",
          *             "display_name": "John Smith",
+         *             "email": "john@example.com",
          *             "first_name": "John",
          *             "id": "prov_d025a96ac0c6",
          *             "last_name": "Smith",
@@ -13532,6 +14722,11 @@ export interface components {
          *             "maximize_utilization": {
          *               "enabled": true
          *             }
+         *           },
+         *           "buffer_policy": {
+         *             "after_duration": "PT1H",
+         *             "before_duration": "PT15M",
+         *             "enabled": true
          *           },
          *           "cancellation_policy": {
          *             "advance_notice": {
@@ -14024,6 +15219,68 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    listOpenings: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+                /** @description Filter by provider ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                provider_ids?: string;
+                /** @description Filter by location ID(s). Accepts a single ID or comma-delimited list of IDs. */
+                location_ids?: string;
+                /** @description Only return openings on the specified date. */
+                date?: string;
+                /** @description Only return openings on or after the specified date. */
+                date_min?: string;
+                /** @description Only return openings on or before the specified date. */
+                date_max?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OpeningsResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ForbiddenResponse"];
                 };
             };
             /** @description Unprocessable Entity */
@@ -14955,6 +16212,66 @@ export interface operations {
             };
         };
     };
+    listConnectedAccountExternalUsers: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+                /** @description Only return external users matching this email address (case-insensitive). */
+                email?: string;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
+                connected_account_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ExternalUsersResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     createPublicBookingIntent: {
         parameters: {
             query?: never;
@@ -15538,6 +16855,143 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["PublicServiceEarliestSlotResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    getOpening: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Opening ID */
+                opening_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OpeningResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    deleteOpening: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Opening ID */
+                opening_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateOpening: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Opening ID */
+                opening_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Opening params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateOpeningRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OpeningResponse"];
                 };
             };
             /** @description Unauthorized */
@@ -17411,6 +18865,222 @@ export interface operations {
             };
         };
     };
+    createOpening: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Provider ID */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Opening params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateOpeningRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["OpeningResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    getUserMapping: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
+                connected_account_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserMappingResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    setUserMapping: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
+                connected_account_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description User mapping params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["SetUserMappingRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserMappingResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteUserMapping: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
+                connected_account_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
     getBlock: {
         parameters: {
             query?: never;
@@ -17721,6 +19391,64 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["ServiceSlotResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    listUserMappings: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+            };
+            header?: never;
+            path: {
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
+                connected_account_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UserMappingsResponse"];
                 };
             };
             /** @description Unauthorized */
