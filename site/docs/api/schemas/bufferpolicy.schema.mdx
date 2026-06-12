@@ -1,0 +1,36 @@
+---
+id: bufferpolicy
+title: "BufferPolicy"
+description: "A policy for shielding time before and/or after appointments from being"
+sidebar_label: "BufferPolicy"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"after_duration":"PT1H","before_duration":"PT15M","enabled":true}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"BufferPolicy"}
+>
+</Heading>
+
+
+
+A policy for shielding time before and/or after appointments from being
+booked (e.g. prep time before, charting time after). The policy is
+captured on the appointment at booking time and continues to shield the
+surrounding time even if the service configuration changes later.
+
+
+<Schema
+  {...require("./bufferpolicy.Schema.json")}
+>
+  
+</Schema>
+            

@@ -75,6 +75,9 @@ export type BookingIntentUpdatedEventData =
   Schemas["BookingIntentUpdatedEventData"];
 export type BookingIntentWorkflow = Schemas["BookingIntentWorkflow"];
 export type BookingPolicy = Schemas["BookingPolicy"];
+export type BufferPolicy = Schemas["BufferPolicy"];
+export type ByEmail = Schemas["ByEmail"];
+export type ByExternalUserId = Schemas["ByExternalUserId"];
 export type CancelAppointmentRequest = Schemas["CancelAppointmentRequest"];
 export type CancellationEvent = Schemas["CancellationEvent"];
 export type CancellationPolicy = Schemas["CancellationPolicy"];
@@ -125,6 +128,7 @@ export type CreateClientRequest = Schemas["CreateClientRequest"];
 export type CreateDashboardSessionRequest =
   Schemas["CreateDashboardSessionRequest"];
 export type CreateFormRequest = Schemas["CreateFormRequest"];
+export type CreateOpeningRequest = Schemas["CreateOpeningRequest"];
 export type CreateProviderRequest = Schemas["CreateProviderRequest"];
 export type CreateProviderScheduleRequest =
   Schemas["CreateProviderScheduleRequest"];
@@ -137,6 +141,8 @@ export type CreateServiceProviderRequest =
 export type CreateServiceRequest = Schemas["CreateServiceRequest"];
 export type DashboardSession = Schemas["DashboardSession"];
 export type DashboardSessionResponse = Schemas["DashboardSessionResponse"];
+export type ExternalUser = Schemas["ExternalUser"];
+export type ExternalUsersResponse = Schemas["ExternalUsersResponse"];
 export type FieldChoice = Schemas["FieldChoice"];
 export type FieldChoiceInput = Schemas["FieldChoiceInput"];
 export type FieldOptions = Schemas["FieldOptions"];
@@ -155,6 +161,12 @@ export type JsonError = Schemas["JsonError"];
 export type JsonErrorResponse = Schemas["JsonErrorResponse"];
 export type MaximizeUtilizationPolicy = Schemas["MaximizeUtilizationPolicy"];
 export type NotFoundResponse = Schemas["NotFoundResponse"];
+export type Opening = Schemas["Opening"];
+export type OpeningCreatedEventData = Schemas["OpeningCreatedEventData"];
+export type OpeningDeletedEventData = Schemas["OpeningDeletedEventData"];
+export type OpeningResponse = Schemas["OpeningResponse"];
+export type OpeningsResponse = Schemas["OpeningsResponse"];
+export type OpeningUpdatedEventData = Schemas["OpeningUpdatedEventData"];
 export type PaginationMeta = Schemas["PaginationMeta"];
 export type Platform = Schemas["Platform"];
 export type PlatformResponse = Schemas["PlatformResponse"];
@@ -214,6 +226,7 @@ export type ServiceResponse = Schemas["ServiceResponse"];
 export type ServiceSlotResponse = Schemas["ServiceSlotResponse"];
 export type ServicesResponse = Schemas["ServicesResponse"];
 export type ServiceUpdatedEventData = Schemas["ServiceUpdatedEventData"];
+export type SetUserMappingRequest = Schemas["SetUserMappingRequest"];
 export type Slot = Schemas["Slot"];
 export type SlotListResponse = Schemas["SlotListResponse"];
 export type SlotRule = Schemas["SlotRule"];
@@ -231,6 +244,7 @@ export type UpdateClientRequest = Schemas["UpdateClientRequest"];
 export type UpdateConnectedAccountRequest =
   Schemas["UpdateConnectedAccountRequest"];
 export type UpdateFormRequest = Schemas["UpdateFormRequest"];
+export type UpdateOpeningRequest = Schemas["UpdateOpeningRequest"];
 export type UpdateProviderRequest = Schemas["UpdateProviderRequest"];
 export type UpdateProviderScheduleRequest =
   Schemas["UpdateProviderScheduleRequest"];
@@ -238,6 +252,9 @@ export type UpdatePublicBookingIntentRequest =
   Schemas["UpdatePublicBookingIntentRequest"];
 export type UpdateServiceRequest = Schemas["UpdateServiceRequest"];
 export type User = Schemas["User"];
+export type UserMapping = Schemas["UserMapping"];
+export type UserMappingResponse = Schemas["UserMappingResponse"];
+export type UserMappingsResponse = Schemas["UserMappingsResponse"];
 export type WeeklyRule = Schemas["WeeklyRule"];
 export type ZonedDateTime = Schemas["ZonedDateTime"];
 type Schemas = components["schemas"];

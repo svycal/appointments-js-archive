@@ -1,0 +1,1 @@
+{"schema":{"example":{"email":"dr.smith@example.com"},"properties":{"email":{"description":"The email address of the external user to map to the provider, matched case-insensitively against the connected account's external users.","type":"string"}},"required":["email"],"title":"ByEmail","type":"object"},"schemaType":"response"}

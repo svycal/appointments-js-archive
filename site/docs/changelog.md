@@ -6,6 +6,15 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## June 12, 2026
+
+- **New: Openings** -- Added endpoints for managing openings — one-off ranges of available time for a provider that sit alongside their recurring schedules: [Create Opening](/api/create-opening), [List Openings](/api/list-openings), [Get Opening](/api/get-opening), [Update Opening](/api/update-opening), and [Delete Opening](/api/delete-opening). See [Opening](/api/schemas/opening).
+- **New:** -- Added webhook events for openings: `opening.created`, `opening.updated`, and `opening.deleted`. See [OpeningCreatedEventData](/api/schemas/openingcreatedeventdata), [OpeningUpdatedEventData](/api/schemas/openingupdatedeventdata), and [OpeningDeletedEventData](/api/schemas/openingdeletedeventdata).
+- **New: Buffer Policy** -- Services now support a `buffer_policy` for shielding time before and/or after appointments from being booked (e.g. prep time before, charting time after). Configurable via [Create Service](/api/create-service) and [Update Service](/api/update-service). See [BufferPolicy](/api/schemas/bufferpolicy) and [Service](/api/schemas/service).
+- **New:** -- [Appointment](/api/schemas/appointment) responses now include `buffer_policy`, `buffered_start_at`, and `buffered_end_at` fields. The buffer policy is captured at booking time and continues to shield the surrounding time even if the service configuration changes later; `buffered_start_at` and `buffered_end_at` equal `start_at` and `end_at` when no buffer applies.
+- **New: User Mappings** -- Added endpoints for managing default mappings between providers and external users on connected accounts (e.g., the Zoom user whose account hosts meetings for a provider): [List User Mappings](/api/list-user-mappings), [Get User Mapping](/api/get-user-mapping), [Set User Mapping](/api/set-user-mapping), and [Delete User Mapping](/api/delete-user-mapping). Mappings can be set by external user ID or by email. See [UserMapping](/api/schemas/usermapping).
+- **New:** -- Added a [List External Users](/api/list-connected-account-external-users) endpoint for listing users synced from a connected external account (e.g., Zoom users). See [ExternalUser](/api/schemas/externaluser).
+
 ## May 18, 2026
 
 - **Changed:** -- The `X-SavvyCal-Account` header is no longer listed as a parameter on individual operations in the OpenAPI spec or API reference; it's now documented once on the [Platforms](/platforms) and [Authentication](/authentication) pages. The header is unchanged at the protocol level — it is still required when authenticating with a platform token to specify the target account.

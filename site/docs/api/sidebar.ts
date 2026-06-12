@@ -180,6 +180,52 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Openings",
+      link: {
+        type: "doc",
+        id: "api/openings",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/opening",
+          label: "Opening",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/list-openings",
+          label: "List openings",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/delete-opening",
+          label: "Delete opening",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-opening",
+          label: "Get opening",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-opening",
+          label: "Update opening",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/create-opening",
+          label: "Create opening",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Accounts",
       link: {
         type: "doc",
@@ -552,6 +598,88 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
+      label: "Connected Accounts",
+      link: {
+        type: "doc",
+        id: "api/connected-accounts",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/usermapping",
+          label: "UserMapping",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/externaluser",
+          label: "ExternalUser",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/connectedaccount",
+          label: "ConnectedAccount",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/list-connected-account-external-users",
+          label: "List external users",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/delete-connected-account",
+          label: "Delete connected account",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-connected-account",
+          label: "Get connected account",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-connected-account",
+          label: "Update connected account",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/delete-user-mapping",
+          label: "Delete user mapping",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-user-mapping",
+          label: "Get user mapping",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/set-user-mapping",
+          label: "Set user mapping",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
+          id: "api/list-user-mappings",
+          label: "List user mappings",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/list-connected-accounts",
+          label: "List connected accounts",
+          className: "api-method get",
+        },
+      ],
+    },
+    {
+      type: "category",
       label: "Forms",
       link: {
         type: "doc",
@@ -660,46 +788,6 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/list-service-slots",
           label: "List available time slots",
-          className: "api-method get",
-        },
-      ],
-    },
-    {
-      type: "category",
-      label: "Connected Accounts",
-      link: {
-        type: "doc",
-        id: "api/connected-accounts",
-      },
-      items: [
-        {
-          type: "doc",
-          id: "api/schemas/connectedaccount",
-          label: "ConnectedAccount",
-          className: "schema",
-        },
-        {
-          type: "doc",
-          id: "api/delete-connected-account",
-          label: "Delete connected account",
-          className: "api-method delete",
-        },
-        {
-          type: "doc",
-          id: "api/get-connected-account",
-          label: "Get connected account",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/update-connected-account",
-          label: "Update connected account",
-          className: "api-method patch",
-        },
-        {
-          type: "doc",
-          id: "api/list-connected-accounts",
-          label: "List connected accounts",
           className: "api-method get",
         },
       ],
@@ -906,6 +994,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/openingresponse",
+          label: "OpeningResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/clientfieldchoice",
           label: "ClientFieldChoice",
           className: "schema",
@@ -1050,8 +1144,20 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/setusermappingrequest",
+          label: "SetUserMappingRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/bookingintentupdatedeventdata",
           label: "BookingIntentUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/openingsresponse",
+          label: "OpeningsResponse",
           className: "schema",
         },
         {
@@ -1290,6 +1396,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/externalusersresponse",
+          label: "ExternalUsersResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/accountusercreatedeventdata",
           label: "AccountUserCreatedEventData",
           className: "schema",
@@ -1298,6 +1410,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentsresponse",
           label: "AppointmentsResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/updateopeningrequest",
+          label: "UpdateOpeningRequest",
           className: "schema",
         },
         {
@@ -1368,6 +1486,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/byemail",
+          label: "ByEmail",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/blockdeletedeventdata",
           label: "BlockDeletedEventData",
           className: "schema",
@@ -1406,6 +1530,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentmeetingcreatefailedeventdata",
           label: "AppointmentMeetingCreateFailedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/openingupdatedeventdata",
+          label: "OpeningUpdatedEventData",
           className: "schema",
         },
         {
@@ -1542,8 +1672,26 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/byexternaluserid",
+          label: "ByExternalUserId",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/openingcreatedeventdata",
+          label: "OpeningCreatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/providerscheduleresponse",
           label: "ProviderScheduleResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/openingdeletedeventdata",
+          label: "OpeningDeletedEventData",
           className: "schema",
         },
         {
@@ -1562,6 +1710,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentcanceledeventdata",
           label: "AppointmentCanceledEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bufferpolicy",
+          label: "BufferPolicy",
           className: "schema",
         },
         {
@@ -1674,6 +1828,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/createopeningrequest",
+          label: "CreateOpeningRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/appointmentmeetingreplacedeventdata",
           label: "AppointmentMeetingReplacedEventData",
           className: "schema",
@@ -1734,6 +1894,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/usermappingsresponse",
+          label: "UserMappingsResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/clientdatainput",
           label: "ClientDataInput",
           className: "schema",
@@ -1754,6 +1920,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentmeetingupdatedeventdata",
           label: "AppointmentMeetingUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/usermappingresponse",
+          label: "UserMappingResponse",
           className: "schema",
         },
         {

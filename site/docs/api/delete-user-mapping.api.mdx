@@ -1,0 +1,77 @@
+---
+id: delete-user-mapping
+title: "Delete user mapping"
+description: "Remove the default user mapping between a provider and an external user on"
+sidebar_label: "Delete user mapping"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVt9v2zYQ/leIw4BtgGDHmbcH9SlIM6zAFhRp8hR7wZk6R2wlkiFPTlxB//tASrLlH02btgP2sKco5t13d9995F0NEotigfKDh7RuEsjIS6csK6MhhSsqzYoE5yQyWmJVsKg8OVGitUrfiwXxI5EWKKwzK5WRE6gzgVrQE5PTWLT2Rs80Cmm0JsmUCZTSVJpH4q8WyAujRUYoWa0wGPRwXkjUAgtvxIKEi+lko5me6SviymkvUExPpuIxJx3TPIghMkNeaMOCnpTnRKj2P5SSvFeLgmaaTetbOUc6HLFxiTBuYxtgl+RIy1D1QYxXm/gzvSFiN+6rABettNnQF0+8WBoX429cA12cK3+EsZmGBIwlh6FFbzJIIaOCmG48uY5NSMCiw5KYnIf0tt7r6vUxnn70otLqoSKhMtKsloocJEBPWNqCIAWJku9wITNaTk5/mf76GySgApxFziEBjWU064HvOuA7lUECjh4q5SiDlF1FCXiZU4mQ1sE9SAVS+DuGmM0e68lp8wMkwGsbID27UFXTJMcq6Vn7bAHB8AsK6PFekHdEfibvecDx1mhP4ZrB6ck0/JFGM2kOn0xPPLYFhnzqQZDdci9Ky2vRQ4lHxXmQU48zLDZkoTh+Rq+rzulIdge3/tKI8w6ySWB6MtlLFq0tlIwCHL/35tmU+7iiNYharzRWnBunPlImAsHk2Q+zr4GcMxvtMqoCUrgZuEECnpErD2lMsJk3SeicJceqJbmHqEExlfFj16AHPmA5OIqSvMf7I3xtI+87/nF9/Va0h0Ka7Khv15TjMdvDI7ofyPC2z3u+sTOL9yRjr7of0DlcH/h1hMy3yhgyeiiQHvZQIDudiBLZ1/O3SiS8m0tT6Zfo49Kw+D347Ipj+q+Kg3RVBnK3weffppgeMCR+CLXX0g43+Y6auDQc63iJHrbFhzPG+9AZON+MmLN2EsQ4JXFutmMrzirOIYXxajI+GB5+XB8bKM04rBV33Rz143rwaDeh/eRW/eyrXBBHzmx9Oh6jVSOPq9VaYjFCayGBFTqFiyL2Pb7VnmTlFK+je690bGu9nQ8t3gXFtoLZs+vkHnhbELo4ijoeQyqRKKWXJj7+HfXvQl7nWIgza43SXJJmL87evglJkvMt2ZPRSWirNZ5LjJG6wfU6ErqzoMFepwZ39P/d7r+523UiGSwETdJquO5uyi2sJpAcLlrhHUg/sX7tXJdgN9xy5gnkxnNArusFerpxRdOEnx8qcuEazLe3pH1zlQ/fGaRLLDw9o7KfrrrX5mfxkrXzKAv9S6bX8dYWVbfofKD1pxbPuDJ+bbKf2Sy/Isch63Eq5YQZuchpa3EmJVke+A7hh8/n64s/L64voGn+AS3J2wI=
+sidebar_class_name: "delete api-method"
+info_path: api/savvycal-appointments-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Delete user mapping"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/connected_accounts/{connected_account_id}/user_mappings/{provider_id}"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Remove the default user mapping between a provider and an external user on
+a connected account. Mappings on deactivated providers can also be removed.
+
+Returns a 404 when the connected account does not exist, is not accessible
+to the current actor, or is not a conferencing connected account; when the
+provider does not exist; or when no mapping exists for the provider on
+this connected account.
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  {...require("./delete-user-mapping.ParamsDetails.json")}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./delete-user-mapping.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./delete-user-mapping.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      
