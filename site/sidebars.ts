@@ -42,18 +42,18 @@ const sidebars: SidebarsConfig = {
     },
     {
       collapsed: false,
+      items: ["embedding/booking-embed"],
+      label: "Embedding",
+      type: "category",
+    },
+    {
+      collapsed: false,
       items: ["components/public-booking-form"],
       label: "Components",
       link: {
         id: "components/index",
         type: "doc",
       },
-      type: "category",
-    },
-    {
-      collapsed: false,
-      items: ["embedding/booking-embed"],
-      label: "Embedding",
       type: "category",
     },
     "webhooks",
