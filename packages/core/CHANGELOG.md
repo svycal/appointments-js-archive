@@ -1,5 +1,15 @@
 # @savvycal/appointments-core
 
+## 1.11.0
+
+### Minor Changes
+
+- [#42](https://github.com/svycal/appointments/pull/42) [`9759756`](https://github.com/svycal/appointments/commit/97597564679dbc38457314d8822af495d0fc1a8c) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed: Set User Mapping** -- [Set User Mapping](https://developers.savvycal.app/api/set-user-mapping) now refreshes a connected account's external users from the provider and retries once when an `email` matches no existing external user, so a freshly-added user can be mapped without a manual sync. A 502 is now returned (instead of a 422) when the refresh cannot reach the provider (e.g. the connection needs to be re-authorized).
+
+- [#42](https://github.com/svycal/appointments/pull/42) [`9759756`](https://github.com/svycal/appointments/commit/97597564679dbc38457314d8822af495d0fc1a8c) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Sync External Users** -- Added a [Sync External Users](https://developers.savvycal.app/api/sync-connected-account-external-users) endpoint for refreshing a connected account's external users from the provider on demand (e.g. pulling the current list of Zoom users). New users are added, existing ones updated, and removed ones deleted; it returns the full refreshed list. See [SyncExternalUsersResponse](https://developers.savvycal.app/api/schemas/syncexternalusersresponse).
+
+- [#42](https://github.com/svycal/appointments/pull/42) [`9759756`](https://github.com/svycal/appointments/commit/97597564679dbc38457314d8822af495d0fc1a8c) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Booking Links** -- Added endpoints for managing booking links — reusable, shareable configurations for booking a service that can restrict the eligible providers, pre-assign a client, lock fields, and enforce an expiration and usage limits. See [BookingLink](https://developers.savvycal.app/api/schemas/bookinglink).
+
 ## 1.10.0
 
 ### Minor Changes
