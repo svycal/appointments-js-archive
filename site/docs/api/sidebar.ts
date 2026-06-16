@@ -676,6 +676,58 @@ const sidebar: SidebarsConfig = {
           label: "List connected accounts",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "api/sync-connected-account-external-users",
+          label: "Sync external users",
+          className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Booking Links",
+      link: {
+        type: "doc",
+        id: "api/booking-links",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/bookinglink",
+          label: "BookingLink",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/delete-booking-link",
+          label: "Delete a booking link",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-booking-link",
+          label: "Get a booking link",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-booking-link",
+          label: "Update a booking link",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/list-booking-links",
+          label: "List booking links",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-booking-link",
+          label: "Create a booking link",
+          className: "api-method post",
+        },
       ],
     },
     {
@@ -946,6 +998,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/updatebookinglinkrequest",
+          label: "UpdateBookingLinkRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/confirmationevent",
           label: "ConfirmationEvent",
           className: "schema",
@@ -966,6 +1024,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentrescheduledeventdata",
           label: "AppointmentRescheduledEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/syncexternalusersresponse",
+          label: "SyncExternalUsersResponse",
           className: "schema",
         },
         {
@@ -1020,6 +1084,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/updateclientfieldrequest",
           label: "UpdateClientFieldRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/createbookinglinkrequest",
+          label: "CreateBookingLinkRequest",
           className: "schema",
         },
         {
@@ -1330,6 +1400,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/bookinglinksresponse",
+          label: "BookingLinksResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/platformresponse",
           label: "PlatformResponse",
           className: "schema",
@@ -1338,6 +1414,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/accountuserresponse",
           label: "AccountUserResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookinglinkresponse",
+          label: "BookingLinkResponse",
           className: "schema",
         },
         {

@@ -1,0 +1,32 @@
+---
+id: bookinglinkresponse
+title: "BookingLinkResponse"
+description: "Response schema for a single booking link"
+sidebar_label: "BookingLinkResponse"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"data":{"client":null,"created_at":"2017-09-12T12:34:55Z","expires_at":"2017-10-01T00:00:00Z","id":"bl_d025a96ac0c6d025a96ac0c6","locked_fields":["provider_id"],"max_uses":5,"metadata":{"campaign":"spring"},"name":"VIP onboarding","object":"booking_link","providers":[{"created_at":"2017-09-12T12:34:55Z","display_name":"John Smith","email":"john@example.com","first_name":"John","id":"prov_d025a96ac0c6","last_name":"Smith","metadata":{"external_id":"123"},"object":"provider","time_zone":"America/New_York","updated_at":"2017-09-13T10:11:12Z"}],"service_id":"srv_d025a96ac0c6","status":"active","updated_at":"2017-09-13T10:11:12Z","url":"https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6","uses_count":1,"uses_remaining":4}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"BookingLinkResponse"}
+>
+</Heading>
+
+
+
+Response schema for a single booking link
+
+<Schema
+  {...require("./bookinglinkresponse.Schema.json")}
+>
+  
+</Schema>
+            

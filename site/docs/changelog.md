@@ -6,6 +6,12 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## June 16, 2026
+
+- **New: Booking Links** -- Added endpoints for managing booking links — reusable, shareable configurations for booking a service that can restrict the eligible providers, pre-assign a client, lock fields, and enforce an expiration and usage limits: [Create Booking Link](/api/create-booking-link), [List Booking Links](/api/list-booking-links), [Get Booking Link](/api/get-booking-link), [Update Booking Link](/api/update-booking-link), and [Delete Booking Link](/api/delete-booking-link). See [BookingLink](/api/schemas/bookinglink).
+- **New:** -- Added a [Sync External Users](/api/sync-connected-account-external-users) endpoint for refreshing a connected account's external users from the provider on demand (e.g. pulling the current list of Zoom users). New users are added, existing ones updated, and removed ones deleted; it returns the full refreshed list. See [SyncExternalUsersResponse](/api/schemas/syncexternalusersresponse) and [ExternalUser](/api/schemas/externaluser).
+- **Changed:** -- [Set User Mapping](/api/set-user-mapping) now refreshes a connected account's external users from the provider and retries once when an `email` matches no existing external user, so a freshly-added user can be mapped without a manual sync. A 502 is now returned (instead of a 422) when the refresh cannot reach the provider (e.g. the connection needs to be re-authorized).
+
 ## June 12, 2026
 
 - **New: Openings** -- Added endpoints for managing openings — one-off ranges of available time for a provider that sit alongside their recurring schedules: [Create Opening](/api/create-opening), [List Openings](/api/list-openings), [Get Opening](/api/get-opening), [Update Opening](/api/update-opening), and [Delete Opening](/api/delete-opening). See [Opening](/api/schemas/opening).
