@@ -63,6 +63,26 @@ The slot availability logic described under [Services](#services) uses provider 
 
 See the [ProviderSchedule](/api/schemas/providerschedule) schema for complete details.
 
+## Openings
+
+An [`Opening`](/api/schemas/opening) is a one-off range of available time for a provider on a specific date. Openings sit alongside a provider's recurring [`ProviderSchedule`](/api/schemas/providerschedule), adding availability without modifying the weekly rules.
+
+Key properties of an opening include:
+
+| Property      | Type           | Description                                                                 |
+| ------------- | -------------- | --------------------------------------------------------------------------- |
+| `id`          | string         | The unique identifier for the opening (e.g., `opn_d025a96ac0c6`).           |
+| `title`       | string \| null | An optional display title for the opening.                                  |
+| `date`        | string         | The date of the opening (ISO date format).                                  |
+| `start_time`  | string         | The start time of the opening (24-hour clock, e.g., `09:00`).               |
+| `end_time`    | string         | The end time of the opening (24-hour clock, e.g., `17:00`).                 |
+| `time_zone`   | string         | The IANA time zone the opening's times are authored in.                     |
+| `provider_id` | string         | The ID of the provider the opening belongs to.                              |
+
+Unlike [`Blocks`](#blocks), which remove time from availability, openings add it. The slot availability logic uses openings to extend a provider's working hours for the dates they cover.
+
+See the [Opening](/api/schemas/opening) schema for complete details, and the [Slot Availability](/slot-availability) guide for how openings factor into availability.
+
 ## Services
 
 A [`Service`](/api/schemas/service) represents a service offered by one or more [`Providers`](/api/schemas/provider).

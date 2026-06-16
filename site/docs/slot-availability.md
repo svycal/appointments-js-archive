@@ -17,7 +17,7 @@ Each stage of the pipeline works as follows:
 
 1. **Slot generation** — The service's `slot_rules` define when slots begin (day of week, start/end time, recurrence pattern). The service `duration` determines the length of each slot. Together, these produce a set of candidate time slots for the requested date range.
 
-2. **Provider working hours** — Each provider's [`ProviderSchedule`](/data-model#provider-schedules) defines `weekly_rules` with working hours per day of the week. Candidate slots that fall outside a provider's working hours for the effective date range are removed.
+2. **Provider working hours** — Each provider's [`ProviderSchedule`](/data-model#provider-schedules) defines `weekly_rules` with working hours per day of the week. An [`Opening`](/data-model#openings) adds a one-off range of available time on a specific date, extending the provider's working hours alongside their recurring schedule. Candidate slots that fall outside both a provider's recurring working hours and any opening for the effective date range are removed.
 
 3. **Existing appointments** — Any scheduled [`Appointment`](/data-model#appointments) that overlaps a candidate slot removes that slot from availability.
 
@@ -209,6 +209,7 @@ This table summarizes the resources that influence slot availability:
 | `SlotRule` | Defines candidate start times and recurrence | [Data Model — Services](/data-model#services) |
 | Service `duration` | Determines slot length | [Service schema](/api/schemas/service) |
 | `ProviderSchedule` `weekly_rules` | Filters to working hours | [Data Model — Provider Schedules](/data-model#provider-schedules) |
+| `Opening` | Adds one-off available time on a specific date | [Data Model — Openings](/data-model#openings) |
 | `ProviderSchedule` `public_bookings` | Controls public endpoint visibility | [ProviderSchedule schema](/api/schemas/providerschedule) |
 | `Appointment` | Removes booked slots | [Data Model — Appointments](/data-model#appointments) |
 | `Block` | Removes blocked time ranges | [Data Model — Blocks](/data-model#blocks) |

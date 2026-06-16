@@ -2,6 +2,10 @@
 title: Booking Embed
 ---
 
+<head>
+  <script async src="https://js.savvycal.app/v2/embed.js"></script>
+</head>
+
 # Booking Embed
 
 The booking embed lets you display the SavvyCal appointment booking experience directly on your website. It's a small, SavvyCal-hosted web component that wraps an `<iframe>` pointing at a booking URL. The booking interface runs inside the iframe; the component handles sizing, theming, and lifecycle events.
@@ -11,9 +15,26 @@ There are two ways to embed:
 - **Inline** — the booking interface renders directly in the page.
 - **Popup** — a trigger opens the booking interface in a full-screen overlay.
 
-:::note
 This is version 2 of the booking embed. The previous `<savvycal-booking-embed>` component is still supported and documented in [Booking Embed (v1)](/embedding/booking-embed-v1), but we recommend new integrations use the component described here.
-:::
+
+## Live Demo
+
+**Inline** — the booking interface renders directly in the page:
+
+<div className="my-6 p-6 rounded-xl border border-zinc-300 dark:border-none bg-white">
+  <savvycal-booking
+    src="https://savvycal.app/c/book/bl_87c8596b1d52ddee6cdf7ca7?theme=light"
+  ></savvycal-booking>
+</div>
+
+**Popup** — a trigger opens the booking interface in a full-screen overlay:
+
+<div className="my-6 p-6 rounded-xl border border-zinc-300 dark:border-none bg-white flex justify-center">
+  <savvycal-booking-button
+    src="https://savvycal.app/c/book/bl_87c8596b1d52ddee6cdf7ca7?theme=light"
+    class="inline-flex cursor-pointer items-center rounded-lg bg-zinc-900 px-4 py-3 text-sm font-semibold leading-tight text-white"
+  >Book an appointment</savvycal-booking-button>
+</div>
 
 ## Installation
 
@@ -29,11 +50,7 @@ This registers the `<savvycal-booking>` and `<savvycal-booking-button>` elements
 
 ## Booking URLs
 
-Both embed types load a **booking URL** that you supply via the `src` attribute.
-
-:::note
-You can obtain a booking URL from the dashboard or via the API. Detailed instructions for generating booking URLs are coming soon.
-:::
+Both embed types load a **booking URL** that you supply via the `src` attribute. Booking URLs come from **booking links**. You can create a booking link when editing a service, under the **Booking Links** tab, or via the [Booking Links API](/api/create-booking-link).
 
 Customize the booking experience by adding query parameters to the booking URL:
 
