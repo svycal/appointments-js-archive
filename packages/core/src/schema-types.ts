@@ -74,6 +74,9 @@ export type BookingIntentsResponse = Schemas["BookingIntentsResponse"];
 export type BookingIntentUpdatedEventData =
   Schemas["BookingIntentUpdatedEventData"];
 export type BookingIntentWorkflow = Schemas["BookingIntentWorkflow"];
+export type BookingLink = Schemas["BookingLink"];
+export type BookingLinkResponse = Schemas["BookingLinkResponse"];
+export type BookingLinksResponse = Schemas["BookingLinksResponse"];
 export type BookingPolicy = Schemas["BookingPolicy"];
 export type BufferPolicy = Schemas["BufferPolicy"];
 export type ByEmail = Schemas["ByEmail"];
@@ -121,6 +124,7 @@ export type CreateAccountUserRequest = Schemas["CreateAccountUserRequest"];
 export type CreateAppointmentRequest = Schemas["CreateAppointmentRequest"];
 export type CreateBlockRequest = Schemas["CreateBlockRequest"];
 export type CreateBookingIntentRequest = Schemas["CreateBookingIntentRequest"];
+export type CreateBookingLinkRequest = Schemas["CreateBookingLinkRequest"];
 export type CreateCancellationReasonRequest =
   Schemas["CreateCancellationReasonRequest"];
 export type CreateClientFieldRequest = Schemas["CreateClientFieldRequest"];
@@ -232,11 +236,13 @@ export type SlotListResponse = Schemas["SlotListResponse"];
 export type SlotRule = Schemas["SlotRule"];
 export type SortServiceFormsRequest = Schemas["SortServiceFormsRequest"];
 export type SubmissionRequirement = Schemas["SubmissionRequirement"];
+export type SyncExternalUsersResponse = Schemas["SyncExternalUsersResponse"];
 export type UnauthorizedResponse = Schemas["UnauthorizedResponse"];
 export type UpdateAccountRequest = Schemas["UpdateAccountRequest"];
 export type UpdateAccountUserRequest = Schemas["UpdateAccountUserRequest"];
 export type UpdateBlockRequest = Schemas["UpdateBlockRequest"];
 export type UpdateBookingIntentRequest = Schemas["UpdateBookingIntentRequest"];
+export type UpdateBookingLinkRequest = Schemas["UpdateBookingLinkRequest"];
 export type UpdateCancellationReasonRequest =
   Schemas["UpdateCancellationReasonRequest"];
 export type UpdateClientFieldRequest = Schemas["UpdateClientFieldRequest"];

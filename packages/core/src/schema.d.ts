@@ -473,6 +473,34 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/booking_links/{booking_link_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get a booking link
+         * @description Retrieve a single booking link by ID.
+         */
+        get: operations["getBookingLink"];
+        put?: never;
+        post?: never;
+        /**
+         * Delete a booking link
+         * @description Delete a booking link by ID.
+         */
+        delete: operations["deleteBookingLink"];
+        options?: never;
+        head?: never;
+        /**
+         * Update a booking link
+         * @description Update a booking link by ID.
+         */
+        patch: operations["updateBookingLink"];
+        trace?: never;
+    };
     "/v1/service_forms/{service_form_id}": {
         parameters: {
             query?: never;
@@ -1041,6 +1069,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/booking_links": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * List booking links
+         * @description List all booking links for an account.
+         */
+        get: operations["listBookingLinks"];
+        put?: never;
+        /**
+         * Create a booking link
+         * @description Create a booking link for a service.
+         */
+        post: operations["createBookingLink"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/provider_schedules": {
         parameters: {
             query?: never;
@@ -1294,9 +1346,14 @@ export interface paths {
          *     connected account. The external user can be identified by ID or by email
          *     address (matched case-insensitively against the connected account's
          *     external users) — exactly one of the two must be provided. `email` is a
-         *     convenience; matching fails with a 422 when the email matches zero or
-         *     multiple external users, so integrations that need determinism should
-         *     resolve and use `external_user_id`.
+         *     convenience; when it matches no external user, the connected account's
+         *     external users are refreshed from the provider and matching is retried once,
+         *     so a freshly-added user can be mapped without a manual sync. Matching still
+         *     fails with a 422 when the email matches zero (after a successful refresh) or
+         *     multiple external users, so integrations that need determinism should resolve
+         *     and use `external_user_id`. When the refresh itself cannot reach the provider
+         *     (e.g. the connection needs to be re-authorized), a 502 is returned rather
+         *     than a 422.
          *
          *     Setting a mapping replaces any existing mapping for the provider on this
          *     connected account, so this operation is an idempotent upsert.
@@ -1516,6 +1573,35 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/connected_accounts/{connected_account_id}/external_users/sync": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sync external users
+         * @description Refresh the external users for a connected account by syncing them from the
+         *     provider (e.g., pulling the current list of users from a connected Zoom
+         *     account). New users are added, existing users are updated, and users no
+         *     longer present at the provider are removed. Returns the full, refreshed list
+         *     of external users.
+         *
+         *     Returns a 404 when the connected account does not exist, is not accessible
+         *     to the current actor, or is not a conferencing connected account. Returns a
+         *     502 when the provider could not be reached or rejected the request (e.g. the
+         *     connection needs to be re-authorized).
+         */
+        post: operations["syncConnectedAccountExternalUsers"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -1598,6 +1684,34 @@ export interface components {
          */
         FormResponse: {
             data: components["schemas"]["FormDetail"];
+        };
+        /**
+         * UpdateBookingLinkRequest
+         * @description Request schema for updating a booking link
+         * @example {
+         *       "max_uses": null,
+         *       "name": "VIP onboarding (closed)"
+         *     }
+         */
+        UpdateBookingLinkRequest: {
+            /** @description The ID of a client to pre-select. Pass `null` to clear. */
+            client_id?: string | null;
+            /**
+             * Format: datetime
+             * @description When the link should stop accepting new bookings. Pass `null` to clear.
+             */
+            expires_at?: string | null;
+            /** @description Fields the public booker may not change on begotten booking intents. */
+            locked_fields?: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[];
+            /** @description How many confirmed bookings the link may beget. Pass `null` for unlimited. */
+            max_uses?: number | null;
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** @description An optional label for the link. */
+            name?: string | null;
+            /** @description Replaces the provider subset. Pass an empty array to restore the full service rotation. */
+            provider_ids?: string[];
         };
         /**
          * ConfirmationEvent
@@ -2183,6 +2297,26 @@ export interface components {
             type: "appointment.rescheduled";
         };
         /**
+         * SyncExternalUsersResponse
+         * @description Response schema for the external users synced from a connected account
+         * @example {
+         *       "data": [
+         *         {
+         *           "email": "dr.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "exusr_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "object": "external_user",
+         *           "status": "active"
+         *         }
+         *       ]
+         *     }
+         */
+        SyncExternalUsersResponse: {
+            /** @description The external users synced from the connected account */
+            data: components["schemas"]["ExternalUser"][];
+        };
+        /**
          * FormField
          * @description A field within a form.
          * @example {
@@ -2680,6 +2814,43 @@ export interface components {
             options?: components["schemas"]["ClientFieldOptions"];
             /** @description Whether the field contains sensitive data. */
             sensitive?: boolean;
+        };
+        /**
+         * CreateBookingLinkRequest
+         * @description Request schema for creating a booking link
+         * @example {
+         *       "locked_fields": [
+         *         "provider_id"
+         *       ],
+         *       "max_uses": 5,
+         *       "name": "VIP onboarding",
+         *       "provider_ids": [
+         *         "prov_d025a96ac0c6"
+         *       ],
+         *       "service_id": "srv_d025a96ac0c6"
+         *     }
+         */
+        CreateBookingLinkRequest: {
+            /** @description The ID of a client to pre-select on the link. */
+            client_id?: string | null;
+            /**
+             * Format: datetime
+             * @description When the link should stop accepting new bookings.
+             */
+            expires_at?: string | null;
+            /** @description Fields the public booker may not change on begotten booking intents. */
+            locked_fields?: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[];
+            /** @description How many confirmed bookings the link may beget. Omit for unlimited. */
+            max_uses?: number | null;
+            metadata?: {
+                [key: string]: unknown;
+            };
+            /** @description An optional label for the link. */
+            name?: string | null;
+            /** @description The provider subset the link is restricted to. Omit or pass an empty array to use the full service rotation. */
+            provider_ids?: string[];
+            /** @description The ID of the service to create the link on. */
+            service_id: string;
         };
         /**
          * AccountResponse
@@ -5354,6 +5525,61 @@ export interface components {
             data: components["schemas"]["ServiceForm"][];
         };
         /**
+         * BookingLinksResponse
+         * @description Response schema for a list of booking links
+         * @example {
+         *       "data": [
+         *         {
+         *           "client": null,
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "expires_at": "2017-10-01T00:00:00Z",
+         *           "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *           "locked_fields": [
+         *             "provider_id"
+         *           ],
+         *           "max_uses": 5,
+         *           "metadata": {
+         *             "campaign": "spring"
+         *           },
+         *           "name": "VIP onboarding",
+         *           "object": "booking_link",
+         *           "providers": [
+         *             {
+         *               "created_at": "2017-09-12T12:34:55Z",
+         *               "display_name": "John Smith",
+         *               "email": "john@example.com",
+         *               "first_name": "John",
+         *               "id": "prov_d025a96ac0c6",
+         *               "last_name": "Smith",
+         *               "metadata": {
+         *                 "external_id": "123"
+         *               },
+         *               "object": "provider",
+         *               "time_zone": "America/New_York",
+         *               "updated_at": "2017-09-13T10:11:12Z"
+         *             }
+         *           ],
+         *           "service_id": "srv_d025a96ac0c6",
+         *           "status": "active",
+         *           "updated_at": "2017-09-13T10:11:12Z",
+         *           "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *           "uses_count": 1,
+         *           "uses_remaining": 4
+         *         }
+         *       ],
+         *       "meta": {
+         *         "current_page": 1,
+         *         "page_size": 10,
+         *         "total_count": 50,
+         *         "total_pages": 5
+         *       }
+         *     }
+         */
+        BookingLinksResponse: {
+            data: components["schemas"]["BookingLink"][];
+            meta: components["schemas"]["PaginationMeta"];
+        };
+        /**
          * PlatformResponse
          * @description Response schema for a single platform
          * @example {
@@ -5405,6 +5631,52 @@ export interface components {
             /** @description The roles assigned to the user in this account. */
             roles: components["schemas"]["Role"][];
             user: components["schemas"]["User"];
+        };
+        /**
+         * BookingLinkResponse
+         * @description Response schema for a single booking link
+         * @example {
+         *       "data": {
+         *         "client": null,
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "expires_at": "2017-10-01T00:00:00Z",
+         *         "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *         "locked_fields": [
+         *           "provider_id"
+         *         ],
+         *         "max_uses": 5,
+         *         "metadata": {
+         *           "campaign": "spring"
+         *         },
+         *         "name": "VIP onboarding",
+         *         "object": "booking_link",
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "status": "active",
+         *         "updated_at": "2017-09-13T10:11:12Z",
+         *         "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *         "uses_count": 1,
+         *         "uses_remaining": 4
+         *       }
+         *     }
+         */
+        BookingLinkResponse: {
+            data: components["schemas"]["BookingLink"];
         };
         /**
          * AppointmentConfirmedEventData
@@ -13239,6 +13511,90 @@ export interface components {
             type: "appointment.meeting.updated";
         };
         /**
+         * BookingLink
+         * @description A reusable, shareable configuration for booking a service.
+         * @example {
+         *       "client": null,
+         *       "created_at": "2017-09-12T12:34:55Z",
+         *       "expires_at": "2017-10-01T00:00:00Z",
+         *       "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *       "locked_fields": [
+         *         "provider_id"
+         *       ],
+         *       "max_uses": 5,
+         *       "metadata": {
+         *         "campaign": "spring"
+         *       },
+         *       "name": "VIP onboarding",
+         *       "object": "booking_link",
+         *       "providers": [
+         *         {
+         *           "created_at": "2017-09-12T12:34:55Z",
+         *           "display_name": "John Smith",
+         *           "email": "john@example.com",
+         *           "first_name": "John",
+         *           "id": "prov_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "metadata": {
+         *             "external_id": "123"
+         *           },
+         *           "object": "provider",
+         *           "time_zone": "America/New_York",
+         *           "updated_at": "2017-09-13T10:11:12Z"
+         *         }
+         *       ],
+         *       "service_id": "srv_d025a96ac0c6",
+         *       "status": "active",
+         *       "updated_at": "2017-09-13T10:11:12Z",
+         *       "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *       "uses_count": 1,
+         *       "uses_remaining": 4
+         *     }
+         */
+        BookingLink: {
+            /** @description The pre-selected client for the link, if any. */
+            client?: components["schemas"]["Client"] | (Record<string, never> | null);
+            /** Format: datetime */
+            created_at: string;
+            /**
+             * Format: datetime
+             * @description When the link stops accepting new bookings. `null` means it never expires.
+             */
+            expires_at?: string | null;
+            id: string;
+            /** @description Fields that the public booker may not change on begotten booking intents. */
+            locked_fields: ("service_id" | "provider_id" | "slot" | "client_data" | "submissions")[];
+            /** @description How many confirmed bookings the link may beget. `null` means unlimited. */
+            max_uses: number | null;
+            metadata: {
+                [key: string]: unknown;
+            };
+            /** @description An optional label for the link. */
+            name?: string | null;
+            /** @enum {string} */
+            object: "booking_link";
+            /** @description The provider subset the link is restricted to. An empty array means the full service rotation applies. */
+            providers: components["schemas"]["Provider"][];
+            /** @description The ID of the service the link belongs to. */
+            service_id: string;
+            /**
+             * @description The current state of the link. `paused` when deactivated, `expired` once past `expires_at`, `used_up` once `max_uses` is reached, otherwise `active`.
+             * @enum {string}
+             */
+            status: "active" | "paused" | "expired" | "used_up";
+            /** Format: datetime */
+            updated_at: string;
+            /**
+             * Format: uri
+             * @description The fully-qualified URL at which the link can be booked. Resolves to the account's active custom domain when configured, otherwise the canonical app host.
+             */
+            url: string;
+            /** @description The number of confirmed bookings begotten through this link. */
+            uses_count: number;
+            /** @description The number of confirmed bookings still available. `null` when unlimited. */
+            uses_remaining: number | null;
+        };
+        /**
          * Appointment
          * @description An appointment represents a booking that a client has made with a provider for a service.
          * @example {
@@ -16315,6 +16671,143 @@ export interface operations {
             };
         };
     };
+    getBookingLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Link ID */
+                booking_link_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingLinkResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    deleteBookingLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Link ID */
+                booking_link_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateBookingLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Booking Link ID */
+                booking_link_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Booking link params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateBookingLinkRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingLinkResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     detachServiceForm: {
         parameters: {
             query?: never;
@@ -18252,6 +18745,103 @@ export interface operations {
             };
         };
     };
+    listBookingLinks: {
+        parameters: {
+            query?: {
+                /** @description Page number */
+                page?: number;
+                /** @description Number of items per page */
+                page_size?: number;
+                /** @description Filter by service ID(s). Accepts a single ID or comma-delimited list. */
+                service_ids?: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingLinksResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    createBookingLink: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** @description Booking link params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["CreateBookingLinkRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            201: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["BookingLinkResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
     listProviderSchedules: {
         parameters: {
             query?: {
@@ -19030,6 +19620,15 @@ export interface operations {
                     "application/json": components["schemas"]["JsonErrorResponse"];
                 };
             };
+            /** @description GenericError */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenericErrorResponse"];
+                };
+            };
         };
     };
     deleteUserMapping: {
@@ -19721,6 +20320,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    syncConnectedAccountExternalUsers: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
+                connected_account_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["SyncExternalUsersResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description GenericError */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenericErrorResponse"];
                 };
             };
         };

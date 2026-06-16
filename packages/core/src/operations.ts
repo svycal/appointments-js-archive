@@ -151,6 +151,15 @@ export function createBookingIntent(
   });
 }
 
+export function createBookingLink(
+  client: FetchClient,
+  body: RequestBody<"/v1/booking_links", "post">,
+) {
+  return client.POST("/v1/booking_links", {
+    body,
+  });
+}
+
 export function createCancellationReason(
   client: FetchClient,
   body: RequestBody<"/v1/cancellation_reasons", "post">,
@@ -279,6 +288,15 @@ export function deleteBlock(
   path: PathParams<"/v1/blocks/{block_id}", "delete">,
 ) {
   return client.DELETE("/v1/blocks/{block_id}", {
+    params: { path },
+  });
+}
+
+export function deleteBookingLink(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_links/{booking_link_id}", "delete">,
+) {
+  return client.DELETE("/v1/booking_links/{booking_link_id}", {
     params: { path },
   });
 }
@@ -426,6 +444,15 @@ export function getBookingIntent(
 ) {
   return client.GET("/v1/booking_intents/{booking_intent_id}", {
     params: { path, query },
+  });
+}
+
+export function getBookingLink(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_links/{booking_link_id}", "get">,
+) {
+  return client.GET("/v1/booking_links/{booking_link_id}", {
+    params: { path },
   });
 }
 
@@ -613,6 +640,15 @@ export function listBookingIntentSlots(
 ) {
   return client.GET("/v1/booking_intents/{booking_intent_id}/slots", {
     params: { path, query },
+  });
+}
+
+export function listBookingLinks(
+  client: FetchClient,
+  query?: QueryParams<"/v1/booking_links", "get">,
+) {
+  return client.GET("/v1/booking_links", {
+    params: { query },
   });
 }
 
@@ -857,6 +893,21 @@ export function sortServiceForms(
   });
 }
 
+export function syncConnectedAccountExternalUsers(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/connected_accounts/{connected_account_id}/external_users/sync",
+    "post"
+  >,
+) {
+  return client.POST(
+    "/v1/connected_accounts/{connected_account_id}/external_users/sync",
+    {
+      params: { path },
+    },
+  );
+}
+
 export function updateAccount(
   client: FetchClient,
   path: PathParams<"/v1/accounts/{account_id}", "patch">,
@@ -896,6 +947,17 @@ export function updateBookingIntent(
   body: RequestBody<"/v1/booking_intents/{booking_intent_id}", "patch">,
 ) {
   return client.PATCH("/v1/booking_intents/{booking_intent_id}", {
+    body,
+    params: { path },
+  });
+}
+
+export function updateBookingLink(
+  client: FetchClient,
+  path: PathParams<"/v1/booking_links/{booking_link_id}", "patch">,
+  body: RequestBody<"/v1/booking_links/{booking_link_id}", "patch">,
+) {
+  return client.PATCH("/v1/booking_links/{booking_link_id}", {
     body,
     params: { path },
   });

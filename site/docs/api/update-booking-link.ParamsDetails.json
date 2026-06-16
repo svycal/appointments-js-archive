@@ -1,0 +1,1 @@
+{"parameters":[{"description":"Booking Link ID","in":"path","name":"booking_link_id","required":true,"schema":{"type":"string"}}]}
