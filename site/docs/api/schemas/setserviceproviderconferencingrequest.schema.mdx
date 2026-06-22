@@ -1,0 +1,32 @@
+---
+id: setserviceproviderconferencingrequest
+title: "SetServiceProviderConferencingRequest"
+description: "Request schema for setting a service provider's conferencing configuration. The connected account must be a conferencing connection (e.g., Zoom). Exactly one of `external_user_id` or `email` must be provided to identify the hosting external user, which must belong to the connected account."
+sidebar_label: "SetServiceProviderConferencingRequest"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"connected_account_id":"cact_d025a96ac0c6","external_user_id":"exusr_d025a96ac0c6"}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"SetServiceProviderConferencingRequest"}
+>
+</Heading>
+
+
+
+Request schema for setting a service provider's conferencing configuration. The connected account must be a conferencing connection (e.g., Zoom). Exactly one of `external_user_id` or `email` must be provided to identify the hosting external user, which must belong to the connected account.
+
+<Schema
+  {...require("./setserviceproviderconferencingrequest.Schema.json")}
+>
+  
+</Schema>
+            

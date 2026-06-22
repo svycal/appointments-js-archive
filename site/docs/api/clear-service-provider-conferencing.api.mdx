@@ -1,0 +1,76 @@
+---
+id: clear-service-provider-conferencing
+title: "Clear service provider conferencing"
+description: "Remove the conferencing configuration for a service provider. Succeeds even"
+sidebar_label: "Clear service provider conferencing"
+hide_title: true
+hide_table_of_contents: true
+api: eJztVsFu4zYQ/RViUKAtQFhx6vagW5Cm6AJFECTZU+wuaGoccVciGXKkxBX07wUpyZZsI2l221tPUcyZx8c3j5xpQIqiWAv5xUPatBwy9NIpS8poSOEWS1MjoxyZNHqDDrVU+jH+ox4rJ0Ic2xjHBPPoaiWRWWdqlaGbsbtKSsTMM6xRL/VzjpppM0VSnsnKOdRUbHewmM2WeqlvkSqnPRNscbZgMT0wGTYybrcXywx6pg0xfFGeeIzbLSq/1GFNeK8eNWaMzBiIB6Qx8CgxYgop0Xu1LpCRWeqoRseZCUnGzZYaOBiLnR4fMkhBFijcXQd40+Ndjg4OHKxwokRC5yF9aA6Uv9/z+d6zSqunCpnKUJPaKHTAAV9EaQuEFLyrP4m1zHAzP/9p8fMvwEEFDCsoBw5alDGqQ/ukMuDg8KlSDjNIyVXIwcscSwFpE5IIXUj/M+Aul8/N/Lz9DjjQ1kYccoF/2/JTnAft3iQdAv8B6wHvHbQj8iu8VwHHW6M9BtPD+dki/JFGE2oKn4QvlNhCBD7NaJPpca9KS1s2QLFnRXlv74gzPmxgoSh+xqzbPukEu6M7eG3YZQ/ZcliczQ/ICmsLJaPzks/evEp52Jd1AfHmVlpUlBun/sKMBYHRkx+zbwCdMzuXklAFpPBxlAYcPAmqPKSRYLtqeaicRUeqE3mAaEARlvFjGjAAH6kcElmJ3ovHE3rtdz5M/P3+/oZ1i0ya7GRuX5TTe3aLJ3w/suHDwHu1izPrzyhjrfofhHNie5TXC7LaO2Os6LFBBthjg0wqES1y6OdvtUh4BDem0u/xx7Uh9lvImZpj8Z+aA3VVBnH3m6++zTEDYCB+DHVQ0h6X/4ueuDYUz/EeP+wPH9ZIPIbKQN+LInqJlJvQpTIskDD2IsohhaSeJ32f8Emz7xhtMrzDPmlGT3KbyGlPCylDQ6tc8EFOZH2aJMKqmRd1vZWimAlrgUMtnBLrIpY4PsseZeUUbWP6YGrRHethNY64C+bsvHEQ1zs7SLRG4WLX6SULVKImSm9MfOd7le8Cr0tRsAtrjdJUoibPLm4+BJLofKfrfHYWKmiNp1LEnfoedRl6/fH0cCDNpEij6/n/kPWOIauv5KhBt7wzWtN7+AHqeW/EaHcO6WTy2Rk5rEyni0nBVhxy4ykANs1aePzoirYNPz9V6IJFV3sHd0+f8uE7g3QjCo+vVPyH2/7S/8jenvNOHnl4RvQ23qOi6qeML7idjnpxSvtaYm8Mc1/BbCx4bAQ5igxd1K+LuJASLY1yx/Djt+vXqz+u7q+gbf8GbGN9XA==
+sidebar_class_name: "delete api-method"
+info_path: api/savvycal-appointments-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Clear service provider conferencing"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/services/{service_id}/providers/{provider_id}/conferencing"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Remove the conferencing configuration for a service provider. Succeeds even
+when no conferencing is currently configured.
+
+Returns a 404 when the service or provider does not exist, the provider is
+not assigned to the service, or the service provider is not accessible to
+the current actor.
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  {...require("./clear-service-provider-conferencing.ParamsDetails.json")}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./clear-service-provider-conferencing.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./clear-service-provider-conferencing.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      

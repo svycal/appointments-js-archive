@@ -64,6 +64,30 @@ export function cancelPublicAppointment(
   });
 }
 
+export function clearServiceConferencing(
+  client: FetchClient,
+  path: PathParams<"/v1/services/{service_id}/conferencing", "delete">,
+) {
+  return client.DELETE("/v1/services/{service_id}/conferencing", {
+    params: { path },
+  });
+}
+
+export function clearServiceProviderConferencing(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    "delete"
+  >,
+) {
+  return client.DELETE(
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    {
+      params: { path },
+    },
+  );
+}
+
 export function completeBookingIntent(
   client: FetchClient,
   path: PathParams<"/v1/booking_intents/{booking_intent_id}/complete", "post">,
@@ -378,9 +402,12 @@ export function deleteService(
 
 export function deleteServiceProvider(
   client: FetchClient,
-  path: PathParams<"/v1/service_providers/{service_provider_id}", "delete">,
+  path: PathParams<
+    "/v1/services/{service_id}/providers/{provider_id}",
+    "delete"
+  >,
 ) {
-  return client.DELETE("/v1/service_providers/{service_provider_id}", {
+  return client.DELETE("/v1/services/{service_id}/providers/{provider_id}", {
     params: { path },
   });
 }
@@ -576,6 +603,21 @@ export function getService(
   return client.GET("/v1/services/{service_id}", {
     params: { path },
   });
+}
+
+export function getServiceProviderConferencing(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    "get"
+  >,
+) {
+  return client.GET(
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    {
+      params: { path },
+    },
+  );
 }
 
 export function getUserMapping(
@@ -862,6 +904,37 @@ export function reschedulePublicAppointment(
   });
 }
 
+export function setServiceConferencing(
+  client: FetchClient,
+  path: PathParams<"/v1/services/{service_id}/conferencing", "put">,
+  body: RequestBody<"/v1/services/{service_id}/conferencing", "put">,
+) {
+  return client.PUT("/v1/services/{service_id}/conferencing", {
+    body,
+    params: { path },
+  });
+}
+
+export function setServiceProviderConferencing(
+  client: FetchClient,
+  path: PathParams<
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    "put"
+  >,
+  body: RequestBody<
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    "put"
+  >,
+) {
+  return client.PUT(
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing",
+    {
+      body,
+      params: { path },
+    },
+  );
+}
+
 export function setUserMapping(
   client: FetchClient,
   path: PathParams<
@@ -906,6 +979,15 @@ export function syncConnectedAccountExternalUsers(
       params: { path },
     },
   );
+}
+
+export function syncServiceConferencing(
+  client: FetchClient,
+  path: PathParams<"/v1/services/{service_id}/conferencing/sync", "post">,
+) {
+  return client.POST("/v1/services/{service_id}/conferencing/sync", {
+    params: { path },
+  });
 }
 
 export function updateAccount(

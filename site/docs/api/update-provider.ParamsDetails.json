@@ -1,1 +1,1 @@
-{"parameters":[{"description":"Provider ID","in":"path","name":"provider_id","required":true,"schema":{"type":"string"}}]}
+{"parameters":[{"description":"The provider's unique identifier","example":"prov_abcdef123456","in":"path","name":"provider_id","required":true,"schema":{"pattern":"^prov_\\w{12}$","type":"string"}}]}
