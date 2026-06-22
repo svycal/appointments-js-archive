@@ -226,58 +226,24 @@ const sidebar: SidebarsConfig = {
     },
     {
       type: "category",
-      label: "Accounts",
-      link: {
-        type: "doc",
-        id: "api/accounts",
-      },
-      items: [
-        {
-          type: "doc",
-          id: "api/schemas/account",
-          label: "Account",
-          className: "schema",
-        },
-        {
-          type: "doc",
-          id: "api/list-accounts",
-          label: "List accounts",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/create-account",
-          label: "Create account",
-          className: "api-method post",
-        },
-        {
-          type: "doc",
-          id: "api/get-account-by-id",
-          label: "Get account by ID",
-          className: "api-method get",
-        },
-        {
-          type: "doc",
-          id: "api/update-account",
-          label: "Update account",
-          className: "api-method patch",
-        },
-        {
-          type: "doc",
-          id: "api/get-current-account",
-          label: "Get current account",
-          className: "api-method get",
-        },
-      ],
-    },
-    {
-      type: "category",
       label: "Services",
       link: {
         type: "doc",
         id: "api/services",
       },
       items: [
+        {
+          type: "doc",
+          id: "api/schemas/serviceproviderconferencing",
+          label: "ServiceProviderConferencing",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/serviceconferencingresult",
+          label: "ServiceConferencingResult",
+          className: "schema",
+        },
         {
           type: "doc",
           id: "api/schemas/service",
@@ -292,6 +258,18 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/clear-service-conferencing",
+          label: "Clear service conferencing",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/set-service-conferencing",
+          label: "Set service conferencing",
+          className: "api-method put",
+        },
+        {
+          type: "doc",
           id: "api/list-service-forms",
           label: "List service forms",
           className: "api-method get",
@@ -301,6 +279,24 @@ const sidebar: SidebarsConfig = {
           id: "api/attach-service-form",
           label: "Attach form to service",
           className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/clear-service-provider-conferencing",
+          label: "Clear service provider conferencing",
+          className: "api-method delete",
+        },
+        {
+          type: "doc",
+          id: "api/get-service-provider-conferencing",
+          label: "Get service provider conferencing",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/set-service-provider-conferencing",
+          label: "Set service provider conferencing",
+          className: "api-method put",
         },
         {
           type: "doc",
@@ -319,6 +315,12 @@ const sidebar: SidebarsConfig = {
           id: "api/update-service",
           label: "Update service",
           className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/sync-service-conferencing",
+          label: "Sync service conferencing",
+          className: "api-method post",
         },
         {
           type: "doc",
@@ -361,6 +363,52 @@ const sidebar: SidebarsConfig = {
           id: "api/sort-service-forms",
           label: "Sort service forms",
           className: "api-method post",
+        },
+      ],
+    },
+    {
+      type: "category",
+      label: "Accounts",
+      link: {
+        type: "doc",
+        id: "api/accounts",
+      },
+      items: [
+        {
+          type: "doc",
+          id: "api/schemas/account",
+          label: "Account",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/list-accounts",
+          label: "List accounts",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/create-account",
+          label: "Create account",
+          className: "api-method post",
+        },
+        {
+          type: "doc",
+          id: "api/get-account-by-id",
+          label: "Get account by ID",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-account",
+          label: "Update account",
+          className: "api-method patch",
+        },
+        {
+          type: "doc",
+          id: "api/get-current-account",
+          label: "Get current account",
+          className: "api-method get",
         },
       ],
     },
@@ -1010,6 +1058,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/setserviceproviderconferencingrequest",
+          label: "SetServiceProviderConferencingRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/blocksresponse",
           label: "BlocksResponse",
           className: "schema",
@@ -1036,6 +1090,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/formfield",
           label: "FormField",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookinglinkdeactivatedeventdata",
+          label: "BookingLinkDeactivatedEventData",
           className: "schema",
         },
         {
@@ -1264,6 +1324,18 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/completebookingintentrequest",
           label: "CompleteBookingIntentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookinglinkactivatedeventdata",
+          label: "BookingLinkActivatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/serviceproviderconferencingresponse",
+          label: "ServiceProviderConferencingResponse",
           className: "schema",
         },
         {
@@ -1532,6 +1604,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/serviceconferencingresponse",
+          label: "ServiceConferencingResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/clientresponse",
           label: "ClientResponse",
           className: "schema",
@@ -1564,6 +1642,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/providersresponse",
           label: "ProvidersResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/setserviceconferencingrequest",
+          label: "SetServiceConferencingRequest",
           className: "schema",
         },
         {
@@ -1702,6 +1786,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/appointmentmeetingcanceledeventdata",
           label: "AppointmentMeetingCanceledEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookinglinkdeletedeventdata",
+          label: "BookingLinkDeletedEventData",
           className: "schema",
         },
         {
@@ -1910,6 +2000,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/bookinglinkupdatedeventdata",
+          label: "BookingLinkUpdatedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/createopeningrequest",
           label: "CreateOpeningRequest",
           className: "schema",
@@ -1954,6 +2050,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/createpublicappointmentrequest",
           label: "CreatePublicAppointmentRequest",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/bookinglinkcreatedeventdata",
+          label: "BookingLinkCreatedEventData",
           className: "schema",
         },
         {

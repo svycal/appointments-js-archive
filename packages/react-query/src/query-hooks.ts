@@ -44,6 +44,7 @@ export { usePublicServiceSlots } from "./query-hooks/use-public-service-slots";
 export { useRoles } from "./query-hooks/use-roles";
 export { useService } from "./query-hooks/use-service";
 export { useServiceForms } from "./query-hooks/use-service-forms";
+export { useServiceProviderConferencing } from "./query-hooks/use-service-provider-conferencing";
 export { useServiceProviders } from "./query-hooks/use-service-providers";
 export { useServiceSlots } from "./query-hooks/use-service-slots";
 export { useServices } from "./query-hooks/use-services";

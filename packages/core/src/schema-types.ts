@@ -75,8 +75,18 @@ export type BookingIntentUpdatedEventData =
   Schemas["BookingIntentUpdatedEventData"];
 export type BookingIntentWorkflow = Schemas["BookingIntentWorkflow"];
 export type BookingLink = Schemas["BookingLink"];
+export type BookingLinkActivatedEventData =
+  Schemas["BookingLinkActivatedEventData"];
+export type BookingLinkCreatedEventData =
+  Schemas["BookingLinkCreatedEventData"];
+export type BookingLinkDeactivatedEventData =
+  Schemas["BookingLinkDeactivatedEventData"];
+export type BookingLinkDeletedEventData =
+  Schemas["BookingLinkDeletedEventData"];
 export type BookingLinkResponse = Schemas["BookingLinkResponse"];
 export type BookingLinksResponse = Schemas["BookingLinksResponse"];
+export type BookingLinkUpdatedEventData =
+  Schemas["BookingLinkUpdatedEventData"];
 export type BookingPolicy = Schemas["BookingPolicy"];
 export type BufferPolicy = Schemas["BufferPolicy"];
 export type ByEmail = Schemas["ByEmail"];
@@ -214,12 +224,19 @@ export type ReschedulingPolicy = Schemas["ReschedulingPolicy"];
 export type Role = Schemas["Role"];
 export type RolesResponse = Schemas["RolesResponse"];
 export type Service = Schemas["Service"];
+export type ServiceConferencingResponse =
+  Schemas["ServiceConferencingResponse"];
+export type ServiceConferencingResult = Schemas["ServiceConferencingResult"];
 export type ServiceCreatedEventData = Schemas["ServiceCreatedEventData"];
 export type ServiceDeletedEventData = Schemas["ServiceDeletedEventData"];
 export type ServiceForm = Schemas["ServiceForm"];
 export type ServiceFormResponse = Schemas["ServiceFormResponse"];
 export type ServiceFormsResponse = Schemas["ServiceFormsResponse"];
 export type ServiceProvider = Schemas["ServiceProvider"];
+export type ServiceProviderConferencing =
+  Schemas["ServiceProviderConferencing"];
+export type ServiceProviderConferencingResponse =
+  Schemas["ServiceProviderConferencingResponse"];
 export type ServiceProviderCreatedEventData =
   Schemas["ServiceProviderCreatedEventData"];
 export type ServiceProviderDeletedEventData =
@@ -230,6 +247,10 @@ export type ServiceResponse = Schemas["ServiceResponse"];
 export type ServiceSlotResponse = Schemas["ServiceSlotResponse"];
 export type ServicesResponse = Schemas["ServicesResponse"];
 export type ServiceUpdatedEventData = Schemas["ServiceUpdatedEventData"];
+export type SetServiceConferencingRequest =
+  Schemas["SetServiceConferencingRequest"];
+export type SetServiceProviderConferencingRequest =
+  Schemas["SetServiceProviderConferencingRequest"];
 export type SetUserMappingRequest = Schemas["SetUserMappingRequest"];
 export type Slot = Schemas["Slot"];
 export type SlotListResponse = Schemas["SlotListResponse"];

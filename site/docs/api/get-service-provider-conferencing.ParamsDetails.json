@@ -1,0 +1,1 @@
+{"parameters":[{"description":"The service's unique identifier","example":"srv_abcdef123456","in":"path","name":"service_id","required":true,"schema":{"pattern":"^srv_\\w{12}$","type":"string"}},{"description":"The provider's unique identifier","example":"prov_abcdef123456","in":"path","name":"provider_id","required":true,"schema":{"pattern":"^prov_\\w{12}$","type":"string"}}]}

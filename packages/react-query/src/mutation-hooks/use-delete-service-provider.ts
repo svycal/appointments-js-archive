@@ -10,7 +10,7 @@ import { useSavvyCalQueryClient } from "../provider";
 interface Options
   extends MutationOptionsFor<
     "delete",
-    "/v1/service_providers/{service_provider_id}"
+    "/v1/services/{service_id}/providers/{provider_id}"
   > {
   client?: QueryClient;
 }
@@ -21,7 +21,7 @@ export const useDeleteServiceProvider = (options?: Options) => {
 
   return client.useMutation(
     "delete",
-    "/v1/service_providers/{service_provider_id}",
+    "/v1/services/{service_id}/providers/{provider_id}",
     mutationOptions,
   );
 };

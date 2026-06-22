@@ -1,0 +1,32 @@
+---
+id: serviceconferencingresult
+title: "ServiceConferencingResult"
+description: "The outcome of configuring a service's conferencing across all of its providers, listing which providers were configured and which were skipped."
+sidebar_label: "ServiceConferencingResult"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"configured":[{"provider_id":"prov_d025a96ac0c6"}],"skipped":[{"provider_id":"prov_a1b2c3d4e5f6","reason":"no_user_mapping"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"ServiceConferencingResult"}
+>
+</Heading>
+
+
+
+The outcome of configuring a service's conferencing across all of its providers, listing which providers were configured and which were skipped.
+
+<Schema
+  {...require("./serviceconferencingresult.Schema.json")}
+>
+  
+</Schema>
+            

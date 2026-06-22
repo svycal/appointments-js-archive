@@ -139,6 +139,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/services/{service_id}/conferencing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /**
+         * Set service conferencing
+         * @description Set a service's default conferencing and configure every provider on the
+         *     service from their default user mappings on the connected account. Providers
+         *     without a default user mapping are skipped (reported in the response, not an
+         *     error).
+         *
+         *     Returns a 404 when the service does not exist or is not accessible to the
+         *     current actor, and a 422 when `connected_account_id` does not reference a
+         *     conferencing connection on the service's account.
+         */
+        put: operations["setServiceConferencing"];
+        post?: never;
+        /**
+         * Clear service conferencing
+         * @description Clear a service's default conferencing and remove conferencing from all of
+         *     its providers.
+         *
+         *     Returns a 404 when the service does not exist or is not accessible to the
+         *     current actor.
+         */
+        delete: operations["clearServiceConferencing"];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/accounts": {
         parameters: {
             query?: never;
@@ -284,6 +319,64 @@ export interface paths {
          * @description Update a user's settings in the specified account.
          */
         patch: operations["updateAccountUser"];
+        trace?: never;
+    };
+    "/v1/services/{service_id}/providers/{provider_id}/conferencing": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get service provider conferencing
+         * @description Get the conferencing configuration for a service provider.
+         *
+         *     Returns a 404 when the service or provider does not exist, the provider is
+         *     not assigned to the service, the service provider is not accessible to the
+         *     current actor, or no conferencing is configured.
+         */
+        get: operations["getServiceProviderConferencing"];
+        /**
+         * Set service provider conferencing
+         * @description Set the conferencing configuration for a service provider. The hosting
+         *     external user can be identified by ID or by email address (matched
+         *     case-insensitively against the connected account's external users) — exactly
+         *     one of `external_user_id` or `email` must be provided. `email` is a
+         *     convenience; when it matches no external user, the connected account's
+         *     external users are refreshed from the provider and matching is retried once,
+         *     so a freshly-added user can be selected without a manual sync. Matching still
+         *     fails with a 422 when the email matches zero (after a successful refresh) or
+         *     multiple external users, so integrations that need determinism should resolve
+         *     and use `external_user_id`. When the refresh itself cannot reach the provider
+         *     (e.g. the connection needs to be re-authorized), a 502 is returned rather
+         *     than a 422.
+         *
+         *     The external user must belong to the connected account, which must be a
+         *     conferencing connection on the same account as the service provider.
+         *
+         *     Setting conferencing replaces any existing configuration for the service
+         *     provider, so this operation is an idempotent upsert.
+         *
+         *     Returns a 404 when the service or provider does not exist, the provider is
+         *     not assigned to the service, or the service provider is not accessible to
+         *     the current actor.
+         */
+        put: operations["setServiceProviderConferencing"];
+        post?: never;
+        /**
+         * Clear service provider conferencing
+         * @description Remove the conferencing configuration for a service provider. Succeeds even
+         *     when no conferencing is currently configured.
+         *
+         *     Returns a 404 when the service or provider does not exist, the provider is
+         *     not assigned to the service, or the service provider is not accessible to
+         *     the current actor.
+         */
+        delete: operations["clearServiceProviderConferencing"];
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/v1/clients/{client_id}": {
@@ -473,6 +566,36 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/services/{service_id}/conferencing/sync": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /**
+         * Sync service conferencing
+         * @description Re-apply the service's default conferencing to all of its providers, in
+         *     alignment with the current default user mappings on the connected account.
+         *     Use this after establishing or updating user mappings on the connection to
+         *     push them onto the service's providers, without re-declaring the default.
+         *
+         *     Providers without a default user mapping are skipped (reported in the
+         *     response, not an error).
+         *
+         *     Returns a 404 when the service does not exist or is not accessible to the
+         *     current actor, and a 422 when the service has no default conferencing
+         *     configured.
+         */
+        post: operations["syncServiceConferencing"];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     "/v1/booking_links/{booking_link_id}": {
         parameters: {
             query?: never;
@@ -619,26 +742,6 @@ export interface paths {
          * @description Update an existing form.
          */
         patch: operations["updateForm"];
-        trace?: never;
-    };
-    "/v1/service_providers/{service_provider_id}": {
-        parameters: {
-            query?: never;
-            header?: never;
-            path?: never;
-            cookie?: never;
-        };
-        get?: never;
-        put?: never;
-        post?: never;
-        /**
-         * Remove service provider
-         * @description Remove a provider from the rotation for a service.
-         */
-        delete: operations["deleteServiceProvider"];
-        options?: never;
-        head?: never;
-        patch?: never;
         trace?: never;
     };
     "/v1/public/services/{service_id}/earliest_slot": {
@@ -877,6 +980,26 @@ export interface paths {
          * @description Update an existing connected account.
          */
         patch: operations["updateConnectedAccount"];
+        trace?: never;
+    };
+    "/v1/services/{service_id}/providers/{provider_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        post?: never;
+        /**
+         * Remove service provider
+         * @description Remove a provider from the rotation for a service.
+         */
+        delete: operations["deleteServiceProvider"];
+        options?: never;
+        head?: never;
+        patch?: never;
         trace?: never;
     };
     "/v1/roles": {
@@ -1881,6 +2004,25 @@ export interface components {
             };
         };
         /**
+         * SetServiceProviderConferencingRequest
+         * @description Request schema for setting a service provider's conferencing configuration. The connected account must be a conferencing connection (e.g., Zoom). Exactly one of `external_user_id` or `email` must be provided to identify the hosting external user, which must belong to the connected account.
+         * @example {
+         *       "connected_account_id": "cact_d025a96ac0c6",
+         *       "external_user_id": "exusr_d025a96ac0c6"
+         *     }
+         */
+        SetServiceProviderConferencingRequest: {
+            /** @description The ID of the conferencing connected account to host meetings. */
+            connected_account_id: string;
+            /** @description The ID of the external user (e.g., Zoom user) whose account hosts meetings for this provider. */
+            external_user_id: string;
+        } | {
+            /** @description The ID of the conferencing connected account to host meetings. */
+            connected_account_id: string;
+            /** @description The email address of the external user to host meetings, matched case-insensitively against the connected account's external users. */
+            email: string;
+        };
+        /**
          * BlocksResponse
          * @description Response schema for a list of blocks
          * @example {
@@ -2356,6 +2498,58 @@ export interface components {
              * @enum {string}
              */
             type: "short_text" | "long_text" | "email" | "phone" | "boolean" | "radio" | "select" | "checkbox";
+        };
+        /**
+         * BookingLinkDeactivatedEventData
+         * @description This is an object representing data for the booking link deactivated event.
+         * @example {
+         *       "object": {
+         *         "client": null,
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "expires_at": "2017-10-01T00:00:00Z",
+         *         "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *         "locked_fields": [
+         *           "provider_id"
+         *         ],
+         *         "max_uses": 5,
+         *         "metadata": {
+         *           "campaign": "spring"
+         *         },
+         *         "name": "VIP onboarding",
+         *         "object": "booking_link",
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "status": "active",
+         *         "updated_at": "2017-09-13T10:11:12Z",
+         *         "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *         "uses_count": 1,
+         *         "uses_remaining": 4
+         *       },
+         *       "type": "booking_link.deactivated"
+         *     }
+         */
+        BookingLinkDeactivatedEventData: {
+            object: components["schemas"]["BookingLink"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_link.deactivated";
         };
         /**
          * ForbiddenResponse
@@ -3926,6 +4120,56 @@ export interface components {
             email: string;
         };
         /**
+         * ServiceProviderConferencing
+         * @description This is an object representing the conferencing configuration for a service provider (e.g., the Zoom user whose account hosts meetings for this provider on this service).
+         * @example {
+         *       "conferencing_provider": "zoom_admin",
+         *       "connected_account": {
+         *         "connection_scope": "user",
+         *         "created_at": "2025-03-12T12:34:55Z",
+         *         "display_name": "John Doe",
+         *         "email": "user@example.com",
+         *         "external_account_id": null,
+         *         "external_subject": "123456789",
+         *         "id": "cact_d025a96ac0c6",
+         *         "object": "connected_account",
+         *         "provider": "google",
+         *         "status": "active",
+         *         "updated_at": "2025-03-13T10:11:12Z",
+         *         "user_id": "user_d025a96ac0c6"
+         *       },
+         *       "external_user": {
+         *         "email": "dr.smith@example.com",
+         *         "first_name": "Jane",
+         *         "id": "exusr_d025a96ac0c6",
+         *         "last_name": "Smith",
+         *         "object": "external_user",
+         *         "status": "active"
+         *       },
+         *       "object": "service_provider_conferencing",
+         *       "provider_id": "prov_d025a96ac0c6",
+         *       "service_id": "srv_d025a96ac0c6"
+         *     }
+         */
+        ServiceProviderConferencing: {
+            /**
+             * @description The conferencing provider used to host meetings.
+             * @enum {string}
+             */
+            conferencing_provider: "zoom_admin";
+            connected_account: components["schemas"]["ConnectedAccount"];
+            external_user: components["schemas"]["ExternalUser"];
+            /**
+             * @description String representing the object's type.
+             * @enum {string}
+             */
+            object: "service_provider_conferencing";
+            /** @description The ID of the provider. */
+            provider_id: string;
+            /** @description The ID of the service. */
+            service_id: string;
+        };
+        /**
          * BookingIntentUpdatedEventData
          * @description This is an object representing data for the booking intent updated event.
          * @example {
@@ -4361,6 +4605,95 @@ export interface components {
             submissions?: components["schemas"]["IntentSubmissionInput"][] | null;
             /** @description The local time zone for the slot (IANA format). */
             time_zone?: string | null;
+        };
+        /**
+         * BookingLinkActivatedEventData
+         * @description This is an object representing data for the booking link activated event.
+         * @example {
+         *       "object": {
+         *         "client": null,
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "expires_at": "2017-10-01T00:00:00Z",
+         *         "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *         "locked_fields": [
+         *           "provider_id"
+         *         ],
+         *         "max_uses": 5,
+         *         "metadata": {
+         *           "campaign": "spring"
+         *         },
+         *         "name": "VIP onboarding",
+         *         "object": "booking_link",
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "status": "active",
+         *         "updated_at": "2017-09-13T10:11:12Z",
+         *         "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *         "uses_count": 1,
+         *         "uses_remaining": 4
+         *       },
+         *       "type": "booking_link.activated"
+         *     }
+         */
+        BookingLinkActivatedEventData: {
+            object: components["schemas"]["BookingLink"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_link.activated";
+        };
+        /**
+         * ServiceProviderConferencingResponse
+         * @description Response schema for a single service provider conferencing configuration
+         * @example {
+         *       "data": {
+         *         "conferencing_provider": "zoom_admin",
+         *         "connected_account": {
+         *           "connection_scope": "user",
+         *           "created_at": "2025-03-12T12:34:55Z",
+         *           "display_name": "John Doe",
+         *           "email": "user@example.com",
+         *           "external_account_id": null,
+         *           "external_subject": "123456789",
+         *           "id": "cact_d025a96ac0c6",
+         *           "object": "connected_account",
+         *           "provider": "google",
+         *           "status": "active",
+         *           "updated_at": "2025-03-13T10:11:12Z",
+         *           "user_id": "user_d025a96ac0c6"
+         *         },
+         *         "external_user": {
+         *           "email": "dr.smith@example.com",
+         *           "first_name": "Jane",
+         *           "id": "exusr_d025a96ac0c6",
+         *           "last_name": "Smith",
+         *           "object": "external_user",
+         *           "status": "active"
+         *         },
+         *         "object": "service_provider_conferencing",
+         *         "provider_id": "prov_d025a96ac0c6",
+         *         "service_id": "srv_d025a96ac0c6"
+         *       }
+         *     }
+         */
+        ServiceProviderConferencingResponse: {
+            data: components["schemas"]["ServiceProviderConferencing"];
         };
         /**
          * Form
@@ -6527,7 +6860,7 @@ export interface components {
              */
             created_at: string;
             /** @description The event data. */
-            data: components["schemas"]["AccountUserCreatedEventData"] | components["schemas"]["AccountUserDeletedEventData"] | components["schemas"]["AccountUserUpdatedEventData"] | components["schemas"]["AppointmentCreatedEventData"] | components["schemas"]["AppointmentRescheduledEventData"] | components["schemas"]["AppointmentCanceledEventData"] | components["schemas"]["AppointmentConfirmedEventData"] | components["schemas"]["AppointmentDeletedEventData"] | components["schemas"]["AppointmentMeetingCreatedEventData"] | components["schemas"]["AppointmentMeetingCreateFailedEventData"] | components["schemas"]["AppointmentMeetingUpdatedEventData"] | components["schemas"]["AppointmentMeetingUpdateFailedEventData"] | components["schemas"]["AppointmentMeetingReplacedEventData"] | components["schemas"]["AppointmentMeetingReplaceFailedEventData"] | components["schemas"]["AppointmentMeetingCanceledEventData"] | components["schemas"]["AppointmentMeetingCancelFailedEventData"] | components["schemas"]["BlockCreatedEventData"] | components["schemas"]["BlockUpdatedEventData"] | components["schemas"]["BlockDeletedEventData"] | components["schemas"]["BookingIntentAbandonedEventData"] | components["schemas"]["BookingIntentCompletedEventData"] | components["schemas"]["BookingIntentCreatedEventData"] | components["schemas"]["BookingIntentUpdatedEventData"] | components["schemas"]["ClientCreatedEventData"] | components["schemas"]["ClientDeletedEventData"] | components["schemas"]["ClientUpdatedEventData"] | components["schemas"]["ConnectedAccountCreatedEventData"] | components["schemas"]["ConnectedAccountDeletedEventData"] | components["schemas"]["ConnectedAccountRefreshFailedEventData"] | components["schemas"]["ConnectedAccountReconnectedEventData"] | components["schemas"]["OpeningCreatedEventData"] | components["schemas"]["OpeningUpdatedEventData"] | components["schemas"]["OpeningDeletedEventData"] | components["schemas"]["ProviderCreatedEventData"] | components["schemas"]["ProviderUpdatedEventData"] | components["schemas"]["ProviderDeactivatedEventData"] | components["schemas"]["ProviderReactivatedEventData"] | components["schemas"]["ProviderScheduleCreatedEventData"] | components["schemas"]["ProviderScheduleDeletedEventData"] | components["schemas"]["ProviderScheduleUpdatedEventData"] | components["schemas"]["ServiceCreatedEventData"] | components["schemas"]["ServiceDeletedEventData"] | components["schemas"]["ServiceUpdatedEventData"] | components["schemas"]["ServiceProviderCreatedEventData"] | components["schemas"]["ServiceProviderDeletedEventData"];
+            data: components["schemas"]["AccountUserCreatedEventData"] | components["schemas"]["AccountUserDeletedEventData"] | components["schemas"]["AccountUserUpdatedEventData"] | components["schemas"]["AppointmentCreatedEventData"] | components["schemas"]["AppointmentRescheduledEventData"] | components["schemas"]["AppointmentCanceledEventData"] | components["schemas"]["AppointmentConfirmedEventData"] | components["schemas"]["AppointmentDeletedEventData"] | components["schemas"]["AppointmentMeetingCreatedEventData"] | components["schemas"]["AppointmentMeetingCreateFailedEventData"] | components["schemas"]["AppointmentMeetingUpdatedEventData"] | components["schemas"]["AppointmentMeetingUpdateFailedEventData"] | components["schemas"]["AppointmentMeetingReplacedEventData"] | components["schemas"]["AppointmentMeetingReplaceFailedEventData"] | components["schemas"]["AppointmentMeetingCanceledEventData"] | components["schemas"]["AppointmentMeetingCancelFailedEventData"] | components["schemas"]["BlockCreatedEventData"] | components["schemas"]["BlockUpdatedEventData"] | components["schemas"]["BlockDeletedEventData"] | components["schemas"]["BookingIntentAbandonedEventData"] | components["schemas"]["BookingIntentCompletedEventData"] | components["schemas"]["BookingIntentCreatedEventData"] | components["schemas"]["BookingIntentUpdatedEventData"] | components["schemas"]["BookingLinkActivatedEventData"] | components["schemas"]["BookingLinkCreatedEventData"] | components["schemas"]["BookingLinkDeactivatedEventData"] | components["schemas"]["BookingLinkDeletedEventData"] | components["schemas"]["BookingLinkUpdatedEventData"] | components["schemas"]["ClientCreatedEventData"] | components["schemas"]["ClientDeletedEventData"] | components["schemas"]["ClientUpdatedEventData"] | components["schemas"]["ConnectedAccountCreatedEventData"] | components["schemas"]["ConnectedAccountDeletedEventData"] | components["schemas"]["ConnectedAccountRefreshFailedEventData"] | components["schemas"]["ConnectedAccountReconnectedEventData"] | components["schemas"]["OpeningCreatedEventData"] | components["schemas"]["OpeningUpdatedEventData"] | components["schemas"]["OpeningDeletedEventData"] | components["schemas"]["ProviderCreatedEventData"] | components["schemas"]["ProviderUpdatedEventData"] | components["schemas"]["ProviderDeactivatedEventData"] | components["schemas"]["ProviderReactivatedEventData"] | components["schemas"]["ProviderScheduleCreatedEventData"] | components["schemas"]["ProviderScheduleDeletedEventData"] | components["schemas"]["ProviderScheduleUpdatedEventData"] | components["schemas"]["ServiceCreatedEventData"] | components["schemas"]["ServiceDeletedEventData"] | components["schemas"]["ServiceUpdatedEventData"] | components["schemas"]["ServiceProviderCreatedEventData"] | components["schemas"]["ServiceProviderDeletedEventData"];
             /** @description Unique identifier for the object. */
             id: string;
             /**
@@ -7619,6 +7952,28 @@ export interface components {
             data: components["schemas"]["Appointment"];
         };
         /**
+         * ServiceConferencingResponse
+         * @description Response schema for configuring a service's conferencing across all providers
+         * @example {
+         *       "data": {
+         *         "configured": [
+         *           {
+         *             "provider_id": "prov_d025a96ac0c6"
+         *           }
+         *         ],
+         *         "skipped": [
+         *           {
+         *             "provider_id": "prov_a1b2c3d4e5f6",
+         *             "reason": "no_user_mapping"
+         *           }
+         *         ]
+         *       }
+         *     }
+         */
+        ServiceConferencingResponse: {
+            data: components["schemas"]["ServiceConferencingResult"];
+        };
+        /**
          * ClientResponse
          * @description Response schema for a single client
          * @example {
@@ -7755,13 +8110,57 @@ export interface components {
             meta: components["schemas"]["PaginationMeta"];
         };
         /**
+         * SetServiceConferencingRequest
+         * @description Request schema for setting a service's default conferencing. The conferencing provider is inferred from the connected account. Setting the default also configures every provider on the service from their default user mappings on the connected account; providers without a mapping are skipped.
+         * @example {
+         *       "connected_account_id": "cact_d025a96ac0c6"
+         *     }
+         */
+        SetServiceConferencingRequest: {
+            /** @description The ID of the conferencing connected account to use as the service default. */
+            connected_account_id: string;
+        };
+        /**
+         * ServiceConferencingResult
+         * @description The outcome of configuring a service's conferencing across all of its providers, listing which providers were configured and which were skipped.
+         * @example {
+         *       "configured": [
+         *         {
+         *           "provider_id": "prov_d025a96ac0c6"
+         *         }
+         *       ],
+         *       "skipped": [
+         *         {
+         *           "provider_id": "prov_a1b2c3d4e5f6",
+         *           "reason": "no_user_mapping"
+         *         }
+         *       ]
+         *     }
+         */
+        ServiceConferencingResult: {
+            configured: {
+                provider_id: string;
+            }[];
+            skipped: {
+                provider_id: string;
+                /**
+                 * @description Why the provider was skipped.
+                 * @enum {string}
+                 */
+                reason: "no_user_mapping";
+            }[];
+        };
+        /**
          * ByEmail
          * @example {
+         *       "connected_account_id": "cact_d025a96ac0c6",
          *       "email": "dr.smith@example.com"
          *     }
          */
         ByEmail: {
-            /** @description The email address of the external user to map to the provider, matched case-insensitively against the connected account's external users. */
+            /** @description The ID of the conferencing connected account to host meetings. */
+            connected_account_id: string;
+            /** @description The email address of the external user to host meetings, matched case-insensitively against the connected account's external users. */
             email: string;
         };
         /**
@@ -9820,6 +10219,58 @@ export interface components {
             type: "appointment.meeting.canceled";
         };
         /**
+         * BookingLinkDeletedEventData
+         * @description This is an object representing data for the booking link deleted event.
+         * @example {
+         *       "object": {
+         *         "client": null,
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "expires_at": "2017-10-01T00:00:00Z",
+         *         "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *         "locked_fields": [
+         *           "provider_id"
+         *         ],
+         *         "max_uses": 5,
+         *         "metadata": {
+         *           "campaign": "spring"
+         *         },
+         *         "name": "VIP onboarding",
+         *         "object": "booking_link",
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "status": "active",
+         *         "updated_at": "2017-09-13T10:11:12Z",
+         *         "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *         "uses_count": 1,
+         *         "uses_remaining": 4
+         *       },
+         *       "type": "booking_link.deleted"
+         *     }
+         */
+        BookingLinkDeletedEventData: {
+            object: components["schemas"]["BookingLink"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_link.deleted";
+        };
+        /**
          * ProviderScheduleCreatedEventData
          * @description This is an object representing data for the provider schedule created event.
          * @example {
@@ -10479,11 +10930,14 @@ export interface components {
         /**
          * ByExternalUserId
          * @example {
+         *       "connected_account_id": "cact_d025a96ac0c6",
          *       "external_user_id": "exusr_d025a96ac0c6"
          *     }
          */
         ByExternalUserId: {
-            /** @description The ID of the external user to map to the provider. */
+            /** @description The ID of the conferencing connected account to host meetings. */
+            connected_account_id: string;
+            /** @description The ID of the external user (e.g., Zoom user) whose account hosts meetings for this provider. */
             external_user_id: string;
         };
         /**
@@ -11846,6 +12300,58 @@ export interface components {
             weekly_rules: components["schemas"]["WeeklyRule"][];
         };
         /**
+         * BookingLinkUpdatedEventData
+         * @description This is an object representing data for the booking link updated event.
+         * @example {
+         *       "object": {
+         *         "client": null,
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "expires_at": "2017-10-01T00:00:00Z",
+         *         "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *         "locked_fields": [
+         *           "provider_id"
+         *         ],
+         *         "max_uses": 5,
+         *         "metadata": {
+         *           "campaign": "spring"
+         *         },
+         *         "name": "VIP onboarding",
+         *         "object": "booking_link",
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "status": "active",
+         *         "updated_at": "2017-09-13T10:11:12Z",
+         *         "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *         "uses_count": 1,
+         *         "uses_remaining": 4
+         *       },
+         *       "type": "booking_link.updated"
+         *     }
+         */
+        BookingLinkUpdatedEventData: {
+            object: components["schemas"]["BookingLink"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_link.updated";
+        };
+        /**
          * CreateOpeningRequest
          * @description Request schema for creating an opening.
          * @example {
@@ -12913,6 +13419,58 @@ export interface components {
              * @example America/New_York
              */
             time_zone: string;
+        };
+        /**
+         * BookingLinkCreatedEventData
+         * @description This is an object representing data for the booking link created event.
+         * @example {
+         *       "object": {
+         *         "client": null,
+         *         "created_at": "2017-09-12T12:34:55Z",
+         *         "expires_at": "2017-10-01T00:00:00Z",
+         *         "id": "bl_d025a96ac0c6d025a96ac0c6",
+         *         "locked_fields": [
+         *           "provider_id"
+         *         ],
+         *         "max_uses": 5,
+         *         "metadata": {
+         *           "campaign": "spring"
+         *         },
+         *         "name": "VIP onboarding",
+         *         "object": "booking_link",
+         *         "providers": [
+         *           {
+         *             "created_at": "2017-09-12T12:34:55Z",
+         *             "display_name": "John Smith",
+         *             "email": "john@example.com",
+         *             "first_name": "John",
+         *             "id": "prov_d025a96ac0c6",
+         *             "last_name": "Smith",
+         *             "metadata": {
+         *               "external_id": "123"
+         *             },
+         *             "object": "provider",
+         *             "time_zone": "America/New_York",
+         *             "updated_at": "2017-09-13T10:11:12Z"
+         *           }
+         *         ],
+         *         "service_id": "srv_d025a96ac0c6",
+         *         "status": "active",
+         *         "updated_at": "2017-09-13T10:11:12Z",
+         *         "url": "https://example.savvycal.com/c/book/bl_d025a96ac0c6d025a96ac0c6",
+         *         "uses_count": 1,
+         *         "uses_remaining": 4
+         *       },
+         *       "type": "booking_link.created"
+         *     }
+         */
+        BookingLinkCreatedEventData: {
+            object: components["schemas"]["BookingLink"];
+            /**
+             * @description The event type. (enum property replaced by openapi-typescript)
+             * @enum {string}
+             */
+            type: "booking_link.created";
         };
         /**
          * ClientField
@@ -15650,6 +16208,108 @@ export interface operations {
             };
         };
     };
+    setServiceConferencing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Service conferencing params */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetServiceConferencingRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceConferencingResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    clearServiceConferencing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
     listAccounts: {
         parameters: {
             query?: {
@@ -16118,6 +16778,176 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    getServiceProviderConferencing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceProviderConferencingResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    setServiceProviderConferencing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Service provider conferencing params */
+        requestBody: {
+            content: {
+                "application/json": components["schemas"]["SetServiceProviderConferencingRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceProviderConferencingResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+            /** @description GenericError */
+            502: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenericErrorResponse"];
+                };
+            };
+        };
+    };
+    clearServiceProviderConferencing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
                 };
             };
         };
@@ -16667,6 +17497,59 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    syncServiceConferencing: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ServiceConferencingResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description GenericError */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["GenericErrorResponse"];
                 };
             };
         };
@@ -17264,47 +18147,6 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JsonErrorResponse"];
-                };
-            };
-        };
-    };
-    deleteServiceProvider: {
-        parameters: {
-            query?: never;
-            header?: never;
-            path: {
-                /** @description Service Provider ID */
-                service_provider_id: string;
-            };
-            cookie?: never;
-        };
-        requestBody?: never;
-        responses: {
-            /** @description No Content */
-            204: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "text/plain": string;
-                };
-            };
-            /** @description Unauthorized */
-            401: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["UnauthorizedResponse"];
-                };
-            };
-            /** @description Not Found */
-            404: {
-                headers: {
-                    [name: string]: unknown;
-                };
-                content: {
-                    "application/json": components["schemas"]["NotFoundResponse"];
                 };
             };
         };
@@ -18021,7 +18863,10 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                /** @description Connected Account ID */
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
                 connected_account_id: string;
             };
             cookie?: never;
@@ -18062,7 +18907,10 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                /** @description Connected Account ID */
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
                 connected_account_id: string;
             };
             cookie?: never;
@@ -18103,7 +18951,10 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                /** @description Connected Account ID */
+                /**
+                 * @description The connected account's unique identifier
+                 * @example cact_abcdef123456
+                 */
                 connected_account_id: string;
             };
             cookie?: never;
@@ -18149,6 +19000,55 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    deleteServiceProvider: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /**
+                 * @description The service's unique identifier
+                 * @example srv_abcdef123456
+                 */
+                service_id: string;
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
+                provider_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description No Content */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "text/plain": string;
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
                 };
             };
         };
@@ -18878,6 +19778,15 @@ export interface operations {
                     "application/json": components["schemas"]["UnauthorizedResponse"];
                 };
             };
+            /** @description Forbidden */
+            403: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["ForbiddenResponse"];
+                };
+            };
             /** @description Unprocessable Entity */
             422: {
                 headers: {
@@ -18987,7 +19896,10 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                /** @description Provider ID */
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
                 provider_id: string;
             };
             cookie?: never;
@@ -19028,7 +19940,10 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                /** @description Provider ID */
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
                 provider_id: string;
             };
             cookie?: never;
@@ -19069,7 +19984,10 @@ export interface operations {
             query?: never;
             header?: never;
             path: {
-                /** @description Provider ID */
+                /**
+                 * @description The provider's unique identifier
+                 * @example prov_abcdef123456
+                 */
                 provider_id: string;
             };
             cookie?: never;

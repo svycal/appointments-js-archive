@@ -1,0 +1,75 @@
+---
+id: clear-service-conferencing
+title: "Clear service conferencing"
+description: "Clear a service's default conferencing and remove conferencing from all of"
+sidebar_label: "Clear service conferencing"
+hide_title: true
+hide_table_of_contents: true
+api: eJzVVlFv2zYQ/ivEYUA3QLDjzNuD3oIswwoMQZGkT7FXnKlTxFYiGfKkxBP03wtSUi3ZRoei28OeTIu8j9999+lOLUgsyx3KTx7StksgIy+dsqyMhhSuS0InUHhyjZL0xouMcqxLFtLonBxpqfSTQJ0JR5VpaP48d6YSWJbC5But2AvrTKMycn6x0Rt9R1w77QWK9cVavBSkBRc0XiYyQ15ow4JelWdhnFD9f5SSvFe7kgSbELLRsnaOdNhi4xYbDQkYSw5DHm8zSEGGTO575OsJR0jAosOKmJyH9LE9UuDhQOiNF7VWzzUJlZFmlStykAC9YmVLghS8az7gTmaUry5/Xv/yKySgAoZFLiABjVU81aN9UBkk4Oi5Vo4ySNnVlICXBVUIaRuCmFwI/yvgbjYv7eqy+wES4L2NOOwC/67bBhhvjfYUigiXF+vwI41m0hyWTK+8tCUGNu3kjnmqN5XlvRihxIviQmgjRpxppoGF4riMUXdD0Bl2J566NeJ6gOwSWF+sjsiitaWSsXLLj958lfJ4r+gPiNw4UWusuTBO/U3Blc81efZT9i2Qc+ZLtRlVCSm8n4RBAp6Raw9pJNhtuwSsC45i1Ys8QrSgmKq4mB8YgU9UDoGiIu/x6Yxeh5uPA/94eHgn+k0hTXY2dijK+Tv7zdMKTV34OPLefjlndh9JxloND9A53J/EDYJsD86YKnpqkBH21CCzSkSLHPv5ey0Smkhuav0t/rg1LH4PMXNzrP9Tc5CuqyDu4fLt9zlmBAzET6GOSjrgJv+iJ24Nxzy+xQ+H5MMe41OoDAy9PKJXxIUJXT6jkphiT+cCUlg2q+XQb/2yPXTebinnMyBsjQOgdqHeBbP16XKJVi08Ns1eYrlAayGBBp3CXRlLGduvJ1k7xfsYPpoXe/qP2+mJ+2DC3gNH5wYHByl2hC6OlkGaQCXmrnRuYj8f1LwPvK6xFFfWGqW5Is1eXL17G0iS871+q8VFqJQ1niuMNw2TqJ/u47g9UmRWg8nb97/+JhgEnczDLunr3Q6WeYRmNfghuiuBdDawZyptEyiM5xDVtjv09N6VXRceP9fkgh22B7f07UT5sM4gzbH09BWZf7wbXqSfxD9/g5zNa3w19T56tqyHyf2J9vPPkNjBCsKMXCTZH7iSkixPQqfo05fut5s/bx5uoOs+A0BNmd0=
+sidebar_class_name: "delete api-method"
+info_path: api/savvycal-appointments-api
+custom_edit_url: null
+hide_send_button: true
+---
+
+import MethodEndpoint from "@theme/ApiExplorer/MethodEndpoint";
+import ParamsDetails from "@theme/ParamsDetails";
+import RequestSchema from "@theme/RequestSchema";
+import StatusCodes from "@theme/StatusCodes";
+import OperationTabs from "@theme/OperationTabs";
+import TabItem from "@theme/TabItem";
+import Heading from "@theme/Heading";
+import Translate from "@docusaurus/Translate";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"Clear service conferencing"}
+>
+</Heading>
+
+<MethodEndpoint
+  method={"delete"}
+  path={"/v1/services/{service_id}/conferencing"}
+  context={"endpoint"}
+>
+  
+</MethodEndpoint>
+
+
+
+Clear a service's default conferencing and remove conferencing from all of
+its providers.
+
+Returns a 404 when the service does not exist or is not accessible to the
+current actor.
+
+
+<Heading
+  id={"request"}
+  as={"h2"}
+  className={"openapi-tabs__heading"}
+>
+  <Translate id="theme.openapi.request.title">Request</Translate>
+</Heading>
+
+<ParamsDetails
+  {...require("./clear-service-conferencing.ParamsDetails.json")}
+>
+  
+</ParamsDetails>
+
+<RequestSchema
+  {...require("./clear-service-conferencing.RequestSchema.json")}
+>
+  
+</RequestSchema>
+
+<StatusCodes
+  {...require("./clear-service-conferencing.StatusCodes.json")}
+>
+  
+</StatusCodes>
+
+
+      
