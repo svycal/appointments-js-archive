@@ -1,0 +1,32 @@
+---
+id: initialproviderschedule
+title: "InitialProviderSchedule"
+description: "The provider's initial schedule, created atomically with the provider when a brand-new provider row is created (ignored on reactivation or affiliation of an existing provider). All fields are optional. Omit the object or pass `null` for no schedules; an empty object `{}` still creates a schedule with `effective_from` defaulted to yesterday and no weekly rules."
+sidebar_label: "InitialProviderSchedule"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"effective_from":"2025-01-01","effective_to":"2025-12-31","public_bookings":{"enabled":true},"time_zone":"America/New_York","weekly_rules":[{"day":"mo","end_time":"17:00","start_time":"09:00"}]}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"InitialProviderSchedule"}
+>
+</Heading>
+
+
+
+The provider's initial schedule, created atomically with the provider when a brand-new provider row is created (ignored on reactivation or affiliation of an existing provider). All fields are optional. Omit the object or pass `null` for no schedules; an empty object `{}` still creates a schedule with `effective_from` defaulted to yesterday and no weekly rules.
+
+<Schema
+  {...require("./initialproviderschedule.Schema.json")}
+>
+  
+</Schema>
+            
