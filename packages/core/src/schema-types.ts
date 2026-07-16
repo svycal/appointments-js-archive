@@ -170,6 +170,7 @@ export type FormResponse = Schemas["FormResponse"];
 export type FormsResponse = Schemas["FormsResponse"];
 export type GenericErrorResponse = Schemas["GenericErrorResponse"];
 export type HoldPolicy = Schemas["HoldPolicy"];
+export type InitialProviderSchedule = Schemas["InitialProviderSchedule"];
 export type IntentSubmissionInput = Schemas["IntentSubmissionInput"];
 export type JsonError = Schemas["JsonError"];
 export type JsonErrorResponse = Schemas["JsonErrorResponse"];

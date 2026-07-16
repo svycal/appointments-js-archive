@@ -6,6 +6,12 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## July 16, 2026
+
+- **New:** -- The [Create Provider](/api/create-provider) endpoint now accepts an optional `initial_schedule` field for creating the provider's first schedule atomically with the provider. It's ignored when the request reactivates or affiliates an existing provider, and an empty object `{}` still creates a schedule with `effective_from` defaulted to yesterday and no weekly rules. See [InitialProviderSchedule](/api/schemas/initialproviderschedule).
+- **Changed:** -- Clarified in the [Create Account User](/api/create-account-user) docs that providers created via the `create_provider` flag start with no schedules — create schedules separately via [Create Provider Schedule](/api/create-provider-schedule) or inline via `initial_schedule` on [Create Provider](/api/create-provider).
+- **Changed:** -- Removed a misleading `default: true` annotation from `public_bookings.enabled` on [CreateProviderScheduleRequest](/api/schemas/createproviderschedulerequest) and [UpdateProviderScheduleRequest](/api/schemas/updateproviderschedulerequest); the field is required, so no default applies.
+
 ## June 22, 2026
 
 - **New: Service Conferencing** -- Added endpoints for managing a service's default conferencing across all of its providers: [Set Service Conferencing](/api/set-service-conferencing) configures the default from a connected conferencing account (e.g. Zoom) and applies it to every provider from their default user mappings, [Clear Service Conferencing](/api/clear-service-conferencing) removes it from the service and all its providers, and [Sync Service Conferencing](/api/sync-service-conferencing) re-applies the default to all providers. See [SetServiceConferencingRequest](/api/schemas/setserviceconferencingrequest), [ServiceConferencingResponse](/api/schemas/serviceconferencingresponse), and [ServiceConferencingResult](/api/schemas/serviceconferencingresult).
