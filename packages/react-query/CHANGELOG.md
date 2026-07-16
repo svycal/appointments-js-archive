@@ -1,5 +1,22 @@
 # @savvycal/appointments-react-query
 
+## 2.0.0
+
+### Major Changes
+
+- [#46](https://github.com/svycal/appointments/pull/46) [`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **Changed: Remove Service Provider endpoint** -- The Remove Service Provider endpoint has moved from `/v1/service_providers/{service_provider_id}` to `/v1/services/{service_id}/providers/{provider_id}`. See https://developers.savvycal.app/api/delete-service-provider.
+
+### Minor Changes
+
+- [#46](https://github.com/svycal/appointments/pull/46) [`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Service Provider Conferencing** -- Added endpoints for managing the conferencing configuration of an individual provider on a service. See https://developers.savvycal.app/api/get-service-provider-conferencing, https://developers.savvycal.app/api/set-service-provider-conferencing, and https://developers.savvycal.app/api/clear-service-provider-conferencing.
+
+- [#46](https://github.com/svycal/appointments/pull/46) [`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Service Conferencing** -- Added endpoints for managing a service's default conferencing across all of its providers. See https://developers.savvycal.app/api/set-service-conferencing, https://developers.savvycal.app/api/clear-service-conferencing, and https://developers.savvycal.app/api/sync-service-conferencing.
+
+### Patch Changes
+
+- Updated dependencies [[`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d), [`5fa4756`](https://github.com/svycal/appointments/commit/5fa475652b4d2de660a5071a35e5f91c9b3f395c), [`5fa4756`](https://github.com/svycal/appointments/commit/5fa475652b4d2de660a5071a35e5f91c9b3f395c), [`5fa4756`](https://github.com/svycal/appointments/commit/5fa475652b4d2de660a5071a35e5f91c9b3f395c), [`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d), [`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d), [`a2b3ea4`](https://github.com/svycal/appointments/commit/a2b3ea490a478c3f59067224404deb1211b0390d)]:
+  - @savvycal/appointments-core@2.0.0
+
 ## 1.3.0
 
 ### Minor Changes
