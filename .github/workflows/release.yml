@@ -33,7 +33,10 @@ jobs:
           registry-url: "https://registry.npmjs.org"
 
       - name: Update npm for trusted publishing
-        run: npm install -g npm@latest
+        # Pinned to npm 11 (trusted publishing needs >= 11.5.1). npm 12 changed
+        # `npm info --json` to return an array, which breaks changesets'
+        # published-version check and fails the publish step.
+        run: npm install -g npm@11
 
       - name: Install Dependencies
         run: pnpm install --frozen-lockfile
