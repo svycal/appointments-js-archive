@@ -1,5 +1,13 @@
 # @savvycal/appointments-core
 
+## 2.1.0
+
+### Minor Changes
+
+- [#51](https://github.com/svycal/appointments/pull/51) [`e77d8dd`](https://github.com/svycal/appointments/commit/e77d8dd36d183eabbdee34055434b4af3a113167) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New:** -- [Role](https://developers.savvycal.app/api/schemas/role) responses now include `permissions` (granted permissions for the role) and `denied_permissions` (explicit denials that always win over grants, including wildcards).
+
+- [#51](https://github.com/svycal/appointments/pull/51) [`e77d8dd`](https://github.com/svycal/appointments/commit/e77d8dd36d183eabbdee34055434b4af3a113167) Thanks [@derrickreimer](https://github.com/derrickreimer)! - **New: Role permissions** -- Added endpoints for retrieving and updating roles: [Get Role](https://developers.savvycal.app/api/get-role) and [Update Role](https://developers.savvycal.app/api/update-role). Use `denied_permissions` on [Update Role](https://developers.savvycal.app/api/update-role) to narrow a built-in role (denials win over baseline grants, including wildcards); superuser roles cannot have denials. See [UpdateRoleRequest](https://developers.savvycal.app/api/schemas/updaterolerequest) and [RoleResponse](https://developers.savvycal.app/api/schemas/roleresponse).
+
 ## 2.0.0
 
 ### Major Changes
