@@ -596,6 +596,15 @@ export function getPublicBookingIntent(
   });
 }
 
+export function getRole(
+  client: FetchClient,
+  path: PathParams<"/v1/roles/{role_id}", "get">,
+) {
+  return client.GET("/v1/roles/{role_id}", {
+    params: { path },
+  });
+}
+
 export function getService(
   client: FetchClient,
   path: PathParams<"/v1/services/{service_id}", "get">,
@@ -1145,6 +1154,17 @@ export function updatePublicBookingIntent(
   body: RequestBody<"/v1/public/booking_intents/{booking_intent_id}", "patch">,
 ) {
   return client.PATCH("/v1/public/booking_intents/{booking_intent_id}", {
+    body,
+    params: { path },
+  });
+}
+
+export function updateRole(
+  client: FetchClient,
+  path: PathParams<"/v1/roles/{role_id}", "patch">,
+  body: RequestBody<"/v1/roles/{role_id}", "patch">,
+) {
+  return client.PATCH("/v1/roles/{role_id}", {
     body,
     params: { path },
   });

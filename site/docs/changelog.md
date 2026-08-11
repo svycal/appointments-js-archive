@@ -6,6 +6,11 @@ sidebar_label: Changelog
 
 A log of notable changes to the SavvyCal Appointments API.
 
+## August 11, 2026
+
+- **New: Role permissions** -- Added endpoints for retrieving and updating roles: [Get Role](/api/get-role) and [Update Role](/api/update-role). Use `denied_permissions` on [Update Role](/api/update-role) to narrow a built-in role (denials win over baseline grants, including wildcards); superuser roles cannot have denials. See [UpdateRoleRequest](/api/schemas/updaterolerequest) and [RoleResponse](/api/schemas/roleresponse).
+- **New:** -- [Role](/api/schemas/role) responses now include `permissions` (granted permissions for the role) and `denied_permissions` (explicit denials that always win over grants, including wildcards).
+
 ## July 16, 2026
 
 - **New:** -- The [Create Provider](/api/create-provider) endpoint now accepts an optional `initial_schedule` field for creating the provider's first schedule atomically with the provider. It's ignored when the request reactivates or affiliates an existing provider, and an empty object `{}` still creates a schedule with `effective_from` defaulted to yesterday and no weekly rules. See [InitialProviderSchedule](/api/schemas/initialproviderschedule).
