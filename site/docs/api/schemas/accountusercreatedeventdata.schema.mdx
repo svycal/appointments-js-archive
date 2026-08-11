@@ -6,7 +6,7 @@ sidebar_label: "AccountUserCreatedEventData"
 hide_title: true
 hide_table_of_contents: true
 schema: true
-sample: {"object":{"object":"account_user","passive":false,"roles":[{"id":"role_123456789012","name":"Admin","object":"role","type":"admin"}],"user":{"created_at":"2025-03-15T13:01:08Z","email":"avery@tendermedical.com","first_name":"Avery","id":"user_d025a96ac0c6","last_name":"Evans","object":"user","updated_at":"2025-03-15T13:01:08Z"}},"type":"account_user.created"}
+sample: {"object":{"object":"account_user","passive":false,"roles":[{"denied_permissions":["appointments.own.cancel","appointments.own.reschedule"],"id":"role_123456789012","name":"Staff","object":"role","permissions":["accounts.view","appointments.own.*","blocks.*","booking_intents.*","clients.*","integrations.own.*","providers.own.view","providers.own.update"],"type":"staff"}],"user":{"created_at":"2025-03-15T13:01:08Z","email":"avery@tendermedical.com","first_name":"Avery","id":"user_d025a96ac0c6","last_name":"Evans","object":"user","updated_at":"2025-03-15T13:01:08Z"}},"type":"account_user.created"}
 custom_edit_url: null
 ---
 

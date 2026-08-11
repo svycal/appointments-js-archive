@@ -495,6 +495,30 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    "/v1/roles/{role_id}": {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * Get role
+         * @description Retrieve a role by ID.
+         */
+        get: operations["getRole"];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        /**
+         * Update role
+         * @description Update a role. Use `denied_permissions` to narrow a built-in role (denials win over baseline grants, including wildcards). Superuser roles cannot have denials.
+         */
+        patch: operations["updateRole"];
+        trace?: never;
+    };
     "/v1/connected_accounts/{connected_account_id}/user_mappings": {
         parameters: {
             query?: never;
@@ -2067,10 +2091,24 @@ export interface components {
          *       "passive": false,
          *       "roles": [
          *         {
+         *           "denied_permissions": [
+         *             "appointments.own.cancel",
+         *             "appointments.own.reschedule"
+         *           ],
          *           "id": "role_123456789012",
-         *           "name": "Admin",
+         *           "name": "Staff",
          *           "object": "role",
-         *           "type": "admin"
+         *           "permissions": [
+         *             "accounts.view",
+         *             "appointments.own.*",
+         *             "blocks.*",
+         *             "booking_intents.*",
+         *             "clients.*",
+         *             "integrations.own.*",
+         *             "providers.own.view",
+         *             "providers.own.update"
+         *           ],
+         *           "type": "staff"
          *         }
          *       ],
          *       "user": {
@@ -3476,10 +3514,24 @@ export interface components {
          *       "passive": false,
          *       "roles": [
          *         {
+         *           "denied_permissions": [
+         *             "appointments.own.cancel",
+         *             "appointments.own.reschedule"
+         *           ],
          *           "id": "role_123456789012",
-         *           "name": "Admin",
+         *           "name": "Staff",
          *           "object": "role",
-         *           "type": "admin"
+         *           "permissions": [
+         *             "accounts.view",
+         *             "appointments.own.*",
+         *             "blocks.*",
+         *             "booking_intents.*",
+         *             "clients.*",
+         *             "integrations.own.*",
+         *             "providers.own.view",
+         *             "providers.own.update"
+         *           ],
+         *           "type": "staff"
          *         }
          *       ],
          *       "user": {
@@ -3853,6 +3905,35 @@ export interface components {
          */
         FormResponse: {
             data: components["schemas"]["FormDetail"];
+        };
+        /**
+         * RoleResponse
+         * @description Response schema for a single role
+         * @example {
+         *       "data": {
+         *         "denied_permissions": [
+         *           "appointments.own.cancel",
+         *           "appointments.own.reschedule"
+         *         ],
+         *         "id": "role_123456789012",
+         *         "name": "Staff",
+         *         "object": "role",
+         *         "permissions": [
+         *           "accounts.view",
+         *           "appointments.own.*",
+         *           "blocks.*",
+         *           "booking_intents.*",
+         *           "clients.*",
+         *           "integrations.own.*",
+         *           "providers.own.view",
+         *           "providers.own.update"
+         *         ],
+         *         "type": "staff"
+         *       }
+         *     }
+         */
+        RoleResponse: {
+            data: components["schemas"]["Role"];
         };
         /**
          * AggregatedSlot
@@ -4951,10 +5032,24 @@ export interface components {
          *         "passive": false,
          *         "roles": [
          *           {
+         *             "denied_permissions": [
+         *               "appointments.own.cancel",
+         *               "appointments.own.reschedule"
+         *             ],
          *             "id": "role_123456789012",
-         *             "name": "Admin",
+         *             "name": "Staff",
          *             "object": "role",
-         *             "type": "admin"
+         *             "permissions": [
+         *               "accounts.view",
+         *               "appointments.own.*",
+         *               "blocks.*",
+         *               "booking_intents.*",
+         *               "clients.*",
+         *               "integrations.own.*",
+         *               "providers.own.view",
+         *               "providers.own.update"
+         *             ],
+         *             "type": "staff"
          *           }
          *         ],
          *         "user": {
@@ -5080,6 +5175,24 @@ export interface components {
              * @enum {string}
              */
             type: "service.deleted";
+        };
+        /**
+         * UpdateRoleRequest
+         * @description Request schema for updating a role
+         * @example {
+         *       "denied_permissions": [
+         *         "appointments.own.cancel",
+         *         "appointments.own.reschedule"
+         *       ]
+         *     }
+         */
+        UpdateRoleRequest: {
+            /** @description Permissions to explicitly deny for this role. Replaces the existing denial list. Denials win over grants, including wildcards. Pass an empty array to clear denials. Cannot be set on superuser roles. */
+            denied_permissions?: string[];
+            /** @description The role's display name. */
+            name?: string;
+            /** @description Allow-list of permissions for custom roles only. Built-in roles (superuser, admin, staff) reject updates to this field; their grants are defined by type. */
+            permissions?: string[];
         };
         /**
          * ClientFieldResponse
@@ -7270,10 +7383,24 @@ export interface components {
          *         "passive": false,
          *         "roles": [
          *           {
+         *             "denied_permissions": [
+         *               "appointments.own.cancel",
+         *               "appointments.own.reschedule"
+         *             ],
          *             "id": "role_123456789012",
-         *             "name": "Admin",
+         *             "name": "Staff",
          *             "object": "role",
-         *             "type": "admin"
+         *             "permissions": [
+         *               "accounts.view",
+         *               "appointments.own.*",
+         *               "blocks.*",
+         *               "booking_intents.*",
+         *               "clients.*",
+         *               "integrations.own.*",
+         *               "providers.own.view",
+         *               "providers.own.update"
+         *             ],
+         *             "type": "staff"
          *           }
          *         ],
          *         "user": {
@@ -8286,13 +8413,29 @@ export interface components {
          * Role
          * @description This is an object representing a role in the system.
          * @example {
+         *       "denied_permissions": [
+         *         "appointments.own.cancel",
+         *         "appointments.own.reschedule"
+         *       ],
          *       "id": "role_123456789012",
-         *       "name": "Admin",
+         *       "name": "Staff",
          *       "object": "role",
-         *       "type": "admin"
+         *       "permissions": [
+         *         "accounts.view",
+         *         "appointments.own.*",
+         *         "blocks.*",
+         *         "booking_intents.*",
+         *         "clients.*",
+         *         "integrations.own.*",
+         *         "providers.own.view",
+         *         "providers.own.update"
+         *       ],
+         *       "type": "staff"
          *     }
          */
         Role: {
+            /** @description Permissions explicitly denied for this role. Denials win over grants, including wildcards (e.g. denying `appointments.own.cancel` removes cancel even when the role has `appointments.own.*`). Superuser roles cannot have denials. */
+            denied_permissions: string[];
             /** @description Unique identifier for the role. */
             id: string;
             /** @description The name of the role. */
@@ -8302,6 +8445,8 @@ export interface components {
              * @enum {string}
              */
             object: "role";
+            /** @description Granted permissions for this role. Built-in roles return their baseline grants; custom roles return the stored allow-list. Explicit denials are listed separately in `denied_permissions` and always win over grants (including wildcards). */
+            permissions: string[];
             /**
              * @description The type of the role.
              * @enum {string}
@@ -12653,10 +12798,24 @@ export interface components {
          * @example {
          *       "data": [
          *         {
+         *           "denied_permissions": [
+         *             "appointments.own.cancel",
+         *             "appointments.own.reschedule"
+         *           ],
          *           "id": "role_123456789012",
-         *           "name": "Admin",
+         *           "name": "Staff",
          *           "object": "role",
-         *           "type": "admin"
+         *           "permissions": [
+         *             "accounts.view",
+         *             "appointments.own.*",
+         *             "blocks.*",
+         *             "booking_intents.*",
+         *             "clients.*",
+         *             "integrations.own.*",
+         *             "providers.own.view",
+         *             "providers.own.update"
+         *           ],
+         *           "type": "staff"
          *         }
          *       ]
          *     }
@@ -13245,10 +13404,24 @@ export interface components {
          *         "passive": false,
          *         "roles": [
          *           {
+         *             "denied_permissions": [
+         *               "appointments.own.cancel",
+         *               "appointments.own.reschedule"
+         *             ],
          *             "id": "role_123456789012",
-         *             "name": "Admin",
+         *             "name": "Staff",
          *             "object": "role",
-         *             "type": "admin"
+         *             "permissions": [
+         *               "accounts.view",
+         *               "appointments.own.*",
+         *               "blocks.*",
+         *               "booking_intents.*",
+         *               "clients.*",
+         *               "integrations.own.*",
+         *               "providers.own.view",
+         *               "providers.own.update"
+         *             ],
+         *             "type": "staff"
          *           }
          *         ],
          *         "user": {
@@ -14399,10 +14572,24 @@ export interface components {
          *           "passive": false,
          *           "roles": [
          *             {
+         *               "denied_permissions": [
+         *                 "appointments.own.cancel",
+         *                 "appointments.own.reschedule"
+         *               ],
          *               "id": "role_123456789012",
-         *               "name": "Admin",
+         *               "name": "Staff",
          *               "object": "role",
-         *               "type": "admin"
+         *               "permissions": [
+         *                 "accounts.view",
+         *                 "appointments.own.*",
+         *                 "blocks.*",
+         *                 "booking_intents.*",
+         *                 "clients.*",
+         *                 "integrations.own.*",
+         *                 "providers.own.view",
+         *                 "providers.own.update"
+         *               ],
+         *               "type": "staff"
          *             }
          *           ],
          *           "user": {
@@ -17314,6 +17501,102 @@ export interface operations {
                 };
                 content: {
                     "application/json": components["schemas"]["SlotListResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+            /** @description Unprocessable Entity */
+            422: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["JsonErrorResponse"];
+                };
+            };
+        };
+    };
+    getRole: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Role ID */
+                role_id: string;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoleResponse"];
+                };
+            };
+            /** @description Unauthorized */
+            401: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["UnauthorizedResponse"];
+                };
+            };
+            /** @description Not Found */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["NotFoundResponse"];
+                };
+            };
+        };
+    };
+    updateRole: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path: {
+                /** @description Role ID */
+                role_id: string;
+            };
+            cookie?: never;
+        };
+        /** @description Role params */
+        requestBody?: {
+            content: {
+                "application/json": components["schemas"]["UpdateRoleRequest"];
+            };
+        };
+        responses: {
+            /** @description Success */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    "application/json": components["schemas"]["RoleResponse"];
                 };
             };
             /** @description Unauthorized */

@@ -1,0 +1,1 @@
+{"parameters":[{"description":"Role ID","in":"path","name":"role_id","required":true,"schema":{"type":"string"}}]}

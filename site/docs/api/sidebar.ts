@@ -480,6 +480,18 @@ const sidebar: SidebarsConfig = {
           label: "List roles",
           className: "api-method get",
         },
+        {
+          type: "doc",
+          id: "api/get-role",
+          label: "Get role",
+          className: "api-method get",
+        },
+        {
+          type: "doc",
+          id: "api/update-role",
+          label: "Update role",
+          className: "api-method patch",
+        },
       ],
     },
     {
@@ -1196,6 +1208,12 @@ const sidebar: SidebarsConfig = {
         },
         {
           type: "doc",
+          id: "api/schemas/roleresponse",
+          label: "RoleResponse",
+          className: "schema",
+        },
+        {
+          type: "doc",
           id: "api/schemas/aggregatedslot",
           label: "AggregatedSlot",
           className: "schema",
@@ -1270,6 +1288,12 @@ const sidebar: SidebarsConfig = {
           type: "doc",
           id: "api/schemas/servicedeletedeventdata",
           label: "ServiceDeletedEventData",
+          className: "schema",
+        },
+        {
+          type: "doc",
+          id: "api/schemas/updaterolerequest",
+          label: "UpdateRoleRequest",
           className: "schema",
         },
         {

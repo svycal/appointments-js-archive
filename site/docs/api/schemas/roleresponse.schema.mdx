@@ -1,0 +1,32 @@
+---
+id: roleresponse
+title: "RoleResponse"
+description: "Response schema for a single role"
+sidebar_label: "RoleResponse"
+hide_title: true
+hide_table_of_contents: true
+schema: true
+sample: {"data":{"denied_permissions":["appointments.own.cancel","appointments.own.reschedule"],"id":"role_123456789012","name":"Staff","object":"role","permissions":["accounts.view","appointments.own.*","blocks.*","booking_intents.*","clients.*","integrations.own.*","providers.own.view","providers.own.update"],"type":"staff"}}
+custom_edit_url: null
+---
+
+import Schema from "@theme/Schema";
+import Heading from "@theme/Heading";
+
+<Heading
+  as={"h1"}
+  className={"openapi__heading"}
+  children={"RoleResponse"}
+>
+</Heading>
+
+
+
+Response schema for a single role
+
+<Schema
+  {...require("./roleresponse.Schema.json")}
+>
+  
+</Schema>
+            

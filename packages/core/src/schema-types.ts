@@ -223,6 +223,7 @@ export type ReschedulePublicAppointmentRequest =
   Schemas["ReschedulePublicAppointmentRequest"];
 export type ReschedulingPolicy = Schemas["ReschedulingPolicy"];
 export type Role = Schemas["Role"];
+export type RoleResponse = Schemas["RoleResponse"];
 export type RolesResponse = Schemas["RolesResponse"];
 export type Service = Schemas["Service"];
 export type ServiceConferencingResponse =
@@ -278,6 +279,7 @@ export type UpdateProviderScheduleRequest =
   Schemas["UpdateProviderScheduleRequest"];
 export type UpdatePublicBookingIntentRequest =
   Schemas["UpdatePublicBookingIntentRequest"];
+export type UpdateRoleRequest = Schemas["UpdateRoleRequest"];
 export type UpdateServiceRequest = Schemas["UpdateServiceRequest"];
 export type User = Schemas["User"];
 export type UserMapping = Schemas["UserMapping"];
