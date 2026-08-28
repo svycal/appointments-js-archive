@@ -3,6 +3,7 @@
 
 # generated content
 .source
+scripts/audit-guide-links.report.json
 
 # test & build
 /coverage
