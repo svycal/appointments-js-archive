@@ -1,0 +1,196 @@
+---
+title: Connected Accounts
+---
+
+This guide explains how connected accounts integrate external calendar and conferencing providers with SavvyCal, how users connect them, and how to monitor and respond to connection health changes.
+
+## What connected accounts do
+
+A [`ConnectedAccount`](/api/schemas/connectedaccount) is an OAuth-authorized link between a SavvyCal user and an external provider such as Google Calendar, Microsoft 365, or Zoom. Each connected account represents a single authenticated session with the provider.
+
+Connected accounts enable different capabilities depending on the provider type. Calendar providers (Google, Microsoft) enable:
+
+- **Availability conflict checking** — reads the external calendar to identify busy times and remove them from slot availability. See [Slot Availability](/slot-availability) for how this feeds into the availability pipeline.
+- **Appointment syncing** — writes confirmed appointments back to the external calendar so the provider's schedule stays in sync.
+
+Conferencing providers (Zoom) enable:
+
+- **Meeting room creation** — automatically creates a video meeting and attaches the join link to appointments.
+
+```
+User ──▶ ConnectedAccount ──▶ External Provider (Google / Microsoft / Zoom)
+  │                                    │
+  └── Provider ◀── reads availability ─┘
+```
+
+A user can have multiple connected accounts — for example, both a Google Calendar and a Microsoft 365 account. Each is tracked independently. See [Users and Accounts](/users-and-accounts) for how users, accounts, and providers relate.
+
+## Supported providers
+
+| Provider     | Description                                                                              |
+| ------------ | ---------------------------------------------------------------------------------------- |
+| `google`     | Google Calendar. Enables availability conflict checking and appointment syncing.         |
+| `microsoft`  | Microsoft 365 / Outlook. Enables availability conflict checking and appointment syncing. |
+| `zoom_admin` | Zoom (admin-level). Enables automatic Zoom meeting creation for appointments.            |
+
+## How users connect accounts
+
+Connected accounts **cannot** be created through the API. Users connect by authenticating with the external provider through the SavvyCal Dashboard. The API provides read, update, and delete operations, but the initial OAuth connection must happen interactively.
+
+Non-passive users can sign in to their SavvyCal account directly and manage their connected accounts from the Dashboard. For passive users (or when you want to streamline the experience), you can generate a dashboard session link to redirect them.
+
+### Directing users to the Dashboard
+
+Use the Dashboard Sessions API to programmatically redirect users to the Dashboard where they can connect their calendar accounts. This is especially useful for passive users who don't have login credentials.
+
+```bash
+curl -X POST "https://api.savvycal.app/v1/dashboard_sessions" \
+  -H "Authorization: Bearer sk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "user_d025a96ac0c6",
+    "return_url": "https://yourapp.com/settings/calendars"
+  }'
+```
+
+The flow works as follows:
+
+1. Call [Create dashboard session](/api/dashboard-sessions/createDashboardSession) with the target `user_id` and an optional `return_url`.
+2. Redirect the user's browser to the returned `url` to sign them in automatically.
+3. The user connects their calendar or conferencing account in the Dashboard.
+4. A `connected_account.created` webhook fires to notify your system.
+5. When the user signs out, they are redirected to the `return_url`.
+
+### Prerequisites
+
+- The user must already exist as an account member. See [Create account user](/api/account-users/createAccountUser).
+- To use a connected calendar account for availability and syncing, the user must have a provider (called "Staff" in the Dashboard) associated with their user. This can be set up via the Members & permissions page in the Dashboard, or through the API — see [Providers and users](/users-and-accounts#providers-and-users).
+
+## Connection scope
+
+| Scope     | Description                                                                                             |
+| --------- | ------------------------------------------------------------------------------------------------------- |
+| `user`    | Owned by a specific user (`user_id` is set). Most common for calendar integrations.                     |
+| `account` | Shared across the account (`user_id` is `null`). Used for account-level integrations like `zoom_admin`. |
+
+## Connection status
+
+A connected account has one of three statuses representing its health:
+
+```
+                    ┌───────────────────────────┐
+                    │                           │
+                    v                           │
+active ──▶ reconnect_required ──▶ active (reconnected)
+  │
+  └──▶ insufficient_permissions ──▶ active (reconnected)
+```
+
+| Status                     | Meaning                                             | Action required                                                 |
+| -------------------------- | --------------------------------------------------- | --------------------------------------------------------------- |
+| `active`                   | OAuth token is valid, integration working normally. | None.                                                           |
+| `reconnect_required`       | OAuth token refresh permanently failed.             | Direct user to Dashboard to reconnect.                          |
+| `insufficient_permissions` | User didn't grant all required OAuth scopes.        | Direct user to Dashboard to reconnect with correct permissions. |
+
+Both failure states resolve the same way — the user reauthenticates through the Dashboard and the status returns to `active`.
+
+## Monitoring connection health
+
+### Webhook events
+
+Four webhook events track the connected account lifecycle:
+
+| Event                              | Trigger                                       | Typical response                                             |
+| ---------------------------------- | --------------------------------------------- | ------------------------------------------------------------ |
+| `connected_account.created`        | User connected a new integration.             | Update records, confirm provider ready.                      |
+| `connected_account.deleted`        | Integration disconnected.                     | Update records, external availability no longer checked.     |
+| `connected_account.refresh_failed` | OAuth token refresh permanently failed.       | Notify user to reconnect; generate a dashboard session link. |
+| `connected_account.reconnected`    | Previously failed connection reauthenticated. | Clear reconnection alerts.                                   |
+
+See the [Webhooks](/webhooks) guide for details on registering webhooks and handling events.
+
+### Polling for status
+
+You can poll the list endpoint to check connection statuses, though webhooks are preferred:
+
+```bash
+curl -G "https://api.savvycal.app/v1/connected_accounts" \
+  -H "Authorization: Bearer sk_live_..." \
+  -d user_id=user_d025a96ac0c6
+```
+
+## Responding to connection failures
+
+A recommended integration pattern for handling OAuth failures:
+
+1. Register a webhook for `connected_account.refresh_failed`.
+2. When the event fires, look up the `user_id` on the connected account.
+3. Create a dashboard session for that user.
+4. Notify the user with the dashboard session URL so they can reconnect.
+5. Listen for `connected_account.reconnected` to confirm resolution.
+
+```bash
+# Create a dashboard session for reconnection
+curl -X POST "https://api.savvycal.app/v1/dashboard_sessions" \
+  -H "Authorization: Bearer sk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{
+    "user_id": "user_d025a96ac0c6",
+    "return_url": "https://yourapp.com/settings/calendars"
+  }'
+```
+
+## Managing connected accounts via the API
+
+### Listing connected accounts
+
+Use query parameters to filter the list:
+
+| Parameter   | Type    | Description                                                 |
+| ----------- | ------- | ----------------------------------------------------------- |
+| `user_id`   | string  | Filter by owning user.                                      |
+| `provider`  | enum    | Filter by provider: `google`, `microsoft`, or `zoom_admin`. |
+| `page`      | integer | Page number for pagination.                                 |
+| `page_size` | integer | Number of results per page.                                 |
+
+```bash
+curl -G "https://api.savvycal.app/v1/connected_accounts" \
+  -H "Authorization: Bearer sk_live_..." \
+  -d provider=google
+```
+
+### Updating a connected account
+
+Only `display_name` is mutable via the API:
+
+```bash
+curl -X PATCH "https://api.savvycal.app/v1/connected_accounts/cact_d025a96ac0c6" \
+  -H "Authorization: Bearer sk_live_..." \
+  -H "Content-Type: application/json" \
+  -d '{"display_name": "Work Calendar"}'
+```
+
+### Disconnecting a connected account
+
+Deleting a connected account disconnects the integration and revokes the OAuth token:
+
+```bash
+curl -X DELETE "https://api.savvycal.app/v1/connected_accounts/cact_d025a96ac0c6" \
+  -H "Authorization: Bearer sk_live_..."
+```
+
+## Key properties
+
+| Property              | Type           | Description                                                    |
+| --------------------- | -------------- | -------------------------------------------------------------- |
+| `id`                  | string         | Unique identifier (e.g., `cact_d025a96ac0c6`).                 |
+| `provider`            | enum           | `google`, `microsoft`, or `zoom_admin`.                        |
+| `email`               | string         | Email associated with this connected account.                  |
+| `display_name`        | string \| null | Settable via the update endpoint.                              |
+| `connection_scope`    | enum           | `user` or `account`.                                           |
+| `status`              | enum           | `active`, `reconnect_required`, or `insufficient_permissions`. |
+| `user_id`             | string \| null | Owning user's ID, or `null` for account-scoped connections.    |
+| `external_subject`    | string         | Unique identifier at the external provider.                    |
+| `external_account_id` | string \| null | Org identifier at the provider.                                |
+
+See the [ConnectedAccount](/api/schemas/connectedaccount) schema for complete details.

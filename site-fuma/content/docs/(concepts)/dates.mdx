@@ -1,0 +1,109 @@
+---
+title: Working with Dates
+---
+
+The SavvyCal API uses string-based date and time values in several formats. Understanding these formats — and the differences between how dates appear in responses versus requests — will help you integrate correctly.
+
+## Date Formats
+
+| Format                | Example                     | Where Used                                        |
+| --------------------- | --------------------------- | ------------------------------------------------- |
+| ISO date              | `2025-10-27`                | Calendar dates (e.g., block `start_date`)         |
+| ISO datetime          | `2025-03-01T03:00:00Z`      | UTC timestamps (e.g., `created_at`, `updated_at`) |
+| Offset-aware datetime | `2025-03-01T10:00:00-05:00` | Local time with offset (used in request bodies)   |
+| Time                  | `09:00`                     | Time of day (e.g., schedule rule `start_time`)    |
+
+## ZonedDateTime
+
+Several response fields (such as appointment `start_at` and `end_at`) return a **ZonedDateTime** object instead of a plain string. This object provides the same moment in multiple representations:
+
+```json
+{
+  "object": "zoned_date_time",
+  "local": "2025-03-01T10:00:00-05:00",
+  "utc": "2025-03-01T15:00:00Z",
+  "unix_ts": 1740841200,
+  "time_zone": "America/New_York"
+}
+```
+
+| Field       | Description                                          |
+| ----------- | ---------------------------------------------------- |
+| `local`     | Offset-aware datetime in the event's local time zone |
+| `utc`       | ISO datetime in UTC                                  |
+| `unix_ts`   | Unix timestamp in seconds                            |
+| `time_zone` | IANA time zone identifier                            |
+| `object`    | Always `"zoned_date_time"`                           |
+
+## Slots
+
+The [public slots endpoint](/api/public-booking/listPublicServiceSlots) returns **Slot** objects representing bookable time windows:
+
+```json
+{
+  "object": "slot",
+  "start_at": "2025-03-10T09:00:00-04:00",
+  "start_at_ts": 1741612800,
+  "end_at": "2025-03-10T10:00:00-04:00",
+  "end_at_ts": 1741616400,
+  "time_zone": "America/New_York"
+}
+```
+
+| Field                       | Description                                                   |
+| --------------------------- | ------------------------------------------------------------- |
+| `start_at` / `end_at`       | ISO datetime with time zone offset in the requested time zone |
+| `start_at_ts` / `end_at_ts` | Unix timestamps in seconds                                    |
+| `time_zone`                 | IANA time zone identifier                                     |
+
+## Creating Appointments
+
+When creating or rescheduling an appointment, the API expects **offset-aware ISO-8601 datetime** strings paired with a separate `time_zone` field. Both UTC (`Z` suffix) and explicit offsets (`+/-HH:MM`) are accepted.
+
+```json
+{
+  "service_id": "svc_01JN5EQ4G6FXR5DEWCB1BNXGYQ",
+  "start_at": "2025-03-01T10:00:00-05:00",
+  "end_at": "2025-03-01T11:00:00-05:00",
+  "time_zone": "America/New_York"
+}
+```
+
+The offset in `start_at` and `end_at` tells the API the exact moment in time. The `time_zone` field identifies the IANA time zone for the appointment (used for display and DST-aware operations). You can also use UTC:
+
+```json
+{
+  "start_at": "2025-03-01T15:00:00Z",
+  "end_at": "2025-03-01T16:00:00Z",
+  "time_zone": "America/New_York"
+}
+```
+
+<Callout type="warn">
+  Naive datetime strings without an offset (e.g., `"2025-03-01T10:00:00"`) are
+  **rejected** with a 422 error. Always include an offset or `Z` suffix.
+</Callout>
+
+## JavaScript SDK
+
+The `@savvycal/appointments` SDK passes date values through as strings and numbers, matching the wire format exactly. For convenience helpers, install `@savvycal/appointments-utils`:
+
+```bash
+npm install @savvycal/appointments-utils
+```
+
+Common operations:
+
+```ts
+import { fromUnixTime, isSameDay } from "@savvycal/appointments-utils";
+
+// Convert a slot's unix timestamp to a Date
+const date = fromUnixTime(slot.start_at_ts);
+
+// Slot start_at/end_at values are already offset-aware strings
+// (e.g., "2025-03-10T09:00:00-04:00") — pass them directly to create requests
+
+// Compare two dates in a specific time zone
+isSameDay(date1, date2, "America/New_York");
+// => true
+```

@@ -1,0 +1,14 @@
+{
+  "title": "Concepts",
+  "defaultOpen": true,
+  "pages": [
+    "platforms",
+    "data-model",
+    "users-and-accounts",
+    "connected-accounts",
+    "booking-intents",
+    "slot-availability",
+    "dates",
+    "metadata-filtering"
+  ]
+}

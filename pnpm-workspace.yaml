@@ -1,5 +1,6 @@
 packages:
   - site
+  - site-fuma
   - packages/*
   - components/*
   - playground/assets

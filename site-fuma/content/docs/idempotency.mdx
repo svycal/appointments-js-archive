@@ -1,0 +1,78 @@
+---
+title: Idempotency
+---
+
+Network blips and timeouts make it easy to accidentally retry the same request twice — and on unsafe operations like creating a booking intent or completing an appointment, that retry can produce duplicate side effects (a double-booked slot, a duplicate charge). To make retries safe, the SavvyCal API accepts an `Idempotency-Key` header on unsafe (`POST`, `PATCH`, `DELETE`) endpoints.
+
+## How it works
+
+Include an `Idempotency-Key` header on any unsafe request with a value unique to that logical operation:
+
+```http
+POST /v1/booking_intents
+Authorization: Bearer <your-api-token>
+Content-Type: application/json
+Idempotency-Key: 4f0e0e2d-9b6a-4d7a-8b9f-2f6c1f0b1f6c
+```
+
+The first request with a given key executes normally and the response is stored. Any subsequent request with the same key returns the original response without re-executing the action.
+
+A good key is opaque, unique, and reused only for retries of the **same** logical operation. UUIDs are a fine default.
+
+## Behaviors
+
+| Scenario                                            | HTTP status | Notes                                                                  |
+| --------------------------------------------------- | ----------- | ---------------------------------------------------------------------- |
+| First request with a key                            | normal      | Response is stored under the key for 24h.                              |
+| Retry with the same key and the same body           | normal      | The stored response is returned byte-for-byte.                         |
+| Retry with the same key but a different body        | `422`       | The key is considered reused with a different request. Pick a new key. |
+| Retry while the original request is still in flight | `409`       | Another request has claimed the key. Wait and retry.                   |
+| Retry after the 24h retention window                | normal      | The stored response has expired; the action runs again.                |
+
+Replayed responses include two extra headers:
+
+```http
+Idempotency-Replayed: true
+Idempotency-Replayed-At: 2026-05-11T18:42:09Z
+```
+
+The absence of `Idempotency-Replayed` on a response means the request executed for the first time under that key.
+
+## Scope
+
+Keys are scoped **per account**. Two different accounts can use the same key string with no collision. Within an account, every unsafe endpoint shares the same keyspace, so you can use the same key across different routes without interference — though we recommend a fresh key per logical operation.
+
+## Body matching
+
+The body comparison is **raw-byte** based — two semantically-equivalent JSON requests with different key ordering or whitespace will be treated as different requests and return `422`. Send byte-identical retries.
+
+## Retention and error responses
+
+- Stored responses expire after **24 hours**.
+- Both successful (`2xx`) and client error (`4xx`) responses are stored and replayed.
+- Server error (`5xx`) responses are also stored. This protects you from duplicate side effects when an action has committed work but failed during response rendering. If you receive a stored `5xx` on retry and want to attempt the action again, use a new `Idempotency-Key`.
+
+## Supported endpoints
+
+`Idempotency-Key` is supported on every unsafe endpoint under:
+
+- `POST /v1/{resource}`, `PATCH /v1/{resource}/:id`, `DELETE /v1/{resource}/:id` — authenticated routes with an account scope (i.e. all of `/v1` except account- and platform-level admin endpoints).
+- `POST`, `PATCH`, and the cancel/reschedule/complete/abandon variants under `/v1/public/booking_intents` and `/v1/public/appointments`.
+
+Safe methods (`GET`, `HEAD`) ignore the header; sending one has no effect.
+
+## Header validation
+
+The header value must be:
+
+- 1 to 255 characters long after trimming whitespace
+- Printable ASCII (no spaces, no control characters)
+
+A malformed header — or more than one `Idempotency-Key` header on the same request — returns `400 Bad Request`.
+
+## Best practices
+
+- Generate a new key for each logical operation. Reusing a key across different requests forces you to send byte-identical bodies.
+- Retry on network errors and `5xx` responses with the **same** key. The server will replay the original response if the action already succeeded, or run it for the first time if it hadn't.
+- If a retry returns `409`, the original request is still running. Wait briefly and retry the same key; once the server finishes, you'll get the replay.
+- If a retry returns `422` with a "different request" message, you've reused a key with a different body. Pick a new key.

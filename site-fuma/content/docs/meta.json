@@ -1,0 +1,15 @@
+{
+  "title": "Guides",
+  "pages": [
+    "index",
+    "authentication",
+    "rate-limiting",
+    "idempotency",
+    "(concepts)",
+    "embedding",
+    "components",
+    "webhooks",
+    "changelog",
+    "api"
+  ]
+}

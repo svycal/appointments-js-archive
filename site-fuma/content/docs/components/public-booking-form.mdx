@@ -1,0 +1,34 @@
+---
+description: A basic public booking form component.
+title: Public Booking Form
+---
+
+A basic public booking form component.
+
+## Live Demo
+
+<ComponentDemo route="public-booking-form" />
+
+## Installation
+
+Follow the instructions to [prepare your app](/components#prerequisites). This component requires a few additional dependencies:
+
+- `lucide-react` (icons)
+- `@base-ui/react` (radio group)
+- `react-day-picker` (calendar)
+
+Run the following command to install the dependencies:
+
+```bash
+npm install lucide-react @base-ui/react react-day-picker
+```
+
+Add the base styles for React Day Picker to your app styles:
+
+```css
+@import "react-day-picker/style.css" layer(components);
+```
+
+Since this component only uses public API endpoints, the `fetchAccessToken` prop is not required on `SavvyCalProvider`.
+
+<ComponentSource name="public-booking-form" />

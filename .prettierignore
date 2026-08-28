@@ -1,0 +1,9 @@
+site/build
+site/.docusaurus
+site/docs/api
+site-fuma/.next
+site-fuma/.source
+site-fuma/next-env.d.ts
+**/dist
+**/coverage
+
